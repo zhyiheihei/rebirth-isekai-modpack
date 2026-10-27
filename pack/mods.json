@@ -36,12 +36,12 @@
   "enabled": true
  },
  {
-  "file": "almanac-neoforge-26.1.2-1.26.10.2.jar",
+  "file": "almanac-1.26.x-neoforge-1.6.2.jar",
   "project": "Gi02250Z",
-  "version": "1.26.10.2",
-  "version_id": "NTnMOYjD",
-  "sha512": "442a66f924787aedaba56d1680e23ec49f4978c6781f6e232a1fcf0d9f10ad2c83b24fe480a29bd4f8b12dacf13a6d0709f61e7eac27ace8bd851ea8e92b42d4",
-  "url": "https://cdn.modrinth.com/data/Gi02250Z/versions/NTnMOYjD/almanac-neoforge-26.1.2-1.26.10.2.jar",
+  "version": "1.6.2",
+  "version_id": "YAS6I3UB",
+  "sha512": "c9794a85fa1cff8bd39c8f5e36c9bcb1e96ae10893b8e2acb17d710e3a63cf20555ece3bcff48829ac9c5961660ea5e6342db1ce22989cb4be7b3db2e9d02977",
+  "url": "https://cdn.modrinth.com/data/Gi02250Z/versions/YAS6I3UB/almanac-1.26.x-neoforge-1.6.2.jar",
   "enabled": true
  },
  {
@@ -765,12 +765,12 @@
   "enabled": true
  },
  {
-  "file": "letmedespawn-neoforge-26.1.2-1.26.10.2.jar",
+  "file": "letmedespawn-1.26.x-neoforge-1.6.2.jar",
   "project": "vE2FN5qn",
-  "version": "1.26.10.2",
-  "version_id": "ykaE6izA",
-  "sha512": "6760ded14abdfcbc8d464638e9b063b231fd60c111e4e469c85030ed3a05e2b0b075b3485e1432a81b6defe7a9b15e74526e5b538124262005a1dd4b72c6e240",
-  "url": "https://cdn.modrinth.com/data/vE2FN5qn/versions/ykaE6izA/letmedespawn-neoforge-26.1.2-1.26.10.2.jar",
+  "version": "1.6.2",
+  "version_id": "Dg7aFXzH",
+  "sha512": "e6fa51a80437a03b2358f30da8eb728ccc35722c95411d135652647563b278ba34381ee5bb3db0bf8562d3fc208bd30900a48967f7ef2c98f50b16583dfea96f",
+  "url": "https://cdn.modrinth.com/data/vE2FN5qn/versions/Dg7aFXzH/letmedespawn-1.26.x-neoforge-1.6.2.jar",
   "enabled": true
  },
  {

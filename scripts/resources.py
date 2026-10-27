@@ -78,11 +78,34 @@ def fetch(pack=None):
 
     comps, mc = components(pack)
     total = fetched = 0
+    index_packages = []
     for uid, version in comps:
         data = _get_json(f"{META}/{uid}/{version}.json")
         os.makedirs(os.path.join(meta_dir, uid), exist_ok=True)
-        with open(os.path.join(meta_dir, uid, f"{version}.json"), "w", encoding="utf-8") as f:
+        path = os.path.join(meta_dir, uid, f"{version}.json")
+        with open(path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=1)
+        # Prism 的 meta 结构：uid/index.json 是版本列表（列表项 sha256 指向版本 json），
+        # index.json 里 packages[].sha256 指向各版本列表文件
+        vlist = {
+            "formatVersion": 1,
+            "uid": uid,
+            "versions": [
+                {
+                    "version": version,
+                    "type": "release",
+                    "recommended": True,
+                    "sha256": common.sha("sha256", path),
+                    "requires": data.get("requires", []),
+                }
+            ],
+        }
+        vlist_path = os.path.join(meta_dir, uid, "index.json")
+        with open(vlist_path, "w", encoding="utf-8") as f:
+            json.dump(vlist, f, ensure_ascii=False, indent=1)
+        index_packages.append(
+            {"uid": uid, "name": uid, "sha256": common.sha("sha256", vlist_path)}
+        )
         libs = [lib for lib in data.get("libraries", []) if _rules_allow_any(lib)]
         if data.get("mainJar"):
             libs.append(data["mainJar"])
@@ -113,6 +136,9 @@ def fetch(pack=None):
                 flush=True,
             )
             print(f"  素材 index {index['id']}: {len(objects)} 个对象", flush=True)
+
+    with open(os.path.join(meta_dir, "index.json"), "w", encoding="utf-8") as f:
+        json.dump({"formatVersion": 1, "packages": index_packages}, f, ensure_ascii=False, indent=1)
 
     log = (mc.get("logging") or {}).get("file") or {}
     if log.get("url"):

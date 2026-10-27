@@ -47,6 +47,15 @@ JavaArchitecture=64
 MinMemAlloc={min_mem}
 MaxMemAlloc={max_mem}
 JavaPath=__BUNDLED_JAVA__
+AutoUpdateCheckEnabled=false
+"""
+
+# 占位账户的静默刷新必须以「网络错误」收场（STATE_OFFLINE），启动器才不会弹
+# 重新认证框。死代理让 OAuth 请求连接被拒 = NetworkError；游戏联机不走这个代理。
+DEAD_PROXY_CFG = """[General]
+ProxyType=SOCKS5
+ProxyAddr=127.0.0.1
+ProxyPort=9
 """
 
 UPDATE_CFG = """[General]
@@ -66,7 +75,11 @@ OverrideJavaArgs=false
 OverrideJavaLocation=true
 JavaPath=__BUNDLED_JAVA__
 JoinServerOnLaunch=false
+LowMemWarning=false
 """
+
+# mmc-pack 组件声明本地 sha256，Prism 校验通过后不再远程拉 meta
+
 
 
 def resource_source(explicit):
@@ -153,20 +166,50 @@ def lwjgl_version():
     return "3.4.1"
 
 
+def meta_sha256(uid, version):
+    """从缓存的 meta index.json 里取组件 json 的 sha256。"""
+    import json as _json
+
+    path = os.path.join(common.CACHE, "resources", "meta", "index.json")
+    try:
+        index = _json.load(open(path, encoding="utf-8"))
+    except Exception:
+        return None
+    for pkg in index.get("packages", []):
+        if pkg["uid"] == uid:
+            return pkg.get("sha256")
+    return None
+
+
 def write_mmc_pack(dest):
     import json as _json
 
     lwjgl = lwjgl_version()
+    sha = lambda uid, ver: meta_sha256(uid, ver)
+
+    def comp(uid, version, **extra):
+        entry = {"uid": uid, "version": version, "cachedName": uid,
+                 "cachedVersion": version}
+        if uid == "org.lwjgl3":
+            entry["cachedVolatile"] = True
+            entry["dependencyOnly"] = True
+        else:
+            entry["important"] = uid == "net.minecraft"
+            if uid == "net.minecraft":
+                entry["cachedRequires"] = [{"uid": "org.lwjgl3", "suggests": lwjgl}]
+            else:
+                entry["cachedRequires"] = [{"uid": "net.minecraft", "equals": PACK["minecraft"]}]
+        s = sha(uid, version)
+        if s:
+            entry["cachedSha256"] = s
+        entry.update(extra)
+        return entry
+
     data = {
         "components": [
-            {"uid": "org.lwjgl3", "version": lwjgl, "cachedName": "LWJGL 3",
-             "cachedVersion": lwjgl, "cachedVolatile": True, "dependencyOnly": True},
-            {"uid": "net.minecraft", "version": PACK["minecraft"], "cachedName": "Minecraft",
-             "cachedVersion": PACK["minecraft"], "important": True,
-             "cachedRequires": [{"uid": "org.lwjgl3", "suggests": lwjgl}]},
-            {"uid": "net.neoforged", "version": PACK["loader"]["version"], "cachedName": "NeoForge",
-             "cachedVersion": PACK["loader"]["version"],
-             "cachedRequires": [{"uid": "net.minecraft", "equals": PACK["minecraft"]}]},
+            comp("org.lwjgl3", lwjgl),
+            comp("net.minecraft", PACK["minecraft"]),
+            comp("net.neoforged", PACK["loader"]["version"]),
         ],
         "formatVersion": 1,
     }
@@ -202,6 +245,7 @@ def write_prism_cfg(datadir):
                 min_mem=PACK["memory"]["min_mb"],
                 max_mem=PACK["memory"]["max_mb"],
             )
+            + DEAD_PROXY_CFG
         )
     with open(os.path.join(datadir, "prismlauncher_update.cfg"), "w", encoding="utf-8") as f:
         f.write(UPDATE_CFG)
@@ -210,9 +254,10 @@ def write_prism_cfg(datadir):
 def write_accounts(datadir):
     """写入占位账户，玩家名留 __RANDOM_NAME__ 由启动脚本首次运行时随机生成。
 
-    Prism 的 anyAccountIsValid() 只认 type != Offline 的账户
-    （MinecraftAccount.h:119 ownsMinecraft()）；用不带 token 的 MSA 结构占位，
-    既不触发首次启动向导，也不会发起任何认证请求。实际启动走 --offline。
+    机制：Arclight 服务端 online-mode=false 时离线登录可用。占位账户用
+    带 msaClientID 的 MSA 结构压掉首次启动向导；其 token 无效，Prism 静默
+    刷新失败后账号进入 Disabled 态，但 LaunchController 对 Offline 模式
+    直接放行（--offline 启动），不会打断游戏。
     """
     import json as _json
     import time
@@ -224,11 +269,20 @@ def write_accounts(datadir):
                 "active": True,
                 "entitlement": {"ownsMinecraft": True, "canPlayMinecraft": True},
                 "type": "MSA",
-                "msa-client-id": "",
+                "msa-client-id": "c36a9fb6-4f2a-41ff-90bd-ae7cc92031eb",
+                "msa": {
+                    "iat": int(time.time()),
+                    "exp": int(time.time()) + 86400,
+                    "token": "placeholder",
+                    "refresh_token": "placeholder",
+                    "extra": {},
+                },
+                "utoken": {"iat": int(time.time()), "exp": 0, "token": "", "refresh_token": "", "extra": {}},
+                "xrp-mc": {"iat": int(time.time()), "exp": 0, "token": "", "refresh_token": "", "extra": {}},
                 "ygg": {
                     "iat": int(time.time()),
-                    "exp": 0,
-                    "token": "0",
+                    "exp": int(time.time()) + 86400,
+                    "token": "placeholder",
                     "refresh_token": "",
                     "extra": {"userName": "__RANDOM_NAME__", "clientToken": uuid.uuid4().hex},
                 },

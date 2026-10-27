@@ -153,6 +153,39 @@ def check_bundle(root):
         else:
             problems.append("缺少 servers.dat")
 
+    for base in (".", "PrismLauncher-data"):
+        cfg_path = os.path.join(root, base, "prismlauncher.cfg")
+        if os.path.exists(cfg_path) and "ProxyType=SOCKS5" in open(cfg_path, encoding="utf-8").read():
+            break
+    else:
+        problems.append("prismlauncher.cfg 缺少死代理配置（占位账户会弹重新认证框）")
+
+    inst_cfg = None
+    for base in ("instances", "PrismLauncher-data/instances"):
+        p = os.path.join(root, base, name, "instance.cfg")
+        if os.path.exists(p):
+            inst_cfg = p
+            break
+    if inst_cfg and "LowMemWarning=false" not in open(inst_cfg, encoding="utf-8").read():
+        problems.append("instance.cfg 缺少 LowMemWarning=false（低内存机器会弹确认框）")
+
+    meta_root = None
+    for base in ("meta", "PrismLauncher-data/meta"):
+        p = os.path.join(root, base)
+        if os.path.isdir(p):
+            meta_root = p
+            break
+    if meta_root:
+        if not os.path.exists(os.path.join(meta_root, "index.json")):
+            problems.append("meta 缺少 index.json（离线解析组件会失败）")
+        for uid, ver in (
+            ("net.minecraft", pack["minecraft"]),
+            ("net.neoforged", pack["loader"]["version"]),
+        ):
+            for rel in (f"{uid}/index.json", f"{uid}/{ver}.json"):
+                if not os.path.exists(os.path.join(meta_root, rel)):
+                    problems.append(f"meta 缺少 {rel}")
+
     trans_ok = any(
         os.path.exists(os.path.join(root, base, "mmc_zh.qm"))
         for base in ("translations", "PrismLauncher-data/translations")
