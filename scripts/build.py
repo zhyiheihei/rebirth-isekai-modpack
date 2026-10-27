@@ -32,6 +32,29 @@ TARGETS = {
     "macos": "macOS",
 }
 
+PRISM_CFG = """[General]
+ConfigVersion=1.3
+Language=zh
+ApplicationTheme=system
+IconTheme=pe_colored
+IgnoreJavaWizard=true
+AutomaticJavaDownload=false
+AutomaticJavaSwitch=false
+UserAskedAboutAutomaticJavaDownload=true
+PastebinURL=
+UseNativeGLFW=true
+JavaArchitecture=64
+MinMemAlloc={min_mem}
+MaxMemAlloc={max_mem}
+JavaPath=__BUNDLED_JAVA__
+"""
+
+UPDATE_CFG = """[General]
+auto_check=false
+allow_beta=false
+update_interval=31536000
+"""
+
 INSTANCE_CFG = """[General]
 ConfigVersion=1.3
 InstanceType=OneSix
@@ -111,12 +134,49 @@ def build_gamedir(dest):
         target = common.ensure_dir(os.path.join(dest, sub))
         for e in common.load(sub + ".json"):
             shutil.copy2(os.path.join(common.LOCAL, sub, e["file"]), os.path.join(target, e["file"]))
+    write_servers(dest)
     return dest
+
+
+def lwjgl_version():
+    """从缓存的 net.minecraft 元数据里取 LWJGL 版本。"""
+    import json as _json
+
+    path = os.path.join(common.CACHE, "resources", "meta", "net.minecraft", PACK["minecraft"] + ".json")
+    try:
+        data = _json.load(open(path, encoding="utf-8"))
+    except Exception:
+        return "3.4.1"
+    for req in data.get("requires", []):
+        if req.get("uid") == "org.lwjgl3":
+            return req.get("equals") or req.get("suggests") or "3.4.1"
+    return "3.4.1"
+
+
+def write_mmc_pack(dest):
+    import json as _json
+
+    lwjgl = lwjgl_version()
+    data = {
+        "components": [
+            {"uid": "org.lwjgl3", "version": lwjgl, "cachedName": "LWJGL 3",
+             "cachedVersion": lwjgl, "cachedVolatile": True, "dependencyOnly": True},
+            {"uid": "net.minecraft", "version": PACK["minecraft"], "cachedName": "Minecraft",
+             "cachedVersion": PACK["minecraft"], "important": True,
+             "cachedRequires": [{"uid": "org.lwjgl3", "suggests": lwjgl}]},
+            {"uid": "net.neoforged", "version": PACK["loader"]["version"], "cachedName": "NeoForge",
+             "cachedVersion": PACK["loader"]["version"],
+             "cachedRequires": [{"uid": "net.minecraft", "equals": PACK["minecraft"]}]},
+        ],
+        "formatVersion": 1,
+    }
+    with open(os.path.join(dest, "mmc-pack.json"), "w", encoding="utf-8") as f:
+        _json.dump(data, f, ensure_ascii=False, indent=4)
 
 
 def build_instance(dest, bundled_java=True):
     common.ensure_dir(dest)
-    shutil.copy2(os.path.join(common.PACK, "mmc-pack.json"), os.path.join(dest, "mmc-pack.json"))
+    write_mmc_pack(dest)
     cfg = INSTANCE_CFG.format(
         name=NAME,
         min_mem=PACK["memory"]["min_mb"],
@@ -134,14 +194,65 @@ def build_instance(dest, bundled_java=True):
     return dest
 
 
-def write_prism_cfg(datadir, source):
-    cfg_path = os.path.join(source, "prismlauncher.cfg")
-    text = open(cfg_path, encoding="utf-8").read() if os.path.exists(cfg_path) else "[General]\n"
-    text = re.sub(r"(?m)^Language=.*$", "Language=zh", text)
-    if "Language=" not in text:
-        text = text.rstrip() + "\nLanguage=zh\n"
+def write_prism_cfg(datadir):
+    """生成预配置好的启动器设置：跳过首次向导、不联网检查更新。"""
     with open(os.path.join(datadir, "prismlauncher.cfg"), "w", encoding="utf-8") as f:
-        f.write(text)
+        f.write(
+            PRISM_CFG.format(
+                min_mem=PACK["memory"]["min_mb"],
+                max_mem=PACK["memory"]["max_mb"],
+            )
+        )
+    with open(os.path.join(datadir, "prismlauncher_update.cfg"), "w", encoding="utf-8") as f:
+        f.write(UPDATE_CFG)
+
+
+def write_accounts(datadir):
+    """写入占位账户，玩家名留 __RANDOM_NAME__ 由启动脚本首次运行时随机生成。
+
+    Prism 的 anyAccountIsValid() 只认 type != Offline 的账户
+    （MinecraftAccount.h:119 ownsMinecraft()）；用不带 token 的 MSA 结构占位，
+    既不触发首次启动向导，也不会发起任何认证请求。实际启动走 --offline。
+    """
+    import json as _json
+    import time
+    import uuid
+
+    data = {
+        "accounts": [
+            {
+                "active": True,
+                "entitlement": {"ownsMinecraft": True, "canPlayMinecraft": True},
+                "type": "MSA",
+                "msa-client-id": "",
+                "ygg": {
+                    "iat": int(time.time()),
+                    "exp": 0,
+                    "token": "0",
+                    "refresh_token": "",
+                    "extra": {"userName": "__RANDOM_NAME__", "clientToken": uuid.uuid4().hex},
+                },
+                "profile": {
+                    "id": uuid.uuid4().hex,
+                    "name": "__RANDOM_NAME__",
+                    "skin": {"id": "", "url": "", "variant": ""},
+                    "capes": [],
+                },
+            }
+        ],
+        "formatVersion": 3,
+    }
+    with open(os.path.join(datadir, "accounts.json"), "w", encoding="utf-8") as f:
+        _json.dump(data, f, ensure_ascii=False)
+
+
+def write_servers(gamedir):
+    import servers
+
+    srv = PACK.get("server")
+    if not srv:
+        return
+    servers.write(os.path.join(gamedir, "servers.dat"), [{"name": srv["name"], "ip": srv["ip"]}])
 
 
 def extract_launcher(archive, kind, root):
@@ -225,19 +336,27 @@ def assemble(platform, source, fill_natives=True):
             runtime["kind"],
             os.path.join(datadir, "java", JRE_DIRNAME),
         )
-    write_prism_cfg(datadir, source)
+    write_prism_cfg(datadir)
+    write_accounts(datadir)
     trans_src = os.path.join(common.CACHE, "translations")
     if os.path.isdir(trans_src):
         shutil.copytree(trans_src, os.path.join(datadir, "translations"), dirs_exist_ok=True)
 
+    server_arg = f' -s {PACK["server"]["ip"]}' if PACK.get("server", {}).get("auto_join") else ""
     if platform == "linux":
         launcher_script = (
             "#!/bin/sh\n"
             'cd "$(dirname "$0")" || exit 1\n'
-            f'CFG="instances/{NAME}/instance.cfg"\n'
             f'JAVA="$(pwd)/java/{JRE_DIRNAME}/{runtime["java_path"]}"\n'
-            'sed -i "s|^JavaPath=.*|JavaPath=$JAVA|" "$CFG"\n'
-            'exec ./PrismLauncher "$@"\n'
+            f'sed -i "s|^JavaPath=.*|JavaPath=$JAVA|" "prismlauncher.cfg" "instances/{NAME}/instance.cfg"\n'
+            'if [ -f player.txt ]; then\n'
+            '  PLAYER="$(cat player.txt)"\n'
+            'else\n'
+            '  PLAYER="Player$(od -An -N3 -tx1 /dev/urandom | tr -d \' \\n\')"\n'
+            '  printf "%s" "$PLAYER" > player.txt\n'
+            '  sed -i "s/__RANDOM_NAME__/$PLAYER/g" accounts.json\n'
+            'fi\n'
+            f'exec ./PrismLauncher -l "{NAME}"{server_arg} --offline "$PLAYER" "$@"\n'
         )
         path = os.path.join(root, "启动游戏.sh")
         open(path, "w", encoding="utf-8").write(launcher_script)
@@ -245,40 +364,67 @@ def assemble(platform, source, fill_natives=True):
     elif platform == "windows":
         java_rel = runtime["java_path"].replace("/", "\\")
         ps = (
-            "$p = 'instances\\" + NAME + "\\instance.cfg'; "
-            "$j = Join-Path (Get-Location) 'java\\" + JRE_DIRNAME + "\\" + java_rel + "'; "
-            "$t = Get-Content -LiteralPath $p -Raw -Encoding UTF8; "
+            "$d = Get-Location; "
+            "if (-not (Test-Path 'player.txt')) { "
+            "$n = 'Player' + (-join (1..6 | ForEach-Object { '{0:x}' -f (Get-Random -Max 16) })); "
+            "[IO.File]::WriteAllText((Join-Path $d 'player.txt'), $n, (New-Object System.Text.ASCIIEncoding)); "
+            "$a = Join-Path $d 'accounts.json'; "
+            "$t = [IO.File]::ReadAllText($a); "
+            "[IO.File]::WriteAllText($a, $t.Replace('__RANDOM_NAME__', $n), (New-Object System.Text.UTF8Encoding($false))) }; "
+            "$j = Join-Path $d 'java\\" + JRE_DIRNAME + "\\" + java_rel + "'; "
+            "foreach ($p in @('prismlauncher.cfg','instances\\" + NAME + "\\instance.cfg')) "
+            "{ $t = Get-Content -LiteralPath $p -Raw -Encoding UTF8; "
             "$t = [regex]::Replace($t, '(?m)^JavaPath=.*', 'JavaPath=' + $j); "
-            "[IO.File]::WriteAllText((Resolve-Path $p).Path, $t, (New-Object System.Text.UTF8Encoding($false)))"
+            "[IO.File]::WriteAllText((Resolve-Path $p).Path, $t, (New-Object System.Text.UTF8Encoding($false))) }"
         )
         bat = (
             "@echo off\r\n"
             "chcp 65001 >nul\r\n"
             'cd /d "%~dp0"\r\n'
             f'powershell -NoProfile -ExecutionPolicy Bypass -Command "{ps}"\r\n'
-            'start "" "prismlauncher.exe"\r\n'
+            "set /p PLAYER=<player.txt\r\n"
+            f'start "" "prismlauncher.exe" -l "{NAME}"{server_arg} --offline "%PLAYER%"\r\n'
         )
         open(os.path.join(root, "启动游戏.bat"), "w", encoding="utf-8").write(bat)
     else:
         launcher_script = (
             "#!/bin/sh\n"
             'cd "$(dirname "$0")" || exit 1\n'
-            f'CFG="PrismLauncher-data/instances/{NAME}/instance.cfg"\n'
             'ARCH="$(uname -m)"\n'
             'case "$ARCH" in\n'
             f'  arm64) JRE="${{PWD}}/PrismLauncher-data/java/{JRE_DIRNAME}-aarch64" ;;\n'
             f'  *)     JRE="${{PWD}}/PrismLauncher-data/java/{JRE_DIRNAME}-x64" ;;\n'
             'esac\n'
             'JAVA="$JRE/Contents/Home/bin/java"\n'
-            'sed -i "" "s|^JavaPath=.*|JavaPath=$JAVA|" "$CFG"\n'
-            'exec "./Prism Launcher.app/Contents/MacOS/prismlauncher" -d "$(pwd)/PrismLauncher-data" "$@"\n'
+            f'sed -i "" "s|^JavaPath=.*|JavaPath=$JAVA|" "PrismLauncher-data/prismlauncher.cfg" "PrismLauncher-data/instances/{NAME}/instance.cfg"\n'
+            'if [ -f player.txt ]; then\n'
+            '  PLAYER="$(cat player.txt)"\n'
+            'else\n'
+            '  PLAYER="Player$(od -An -N3 -tx1 /dev/urandom | tr -d \' \\n\')"\n'
+            '  printf "%s" "$PLAYER" > player.txt\n'
+            '  sed -i "" "s/__RANDOM_NAME__/$PLAYER/g" "PrismLauncher-data/accounts.json"\n'
+            'fi\n'
+            f'exec "./Prism Launcher.app/Contents/MacOS/prismlauncher" -d "$(pwd)/PrismLauncher-data" -l "{NAME}"{server_arg} --offline "$PLAYER" "$@"\n'
         )
         path = os.path.join(root, "启动游戏.command")
         open(path, "w", encoding="utf-8").write(launcher_script)
         os.chmod(path, 0o755)
 
-    shutil.copy2(os.path.join(common.PACK, "使用说明.txt"), os.path.join(root, "使用说明.txt"))
+    write_guide(root)
     return root
+
+
+def write_guide(root):
+    text = open(os.path.join(common.PACK, "使用说明.txt"), encoding="utf-8").read()
+    text = text.format(
+        minecraft=PACK["minecraft"],
+        loader=PACK["loader"]["version"],
+        modcount=sum(1 for m in common.load("mods.json") if m["enabled"]),
+        rpcount=len(common.load("resourcepacks.json")),
+        spcount=len(common.load("shaderpacks.json")),
+    )
+    with open(os.path.join(root, "使用说明.txt"), "w", encoding="utf-8") as f:
+        f.write(text)
 
 
 def build_mmc(root_dir):

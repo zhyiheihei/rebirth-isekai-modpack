@@ -99,6 +99,60 @@ def check_bundle(root):
     elif not java_ok:
         problems.append("缺少内置 Java")
 
+    server = common.load("pack.json").get("server") or {}
+    for base in (".", "PrismLauncher-data"):
+        cfg_path = os.path.join(root, base, "prismlauncher.cfg")
+        if os.path.exists(cfg_path):
+            cfg = open(cfg_path, encoding="utf-8").read()
+            for key, want in (
+                ("IgnoreJavaWizard", "true"),
+                ("Language", "zh"),
+                ("ApplicationTheme", "system"),
+                ("IconTheme", "pe_colored"),
+                ("AutomaticJavaDownload", "false"),
+            ):
+                if f"{key}={want}" not in cfg:
+                    problems.append(f"prismlauncher.cfg 缺少 {key}={want}")
+            break
+    else:
+        problems.append("缺少 prismlauncher.cfg")
+
+    for base in (".", "PrismLauncher-data"):
+        acc = os.path.join(root, base, "accounts.json")
+        if os.path.exists(acc):
+            import json as _json
+
+            try:
+                data = _json.load(open(acc, encoding="utf-8"))
+            except Exception:
+                problems.append("accounts.json 解析失败")
+                break
+            names = [a.get("profile", {}).get("name") for a in data.get("accounts", [])]
+            if not names or not all(names):
+                problems.append("accounts.json 里没有可用的离线账户")
+            break
+    else:
+        problems.append("缺少 accounts.json（会弹首次登录向导）")
+
+    for base in (".", "PrismLauncher-data"):
+        upd = os.path.join(root, base, "prismlauncher_update.cfg")
+        if os.path.exists(upd) and "auto_check=false" in open(upd, encoding="utf-8").read():
+            break
+    else:
+        problems.append("缺少 prismlauncher_update.cfg auto_check=false（会检查更新）")
+
+    if server:
+        for base in ("instances", "PrismLauncher-data/instances", ""):
+            dat = os.path.join(root, base, name, "minecraft", "servers.dat")
+            if not os.path.exists(dat):
+                dat = os.path.join(root, base, ".minecraft", "servers.dat")
+            if os.path.exists(dat):
+                if server["ip"].encode() not in open(dat, "rb").read():
+                    problems.append(f"servers.dat 里没有 {server['ip']}")
+                break
+        else:
+            problems.append("缺少 servers.dat")
+
     trans_ok = any(
         os.path.exists(os.path.join(root, base, "mmc_zh.qm"))
         for base in ("translations", "PrismLauncher-data/translations")
@@ -113,8 +167,18 @@ def check_mmc(root, name, problems):
     cfg = open(os.path.join(root, "instance.cfg"), encoding="utf-8").read()
     if "JavaPath=" in cfg:
         problems.append("MMC 包不应固定 JavaPath（由导入方启动器决定）")
-    if not os.path.exists(os.path.join(root, "mmc-pack.json")):
+    manifest = os.path.join(root, "mmc-pack.json")
+    if not os.path.exists(manifest):
         problems.append("缺少 mmc-pack.json")
+    else:
+        import json as _json
+
+        comps = {c["uid"]: c["version"] for c in _json.load(open(manifest, encoding="utf-8"))["components"]}
+        pack = common.load("pack.json")
+        if comps.get("net.minecraft") != pack["minecraft"]:
+            problems.append(f"mmc-pack 的 MC 版本 {comps.get('net.minecraft')} != {pack['minecraft']}")
+        if comps.get("net.neoforged") != pack["loader"]["version"]:
+            problems.append(f"mmc-pack 的 NeoForge {comps.get('net.neoforged')} != {pack['loader']['version']}")
     game = os.path.join(root, ".minecraft")
     if not os.path.isdir(game):
         problems.append("缺少 .minecraft/")

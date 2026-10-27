@@ -29,13 +29,22 @@ def main():
         "",
         "## 首次进入",
         "1. 解压到硬盘（路径别带特殊符号）",
-        "2. 双击启动脚本，等启动器打开",
-        "3. 右上角「账户」→ 添加 Microsoft 正版账号，或添加离线账户直接玩单人",
-        "4. 选中实例 → 启动",
+        "2. 双击启动脚本（会直接启动游戏并进服）",
+        "3. 启动器已预配离线账户与服务器，等游戏起来自动进服；玩家名首次启动随机生成",
+        "4. 要正版联机再「账户」→ 添加账户 登录 Microsoft",
         "",
         "光影：进游戏后在「选项 → 视频设置 → 光影包」里选，默认 Complementary Unbound（r5.9.3）。",
         "",
     ]
+    try:
+        dropped = common.load("dropped.json")
+    except Exception:
+        dropped = []
+    if dropped:
+        lines += ["## 本版本相对上一版剔除", "| 文件 | 原因 |", "| --- | --- |"]
+        lines += [f"| {d['file']} | {d['reason']} |" for d in dropped]
+        lines.append("")
+
     if disabled:
         lines += ["## 已知不适配、已禁用", "| 模组 | 原因 |", "| --- | --- |"]
         lines += [f"| {m['file']} | {m.get('disabled_reason', '')} |" for m in disabled]

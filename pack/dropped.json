@@ -1,0 +1,22 @@
+[
+ {
+  "file": "mcw-holidays-1.1.3-mc26.3neoforge.jar",
+  "project": "rH20L2Lp",
+  "reason": "26.1.2 无 NeoForge 构建（该项目只支持 26.2/26.3）"
+ },
+ {
+  "file": "naturalist-2.0.7-neoforge-26.3.jar",
+  "project": "F8BQNPWX",
+  "reason": "26.1.2 无 NeoForge 构建（该项目只支持 26.2/26.3）"
+ },
+ {
+  "file": "Perception-NEOFORGE-0.1.6.1+26.3.jar",
+  "project": "P8STLvzB",
+  "reason": "26.1.2 无 NeoForge 构建（该项目只支持 26.2/26.3）"
+ },
+ {
+  "file": "qraftys-jungle-villages-6.0.jar",
+  "project": "qSvzu3X3",
+  "reason": "26.1.2 无 NeoForge 构建（该项目只支持 26.2/26.3）"
+ }
+]

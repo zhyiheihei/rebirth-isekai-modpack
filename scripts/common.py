@@ -9,7 +9,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PACK = os.path.join(ROOT, "pack")
 CACHE = os.path.join(ROOT, "cache")
 LOCAL = os.path.join(ROOT, "local-assets")
-DIST = os.path.join(ROOT, "dist")
+DIST = os.environ.get("MODPACK_DIST") or os.path.join(ROOT, "dist")
 
 
 def load(name):

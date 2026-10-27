@@ -1,10 +1,10 @@
 {
  "name": "重生：异世界冒险",
- "version": "0.0.1",
- "minecraft": "26.3",
+ "version": "0.1.0",
+ "minecraft": "26.1.2",
  "loader": {
   "type": "neoforge",
-  "version": "26.3.0.99"
+  "version": "26.1.2.109"
  },
  "java": {
   "vendor": "Eclipse Temurin",
@@ -18,5 +18,10 @@
  "memory": {
   "min_mb": 1024,
   "max_mb": 5120
+ },
+ "server": {
+  "name": "Minecraft服务器",
+  "ip": "122.51.242.40:25565",
+  "auto_join": true
  }
 }
