@@ -16,8 +16,20 @@ def main():
     print("== Java 运行时 ==")
     print("   ok" if common.fetch_runtimes() else "   失败")
 
+    print("== 启动器翻译 ==")
+    print("   ok" if common.fetch_translations() else "   失败")
+
+    print("== 游戏资源（客户端 jar / 库 / 素材）==")
+    import resources
+
+    resources.fetch()
+
     print("== 本地资产（材质/光影，不进 git）==")
     missing = common.check_local_assets()
+    if missing:
+        print("   尝试从发布资产拉取…")
+        if common.fetch_local_assets():
+            missing = common.check_local_assets()
     if missing:
         print("   缺少以下文件，请从原始来源补齐 local-assets/：")
         for m in missing:

@@ -44,8 +44,12 @@ JoinServerOnLaunch=false
 """
 
 
-def prism_data_dir(explicit):
-    return os.path.expanduser(explicit or "~/.local/share/PrismLauncher")
+def resource_source(explicit):
+    """返回 (资源目录, 是否需要按平台补原生库)。缓存的 resources 已含全部平台库。"""
+    cached = os.path.join(common.CACHE, "resources")
+    if os.path.isdir(os.path.join(cached, "libraries")):
+        return cached, False
+    return os.path.expanduser(explicit or "~/.local/share/PrismLauncher"), True
 
 
 def natives(libdir, os_key, meta_dir):
@@ -125,9 +129,9 @@ def build_instance(dest):
 def write_prism_cfg(datadir, source):
     cfg_path = os.path.join(source, "prismlauncher.cfg")
     text = open(cfg_path, encoding="utf-8").read() if os.path.exists(cfg_path) else "[General]\n"
-    text = re.sub(r"(?m)^Language=.*$", "Language=zh_CN", text)
+    text = re.sub(r"(?m)^Language=.*$", "Language=zh", text)
     if "Language=" not in text:
-        text = text.rstrip() + "\nLanguage=zh_CN\n"
+        text = text.rstrip() + "\nLanguage=zh\n"
     with open(os.path.join(datadir, "prismlauncher.cfg"), "w", encoding="utf-8") as f:
         f.write(text)
 
@@ -168,7 +172,7 @@ def extract_runtime(archive, kind, dest):
     shutil.rmtree(tmp)
 
 
-def assemble(platform, source):
+def assemble(platform, source, fill_natives=True):
     launcher_key = {"linux": "linux-x64", "windows": "windows-x64", "macos": "macos"}[platform]
     launcher = common.load("launcher.json")["artifacts"][launcher_key]
     runtime_key = "macos-aarch64" if platform == "macos" else platform + "-x64"
@@ -191,8 +195,12 @@ def assemble(platform, source):
     shutil.copytree(os.path.join(source, "assets"), os.path.join(datadir, "assets"), symlinks=False)
     shutil.copytree(os.path.join(source, "libraries"), os.path.join(datadir, "libraries"), symlinks=False)
     shutil.copytree(os.path.join(source, "meta"), os.path.join(datadir, "meta"), symlinks=False)
-    got = natives(os.path.join(datadir, "libraries"), OS_KEY[platform], os.path.join(datadir, "meta"))
-    print(f"[{platform}]   补下 {got} 个原生库", flush=True)
+    if fill_natives:
+        got = natives(os.path.join(datadir, "libraries"), OS_KEY[platform], os.path.join(datadir, "meta"))
+        print(f"[{platform}]   补下 {got} 个原生库", flush=True)
+    logs = os.path.join(source, "logs")
+    if os.path.isdir(logs):
+        shutil.copytree(logs, os.path.join(datadir, "assets", "log_configs"), dirs_exist_ok=True)
 
     print(f"[{platform}] Java {PACK['java']['release']}", flush=True)
     if platform == "macos":
@@ -210,6 +218,9 @@ def assemble(platform, source):
             os.path.join(datadir, "java", JRE_DIRNAME),
         )
     write_prism_cfg(datadir, source)
+    trans_src = os.path.join(common.CACHE, "translations")
+    if os.path.isdir(trans_src):
+        shutil.copytree(trans_src, os.path.join(datadir, "translations"), dirs_exist_ok=True)
 
     if platform == "linux":
         launcher_script = (
@@ -290,7 +301,7 @@ def main():
     args = ap.parse_args()
 
     targets = list(TARGETS) + ["mmc"] if args.target == "all" else args.target.split(",")
-    source = prism_data_dir(args.prism_data)
+    source, fill_natives = resource_source(args.prism_data)
 
     missing = common.check_local_assets()
     if missing:
@@ -309,7 +320,7 @@ def main():
         if platform == "mmc":
             root = build_mmc(None)
         else:
-            root = assemble(platform, source)
+            root = assemble(platform, source, fill_natives)
         print("完成：", root, flush=True)
         built.append(root)
         if args.zip:

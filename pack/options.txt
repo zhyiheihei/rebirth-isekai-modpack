@@ -67,7 +67,7 @@ damageTiltStrength:1.0
 highContrast:false
 highContrastBlockOutline:false
 narratorHotkey:true
-resourcePacks:["vanilla","mod_resources"]
+resourcePacks:["vanilla","mod_resources","file/3D发光浆果cave-vines-e1610.zip","file/3D树苗trees-a-e90.zip","file/3D竹笋3d-bamboo-shoots-v1-2-2.zip","file/Furnish Door Knock Silencer.zip","file/三叉戟模型drowned-trident.zip","file/吊篮hanging-baskets-1-1.zip","file/更好的作物better-crops-3d-16x-with-tall-wheat-e2310.zip","file/土豆朋友potato-friends.zip","file/暴击音效MC_Dungeons_Crit [1.19.3].zip","file/玻璃底船§7[1.20.1]§lGlass-Bottom Boat[32x].zip","file/3D药水瓶3d-potions-v1-1.zip","file/更好的连接透明玻璃Clean_Connected_Glass(1.20fufu修复版).zip","file/更好的竹子betterbamboo.zip","file/更好的藤曼better-vines-e2120.zip","file/花草梯子floweryladder-1-20-4.zip","file/更好的浆果2better-cberry-2bush.zip","file/更好的甘蔗Ray's Better Sugarcanezip v1.3.zip","file/杂七杂八的东西重置材质Things_Retextured.zip","file/【村民之声】§a§lVocal Villagers §r§71.2.zip","file/乌托邦自定义音乐版本3.5.zip","file/行星planet.zip","file/【繁花谧境】Bloom & Serenity UI.zip","file/修复动作弯曲.zip","file/A提示.zip","file/更好的草方块Fast Better Grass.zip","file/绿色行星.zip"]
 incompatibleResourcePacks:[]
 lastServer:
 lang:zh_cn

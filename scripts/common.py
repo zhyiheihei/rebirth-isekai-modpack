@@ -42,6 +42,47 @@ def proxy_args():
     return ["--socks5-hostname", proxy] if proxy else []
 
 
+def fetch_json(url, retries=3):
+    """走 curl（可用 MODPACK_PROXY）取 JSON。"""
+    import json as _json
+
+    for _ in range(retries):
+        proc = subprocess.run(
+            ["curl", "-fsSL", "--max-time", "120", *proxy_args(), url], capture_output=True
+        )
+        if proc.returncode == 0:
+            try:
+                return _json.loads(proc.stdout)
+            except Exception:
+                continue
+    raise RuntimeError(f"取 JSON 失败: {url}")
+
+
+def download_many(pairs, parallel=16):
+    """pairs: [(url, dest, expected_sha1)]，用 curl --parallel 批量拉，返回失败列表。"""
+    todo = []
+    for url, dest, expected in pairs:
+        if os.path.exists(dest) and (not expected or sha("sha1", dest) == expected):
+            continue
+        ensure_dir(os.path.dirname(dest))
+        todo.append((url, dest, expected))
+    if not todo:
+        return []
+    px = os.environ.get("MODPACK_PROXY", "")
+    lines = [f'proxy = "socks5h://{px}"'] if px else []
+    for url, dest, _ in todo:
+        lines += [f'url = "{url}"', f'output = "{dest}"']
+    subprocess.run(
+        ["curl", "--parallel", "--parallel-max", str(parallel), "-fsSL",
+         "--max-time", "900", "--config", "-"],
+        input="\n".join(lines), text=True, capture_output=True,
+    )
+    failed = [(u, d, h) for u, d, h in todo if not os.path.exists(d) or (h and sha("sha1", d) != h)]
+    for url, dest, expected in failed:
+        download(url, dest, expected, "sha1", retries=2, quiet=True)
+    return [d for u, d, h in failed if not os.path.exists(d) or (h and sha("sha1", d) != h)]
+
+
 def download(url, dest, expected=None, algorithm="sha256", retries=3, quiet=False):
     """下载到 dest 并校验；已存在且校验通过则跳过。返回 True/False。"""
     if os.path.exists(dest) and expected and sha(algorithm, dest) == expected:
@@ -98,3 +139,38 @@ def check_local_assets():
             elif sha("sha256", path) != e["sha256"]:
                 missing.append(os.path.relpath(path, ROOT) + " (校验失败)")
     return missing
+
+
+I18N = "https://i18n.prismlauncher.org"
+
+
+def fetch_translations(langs=("zh",)):
+    """启动器界面翻译：index_v2.json + mmc_<lang>.qm，保证离线也能显示中文。"""
+    dest = ensure_dir(os.path.join(CACHE, "translations"))
+    index = fetch_json(f"{I18N}/index_v2.json")
+    with open(os.path.join(dest, "index_v2.json"), "w", encoding="utf-8") as f:
+        json.dump(index, f, ensure_ascii=False)
+    ok = True
+    for lang in langs:
+        info = (index.get("languages") or {}).get(lang)
+        if not info:
+            ok = False
+            continue
+        path = os.path.join(dest, f"mmc_{lang}.qm")
+        ok &= download(f"{I18N}/{info['file']}", path, info["sha1"], "sha1")
+    return ok
+
+
+def fetch_local_assets():
+    """按 pack/local-assets.json 拉取材质/光影原始包并解压到 local-assets/。"""
+    info = load("local-assets.json")
+    if not info.get("url"):
+        return False
+    import tarfile
+
+    archive = os.path.join(CACHE, "launcher", info["file"])
+    if not download(info["url"], archive, info.get("sha256") or None):
+        return False
+    with tarfile.open(archive) as tar:
+        tar.extractall(ROOT)
+    return True
