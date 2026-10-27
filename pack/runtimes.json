@@ -1,0 +1,35 @@
+{
+ "vendor": "Eclipse Temurin",
+ "release": "jdk-25.0.5+8-jre",
+ "major": 25,
+ "artifacts": {
+  "linux-x64": {
+   "file": "jre25-linux-x64.tar.gz",
+   "kind": "tar",
+   "java_path": "bin/java",
+   "url": "https://api.adoptium.net/v3/binary/latest/25/ga/linux/x64/jre/hotspot/normal/eclipse",
+   "sha256": "6fac98f0c8202efc3135a9e9e42aa61963ec42d1c5cbb40caf231e7b14a24ef6"
+  },
+  "windows-x64": {
+   "file": "jre25-windows-x64.zip",
+   "kind": "zip",
+   "java_path": "bin/java.exe",
+   "url": "https://api.adoptium.net/v3/binary/latest/25/ga/windows/x64/jre/hotspot/normal/eclipse",
+   "sha256": "da78d54a2fcdbba1e92d5e3f07dd30236f96297891c4a21a781c3f38f5c0beae"
+  },
+  "macos-aarch64": {
+   "file": "jre25-mac-aarch64.tar.gz",
+   "kind": "tar",
+   "java_path": "Contents/Home/bin/java",
+   "url": "https://api.adoptium.net/v3/binary/latest/25/ga/mac/aarch64/jre/hotspot/normal/eclipse",
+   "sha256": "72ebd76b502c849e88dea39afae51baf5f82f2b5b1b6389c28ea707b20451bce"
+  },
+  "macos-x64": {
+   "file": "jre25-mac-x64.tar.gz",
+   "kind": "tar",
+   "java_path": "Contents/Home/bin/java",
+   "url": "https://api.adoptium.net/v3/binary/latest/25/ga/mac/x64/jre/hotspot/normal/eclipse",
+   "sha256": "806902c796c670969b7b27df73b8f0fe0924a61bd65083aa53064115e49cab2d"
+  }
+ }
+}

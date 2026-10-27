@@ -1,0 +1,27 @@
+{
+	"jungle_cabin": {
+		"salt": 331996537,
+		"separation": 26,
+		"spacing": 30
+	},
+	"jungle_fire": {
+		"salt": 238341175,
+		"separation": 60,
+		"spacing": 71
+	},
+	"jungle_monument": {
+		"salt": 538795179,
+		"separation": 49,
+		"spacing": 59
+	},
+	"jungle_parrot_cage": {
+		"salt": 497232954,
+		"separation": 52,
+		"spacing": 61
+	},
+	"jungle_treevillage": {
+		"salt": 1515129446,
+		"separation": 10,
+		"spacing": 25
+	}
+}

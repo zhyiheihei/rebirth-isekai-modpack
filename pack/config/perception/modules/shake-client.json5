@@ -1,0 +1,219 @@
+{
+  // DO NOT CHANGE
+  schemaVersion: 0,
+  // Options for configuring the screen shake effect during player falls.
+  fallShakes: {
+    // Generic intensity of the screen shake during a fall. If the value is 0 or below, the effect is disabled.
+    intensity: 0.0,
+    // Min player's vertical speed required to trigger the screen shake effect.
+    minSpeed: 0.5
+  },
+  /*
+   * List of sound effects that trigger the screen shaking effect.
+   * 
+   * [rangeMultiplier] - Multiplier of the standard sound playback range, which will be used as the radius for the screen shake effect;
+   * [rotationAmplitude|offsetAmplitude|fovAmplitude] - The intensity of the screen shaking;
+   * [rotationSpeed|offsetSpeed|fovSpeed] - The speed of the screen shaking;
+   * [duration] - The duration of the screen shaking;
+   * [fadeInTime] - The time in ticks for interpolating the screen shaking from the minimum to the maximum value. Applied at the start of the shaking effect;
+   * [fadeOutTime] - The time in ticks for interpolating the screen shaking from the maximum to the minimum value. Applied at the end of the shaking effect. A value of -1 sets the interpolation duration equal to the effect's total duration.
+   * 
+   * * Rotation - Tilt of the screen away from the source of the shake;
+   * * Offset - Offset of the position away from the source of the shake;
+   * * FOV (Field of View) - Screen zoom-out.
+   */
+  soundShakes: {
+    "minecraft:block.anvil.place": {
+      rangeMultiplier: 1.0,
+      rotationAmplitude: 0.1,
+      offsetAmplitude: 0.1,
+      fovAmplitude: 0.1,
+      rotationSpeed: 7.5,
+      offsetSpeed: 7.5,
+      fovSpeed: 7.5,
+      duration: 5,
+      fadeInTime: 0,
+      fadeOutTime: -1
+    },
+    "minecraft:entity.wither.spawn": {
+      rangeMultiplier: 1.0,
+      rotationAmplitude: 0.05,
+      offsetAmplitude: 0.05,
+      fovAmplitude: 0.1,
+      rotationSpeed: 10.0,
+      offsetSpeed: 10.0,
+      fovSpeed: 10.0,
+      duration: 60,
+      fadeInTime: 0,
+      fadeOutTime: -1
+    },
+    "minecraft:entity.generic.explode": {
+      rangeMultiplier: 0.25,
+      rotationAmplitude: 0.1,
+      offsetAmplitude: 0.5,
+      fovAmplitude: 0.15,
+      rotationSpeed: 5.0,
+      offsetSpeed: 3.5,
+      fovSpeed: 10.0,
+      duration: 7,
+      fadeInTime: 0,
+      fadeOutTime: -1
+    },
+    "minecraft:entity.ender_dragon.death": {
+      rangeMultiplier: 1.0,
+      rotationAmplitude: 0.05,
+      offsetAmplitude: 0.05,
+      fovAmplitude: 0.15,
+      rotationSpeed: 10.0,
+      offsetSpeed: 10.0,
+      fovSpeed: 10.0,
+      duration: 260,
+      fadeInTime: 0,
+      fadeOutTime: -1
+    },
+    "minecraft:entity.elder_guardian.curse": {
+      rangeMultiplier: 1.0,
+      rotationAmplitude: 0.15,
+      offsetAmplitude: 0.05,
+      fovAmplitude: 0.2,
+      rotationSpeed: 2.0,
+      offsetSpeed: 2.0,
+      fovSpeed: 10.0,
+      duration: 30,
+      fadeInTime: 0,
+      fadeOutTime: -1
+    },
+    "minecraft:entity.ender_dragon.growl": {
+      rangeMultiplier: 1.0,
+      rotationAmplitude: 0.05,
+      offsetAmplitude: 0.05,
+      fovAmplitude: 0.05,
+      rotationSpeed: 10.0,
+      offsetSpeed: 10.0,
+      fovSpeed: 10.0,
+      duration: 60,
+      fadeInTime: 0,
+      fadeOutTime: -1
+    },
+    "minecraft:entity.warden.dig": {
+      rangeMultiplier: 1.0,
+      rotationAmplitude: 0.1,
+      offsetAmplitude: 0.1,
+      fovAmplitude: 0.1,
+      rotationSpeed: 15.0,
+      offsetSpeed: 15.0,
+      fovSpeed: 15.0,
+      duration: 80,
+      fadeInTime: 50,
+      fadeOutTime: 20
+    },
+    "minecraft:entity.ender_dragon.ambient": {
+      rangeMultiplier: 1.0,
+      rotationAmplitude: 0.05,
+      offsetAmplitude: 0.05,
+      fovAmplitude: 0.05,
+      rotationSpeed: 10.0,
+      offsetSpeed: 10.0,
+      fovSpeed: 10.0,
+      duration: 60,
+      fadeInTime: 0,
+      fadeOutTime: -1
+    },
+    "minecraft:block.end_portal.spawn": {
+      rangeMultiplier: 1.0,
+      rotationAmplitude: 0.0,
+      offsetAmplitude: 0.1,
+      fovAmplitude: 0.25,
+      rotationSpeed: 10.0,
+      offsetSpeed: 10.0,
+      fovSpeed: 10.0,
+      duration: 80,
+      fadeInTime: 0,
+      fadeOutTime: -1
+    },
+    "minecraft:entity.warden.heartbeat": {
+      rangeMultiplier: 1.0,
+      rotationAmplitude: 0.05,
+      offsetAmplitude: 0.075,
+      fovAmplitude: 0.0,
+      rotationSpeed: 10.0,
+      offsetSpeed: 10.0,
+      fovSpeed: 10.0,
+      duration: 5,
+      fadeInTime: 0,
+      fadeOutTime: -1
+    },
+    "minecraft:block.sculk_shrieker.shriek": {
+      rangeMultiplier: 1.0,
+      rotationAmplitude: 0.025,
+      offsetAmplitude: 0.025,
+      fovAmplitude: 0.025,
+      rotationSpeed: 10.0,
+      offsetSpeed: 10.0,
+      fovSpeed: 10.0,
+      duration: 80,
+      fadeInTime: 0,
+      fadeOutTime: -1
+    },
+    "minecraft:entity.warden.emerge": {
+      rangeMultiplier: 1.0,
+      rotationAmplitude: 0.15,
+      offsetAmplitude: 0.15,
+      fovAmplitude: 0.15,
+      rotationSpeed: 10.0,
+      offsetSpeed: 10.0,
+      fovSpeed: 10.0,
+      duration: 120,
+      fadeInTime: 0,
+      fadeOutTime: -1
+    },
+    "minecraft:entity.warden.roar": {
+      rangeMultiplier: 1.0,
+      rotationAmplitude: 0.15,
+      offsetAmplitude: 0.15,
+      fovAmplitude: 0.15,
+      rotationSpeed: 15.0,
+      offsetSpeed: 15.0,
+      fovSpeed: 15.0,
+      duration: 60,
+      fadeInTime: 10,
+      fadeOutTime: -1
+    },
+    "minecraft:entity.warden.sonic_boom": {
+      rangeMultiplier: 1.0,
+      rotationAmplitude: 0.25,
+      offsetAmplitude: 0.25,
+      fovAmplitude: 0.25,
+      rotationSpeed: 7.0,
+      offsetSpeed: 7.0,
+      fovSpeed: 7.0,
+      duration: 50,
+      fadeInTime: 0,
+      fadeOutTime: -1
+    },
+    "minecraft:block.anvil.land": {
+      rangeMultiplier: 1.0,
+      rotationAmplitude: 0.075,
+      offsetAmplitude: 0.075,
+      fovAmplitude: 0.075,
+      rotationSpeed: 7.5,
+      offsetSpeed: 7.5,
+      fovSpeed: 7.5,
+      duration: 5,
+      fadeInTime: 0,
+      fadeOutTime: -1
+    },
+    "minecraft:entity.dragon_fireball.explode": {
+      rangeMultiplier: 0.1,
+      rotationAmplitude: 0.1,
+      offsetAmplitude: 0.5,
+      fovAmplitude: 0.15,
+      rotationSpeed: 5.0,
+      offsetSpeed: 3.5,
+      fovSpeed: 10.0,
+      duration: 5,
+      fadeInTime: 0,
+      fadeOutTime: -1
+    }
+  }
+}

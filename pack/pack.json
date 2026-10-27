@@ -1,0 +1,22 @@
+{
+ "name": "重生：异世界冒险",
+ "version": "1.0.0",
+ "minecraft": "26.3",
+ "loader": {
+  "type": "neoforge",
+  "version": "26.3.0.99"
+ },
+ "java": {
+  "vendor": "Eclipse Temurin",
+  "release": "25.0.5",
+  "major": 25
+ },
+ "launcher": {
+  "name": "PrismLauncher",
+  "version": "11.1.1"
+ },
+ "memory": {
+  "min_mb": 1024,
+  "max_mb": 5120
+ }
+}

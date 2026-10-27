@@ -1,0 +1,44 @@
+[
+ {
+  "file": "Bliss_v2.1.2_(Chocapic13_Shaders_edit).zip",
+  "sha256": "f41db92acc585fe9ffe0cc124d6ecaea27cef9ded91129ebc2a8e60226947b2c",
+  "size": 1791406,
+  "source": "local"
+ },
+ {
+  "file": "ComplementaryReimagined_r5.9.3.zip",
+  "sha256": "fed6c879e732cf7fc7bc6570ebb1def43235aa7e96f62859fbdbdbfa0b484b38",
+  "size": 553397,
+  "source": "local"
+ },
+ {
+  "file": "ComplementaryUnbound_r5.9.3.zip",
+  "sha256": "98ac741dee294d2a3c82d153349148c3bb7fb688c30eb3b49c3b9ac37e968c5a",
+  "size": 553400,
+  "source": "local"
+ },
+ {
+  "file": "Derivative_v2.0.1.zip",
+  "sha256": "71d2ee4bca827efa0bd9419ce9c0f94d0f2fe3b882bedc2a565d6d2f612e0e95",
+  "size": 19813468,
+  "source": "local"
+ },
+ {
+  "file": "Helian-MMCO.v1.2.16.Sundial.Lite.edit.zip",
+  "sha256": "3942920b519a857d59495442e6780f146a56ecbc03f51ecb3dd56269fbb6facb",
+  "size": 1406369,
+  "source": "local"
+ },
+ {
+  "file": "VanillaPlus_v3.3.zip",
+  "sha256": "d14c6f0331a33d3dd16e613f3c98fc8e77b8707fc4f2544231b2468a69f51d2b",
+  "size": 445002,
+  "source": "local"
+ },
+ {
+  "file": "photon_v1.4.zip",
+  "sha256": "da0929b38f5fd99befaaa8cd141cbf60e1fad05b92d916d0eeeee7c79f86c0fd",
+  "size": 3857333,
+  "source": "local"
+ }
+]
