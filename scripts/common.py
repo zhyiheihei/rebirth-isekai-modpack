@@ -166,11 +166,12 @@ def fetch_local_assets():
     info = load("local-assets.json")
     if not info.get("url"):
         return False
-    import tarfile
-
     archive = os.path.join(CACHE, "launcher", info["file"])
     if not download(info["url"], archive, info.get("sha256") or None):
         return False
-    with tarfile.open(archive) as tar:
-        tar.extractall(ROOT)
+    cmd = ["tar", "-xf", archive, "-C", ROOT]
+    if archive.endswith(".zst"):
+        cmd = ["tar", "--zstd", "-xf", archive, "-C", ROOT]
+    if subprocess.run(cmd, capture_output=True).returncode != 0:
+        return False
     return True
