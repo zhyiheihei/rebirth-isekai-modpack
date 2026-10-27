@@ -24,6 +24,8 @@ VERSION = PACK["version"]
 JRE_DIRNAME = "jre" + str(PACK["java"]["major"])
 
 OS_KEY = {"linux": "linux", "windows": "windows", "macos": "osx"}
+ARCHIVE_PREFIX = "Rebirth-Isekai"
+
 TARGETS = {
     "linux": "Linux-x64",
     "windows": "Windows-x64",
@@ -324,7 +326,8 @@ def main():
         print("完成：", root, flush=True)
         built.append(root)
         if args.zip:
-            archive = root.rstrip("/") + ".7z"
+            suffix = os.path.basename(root).replace(f"{NAME}-", ARCHIVE_PREFIX + "-")
+            archive = os.path.join(common.DIST, suffix + ".7z")
             print("打包：", archive, flush=True)
             zip_dir(root, archive)
             built.append(archive)
