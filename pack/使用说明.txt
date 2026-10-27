@@ -22,11 +22,11 @@
 · 不含存档、不含账号，环境干净
 
 【光影怎么选】
-· Complementary Reimagined —— 均衡、稳，默认推荐
-· Complementary Unbound —— 氛围更重
+· Complementary Unbound —— 默认已启用，氛围重
+· Complementary Reimagined —— 均衡、稳，集显/老显卡建议换这个
 · Photon —— 写实向
 · Bliss —— 明亮清爽
-集显或老显卡建议先用 Complementary Reimagined；卡的话关掉 Distant Horizons。
+卡的话再关掉 Distant Horizons。
 
 【常见问题】
 · 双击没反应 / 闪退：确认是解压后运行，不要直接在压缩包里双击

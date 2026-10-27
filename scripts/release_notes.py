@@ -31,7 +31,7 @@ def main():
         "3. 右上角「账户」→ 添加 Microsoft 正版账号，或添加离线账户直接玩单人",
         "4. 选中实例 → 启动",
         "",
-        "光影：进游戏后在「选项 → 视频设置 → 光影包」里选，默认推荐 Complementary Reimagined。",
+        "光影：进游戏后在「选项 → 视频设置 → 光影包」里选，默认 Complementary Unbound（r5.9.3）。",
         "",
     ]
     if disabled:

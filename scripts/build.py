@@ -114,7 +114,7 @@ def build_gamedir(dest):
     return dest
 
 
-def build_instance(dest):
+def build_instance(dest, bundled_java=True):
     common.ensure_dir(dest)
     shutil.copy2(os.path.join(common.PACK, "mmc-pack.json"), os.path.join(dest, "mmc-pack.json"))
     cfg = INSTANCE_CFG.format(
@@ -122,6 +122,12 @@ def build_instance(dest):
         min_mem=PACK["memory"]["min_mb"],
         max_mem=PACK["memory"]["max_mb"],
     )
+    if not bundled_java:
+        cfg = "\n".join(
+            line
+            for line in cfg.splitlines()
+            if not line.startswith(("JavaPath=", "OverrideJavaLocation="))
+        ) + "\n"
     with open(os.path.join(dest, "instance.cfg"), "w", encoding="utf-8") as f:
         f.write(cfg)
     build_gamedir(os.path.join(dest, "minecraft"))
@@ -281,7 +287,7 @@ def build_mmc(root_dir):
     if os.path.exists(root):
         shutil.rmtree(root)
     common.ensure_dir(root)
-    instance = build_instance(root)
+    instance = build_instance(root, bundled_java=False)
     game = os.path.join(instance, "minecraft")
     os.rename(game, os.path.join(instance, ".minecraft"))
     return root

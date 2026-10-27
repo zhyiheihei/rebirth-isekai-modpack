@@ -11,10 +11,14 @@ def check_bundle(root):
     name = common.load("pack.json")["name"]
     pack = common.load("pack.json")
     problems = []
+    is_mmc = root.endswith("-MMC")
 
     def need(rel, what):
         if not os.path.exists(os.path.join(root, rel)):
             problems.append(f"缺少{what}: {rel}")
+
+    if is_mmc:
+        return check_mmc(root, name, problems)
 
     index_id = None
     for candidate in ("assets", "PrismLauncher-data/assets"):
@@ -54,7 +58,7 @@ def check_bundle(root):
         problems.append("缺少 meta/")
 
     gamedir = None
-    for base in ("instances", "PrismLauncher-data/instances"):
+    for base in ("instances", "PrismLauncher-data/instances", ""):
         path = os.path.join(root, base, name, "minecraft")
         if os.path.isdir(path):
             gamedir = path
@@ -88,7 +92,11 @@ def check_bundle(root):
                 if "java" in files or "java.exe" in files:
                     java_ok = True
                     break
-    if not java_ok:
+    if is_mmc:
+        cfg = open(os.path.join(root, "instance.cfg"), encoding="utf-8").read()
+        if "JavaPath=" in cfg:
+            problems.append("MMC 包不应固定 JavaPath（由导入方启动器决定）")
+    elif not java_ok:
         problems.append("缺少内置 Java")
 
     trans_ok = any(
@@ -98,6 +106,32 @@ def check_bundle(root):
     if not trans_ok:
         problems.append("缺少中文翻译（启动器会去联网下载）")
 
+    return problems
+
+
+def check_mmc(root, name, problems):
+    cfg = open(os.path.join(root, "instance.cfg"), encoding="utf-8").read()
+    if "JavaPath=" in cfg:
+        problems.append("MMC 包不应固定 JavaPath（由导入方启动器决定）")
+    if not os.path.exists(os.path.join(root, "mmc-pack.json")):
+        problems.append("缺少 mmc-pack.json")
+    game = os.path.join(root, ".minecraft")
+    if not os.path.isdir(game):
+        problems.append("缺少 .minecraft/")
+        return problems
+    mods = [f for f in os.listdir(os.path.join(game, "mods")) if f.endswith(".jar")]
+    want = sum(1 for m in common.load("mods.json") if m["enabled"])
+    if len(mods) != want:
+        problems.append(f"模组数量不符: {len(mods)} != {want}")
+    for sub in ("resourcepacks", "shaderpacks"):
+        got = [f for f in os.listdir(os.path.join(game, sub)) if f.endswith(".zip")]
+        if len(got) != len(common.load(sub + ".json")):
+            problems.append(f"{sub} 数量不符: {len(got)}")
+    opts = os.path.join(game, "options.txt")
+    if not os.path.exists(opts):
+        problems.append("缺少 options.txt")
+    elif "file/" not in open(opts, encoding="utf-8").read():
+        problems.append("options.txt 里没有启用材质包")
     return problems
 
 
@@ -112,8 +146,6 @@ def main():
         return 1
     failed = 0
     for root in roots:
-        if root.endswith("-MMC"):
-            continue
         problems = check_bundle(root)
         status = "OK" if not problems else "有问题"
         print(f"{status}  {os.path.basename(root)}")
