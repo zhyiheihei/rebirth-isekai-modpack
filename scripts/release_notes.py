@@ -13,6 +13,8 @@ def main():
     lines = [
         f"# {pack['name']} v{pack['version']}",
         "",
+        ("**测试版**：功能与配置已可用，仍在迭代。" if pack["version"].startswith("0.") else ""),
+        "",
         f"- Minecraft **{pack['minecraft']}** + NeoForge **{pack['loader']['version']}**",
         f"- 模组 **{len(enabled)}** 个，材质包 **{len(common.load('resourcepacks.json'))}** 个（默认启用），光影包 **{len(common.load('shaderpacks.json'))}** 个",
         f"- 内置 Eclipse Temurin JDK {pack['java']['release']}，启动无需任何下载",

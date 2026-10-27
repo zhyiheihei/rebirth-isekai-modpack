@@ -82,4 +82,5 @@ jobs:
           tag_name: ${{ steps.ver.outputs.version }}
           body: ${{ steps.notes.outputs.notes }}
           files: dist/*.7z
+          prerelease: ${{ startsWith(steps.ver.outputs.version, 'v0.') }}
           fail_on_unmatched_files: true
