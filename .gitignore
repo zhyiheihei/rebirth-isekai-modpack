@@ -6,3 +6,7 @@ local-assets/
 # python
 __pycache__/
 *.pyc
+
+# 启动器/构建产物
+.fabric/
+hs_err_pid*.log

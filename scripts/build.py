@@ -42,7 +42,9 @@ AutomaticJavaDownload=false
 AutomaticJavaSwitch=false
 UserAskedAboutAutomaticJavaDownload=true
 PastebinURL=
-UseNativeGLFW=true
+# MC 26.x 需要 GLFW 3.5 的 glfwSetPreeditCallback；NixOS/系统自带 GLFW 3.4 没有该符号，
+# 一旦让启动器注入系统 GLFW 就会在 InputConstants 初始化时 NPE 崩掉，所以强制用包内自带的 GLFW。
+UseNativeGLFW=false
 JavaArchitecture=64
 MinMemAlloc={min_mem}
 MaxMemAlloc={max_mem}
@@ -166,53 +168,45 @@ def lwjgl_version():
     return "3.4.1"
 
 
-def meta_sha256(uid, version):
-    """从缓存的 meta index.json 里取组件 json 的 sha256。"""
-    import json as _json
-
-    path = os.path.join(common.CACHE, "resources", "meta", "index.json")
-    try:
-        index = _json.load(open(path, encoding="utf-8"))
-    except Exception:
-        return None
-    for pkg in index.get("packages", []):
-        if pkg["uid"] == uid:
-            return pkg.get("sha256")
-    return None
-
-
 def write_mmc_pack(dest):
+    """按 Prism 实际生成的形状写 mmc-pack.json（不带 cachedSha256，否则启动器会认为本地 meta 过期）。"""
     import json as _json
+
+    from resources import META
+    import common as _common
 
     lwjgl = lwjgl_version()
-    sha = lambda uid, ver: meta_sha256(uid, ver)
+    meta_dir = os.path.join(common.CACHE, "resources", "meta")
 
-    def comp(uid, version, **extra):
-        entry = {"uid": uid, "version": version, "cachedName": uid,
-                 "cachedVersion": version}
+    def meta_json(uid, version):
+        path = os.path.join(meta_dir, uid, version + ".json")
+        try:
+            return _json.load(open(path, encoding="utf-8"))
+        except Exception:
+            return {}
+
+    def comp(uid, version):
+        info = meta_json(uid, version)
+        entry = {
+            "uid": uid,
+            "version": version,
+            "cachedName": info.get("name") or uid,
+            "cachedVersion": version,
+        }
+        requires = info.get("requires") or []
+        if requires:
+            entry["cachedRequires"] = requires
         if uid == "org.lwjgl3":
-            entry["cachedVolatile"] = True
             entry["dependencyOnly"] = True
-        else:
-            entry["important"] = uid == "net.minecraft"
-            if uid == "net.minecraft":
-                entry["cachedRequires"] = [{"uid": "org.lwjgl3", "suggests": lwjgl}]
-            elif uid == "net.fabricmc.fabric-loader":
-                entry["cachedRequires"] = [
-                    {"uid": "net.minecraft", "equals": PACK["minecraft"]},
-                    {"uid": "net.fabricmc.intermediary", "equals": PACK["minecraft"]},
-                ]
-            else:
-                entry["cachedRequires"] = [{"uid": "net.minecraft", "equals": PACK["minecraft"]}]
-        s = sha(uid, version)
-        if s:
-            entry["cachedSha256"] = s
-        entry.update(extra)
+        if uid == "net.minecraft":
+            entry["important"] = True
+        if uid == "net.fabricmc.intermediary":
+            entry["dependencyOnly"] = True
         return entry
 
     data = {
         "components": [comp("org.lwjgl3", lwjgl), comp("net.minecraft", PACK["minecraft"])]
-        + [comp(uid, version) for uid, version in common.loader_components(PACK)],
+        + [comp(uid, version) for uid, version in _common.loader_components(PACK)],
         "formatVersion": 1,
     }
     with open(os.path.join(dest, "mmc-pack.json"), "w", encoding="utf-8") as f:
@@ -347,29 +341,54 @@ def extract_runtime(archive, kind, dest):
     shutil.rmtree(tmp)
 
 
-def assemble(platform, source, fill_natives=True):
+def link_tree(src, dst):
+    """优先硬链接、跨盘回退复制：assets/libraries 这类只读资源用它，构建快一个数量级。"""
+    common.ensure_dir(dst)
+    for root, dirs, files in os.walk(src):
+        rel = os.path.relpath(root, src)
+        target = dst if rel == "." else os.path.join(dst, rel)
+        common.ensure_dir(target)
+        for name in files:
+            s_path = os.path.join(root, name)
+            d_path = os.path.join(target, name)
+            if os.path.exists(d_path):
+                continue
+            try:
+                os.link(s_path, d_path)
+            except OSError:
+                shutil.copy2(s_path, d_path)
+
+
+def assemble(platform, source, fill_natives=True, fast=False):
     launcher_key = {"linux": "linux-x64", "windows": "windows-x64", "macos": "macos"}[platform]
     launcher = common.load("launcher.json")["artifacts"][launcher_key]
     runtime_key = "macos-aarch64" if platform == "macos" else platform + "-x64"
     runtime = common.load("runtimes.json")["artifacts"][runtime_key]
     root = os.path.join(common.DIST, f"{NAME}-{VERSION}-{TARGETS[platform]}")
-    if os.path.exists(root):
+    reuse = fast and os.path.isdir(root)
+    if os.path.exists(root) and not reuse:
         shutil.rmtree(root)
     common.ensure_dir(root)
 
-    extract_launcher(
-        os.path.join(common.CACHE, "launcher", launcher["file"]), launcher["kind"], root
-    )
+    if not reuse:
+        extract_launcher(
+            os.path.join(common.CACHE, "launcher", launcher["file"]), launcher["kind"], root
+        )
     datadir = root if platform != "macos" else os.path.join(root, "PrismLauncher-data")
     common.ensure_dir(datadir)
 
     print(f"[{platform}] 实例与配置", flush=True)
-    build_instance(os.path.join(datadir, "instances", NAME))
+    instance_dir = os.path.join(datadir, "instances", NAME)
+    if os.path.exists(instance_dir):
+        shutil.rmtree(instance_dir)
+    build_instance(instance_dir)
 
     print(f"[{platform}] 游戏资源（assets/libraries/meta）", flush=True)
-    shutil.copytree(os.path.join(source, "assets"), os.path.join(datadir, "assets"), symlinks=False)
-    shutil.copytree(os.path.join(source, "libraries"), os.path.join(datadir, "libraries"), symlinks=False)
-    shutil.copytree(os.path.join(source, "meta"), os.path.join(datadir, "meta"), symlinks=False)
+    for sub in ("assets", "libraries", "meta"):
+        dst = os.path.join(datadir, sub)
+        if reuse and os.path.isdir(dst):
+            continue
+        link_tree(os.path.join(source, sub), dst)
     if fill_natives:
         got = natives(os.path.join(datadir, "libraries"), OS_KEY[platform], os.path.join(datadir, "meta"))
         print(f"[{platform}]   补下 {got} 个原生库", flush=True)
@@ -377,21 +396,25 @@ def assemble(platform, source, fill_natives=True):
     if os.path.isdir(logs):
         shutil.copytree(logs, os.path.join(datadir, "assets", "log_configs"), dirs_exist_ok=True)
 
-    print(f"[{platform}] Java {PACK['java']['release']}", flush=True)
-    if platform == "macos":
-        for arch in ("aarch64", "x64"):
-            art = common.load("runtimes.json")["artifacts"]["macos-" + arch]
-            extract_runtime(
-                os.path.join(common.CACHE, "runtimes", art["file"]),
-                art["kind"],
-                os.path.join(datadir, "java", f"{JRE_DIRNAME}-{arch}"),
-            )
+    java_dir = os.path.join(datadir, "java", JRE_DIRNAME)
+    if reuse and os.path.isdir(java_dir):
+        print(f"[{platform}] Java {PACK['java']['release']}（复用）", flush=True)
     else:
-        extract_runtime(
-            os.path.join(common.CACHE, "runtimes", runtime["file"]),
-            runtime["kind"],
-            os.path.join(datadir, "java", JRE_DIRNAME),
-        )
+        print(f"[{platform}] Java {PACK['java']['release']}", flush=True)
+        if platform == "macos":
+            for arch in ("aarch64", "x64"):
+                art = common.load("runtimes.json")["artifacts"]["macos-" + arch]
+                extract_runtime(
+                    os.path.join(common.CACHE, "runtimes", art["file"]),
+                    art["kind"],
+                    os.path.join(datadir, "java", f"{JRE_DIRNAME}-{arch}"),
+                )
+        else:
+            extract_runtime(
+                os.path.join(common.CACHE, "runtimes", runtime["file"]),
+                runtime["kind"],
+                java_dir,
+            )
     write_prism_cfg(datadir)
     write_accounts(datadir)
     trans_src = os.path.join(common.CACHE, "translations")
@@ -508,6 +531,8 @@ def main():
     ap.add_argument("--target", default="all", help="all|linux|windows|macos|mmc，逗号分隔")
     ap.add_argument("--zip", action="store_true", help="同时打成压缩包")
     ap.add_argument("--prism-data", default="", help="提供 assets/libraries/meta 的 Prism 数据目录")
+    ap.add_argument("--fast", action="store_true",
+                    help="复用已解压的启动器/Java/资源，只重建实例（改模组或配置后快速重打包）")
     args = ap.parse_args()
 
     targets = list(TARGETS) + ["mmc"] if args.target == "all" else args.target.split(",")
@@ -530,7 +555,7 @@ def main():
         if platform == "mmc":
             root = build_mmc(None)
         else:
-            root = assemble(platform, source, fill_natives)
+            root = assemble(platform, source, fill_natives, fast=args.fast)
         print("完成：", root, flush=True)
         built.append(root)
         if args.zip:
