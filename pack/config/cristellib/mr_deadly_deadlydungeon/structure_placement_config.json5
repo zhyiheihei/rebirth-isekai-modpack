@@ -1,0 +1,12 @@
+{
+	"dddtowers": {
+		"salt": 47893215,
+		"separation": 32,
+		"spacing": 43
+	},
+	"dddungeons": {
+		"salt": 81051435,
+		"separation": 40,
+		"spacing": 50
+	}
+}

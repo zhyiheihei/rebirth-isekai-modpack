@@ -88,6 +88,17 @@
   "source_mod": "advancementinfo"
  },
  {
+  "file": "alexsmobs-2.2.4-fabric+26.1.2.jar",
+  "project": "kYIaHHfw",
+  "version": "2.2.4+26.1.2-fabric",
+  "version_id": "GnzVWDzC",
+  "loader": "fabric",
+  "sha512": "53de491b74120bd37087b37134df5f4d9b750e04e634b72920b9f5929185ce203b493af5454069375b2b1637cc26310b3a08373c972db1d6cc40b26c2ae36584",
+  "url": "https://cdn.modrinth.com/data/kYIaHHfw/versions/GnzVWDzC/alexsmobs-2.2.4-fabric%2B26.1.2.jar",
+  "enabled": true,
+  "source_mod": "alexs-mobs-continued"
+ },
+ {
   "file": "almanac-fabric-26.1.2-1.26.10.2.jar",
   "project": "Gi02250Z",
   "version": "1.26.10.2",
@@ -140,6 +151,17 @@
   "url": "https://cdn.modrinth.com/data/EsAfCjCV/versions/zLlqqiTA/appleskin-fabric-mc26.1.2-3.0.10.jar",
   "enabled": true,
   "source_mod": "appleskin"
+ },
+ {
+  "file": "archers-fabric-3.1.3.002+26.1.2.jar",
+  "project": "QgooUXAJ",
+  "version": "3.1.3.002+26.1.2-fabric",
+  "version_id": "iTQvlbsz",
+  "loader": "fabric",
+  "sha512": "87ad8e0dea74f3ba4b7b04562497f816f76e255134f3cf691573a8da8567cd319f89c833ce6caf6959a284653c960b2572ac0fe4268109eec9bf56ebe0720f42",
+  "url": "https://cdn.modrinth.com/data/QgooUXAJ/versions/iTQvlbsz/archers-fabric-3.1.3.002%2B26.1.2.jar",
+  "enabled": true,
+  "source_mod": "archers"
  },
  {
   "file": "architectury-fabric-20.1.17.jar",
@@ -416,6 +438,18 @@
   "source_mod": "bridgingmod"
  },
  {
+  "file": "BrutalNightmare-v7_MOD.jar",
+  "project": "local",
+  "version": "7",
+  "version_id": "local",
+  "loader": "fabric",
+  "sha512": "309044144f38c24165aa7ef7d8ca519e205f7c354b3fc2200719236e49d0535b4ae65b53a861550a67f089c34e8812ffa2d61e6526d05804adf46ab7d8e6ce03",
+  "url": "",
+  "local": "pack/mods-local/BrutalNightmare-v7_MOD.jar",
+  "enabled": true,
+  "source_mod": "brutalnightmare"
+ },
+ {
   "file": "bundle-api-fabric-3.0.0+26.1.2.jar",
   "project": "n8QN6Z1a",
   "version": "3.0.0+26.1.2-fabric",
@@ -523,6 +557,17 @@
   "url": "https://cdn.modrinth.com/data/dQcfqGbl/versions/vv7kxY52/cobweb-fabric-26.1-1.4.0.jar",
   "enabled": true,
   "source_mod": "cobweb"
+ },
+ {
+  "file": "codxlib-1.6.1-fabric+26.1.2.jar",
+  "project": "6oyMM4yX",
+  "version": "1.6.1+fabric-26.1.2",
+  "version_id": "Lrmefryj",
+  "loader": "fabric",
+  "sha512": "4c1b7643ea6abd062d63b4c9363e798e65f9ed071d337879946ad80d18a79c1d64443e5f1f83cc32890bfa2f3e279f3ee4b4d0002bcda8da9971487bc45fda3d",
+  "url": "https://cdn.modrinth.com/data/6oyMM4yX/versions/Lrmefryj/codxlib-1.6.1-fabric%2B26.1.2.jar",
+  "enabled": true,
+  "source_mod": "codxlib"
  },
  {
   "file": "collective-26.1.2-8.32.jar",
@@ -666,6 +711,28 @@
   "url": "https://cdn.modrinth.com/data/idMHQ4n2/versions/yyYvYfZI/CustomSkinLoader_Universal-15.1.jar",
   "enabled": true,
   "source_mod": "customskinloader"
+ },
+ {
+  "file": "Dangerous Fabric - 26.1.2 v1.5.1.jar",
+  "project": "nsri5wVW",
+  "version": "1.5.1",
+  "version_id": "YXgU0bJP",
+  "loader": "fabric",
+  "sha512": "1ec0dd5412d218907408572793f9af21fe8587c78d2ae3714bb1225ae3664ac79a224401b4f94dd2f45181f4c3e6124289344374a609ecbbc0a4ef9d4defe542",
+  "url": "https://cdn.modrinth.com/data/nsri5wVW/versions/YXgU0bJP/Dangerous%20Fabric%20-%2026.1.2%20v1.5.1.jar",
+  "enabled": true,
+  "source_mod": "dangerous"
+ },
+ {
+  "file": "deadly-deadly-dungeon-1.0.6.jar",
+  "project": "H1POBnTh",
+  "version": "1.0.6+mod",
+  "version_id": "V2HcfXx4",
+  "loader": "fabric",
+  "sha512": "2b6ffe263003e52ddd4d66d777d53be109e4c29cb32ee2e520cfa0c88d97723decf02e458214847cc8a4e92967587682f6463b500f73bf7d6142a92464ab70f1",
+  "url": "https://cdn.modrinth.com/data/H1POBnTh/versions/V2HcfXx4/deadly-deadly-dungeon-1.0.6.jar",
+  "enabled": true,
+  "source_mod": "deadly-deadly-dungeon"
  },
  {
   "file": "defaultoptions-fabric-26.1.2-26.1.2.2.jar",
@@ -855,6 +922,29 @@
   "source_mod": "enderitemod"
  },
  {
+  "file": "EnderZoology-v26.1.0-mc26.1.x-Fabric.jar",
+  "project": "CUQhzQjg",
+  "version": "26.1.0",
+  "version_id": "XBuMd0Yd",
+  "loader": "fabric",
+  "sha512": "40fd42a8b84b93d4c7f044d18cd9f8d12971e547b8c7749a02abcdef6ee1063fe3a99272b91316d5cf75ef2dc60c6745b080da7322e12a6adab551ee06b7ceb1",
+  "url": "https://cdn.modrinth.com/data/CUQhzQjg/versions/XBuMd0Yd/EnderZoology-v26.1.0-mc26.1.x-Fabric.jar",
+  "enabled": true,
+  "source_mod": "ender-zoology"
+ },
+ {
+  "file": "enhanced-mobs-1.0.1.jar",
+  "project": "local",
+  "version": "1.0.1",
+  "version_id": "local",
+  "loader": "fabric",
+  "sha512": "e696d7a84cb72eecf642c9d6783d9c7720444701b55a7449b789e274a9df83811753f1f1e2cb449cd8c65aaf113c30eee33265b0027b496520892687e659f6a6",
+  "url": "",
+  "local": "pack/mods-local/enhanced-mobs-1.0.1.jar",
+  "enabled": true,
+  "source_mod": "mr_enhanced_mobs"
+ },
+ {
   "file": "entity_model_features-3.3.12-26.1-fabric.jar",
   "project": "4I1XuqiY",
   "version": "3.3.12-fabric-26.1",
@@ -1017,6 +1107,18 @@
   "url": "https://cdn.modrinth.com/data/Oprx59lK/versions/diATUnsD/Floral%20Enchantment-fabric-26.1.2-1.3.0.jar",
   "enabled": true,
   "source_mod": "floralench"
+ },
+ {
+  "file": "FokusAPI-v4.9_MOD.jar",
+  "project": "local",
+  "version": "4.9",
+  "version_id": "local",
+  "loader": "fabric",
+  "sha512": "43a4b606d62afe0f32ee2bd891777e8122c0a50d254efc848f06c34ab25c821b9f4e7444890c68af1d18da745363d26cbe5ec04c96ce5a51c4aa9e595201ab04",
+  "url": "",
+  "local": "pack/mods-local/FokusAPI-v4.9_MOD.jar",
+  "enabled": true,
+  "source_mod": "fokusapi"
  },
  {
   "file": "foodeffecttooltips-2.1.2+26.1.1.jar",
@@ -1863,6 +1965,17 @@
   "source_mod": "packetfixer"
  },
  {
+  "file": "paladins-fabric-3.1.3.002+26.1.2.jar",
+  "project": "FxXkHaLe",
+  "version": "3.1.3.002+26.1.2-fabric",
+  "version_id": "MewONRsn",
+  "loader": "fabric",
+  "sha512": "ba75645a1576c42f07521a89e44d8f0271c15eea9e58f00e7b4981eb47d590461a86c6da5f0708b2ca6f4687aadc433de3c7c5ad81d86196a21d1c2e815ac3ea",
+  "url": "https://cdn.modrinth.com/data/FxXkHaLe/versions/MewONRsn/paladins-fabric-3.1.3.002%2B26.1.2.jar",
+  "enabled": true,
+  "source_mod": "paladins-and-priests"
+ },
+ {
   "file": "patchouli-fabric-26.1-94.jar",
   "project": "nU0bVIaL",
   "version": "26.1-94-beta",
@@ -2001,6 +2114,17 @@
   "enabled": true
  },
  {
+  "file": "reactify-1.4.b1_MOD.jar",
+  "project": "rcPTL0X0",
+  "version": "1.4.b1",
+  "version_id": "5s1fWU2d",
+  "loader": "fabric",
+  "sha512": "3cd3e2140ac6602c6fed1c280a76dbd08ece017bf0fb32ea0c48b128e24b66416ffcbfade2a08c9a601a61f31bd81ce6d5522e4156c056d8e8ca43febd65131a",
+  "url": "https://cdn.modrinth.com/data/rcPTL0X0/versions/5s1fWU2d/reactify-1.4.b1_MOD.jar",
+  "enabled": true,
+  "source_mod": "reactify"
+ },
+ {
   "file": "reeses-sodium-options-fabric-2.2.4+mc26.1.2.jar",
   "project": "Bh37bMuy",
   "version": "mc26.1.2-2.2.4+fabric",
@@ -2076,6 +2200,17 @@
   "url": "https://cdn.modrinth.com/data/Sb5ypgDP/versions/kRAYBIr2/rocks-fabric-1.9.5%2B26.1.jar",
   "enabled": true,
   "source_mod": "rocks"
+ },
+ {
+  "file": "rogues-fabric-3.1.3.002+26.1.2.jar",
+  "project": "3MKqoGuP",
+  "version": "3.1.3.002+26.1.2-fabric",
+  "version_id": "PQrEjztF",
+  "loader": "fabric",
+  "sha512": "a7ab12f68c5119bb02d864a89606b5f9f511289776d412dcefa2f766c8bddcfb5d835d0ea721c697084834cd189a13c5cd18bcdcebf3618997e4ba65cef4ef6e",
+  "url": "https://cdn.modrinth.com/data/3MKqoGuP/versions/PQrEjztF/rogues-fabric-3.1.3.002%2B26.1.2.jar",
+  "enabled": true,
+  "source_mod": "rogues-and-warriors"
  },
  {
   "file": "runes-fabric-1.3.2+26.1.2.jar",
@@ -2524,6 +2659,18 @@
   "url": "https://cdn.modrinth.com/data/PYjpoAys/versions/YKJCSGVJ/ubesdelight-fabric-26.1.2-0.4.15.jar",
   "enabled": true,
   "source_mod": "ubesdelight"
+ },
+ {
+  "file": "UltimateWarden-0.3.pre-b1-mod.jar",
+  "project": "local",
+  "version": "0.3.pre-b1",
+  "version_id": "local",
+  "loader": "fabric",
+  "sha512": "a2dd25c4e3da17361fce301c30e75cb49573f376bac7547b303c5d9b25ede775dfb02f1e5602ea765728f7a590f429772c322bd04a9af39304f61c90c00d8572",
+  "url": "",
+  "local": "pack/mods-local/UltimateWarden-0.3.pre-b1-mod.jar",
+  "enabled": true,
+  "source_mod": "ultimate_warden"
  },
  {
   "file": "UniversalBoneMeal-v26.1.0-mc26.1.x-Fabric.jar",

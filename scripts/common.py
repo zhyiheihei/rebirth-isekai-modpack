@@ -2,6 +2,7 @@
 import hashlib
 import json
 import os
+import shutil
 import subprocess
 import sys
 
@@ -124,6 +125,17 @@ def fetch_mods(quiet=False):
     ok = 0
     for m in mods:
         dest = os.path.join(CACHE, "mods", m["file"])
+        if m.get("local"):
+            # 仓库自带 jar（Modrinth 上没有的付费/自制数据包模组），按 sha512 校验后直接摆进缓存
+            src = os.path.join(ROOT, m["local"])
+            if not os.path.exists(src) or (m.get("sha512") and sha("sha512", src) != m["sha512"]):
+                print(f"  仓库内 mod 缺失或校验失败: {m['local']}", file=sys.stderr)
+                continue
+            if not (os.path.exists(dest) and m.get("sha512") and sha("sha512", dest) == m["sha512"]):
+                ensure_dir(os.path.dirname(dest))
+                shutil.copy2(src, dest)
+            ok += 1
+            continue
         if download(m["url"], dest, m["sha512"], "sha512", quiet=quiet):
             ok += 1
         else:

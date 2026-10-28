@@ -26,9 +26,11 @@ java           = Temurin 25
 ```
 pack/            清单与配置（唯一事实来源）：pack.json / mods.json / dropped.json /
                  resourcepacks.json / shaderpacks.json / local-assets.json / config / options.txt
+pack/mods-local/ Modrinth 上拿不到的自制/付费数据包模组（jar 直接进仓库，mods.json 里 url 留空、写 local）
 local-assets/    材质与光影原始 zip（约 262MB，不进 git，托管在 release 资产 assets-<版本>）
 scripts/         fetch.py（拉依赖）build.py（组装）verify_bundle.py（自检）
                  update_assets.py（对齐材质/光影上游）resources.py / release_notes.py
+                 sync_client.py（把本机客户端改动同步回 pack/）
 cache/           下载缓存，可删
 dist/            构建产物，可删
 ```
@@ -43,7 +45,21 @@ python3 scripts/verify_bundle.py                # 产物自检（离线可启动
 python3 scripts/update_assets.py                # 报告材质/光影有哪些上游新版本
 python3 scripts/update_assets.py --apply        # 落地：替换 + 补 mcmeta + 同步清单与 options.txt
 python3 scripts/package_assets.py               # 重打材质原件 tar.zst，用于发新 assets-<版本>
+python3 scripts/sync_client.py                  # 客户端改动进仓库：预演差异（mods/config/options）
+python3 scripts/sync_client.py --apply          # 落盘
+python3 scripts/sync_client.py --apply --release 0.2.2   # 落盘 + 改版本 + 提交 + 打 tag 推送（出 Release）
 ```
+
+## 客户端开发流程（唯一通道）
+
+本机实例（`MODPACK_INSTANCE`，缺省 `D:/我的世界/重生之异世界生存/.minecraft/versions/重生之异世界生成1.0v`）
+里试出来的改动，必须回灌到本仓库、由 CI 出 Release，**不允许只留在本机**：
+
+1. `python3 scripts/sync_client.py` 看差异，`--apply` 落盘。模组按 sha512 反查 Modrinth 自动补元数据；
+   查不到的（付费、自制数据包）先把 jar 放进 `pack/mods-local/` 再跑，脚本会写成 `local` 条目，CI 直接从仓库取。
+2. `python3 scripts/fetch.py && python3 scripts/build.py --fast --target linux` 本地抽检（可选）。
+3. `python3 scripts/sync_client.py --apply --release <新版本>` → 改 `pack.json` version、提交、打 tag 并推送，
+   Actions 构建完自动发 Release，玩家从 Release 页下载即可。
 
 ## 发布
 
