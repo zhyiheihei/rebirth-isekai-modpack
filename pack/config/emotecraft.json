@@ -1,0 +1,23 @@
+{
+  "config_version": 4,
+  "validate": false,
+  "emotesFolderOnLogicalServer": false,
+  "emotesDirectory": "emotes",
+  "checkPose": true,
+  "displayNowPlaying": true,
+  "alwaysValidateEmote": false,
+  "playersafety": true,
+  "stopthreshold": 0.04,
+  "yratio": 0.75,
+  "showHiddenConfig": false,
+  "loadbuiltin": true,
+  "quark": false,
+  "closeWheelType": "PRESS",
+  "enableWheelKeyboardNav": true,
+  "cameraType": "THIRD_PERSON_FRONT",
+  "alwaysOpenScreen": false,
+  "oldChooseWheel": false,
+  "showIconsIfPossible": false,
+  "fastmenu": {},
+  "keys": {}
+}

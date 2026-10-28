@@ -1,0 +1,50 @@
+{
+  "general": {
+    "allowVoidFloatingEnchantment": true,
+    "enderiteUpgradeTemplateChance": 0.5
+  },
+  "tools": {
+    "enderitePickaxeAD": 4.0,
+    "enderiteAxeAD": 8.0,
+    "enderiteHoeAD": -2.0,
+    "enderiteShovelAD": 4.5,
+    "enderiteSwordAD": 6.0,
+    "enderiteBowAD": 2.5,
+    "enderiteBowArrowSpeed": 3.5,
+    "enderiteBowNeedsArrow": true,
+    "enderiteBowWithInfinityNeedsArrow": false,
+    "enderiteBowChargeTime": 30.0,
+    "enderiteCrossbowAD": 3.0,
+    "enderiteCrossbowArrowSpeed": 3.65,
+    "enderiteCrossBowChargeTime": 35.0,
+    "durability": 4096,
+    "maxTeleportCharge": 64,
+    "enderiteSwordTeleportDistance": 30,
+    "spear": {
+      "swingAnimationSeconds": 1.25,
+      "chargeDamageMultiplier": 1.375,
+      "chargeDelaySeconds": 0.3,
+      "maxDurationForDismountSeconds": 2.0,
+      "minSpeedForDismount": 6.5
+    },
+    "miningSpeed": 15.0,
+    "attackDamageBonus": 5.0
+  },
+  "worldGeneration": {
+    "enderiteOre": {
+      "veinSize": 3,
+      "veinAmount": 3
+    }
+  },
+  "armor": {
+    "bootsProtection": 4,
+    "leggingsProtection": 7,
+    "chestplateProtection": 9,
+    "helmetProtection": 4,
+    "bodyProtection": 29,
+    "durabilityMultiplier": 72,
+    "enchantability": 17,
+    "toughness": 4.0,
+    "knockbackResistance": 0.1
+  }
+}

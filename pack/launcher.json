@@ -1,0 +1,24 @@
+{
+ "name": "PrismLauncher",
+ "version": "11.1.1",
+ "artifacts": {
+  "linux-x64": {
+   "file": "PrismLauncher-Linux-Qt6-Portable-11.1.1.tar.gz",
+   "kind": "tar",
+   "url": "https://github.com/PrismLauncher/PrismLauncher/releases/download/11.1.1/PrismLauncher-Linux-Qt6-Portable-11.1.1.tar.gz",
+   "sha256": "e21949a8101c1803dbc6f67a2cdad48ba80ede1c133f0d1f2a89da07af09e823"
+  },
+  "windows-x64": {
+   "file": "PrismLauncher-Windows-MSVC-Portable-11.1.1.zip",
+   "kind": "zip",
+   "url": "https://github.com/PrismLauncher/PrismLauncher/releases/download/11.1.1/PrismLauncher-Windows-MSVC-Portable-11.1.1.zip",
+   "sha256": "ab35a770fb06d89d2ccc098079db5db329fb4e68f42b72babd8b095efde3d2d7"
+  },
+  "macos": {
+   "file": "PrismLauncher-macOS-11.1.1.zip",
+   "kind": "mac",
+   "url": "https://github.com/PrismLauncher/PrismLauncher/releases/download/11.1.1/PrismLauncher-macOS-11.1.1.zip",
+   "sha256": "15126a7df57acb4f37fe581dad68cb03c7bb60b70eb82345f8bb3246235600c6"
+  }
+ }
+}

@@ -1,0 +1,57 @@
+[slots]
+	#Inventory elytra slot X offset from inventory panel left (Default: 77, negative = outside panel)
+	# Default: 77
+	# Range: -300 ~ 300
+	elytra_slot_x = 77
+	#Inventory elytra slot Y offset from inventory panel top (Default: 26, negative = outside panel)
+	# Default: 26
+	# Range: -300 ~ 300
+	elytra_slot_y = 26
+	#Inventory firework slot X offset from inventory panel left (Default: 77, negative = outside panel)
+	# Default: 77
+	# Range: -300 ~ 300
+	firework_slot_x = 77
+	#Inventory firework slot Y offset from inventory panel top (Default: 8, negative = outside panel)
+	# Default: 8
+	# Range: -300 ~ 300
+	firework_slot_y = 8
+	#Creative survival-inventory tab elytra slot X (Default: 126)
+	# Default: 126
+	# Range: -300 ~ 300
+	creative_elytra_slot_x = 126
+	#Creative survival-inventory tab elytra slot Y (Default: 33, aligned with armor slot spacing)
+	# Default: 33
+	# Range: -300 ~ 300
+	creative_elytra_slot_y = 33
+	#Creative survival-inventory tab firework slot X (Default: 126)
+	# Default: 126
+	# Range: -300 ~ 300
+	creative_firework_slot_x = 126
+	#Creative survival-inventory tab firework slot Y (Default: 6, aligned with armor slot spacing)
+	# Default: 6
+	# Range: -300 ~ 300
+	creative_firework_slot_y = 6
+
+[hud]
+	#Enable Elytra Durability & Firework HUD (Default: true)
+	hud_enabled = true
+	#Elytra HUD X offset from screen bottom center (Default: -150, left of offhand)
+	# Default: -150
+	# Range: -1000 ~ 1000
+	elytra_hud_x = -150
+	#Elytra HUD Y offset from screen bottom (Default: -22)
+	# Default: -22
+	# Range: -1000 ~ 1000
+	elytra_hud_y = -22
+	#Firework HUD X offset from screen bottom center (Default: -170, left of offhand)
+	# Default: -170
+	# Range: -1000 ~ 1000
+	firework_hud_x = -170
+	#Firework HUD Y offset from screen bottom (Default: -22)
+	# Default: -22
+	# Range: -1000 ~ 1000
+	firework_hud_y = -22
+	#Durability threshold fraction to show a warning (Default: 0.05 for 5%)
+	# Default: 0.05
+	# Range: 0.0 ~ 1.0
+	warning_threshold = 0.05

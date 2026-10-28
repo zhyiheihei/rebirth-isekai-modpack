@@ -1,0 +1,26 @@
+{
+  "scarecrow": {
+    "enabled": true,
+    "mobs_whitelist": [
+      ""
+    ],
+    "mobs_blacklist": [
+      ""
+    ],
+    "scare_radius": 12
+  },
+  "general": {
+    "DPS_mode": "DYNAMIC",
+    "disable_equipment_damage": true,
+    "xp_per_damage_on_hit": 0.0,
+    "dummy_decoy": false
+  },
+  "boss_mode": {
+    "health": 200,
+    "health_bar_color": "YELLOW"
+  },
+  "mobs_damage_numbers": {
+    "damage_mode": "NONE",
+    "healing_mode": "NONE"
+  }
+}

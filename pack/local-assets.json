@@ -1,0 +1,8 @@
+{
+  "version": "0.3.0",
+  "file": "local-assets-0.3.0.tar.zst",
+  "size": 274601529,
+  "sha256": "bde997e2f0517a0c4ce926553ec8167854c8adbf3934fe5d35ed4d594fd25b05",
+  "url": "https://github.com/zhyiheihei/rebirth-isekai-modpack/releases/download/assets-0.3.0/local-assets-0.3.0.tar.zst",
+  "note": "材质包与光影原始压缩包（约 262MB，不进 git）。CI 构建时按 url+sha256 拉取，解压后按 pack/resourcepacks.json / shaderpacks.json 逐条校验并清掉多余文件。"
+}

@@ -1,0 +1,28 @@
+{
+ "name": "重生：异世界冒险",
+ "version": "0.3.0",
+ "minecraft": "26.1.2",
+ "minecraft_line": "26.1",
+ "loader": {
+  "type": "fabric",
+  "version": "0.20.1"
+ },
+ "java": {
+  "vendor": "Eclipse Temurin",
+  "release": "25.0.5",
+  "major": 25
+ },
+ "launcher": {
+  "name": "PrismLauncher",
+  "version": "11.1.1"
+ },
+ "memory": {
+  "min_mb": 1024,
+  "max_mb": 5120
+ },
+ "server": {
+  "name": "Minecraft服务器",
+  "ip": "122.51.242.40:25565",
+  "auto_join": true
+ }
+}

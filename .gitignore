@@ -1,0 +1,12 @@
+# 大体积二进制与本地产物，不进 git
+cache/
+dist*/
+local-assets/
+
+# python
+__pycache__/
+*.pyc
+
+# 启动器/构建产物
+.fabric/
+hs_err_pid*.log

@@ -1,0 +1,54 @@
+《重生：异世界冒险》使用说明
+==============================
+
+【怎么开始玩】
+1. 把整个文件夹解压到硬盘（建议路径不含特殊符号，Windows 放 D:\Games\ 下最稳）
+2. 双击启动脚本，等启动器打开，游戏会自己起来并进入服务器：
+   · Windows：启动游戏.bat
+   · macOS：启动游戏.command（若提示「无法验证开发者」，右键 → 打开）
+   · Linux：启动游戏.sh（终端执行 ./启动游戏.sh）
+3. 玩家名首次启动自动随机生成（Player + 6 位十六进制），之后固定不变
+4. 想用正版账号联机：启动器右上「账户」→「添加账户」登录 Microsoft,
+   再在主界面点「启动」即可（不带离线参数）
+
+启动器、Java 25、全部游戏资源、材质、光影都已放在包里，不需要另外装 Java 或下载游戏本体。
+
+【包里有什么】
+· Minecraft {minecraft} + Fabric {loader}
+· {modcount} 个模组（冒险/RPG/地牢/结构/界面/性能优化）
+· {rpcount} 个材质包，已默认启用，进游戏即生效
+· {spcount} 个光影包：进游戏后 选项 → 视频设置 → 光影包 里挑
+· 多人列表里预置了服务器 122.51.242.40:25565
+· 不含存档，环境干净
+
+【光影怎么选】
+· Complementary Unbound r5.9.3 —— 默认已启用，氛围重
+· Complementary Unbound r5.9.3 + EuphoriaPatches_1.8.1 —— 同上的增强版（合并包基于 5.7.1），更花哨、更吃配置
+· Complementary Reimagined r5.9.3 —— 均衡、稳，集显/老显卡建议换这个
+· Complementary Reimagined r5.9.3 + EuphoriaPatches_1.8.1 —— 同上增强版（基于 5.7.1）
+· Photon v1.4 —— 写实向
+· Bliss 2.1.2 —— 明亮清爽
+· Helian-MMCO —— 自然向
+· Derivative —— 国创写实向
+· 低配原版 VanillaPlus —— 只加光影不加风格，最省
+卡的话再关掉 Distant Horizons。
+
+【常见问题】
+· 双击没反应 / 闪退：确认是解压后运行，不要直接在压缩包里双击
+· 内存不够：启动器里右键实例 → 编辑 → 设置 → 内存，按自己机器调（默认 5GB）
+· 启动器每次启动会做一次很轻的联网检查（界面翻译索引，几十 KB），
+  离线时会自动跳过，不影响进游戏；游戏本体不会下载任何东西
+· 启动瞬间就崩、日志里有 GLFW 或 glfwSetPreeditCallback：说明启动器用了系统的老 GLFW。
+  本包默认已关闭「使用系统 GLFW」；如果手动改过，请在启动器设置里关掉它再启动
+  （MC 26.x 需要 GLFW 3.5，多数发行版的 glfw 3.4 会在初始化时直接崩溃）。
+· Linux：本包适用于常规发行版（Ubuntu/Debian/Arch/Fedora 等）。
+  NixOS 用户请用 nixpkgs 的 prismlauncher，把这个实例目录导入进去即可。
+· macOS：Apple 芯片与 Intel 机型都已内置对应 Java。
+· 用 PCL2 的玩家：导入同名 MMC 实例包（.7z），PCL 会自己准备 Java 和游戏资源。
+· 这个版本对齐的是 MC {minecraft} + Fabric，方便接 Arclight 混合端开插件服。
+  评估过的 459 个模组中，有 211 个在 26.1.2 上还没有 Fabric 移植
+  （多为止步 1.20.1/1.21.1，或只在 CurseForge 发布），完整清单见仓库
+  pack/dropped.json。
+
+【版权】
+模组、材质、光影版权归各自作者所有，本包只做整合与配置，请勿用于商业用途。

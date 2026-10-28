@@ -1,0 +1,259 @@
+{
+  // DO NOT CHANGE
+  schemaVersion: 0,
+  /*
+   * List of entity ID's that should have trail effect.
+   * 
+   * [size] - Trail thickness;
+   * [maxPoints] - Maximum trail length, measured in points that are placed every N ticks, where N is the value of updateFrequency;
+   * [minSpeed] - Minimum object movement speed to place trail points;
+   * [updateFrequency] - Frequency of trail point placement;
+   * [fadeInColor] - Starting color of the trail in ARGB format;
+   * [fadeOutColor] - Ending color of the trail in ARGB format;
+   * [positionOffset] - Position offset of the trail relative to the object in XYZ;
+   * [backwardShift] - Position offset of the trail in the opposite direction from the player's standing point;
+   * [motionShift] - Position offset of the trail in the opposite direction from the object's movement.
+   */
+  entityTrails: {
+    "minecraft:arrow": {
+      size: 0.075,
+      maxPoints: 5,
+      minSpeed: 0.001,
+      updateFrequency: 1,
+      fadeInColor: "#00000000",
+      fadeOutColor: "#80000000",
+      positionOffset: {
+        x: 0.0,
+        y: 0.0,
+        z: 0.0
+      },
+      backwardShift: 0.0,
+      motionShift: 0.0
+    },
+    "minecraft:spectral_arrow": {
+      size: 0.075,
+      maxPoints: 10,
+      minSpeed: 0.001,
+      updateFrequency: 1,
+      fadeInColor: "#FFD505",
+      fadeOutColor: "#80000000",
+      positionOffset: {
+        x: 0.0,
+        y: 0.0,
+        z: 0.0
+      },
+      backwardShift: 0.0,
+      motionShift: 0.0
+    },
+    "minecraft:trident": {
+      size: 0.05,
+      maxPoints: 10,
+      minSpeed: 0.001,
+      updateFrequency: 1,
+      fadeInColor: "#00FFEA",
+      fadeOutColor: "#80000000",
+      positionOffset: {
+        x: 0.0,
+        y: 0.0,
+        z: 0.0
+      },
+      backwardShift: 0.0,
+      motionShift: 0.0
+    },
+    "minecraft:experience_orb": {
+      size: 0.075,
+      maxPoints: 5,
+      minSpeed: 0.001,
+      updateFrequency: 1,
+      fadeInColor: "#66FF00",
+      fadeOutColor: "#80D9FF00",
+      positionOffset: {
+        x: 0.0,
+        y: 0.175,
+        z: 0.0
+      },
+      backwardShift: 0.1,
+      motionShift: 0.1
+    },
+    "minecraft:firework_rocket": {
+      size: 0.075,
+      maxPoints: 15,
+      minSpeed: 0.001,
+      updateFrequency: 1,
+      fadeInColor: "#80FFFFFF",
+      fadeOutColor: "#FF0000",
+      positionOffset: {
+        x: 0.0,
+        y: 0.25,
+        z: 0.0
+      },
+      backwardShift: 0.0,
+      motionShift: 1.0
+    },
+    "minecraft:potion": {
+      size: 0.085,
+      maxPoints: 5,
+      minSpeed: 0.001,
+      updateFrequency: 1,
+      fadeInColor: "#8AD1E2F4",
+      fadeOutColor: "#80000000",
+      positionOffset: {
+        x: 0.0,
+        y: 0.15,
+        z: 0.0
+      },
+      backwardShift: 0.0,
+      motionShift: 0.0
+    },
+    "minecraft:fireball": {
+      size: 0.35,
+      maxPoints: 5,
+      minSpeed: 0.001,
+      updateFrequency: 1,
+      fadeInColor: "#EBAA18",
+      fadeOutColor: "#80800000",
+      positionOffset: {
+        x: 0.0,
+        y: 0.35,
+        z: 0.0
+      },
+      backwardShift: 0.0,
+      motionShift: 0.0
+    },
+    "minecraft:small_fireball": {
+      size: 0.2,
+      maxPoints: 5,
+      minSpeed: 0.001,
+      updateFrequency: 1,
+      fadeInColor: "#EBAA18",
+      fadeOutColor: "#80800000",
+      positionOffset: {
+        x: 0.0,
+        y: 0.15,
+        z: 0.0
+      },
+      backwardShift: 0.0,
+      motionShift: 0.0
+    },
+    "minecraft:dragon_fireball": {
+      size: 0.45,
+      maxPoints: 5,
+      minSpeed: 0.001,
+      updateFrequency: 1,
+      fadeInColor: "#D974F7",
+      fadeOutColor: "#80FF00D0",
+      positionOffset: {
+        x: 0.0,
+        y: 0.35,
+        z: 0.0
+      },
+      backwardShift: 0.0,
+      motionShift: 0.0
+    },
+    "minecraft:wither_skull": {
+      size: 0.1,
+      maxPoints: 5,
+      minSpeed: 0.001,
+      updateFrequency: 1,
+      fadeInColor: "#576868",
+      fadeOutColor: "#80000000",
+      positionOffset: {
+        x: 0.0,
+        y: 0.125,
+        z: 0.0
+      },
+      backwardShift: 0.0,
+      motionShift: 0.0
+    },
+    "minecraft:wind_charge": {
+      size: 0.075,
+      maxPoints: 10,
+      minSpeed: 0.001,
+      updateFrequency: 1,
+      fadeInColor: "#E8ECFC",
+      fadeOutColor: "#80000000",
+      positionOffset: {
+        x: 0.0,
+        y: 0.05,
+        z: 0.0
+      },
+      backwardShift: 0.0,
+      motionShift: 0.0
+    },
+    "minecraft:breeze_wind_charge": {
+      size: 0.075,
+      maxPoints: 10,
+      minSpeed: 0.001,
+      updateFrequency: 1,
+      fadeInColor: "#E8ECFC",
+      fadeOutColor: "#80000000",
+      positionOffset: {
+        x: 0.0,
+        y: 0.05,
+        z: 0.0
+      },
+      backwardShift: 0.0,
+      motionShift: 0.0
+    },
+    "minecraft:eye_of_ender": {
+      size: 0.075,
+      maxPoints: 10,
+      minSpeed: 0.001,
+      updateFrequency: 1,
+      fadeInColor: "#6321A6",
+      fadeOutColor: "#80FF00D0",
+      positionOffset: {
+        x: 0.0,
+        y: 0.125,
+        z: 0.0
+      },
+      backwardShift: 0.0,
+      motionShift: 0.0
+    },
+    "minecraft:vex": {
+      size: 0.15,
+      maxPoints: 20,
+      minSpeed: 0.001,
+      updateFrequency: 1,
+      fadeInColor: "#515F6D",
+      fadeOutColor: "#80000000",
+      positionOffset: {
+        x: 0.0,
+        y: 0.4,
+        z: 0.0
+      },
+      backwardShift: 0.0,
+      motionShift: 0.0
+    },
+    "minecraft:allay": {
+      size: 0.15,
+      maxPoints: 20,
+      minSpeed: 0.001,
+      updateFrequency: 1,
+      fadeInColor: "#63F8FC",
+      fadeOutColor: "#80000000",
+      positionOffset: {
+        x: 0.0,
+        y: 0.3,
+        z: 0.0
+      },
+      backwardShift: 0.0,
+      motionShift: 0.0
+    },
+    "minecraft:phantom": {
+      size: 0.15,
+      maxPoints: 30,
+      minSpeed: 0.001,
+      updateFrequency: 1,
+      fadeInColor: "#38007D",
+      fadeOutColor: "#80000000",
+      positionOffset: {
+        x: 0.0,
+        y: 0.25,
+        z: 0.0
+      },
+      backwardShift: 0.0,
+      motionShift: 0.0
+    }
+  }
+}

@@ -1,0 +1,604 @@
+[
+ {
+  "file": "3D发光浆果cave-vines-e1610.zip",
+  "sha256": "9c2011059230708e6284172800ae2c146b676e5359ab496b40fb99290304b6ba",
+  "size": 26679,
+  "source": "local"
+ },
+ {
+  "file": "3D树苗trees-a-e90.zip",
+  "sha256": "2ace2ced4010395c57518e95d7440a49c6d5f69ae9fd223a7839d3b9b99af25d",
+  "size": 56802,
+  "source": "local"
+ },
+ {
+  "file": "3D药水瓶3d-potions-v1-1.zip",
+  "sha256": "15f90de6918c5d678dc0de36f6be0557ebf4a4ae19a2774bef30967b32eff20f",
+  "size": 38486,
+  "source": "local"
+ },
+ {
+  "file": "3d-bamboo-shoots-v1-2-3.zip",
+  "sha256": "2389e0285830b94f2fed3f0c77daa354274c6d2d53973dcbcbd376be23b62755",
+  "size": 27380,
+  "source": "local",
+  "upstream": {
+   "project": "3d-bamboo-shoots",
+   "version": "1.2.3",
+   "game_versions": [
+    "1.14.4",
+    "1.15",
+    "1.15.1",
+    "1.15.2",
+    "1.16",
+    "1.16.1",
+    "1.16.2",
+    "1.16.3",
+    "1.16.4",
+    "1.16.5",
+    "1.17",
+    "1.17.1",
+    "1.18",
+    "1.18.1",
+    "1.18.2",
+    "1.19",
+    "1.19.1",
+    "1.19.2",
+    "1.19.3",
+    "1.19.4",
+    "1.20",
+    "1.20.1",
+    "1.20.2"
+   ]
+  },
+  "note": "上游停更在 1.20.x，靠 supported_formats.max_format=999 在 26.1.2 加载"
+ },
+ {
+  "file": "A Good Place Sample Pack.zip",
+  "sha256": "84ed61e510f104010fe5c5c1198de0204a1cb205eb2ef76c7afc19d12ecf0ada",
+  "size": 15055,
+  "source": "local"
+ },
+ {
+  "file": "Assorted Allays x FA - V.12.0.zip",
+  "sha256": "0b7b1b3bd9ac10925cb02506cdc69500b02fb85b160f09777370992a9d09b304",
+  "size": 974952,
+  "source": "local",
+  "upstream": {
+   "project": "assorted-allays-x-fresh-animations",
+   "version": "12.0",
+   "game_versions": [
+    "1.20.1",
+    "1.20.2",
+    "1.20.3",
+    "1.20.4",
+    "1.20.5",
+    "1.20.6",
+    "1.21",
+    "1.21.1",
+    "1.21.2",
+    "1.21.3",
+    "1.21.4",
+    "1.21.5",
+    "1.21.6",
+    "1.21.7",
+    "1.21.8",
+    "1.21.9",
+    "1.21.10",
+    "1.21.11",
+    "26.1",
+    "26.1.1",
+    "26.1.2",
+    "26.2"
+   ]
+  }
+ },
+ {
+  "file": "A提示.zip",
+  "sha256": "dfcaba9db21a0de9846cce9c1798ab63161237705ba63f50be47824e04c43f0b",
+  "size": 252591,
+  "source": "local"
+ },
+ {
+  "file": "Better-Leaves-9.4.zip",
+  "sha256": "28da5fb7972056a345b2d130a0a87bb89a85b9fb87ffcec5d38feac16772527b",
+  "size": 1428881,
+  "source": "local"
+ },
+ {
+  "file": "Bloom & Serenity UI.zip",
+  "sha256": "ea03e8e3358a17b940104ed99e32981f627fe975e9d8701be57b91dc4bfad3b5",
+  "size": 2617093,
+  "source": "local"
+ },
+ {
+  "file": "EnderEyes_26.3_v3.1.zip",
+  "sha256": "32d2f8b55f226826570869d84249aad741fc240399951d43dcc530889e9293d2",
+  "size": 247094,
+  "source": "local",
+  "upstream": {
+   "project": "blinking-ender-eyes",
+   "version": "26.3_v3.1",
+   "game_versions": [
+    "1.20",
+    "1.20.1",
+    "23w31a",
+    "23w32a",
+    "23w33a",
+    "23w35a",
+    "1.20.2-pre1",
+    "1.20.2",
+    "23w42a",
+    "23w43a",
+    "23w43b",
+    "23w44a",
+    "23w45a",
+    "23w46a",
+    "1.20.3",
+    "1.20.4",
+    "24w03a",
+    "24w03b",
+    "24w04a",
+    "24w05a",
+    "24w05b",
+    "24w06a",
+    "24w07a",
+    "24w09a",
+    "24w10a",
+    "24w11a",
+    "24w12a",
+    "24w13a",
+    "24w14potato",
+    "24w14a",
+    "1.20.5-pre1",
+    "1.20.5-pre2",
+    "1.20.5-pre3",
+    "1.20.5",
+    "1.20.6",
+    "24w18a",
+    "24w19a",
+    "24w19b",
+    "24w20a",
+    "1.21",
+    "1.21.1",
+    "24w33a",
+    "24w34a",
+    "24w35a",
+    "24w36a",
+    "24w37a",
+    "24w38a",
+    "24w39a",
+    "24w40a",
+    "1.21.2-pre1",
+    "1.21.2-pre2",
+    "1.21.2",
+    "1.21.3",
+    "24w44a",
+    "24w45a",
+    "24w46a",
+    "1.21.4",
+    "1.21.5",
+    "1.21.6",
+    "1.21.7",
+    "1.21.8",
+    "1.21.9",
+    "1.21.10",
+    "1.21.11",
+    "26.1",
+    "26.1.1",
+    "26.1.2",
+    "26.2",
+    "26.3"
+   ]
+  },
+  "note": "文件名里的 26.3 是上游的版本命名，该版本声明支持 26.1.2/26.2/26.3"
+ },
+ {
+  "file": "FarnersDelightExcaliburSupport_1.21.1.zip",
+  "sha256": "e133a320904d7cc296a2e473f791270a5f0dd505deb158baba27c84709ebeda3",
+  "size": 1149194,
+  "source": "local",
+  "upstream": {
+   "project": "excalibur-farmers-delight-support",
+   "version": "1.1.1",
+   "game_versions": [
+    "1.21",
+    "1.21.1",
+    "1.21.2",
+    "1.21.3",
+    "1.21.4",
+    "1.21.5",
+    "1.21.6",
+    "1.21.7",
+    "1.21.8",
+    "1.21.9",
+    "1.21.10",
+    "1.21.11"
+   ]
+  },
+  "note": "上游只发到 1.21.x，靠 supported_formats.max_format=999 在 26.1.2 加载"
+ },
+ {
+  "file": "FreshAnimations_v1.11.1_26.1+.zip",
+  "sha256": "ace5850e6f45e194aee47d84557634e3a79613230cf466550700b7e0318946f4",
+  "size": 773652,
+  "source": "local",
+  "upstream": {
+   "project": "fresh-animations",
+   "version": "1.11.1",
+   "game_versions": [
+    "26.1",
+    "26.1.1",
+    "26.1.2",
+    "26.2",
+    "26.3"
+   ]
+  }
+ },
+ {
+  "file": "Furnish Door Knock Silencer.zip",
+  "sha256": "c7b48aa60e0c71dd0856ccc1c892a1ab65a46bc1fd9c7849a9b52e1e405ba24e",
+  "size": 14000,
+  "source": "local"
+ },
+ {
+  "file": "JustExpressions_v1.2.1.zip",
+  "sha256": "24ed2c28376523cee38feb3336868b9c48deb108718676f7d9ee887316874aec",
+  "size": 260859,
+  "source": "local",
+  "upstream": {
+   "project": "just-expressions",
+   "version": "1.2.1",
+   "game_versions": [
+    "1.20",
+    "1.20.1",
+    "1.20.2",
+    "1.20.3",
+    "1.20.4",
+    "1.20.5",
+    "1.20.6",
+    "1.21",
+    "1.21.1",
+    "1.21.2",
+    "1.21.3",
+    "1.21.4",
+    "1.21.5",
+    "1.21.6",
+    "1.21.7",
+    "1.21.8",
+    "1.21.9",
+    "1.21.10",
+    "1.21.11",
+    "26.1",
+    "26.1.1",
+    "26.1.2",
+    "26.2",
+    "26.3"
+   ]
+  }
+ },
+ {
+  "file": "MC_Dungeons_Crit 26.1.zip",
+  "sha256": "bbec7b6533371b14b746c2f03e2b14cb1e1d62e030ded6547650c2dac755bd51",
+  "size": 68076,
+  "source": "local"
+ },
+ {
+  "file": "Minecraft-Mod-Language-Modpack-Converted-1.20.1.zip",
+  "sha256": "7b837a4dca89ed43f6d4c0d693711d3b5d5e958d7fa9f1ef1acf3ef5a6ceb5f0",
+  "size": 1719133,
+  "source": "local"
+ },
+ {
+  "file": "Os' Colorful Grasses (Mix).zip",
+  "sha256": "bdd900e576ec394475f3e8af78150c0dfd3204bccf6cf6f39ded7a7d5437b7ee",
+  "size": 329383,
+  "source": "local"
+ },
+ {
+  "file": "Rainbow Enchanted Glint 1.1.zip",
+  "sha256": "2a72853e65e45ab3036c16b246b0817c74e22cde4f1bbd146158cb35e0db10df",
+  "size": 153170,
+  "source": "local",
+  "upstream": {
+   "project": "rainbow-enchantment-glint",
+   "version": "1.1",
+   "game_versions": [
+    "1.19",
+    "1.19.1",
+    "1.19.2",
+    "1.19.3",
+    "1.19.4",
+    "1.20",
+    "1.20.1"
+   ]
+  },
+  "note": "上游只发到 1.20.1，靠 supported_formats.max_format=999 在 26.1.2 加载"
+ },
+ {
+  "file": "Round-Trees-8.4.zip",
+  "sha256": "db4c1a594e50357abe192857654bbec98c147d9c58045532adb3b0ecdaafb336",
+  "size": 435706,
+  "source": "local",
+  "upstream": {
+   "project": "round-trees",
+   "version": "8.4",
+   "game_versions": [
+    "1.20",
+    "1.20.1",
+    "1.20.2",
+    "1.20.3",
+    "1.20.4",
+    "1.20.5",
+    "1.20.6",
+    "1.21",
+    "1.21.1",
+    "1.21.2",
+    "1.21.3",
+    "1.21.4",
+    "1.21.5",
+    "1.21.6",
+    "1.21.7",
+    "1.21.8",
+    "1.21.9",
+    "1.21.10",
+    "1.21.11",
+    "26.1",
+    "26.1.1",
+    "26.1.2",
+    "26.2",
+    "26.3"
+   ]
+  }
+ },
+ {
+  "file": "XKSP 披花戴叶 flower armor.zip",
+  "sha256": "70c6af463968925a41da3e6b99d914cc097cbb5b9f182e1fb422d197db763c59",
+  "size": 131999,
+  "source": "local"
+ },
+ {
+  "file": "XKSP 花团锦簇 lush flowers.zip",
+  "sha256": "e092e9681ae5757eee697e289d1a5e540f796ca91ead099adf0029aee5bc31c8",
+  "size": 212607,
+  "source": "local"
+ },
+ {
+  "file": "xali's Enhanced Vanilla -1.11.2b-rev.54d51d4.zip",
+  "sha256": "63e28b897916120f71aa301bcf3d4876ddceb5eaee33400edf8a5e74cfe2a231",
+  "size": 915756,
+  "source": "local",
+  "upstream": {
+   "project": "xalis-enhanced-vanilla",
+   "version": "v1.11.2b",
+   "game_versions": [
+    "1.13",
+    "1.13.1",
+    "1.13.2",
+    "1.14",
+    "1.14.1",
+    "1.14.2",
+    "1.14.3",
+    "1.14.4",
+    "1.15",
+    "1.15.1",
+    "1.15.2",
+    "1.16",
+    "1.16.1",
+    "1.16.2",
+    "1.16.3",
+    "1.16.4",
+    "1.16.5",
+    "1.17",
+    "1.17.1",
+    "1.18",
+    "1.18.1",
+    "1.18.2",
+    "1.19",
+    "1.19.1",
+    "1.19.2",
+    "1.19.3",
+    "1.20",
+    "1.20.1",
+    "1.20.2",
+    "1.20.3",
+    "1.20.4",
+    "1.20.5",
+    "1.20.6",
+    "1.21"
+   ]
+  },
+  "note": "上游只发到 1.21，且原始 zip 条目重叠；本地是重建副本，靠 supported_formats.max_format=999 在 26.1.2 加载"
+ },
+ {
+  "file": "§2[1.21.7] §6Glass-Bottom Boat §7[32x].zip",
+  "sha256": "88a2a80936a20a7f4231057253a2c3a5a4f96ee49ea1fc6bd57d6df14d3344f2",
+  "size": 604939,
+  "source": "local"
+ },
+ {
+  "file": "§a§lVocal Villagers §r§71.4.zip",
+  "sha256": "4a3ad482b3c163c31b14f506ee696708bd289076bddce30c68c2fa18d85fc01b",
+  "size": 1150652,
+  "source": "local"
+ },
+ {
+  "file": "§lBetter Beds.zip",
+  "sha256": "c706c3775c9a3e2da49b1a037e8f5c15f9ce58a900c9c8c1a58c6f1ec24966d3",
+  "size": 114378,
+  "source": "local",
+  "upstream": {
+   "project": "better-3d-beds",
+   "version": "3.0",
+   "game_versions": [
+    "1.13",
+    "1.13.1",
+    "1.13.2",
+    "1.14",
+    "1.14.1",
+    "1.14.2",
+    "1.14.3",
+    "1.14.4",
+    "1.15",
+    "1.15.1",
+    "1.15.2",
+    "1.16",
+    "1.16.1",
+    "1.16.2",
+    "1.16.3",
+    "1.16.4",
+    "1.16.5",
+    "1.17",
+    "1.17.1",
+    "1.18",
+    "1.18.1",
+    "1.18.2",
+    "1.19",
+    "1.19.1",
+    "1.19.2",
+    "1.19.3",
+    "1.19.4",
+    "1.20",
+    "1.20.1",
+    "1.20.2",
+    "1.20.3",
+    "1.20.4",
+    "1.20.5",
+    "1.20.6",
+    "1.21",
+    "1.21.1",
+    "1.21.2",
+    "1.21.3",
+    "1.21.4",
+    "1.21.5",
+    "1.21.6",
+    "1.21.7",
+    "1.21.8",
+    "1.21.9",
+    "1.21.10",
+    "1.21.11"
+   ]
+  },
+  "note": "上游只发到 1.21.x，靠 supported_formats.max_format=999 在 26.1.2 加载"
+ },
+ {
+  "file": "§lTeddy Totems                         .zip",
+  "sha256": "38abcd8a72f7b7af5873dd243e534c9a422df4b0e3b62bd690aceff863f87569",
+  "size": 61727,
+  "source": "local"
+ },
+ {
+  "file": "三叉戟模型drowned-trident.zip",
+  "sha256": "d35ca7765ae914d3c1fe7f3fe22dd989c8458895c8e98cab47127a6d0efd7961",
+  "size": 61204,
+  "source": "local"
+ },
+ {
+  "file": "七彩花透明GUI.zip",
+  "sha256": "88d703f6cad7fd9e5160cd29f33df6a602d7c70303f36fda45fd29c4f04dcb35",
+  "size": 13400,
+  "source": "local"
+ },
+ {
+  "file": "自定义音乐版本3.5.zip",
+  "sha256": "8e18e4b4248569ac1dfdc03bbe47416544642df62933ea43846ee791bb36bc47",
+  "size": 218258913,
+  "source": "local"
+ },
+ {
+  "file": "修复动作弯曲.zip",
+  "sha256": "c392976a9a05ce5a3311ed440431a16e3dba0abf1d5629ef5891463942fc63d1",
+  "size": 86322,
+  "source": "local"
+ },
+ {
+  "file": "吊篮hanging-baskets-1-1.zip",
+  "sha256": "ce4fc93573524253a584886b8eb43491eb93657d47e3980ef183d411bfbe5f16",
+  "size": 100174,
+  "source": "local"
+ },
+ {
+  "file": "土豆朋友potato-friends.zip",
+  "sha256": "590d027dda4f041893c37ab1cce46e6c2cadc694deb0c50ff6345d317372e486",
+  "size": 91116,
+  "source": "local"
+ },
+ {
+  "file": "更好的作物better-crops-3d-16x-with-tall-wheat-e2310.zip",
+  "sha256": "574dc48c498c74e4e590229e4d0c4d05050c9523c1ddbda8813f6b03fd604eaf",
+  "size": 273991,
+  "source": "local"
+ },
+ {
+  "file": "更好的浆果2better-cberry-2bush.zip",
+  "sha256": "25bf7410ec7eaff6e6c3871be8675752348d844a010f9dee61d90203277537d5",
+  "size": 23814,
+  "source": "local"
+ },
+ {
+  "file": "更好的甘蔗Ray's Better Sugarcanezip v1.3.zip",
+  "sha256": "129a092a1a1f4b1a83c3b7f42f3be3a3bf0c806ec175c9c37383bdff6467d727",
+  "size": 32717,
+  "source": "local"
+ },
+ {
+  "file": "更好的竹子betterbamboo.zip",
+  "sha256": "40f375526f078da199b0b4e1700bdf16504c2ffb5671401bbc86f997e0105984",
+  "size": 293945,
+  "source": "local"
+ },
+ {
+  "file": "更好的草方块Fast Better Grass.zip",
+  "sha256": "9ac5e3cc04c65412b8093acfc78e6b2f84c19d144795efe17b7f5801c9e9cbf6",
+  "size": 11738,
+  "source": "local"
+ },
+ {
+  "file": "更好的藤曼better-vines-e2120.zip",
+  "sha256": "bbf915695efc48db3fe367540bb34848fd1f9aef60c342c9413b696ea9a4cc66",
+  "size": 18463,
+  "source": "local"
+ },
+ {
+  "file": "更好的连接透明玻璃Clean_Connected_Glass(1.20fufu修复版).zip",
+  "sha256": "b842f5ad5a9693139c6b1422faff0c73b3210f376462bfb1efb97d92511c05d8",
+  "size": 687122,
+  "source": "local"
+ },
+ {
+  "file": "杂七杂八的东西重置材质Things_Retextured.zip",
+  "sha256": "fbed09b21636ef532eaa4e7fd916c2a58fa67aec9a0356835f1d838e667bba66",
+  "size": 31320,
+  "source": "local"
+ },
+ {
+  "file": "汉化资源包.zip",
+  "sha256": "d9ce2c5e557240c0418e48c765cecbfc6f5e1a3221201c77faee811f2a78701e",
+  "size": 1081456,
+  "source": "local"
+ },
+ {
+  "file": "绿色行星.zip",
+  "sha256": "dd77ae55c3810c48406b28e04fe7da26d23cb8a3f297ceb501a568da75f4e461",
+  "size": 9476801,
+  "source": "local"
+ },
+ {
+  "file": "花草工具evey-s-overgrown-floral-tools-e2290.zip",
+  "sha256": "a5a2725d87520f0432d7c4d1e5259db90279440c61643edf4b87e07c2d715561",
+  "size": 261444,
+  "source": "local"
+ },
+ {
+  "file": "花草梯子floweryladder-1-20-4.zip",
+  "sha256": "df9e0057dcc2335b7081d6087c3cc6355e4147618e20b5ceb02dc3eb43d49716",
+  "size": 71800,
+  "source": "local"
+ },
+ {
+  "file": "行星planet.zip",
+  "sha256": "d33d95ebff86fdfd3b600be970e37ab029d7f52b877323c14046fffc6c8b5c44",
+  "size": 5488575,
+  "source": "local"
+ }
+]

@@ -1,0 +1,47 @@
+{
+	"//": "These settings are easier to change in-game! Mod List -> Healing Campfire -> Config",
+	"Enable Healing Campfire": {
+		"//": "Whether Healing Campfire is enabled. When disabled, none of its features run and its other settings are hidden. Takes effect after a restart.",
+		"value": true
+	},
+	"checkForCampfireDelayInTicks": {
+		"//": "How often in ticks the mod checks for campfires around the player. 1 second = 20 ticks, so by default every 2 seconds. min: 1, max: 1,200",
+		"value": 40
+	},
+	"healingRadius": {
+		"//": "The radius around the campfire in blocks where players receive the regeneration effect. min: 1, max: 64",
+		"value": 16
+	},
+	"effectDurationSeconds": {
+		"//": "The duration of the regeneration effect which the campfire applies. min: 1, max: 600",
+		"value": 60
+	},
+	"regenerationLevel": {
+		"//": "The level of regeneration which the campfire applies, by default 1. min: 1, max: 50",
+		"value": 1
+	},
+	"healPassiveMobs": {
+		"//": "When enabled, the campfire heals passive mobs around where the radius is half the width of a bounding box.",
+		"value": true
+	},
+	"hideEffectParticles": {
+		"//": "When enabled, hides the particles from the regeneration effect around the campfire.",
+		"value": true
+	},
+	"campfireMustBeLit": {
+		"//": "When enabled, the campfire only has an effect when the block is lit up.",
+		"value": true
+	},
+	"campfireMustBeSignalling": {
+		"//": "When enabled, the campfire only has an effect when the block is signalling.",
+		"value": false
+	},
+	"enableEffectForNormalCampfires": {
+		"//": "When enabled, the mod will work with normal campfires.",
+		"value": true
+	},
+	"enableEffectForSoulCampfires": {
+		"//": "When enabled, the mod will work with soul campfires.",
+		"value": true
+	}
+}

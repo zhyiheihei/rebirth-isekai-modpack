@@ -1,0 +1,113 @@
+{
+  "enableChatAnnouncements": true,
+  "enableDebugLogging": false,
+  "enableHealthScaling": true,
+  "baseHealthMultiplier": 1.0,
+  "maxHealthMultiplier": 2.0,
+  "healthMultiplierIncrement": 0.2,
+  "daysPerIncrement": 24,
+  "weaponChance": 0.18,
+  "enchantCountLevel1": 0.35,
+  "enchantCountLevel2": 0.15,
+  "enchantCountLevel3": 0.05,
+  "easyGearChance": 0.1,
+  "normalGearChance": 0.2,
+  "hardGearChance": 0.35,
+  "creeperSpeedMultiplier": 1.4,
+  "spiderSpeedMultiplier": 1.25,
+  "surfaceArmor": [
+    "minecraft:copper_helmet",
+    "minecraft:copper_chestplate",
+    "minecraft:copper_leggings",
+    "minecraft:copper_boots",
+    "minecraft:chainmail_helmet",
+    "minecraft:chainmail_chestplate",
+    "minecraft:chainmail_leggings",
+    "minecraft:chainmail_boots",
+    "minecraft:leather_helmet",
+    "minecraft:leather_chestplate",
+    "minecraft:leather_leggings",
+    "minecraft:leather_boots"
+  ],
+  "surfaceWeapons": [
+    "minecraft:stone_sword",
+    "minecraft:stone_axe",
+    "minecraft:copper_sword",
+    "minecraft:copper_axe",
+    "minecraft:iron_sword",
+    "minecraft:iron_axe"
+  ],
+  "caveArmor": [
+    "minecraft:iron_helmet",
+    "minecraft:iron_chestplate",
+    "minecraft:iron_leggings",
+    "minecraft:iron_boots",
+    "minecraft:copper_helmet",
+    "minecraft:copper_chestplate",
+    "minecraft:copper_leggings",
+    "minecraft:copper_boots",
+    "minecraft:chainmail_helmet",
+    "minecraft:chainmail_chestplate",
+    "minecraft:chainmail_leggings",
+    "minecraft:chainmail_boots"
+  ],
+  "caveWeapons": [
+    "minecraft:copper_sword",
+    "minecraft:copper_axe",
+    "minecraft:iron_sword",
+    "minecraft:iron_axe"
+  ],
+  "deepCaveArmor": [
+    "minecraft:diamond_helmet",
+    "minecraft:diamond_chestplate",
+    "minecraft:diamond_leggings",
+    "minecraft:diamond_boots",
+    "minecraft:golden_helmet",
+    "minecraft:golden_chestplate",
+    "minecraft:golden_leggings",
+    "minecraft:golden_boots",
+    "minecraft:iron_helmet",
+    "minecraft:iron_chestplate",
+    "minecraft:iron_leggings",
+    "minecraft:iron_boots",
+    "minecraft:chainmail_helmet",
+    "minecraft:chainmail_chestplate",
+    "minecraft:chainmail_leggings",
+    "minecraft:chainmail_boots"
+  ],
+  "deepCaveWeapons": [
+    "minecraft:iron_sword",
+    "minecraft:iron_axe",
+    "minecraft:diamond_sword",
+    "minecraft:diamond_axe"
+  ],
+  "surfaceArmorSets": [
+    "[minecraft:leather_helmet, minecraft:leather_chestplate, minecraft:leather_leggings, minecraft:leather_boots, 1]"
+  ],
+  "caveArmorSets": [
+    "[minecraft:iron_helmet, minecraft:iron_chestplate, minecraft:iron_leggings, minecraft:iron_boots, 1]"
+  ],
+  "deepCaveArmorSets": [
+    "[minecraft:diamond_helmet, minecraft:diamond_chestplate, minecraft:diamond_leggings, minecraft:diamond_boots, 1]"
+  ],
+  "availableBowEnchantments": [
+    "minecraft:power",
+    "minecraft:infinity",
+    "minecraft:flame",
+    "minecraft:punch"
+  ],
+  "availableWeaponEnchantments": [
+    "minecraft:sharpness",
+    "minecraft:smite",
+    "minecraft:fire_aspect",
+    "minecraft:unbreaking",
+    "minecraft:knockback",
+    "apotheosis:deep_wounds"
+  ],
+  "availableArmorEnchantments": [
+    "minecraft:protection",
+    "minecraft:unbreaking",
+    "minecraft:fire_protection",
+    "minecraft:projectile_protection"
+  ]
+}

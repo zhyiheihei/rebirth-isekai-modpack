@@ -1,0 +1,4 @@
+use_as_whitelists_instead = false
+show_suspicious_stew_tooltips = false
+blacklisted_item_identifiers = []
+blacklisted_mod_ids = ["spectrum", "vinery", "farmersdelight", "createfood", "expandeddelight", "frightsdelight", "moredelight", "oceansdelight", "silentsdelight", "ubesdelight"]
