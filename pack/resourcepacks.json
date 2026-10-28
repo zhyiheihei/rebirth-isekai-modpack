@@ -12,16 +12,20 @@
   "source": "local"
  },
  {
-  "file": "3D竹笋3d-bamboo-shoots-v1-2-2.zip",
-  "sha256": "614c6bcf816fb49cccb4673a86cb27e055d1424d7d05eec6d5f4489869891175",
-  "size": 27354,
-  "source": "local"
- },
- {
   "file": "3D药水瓶3d-potions-v1-1.zip",
   "sha256": "15f90de6918c5d678dc0de36f6be0557ebf4a4ae19a2774bef30967b32eff20f",
   "size": 38486,
   "source": "local"
+ },
+ {
+  "file": "3d-bamboo-shoots-v1-2-3.zip",
+  "sha256": "2389e0285830b94f2fed3f0c77daa354274c6d2d53973dcbcbd376be23b62755",
+  "size": 27380,
+  "source": "local",
+  "upstream": {
+   "project": "3d-bamboo-shoots",
+   "version": "1.2.3"
+  }
  },
  {
   "file": "A Good Place Sample Pack.zip",
@@ -30,21 +34,19 @@
   "source": "local"
  },
  {
-  "file": "Assorted Allays x FA - V.9.0.zip",
-  "sha256": "14c1ca4db481d681443bc964b52323b7f3cd99b10486123c68505b8c12ea0268",
-  "size": 847211,
-  "source": "local"
+  "file": "Assorted Allays x FA - V.12.0.zip",
+  "sha256": "0b7b1b3bd9ac10925cb02506cdc69500b02fb85b160f09777370992a9d09b304",
+  "size": 974952,
+  "source": "local",
+  "upstream": {
+   "project": "assorted-allays-x-fresh-animations",
+   "version": "12.0"
+  }
  },
  {
   "file": "A提示.zip",
   "sha256": "dfcaba9db21a0de9846cce9c1798ab63161237705ba63f50be47824e04c43f0b",
   "size": 252591,
-  "source": "local"
- },
- {
-  "file": "Better 3D Beds.zip",
-  "sha256": "a85b3799b2c0864f772b6b808d0ead4925022fecea4d365e12ebb1711fac4f20",
-  "size": 120863,
   "source": "local"
  },
  {
@@ -54,22 +56,40 @@
   "source": "local"
  },
  {
-  "file": "EnderEyes_1.20.1_v3.zip",
-  "sha256": "7dcc98d7903e02628e20effc37c3e6f2c8ed24528dfde236b7df66bee9a94562",
-  "size": 166744,
+  "file": "Bloom & Serenity UI.zip",
+  "sha256": "ea03e8e3358a17b940104ed99e32981f627fe975e9d8701be57b91dc4bfad3b5",
+  "size": 2617093,
   "source": "local"
  },
  {
-  "file": "FarmersDelightExcaliburSupport.zip",
-  "sha256": "3396a7cdf24fc0cf9ef6f2b2396457ad177b888c6f41c454e91092e3c8fce5c6",
-  "size": 1105001,
-  "source": "local"
+  "file": "EnderEyes_26.3_v3.1.zip",
+  "sha256": "32d2f8b55f226826570869d84249aad741fc240399951d43dcc530889e9293d2",
+  "size": 247094,
+  "source": "local",
+  "upstream": {
+   "project": "blinking-ender-eyes",
+   "version": "26.3_v3.1"
+  }
  },
  {
-  "file": "FreshAnimations_v1.9.2.zip",
-  "sha256": "10364b22e1a34420e5efa2d1ee1bd4c58e5a1e156cb8b49786add3c9131c601c",
-  "size": 513007,
-  "source": "local"
+  "file": "FarnersDelightExcaliburSupport_1.21.1.zip",
+  "sha256": "e133a320904d7cc296a2e473f791270a5f0dd505deb158baba27c84709ebeda3",
+  "size": 1149194,
+  "source": "local",
+  "upstream": {
+   "project": "excalibur-farmers-delight-support",
+   "version": "1.1.1"
+  }
+ },
+ {
+  "file": "FreshAnimations_v1.11.1_26.1+.zip",
+  "sha256": "ace5850e6f45e194aee47d84557634e3a79613230cf466550700b7e0318946f4",
+  "size": 773652,
+  "source": "local",
+  "upstream": {
+   "project": "fresh-animations",
+   "version": "1.11.1"
+  }
  },
  {
   "file": "Furnish Door Knock Silencer.zip",
@@ -78,9 +98,19 @@
   "source": "local"
  },
  {
-  "file": "JustExpressions_v1.1.zip",
-  "sha256": "f6794fb3fd9b45777d3e13c73c63ea9c09f8f44564c8a5dc79c497937d22a4a0",
-  "size": 271250,
+  "file": "JustExpressions_v1.2.1.zip",
+  "sha256": "24ed2c28376523cee38feb3336868b9c48deb108718676f7d9ee887316874aec",
+  "size": 260859,
+  "source": "local",
+  "upstream": {
+   "project": "just-expressions",
+   "version": "1.2.1"
+  }
+ },
+ {
+  "file": "MC_Dungeons_Crit 26.1.zip",
+  "sha256": "bbec7b6533371b14b746c2f03e2b14cb1e1d62e030ded6547650c2dac755bd51",
+  "size": 68076,
   "source": "local"
  },
  {
@@ -91,21 +121,29 @@
  },
  {
   "file": "Os' Colorful Grasses (Mix).zip",
-  "sha256": "6e100c2925edfa356a472a1c92c9aec765ebe15a599193a12306b4417cc0ed25",
-  "size": 289095,
+  "sha256": "bdd900e576ec394475f3e8af78150c0dfd3204bccf6cf6f39ded7a7d5437b7ee",
+  "size": 329383,
   "source": "local"
  },
  {
-  "file": "Rainbow Enchantment Glint v1.1.zip",
-  "sha256": "4d6dea0de2a3487280a10d1434f8568980a566eb9e63078bb35e1de2f364f3dd",
-  "size": 153146,
-  "source": "local"
+  "file": "Rainbow Enchanted Glint 1.1.zip",
+  "sha256": "2a72853e65e45ab3036c16b246b0817c74e22cde4f1bbd146158cb35e0db10df",
+  "size": 153170,
+  "source": "local",
+  "upstream": {
+   "project": "rainbow-enchantment-glint",
+   "version": "1.1"
+  }
  },
  {
-  "file": "Round-Trees-8.0.zip",
-  "sha256": "a60948c9cc6753d5d6e8ecdee48801b63f3f6d344fa92a4a8268f1bf175d094a",
-  "size": 429875,
-  "source": "local"
+  "file": "Round-Trees-8.4.zip",
+  "sha256": "db4c1a594e50357abe192857654bbec98c147d9c58045532adb3b0ecdaafb336",
+  "size": 435706,
+  "source": "local",
+  "upstream": {
+   "project": "round-trees",
+   "version": "8.4"
+  }
  },
  {
   "file": "XKSP 披花戴叶 flower armor.zip",
@@ -123,24 +161,38 @@
   "file": "xali's Enhanced Vanilla -1.11.2b-rev.54d51d4.zip",
   "sha256": "63e28b897916120f71aa301bcf3d4876ddceb5eaee33400edf8a5e74cfe2a231",
   "size": 915756,
+  "source": "local",
+  "upstream": {
+   "project": "xalis-enhanced-vanilla",
+   "version": "v1.11.2b"
+  }
+ },
+ {
+  "file": "§2[1.21.7] §6Glass-Bottom Boat §7[32x].zip",
+  "sha256": "88a2a80936a20a7f4231057253a2c3a5a4f96ee49ea1fc6bd57d6df14d3344f2",
+  "size": 604939,
   "source": "local"
  },
  {
-  "file": "§lTeddy Totems                         .zip",
-  "sha256": "38abcd8a72f7b7af5873dd243e534c9a422df4b0e3b62bd690aceff863f87569",
-  "size": 61727,
-  "source": "local"
- },
- {
-  "file": "【村民之声】§a§lVocal Villagers §r§71.2.zip",
+  "file": "§a§lVocal Villagers §r§71.4.zip",
   "sha256": "4a3ad482b3c163c31b14f506ee696708bd289076bddce30c68c2fa18d85fc01b",
   "size": 1150652,
   "source": "local"
  },
  {
-  "file": "【繁花谧境】Bloom & Serenity UI.zip",
-  "sha256": "ea03e8e3358a17b940104ed99e32981f627fe975e9d8701be57b91dc4bfad3b5",
-  "size": 2617093,
+  "file": "§lBetter Beds.zip",
+  "sha256": "c706c3775c9a3e2da49b1a037e8f5c15f9ce58a900c9c8c1a58c6f1ec24966d3",
+  "size": 114378,
+  "source": "local",
+  "upstream": {
+   "project": "better-3d-beds",
+   "version": "3.0"
+  }
+ },
+ {
+  "file": "§lTeddy Totems                         .zip",
+  "sha256": "38abcd8a72f7b7af5873dd243e534c9a422df4b0e3b62bd690aceff863f87569",
+  "size": 61727,
   "source": "local"
  },
  {
@@ -177,12 +229,6 @@
   "file": "土豆朋友potato-friends.zip",
   "sha256": "590d027dda4f041893c37ab1cce46e6c2cadc694deb0c50ff6345d317372e486",
   "size": 91116,
-  "source": "local"
- },
- {
-  "file": "暴击音效MC_Dungeons_Crit [1.19.3].zip",
-  "sha256": "bbec7b6533371b14b746c2f03e2b14cb1e1d62e030ded6547650c2dac755bd51",
-  "size": 68076,
   "source": "local"
  },
  {
@@ -237,12 +283,6 @@
   "file": "汉化资源包.zip",
   "sha256": "d9ce2c5e557240c0418e48c765cecbfc6f5e1a3221201c77faee811f2a78701e",
   "size": 1081456,
-  "source": "local"
- },
- {
-  "file": "玻璃底船§7[1.20.1]§lGlass-Bottom Boat[32x].zip",
-  "sha256": "88a2a80936a20a7f4231057253a2c3a5a4f96ee49ea1fc6bd57d6df14d3344f2",
-  "size": 604939,
   "source": "local"
  },
  {

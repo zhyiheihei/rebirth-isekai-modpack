@@ -168,8 +168,14 @@ def lwjgl_version():
     return "3.4.1"
 
 
-def write_mmc_pack(dest):
-    """按 Prism 实际生成的形状写 mmc-pack.json（不带 cachedSha256，否则启动器会认为本地 meta 过期）。"""
+def write_mmc_pack(dest, cached_sha=True):
+    """按 Prism 实际生成的形状写 mmc-pack.json。
+
+    随包自带 meta 的产物必须写 cachedSha256（与包内 meta 文件同 sha），否则 Prism
+    每次启动都去远程拉组件元数据；代理 fake-ip / 断网环境下会直接报「组件元数据更新失败」
+    而拦住启动。MMC 导入包不含 meta，交给导入方启动器自己解析，故不写。
+    """
+    import hashlib
     import json as _json
 
     from resources import META
@@ -185,6 +191,13 @@ def write_mmc_pack(dest):
         except Exception:
             return {}
 
+    def meta_sha(uid, version):
+        path = os.path.join(meta_dir, uid, version + ".json")
+        try:
+            return hashlib.sha256(open(path, "rb").read()).hexdigest()
+        except Exception:
+            return None
+
     def comp(uid, version):
         info = meta_json(uid, version)
         entry = {
@@ -193,6 +206,10 @@ def write_mmc_pack(dest):
             "cachedName": info.get("name") or uid,
             "cachedVersion": version,
         }
+        if cached_sha:
+            sha = meta_sha(uid, version)
+            if sha:
+                entry["cachedSha256"] = sha
         requires = info.get("requires") or []
         if requires:
             entry["cachedRequires"] = requires
@@ -213,9 +230,9 @@ def write_mmc_pack(dest):
         _json.dump(data, f, ensure_ascii=False, indent=4)
 
 
-def build_instance(dest, bundled_java=True):
+def build_instance(dest, bundled_java=True, ships_meta=True):
     common.ensure_dir(dest)
-    write_mmc_pack(dest)
+    write_mmc_pack(dest, cached_sha=ships_meta)
     cfg = INSTANCE_CFG.format(
         name=NAME,
         min_mem=PACK["memory"]["min_mb"],
@@ -512,7 +529,7 @@ def build_mmc(root_dir):
     if os.path.exists(root):
         shutil.rmtree(root)
     common.ensure_dir(root)
-    instance = build_instance(root, bundled_java=False)
+    instance = build_instance(root, bundled_java=False, ships_meta=False)
     game = os.path.join(instance, "minecraft")
     os.rename(game, os.path.join(instance, ".minecraft"))
     return root

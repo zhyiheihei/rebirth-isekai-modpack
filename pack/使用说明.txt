@@ -22,12 +22,12 @@
 · 不含存档，环境干净
 
 【光影怎么选】
-· Complementary Unbound —— 默认已启用，氛围重
-· Complementary Unbound + EuphoriaPatches —— 同上的增强版，更花哨、更吃配置
-· Complementary Reimagined —— 均衡、稳，集显/老显卡建议换这个
-· Complementary Reimagined + EuphoriaPatches —— 同上增强版
-· Photon —— 写实向
-· Bliss —— 明亮清爽
+· Complementary Unbound r5.9.3 —— 默认已启用，氛围重
+· Complementary Unbound r5.9.3 + EuphoriaPatches_1.8.1 —— 同上的增强版（合并包基于 5.7.1），更花哨、更吃配置
+· Complementary Reimagined r5.9.3 —— 均衡、稳，集显/老显卡建议换这个
+· Complementary Reimagined r5.9.3 + EuphoriaPatches_1.8.1 —— 同上增强版（基于 5.7.1）
+· Photon v1.4 —— 写实向
+· Bliss 2.1.2 —— 明亮清爽
 · Helian-MMCO —— 自然向
 · Derivative —— 国创写实向
 · 低配原版 VanillaPlus —— 只加光影不加风格，最省
@@ -38,6 +38,9 @@
 · 内存不够：启动器里右键实例 → 编辑 → 设置 → 内存，按自己机器调（默认 5GB）
 · 启动器每次启动会做一次很轻的联网检查（界面翻译索引，几十 KB），
   离线时会自动跳过，不影响进游戏；游戏本体不会下载任何东西
+· 启动瞬间就崩、日志里有 GLFW 或 glfwSetPreeditCallback：说明启动器用了系统的老 GLFW。
+  本包默认已关闭「使用系统 GLFW」；如果手动改过，请在启动器设置里关掉它再启动
+  （MC 26.x 需要 GLFW 3.5，多数发行版的 glfw 3.4 会在初始化时直接崩溃）。
 · Linux：本包适用于常规发行版（Ubuntu/Debian/Arch/Fedora 等）。
   NixOS 用户请用 nixpkgs 的 prismlauncher，把这个实例目录导入进去即可。
 · macOS：Apple 芯片与 Intel 机型都已内置对应 Java。

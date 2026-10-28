@@ -187,7 +187,68 @@ def check_bundle(root):
     if not trans_ok:
         problems.append("缺少中文翻译（启动器会去联网下载）")
 
+    check_portable_extras(root, problems)
+
     return problems
+
+
+def check_portable_extras(root, problems):
+    """针对已经踩过的坑加回归检查，避免改包时静默退化。"""
+    import glob
+    import hashlib
+
+    # 1) 启动器配置：必须关闭「使用系统 GLFW」（MC 26.x 要 GLFW 3.5）
+    for cfg in glob.glob(os.path.join(root, "**", "prismlauncher.cfg"), recursive=True):
+        text = open(cfg, encoding="utf-8").read()
+        if "UseNativeGLFW=false" not in text:
+            problems.append(f"{os.path.relpath(cfg, root)} 未关闭系统 GLFW（MC 26.x 需 GLFW 3.5）")
+
+    # 2) 组件 meta 的 cachedSha256 必须与随包 meta 文件一致，否则启动要联网取元数据
+    for manifest in glob.glob(os.path.join(root, "**", "mmc-pack.json"), recursive=True):
+        data = json.load(open(manifest, encoding="utf-8"))
+        meta_root = os.path.join(os.path.dirname(manifest), "meta")
+        if not os.path.isdir(meta_root):
+            continue
+        for comp in data.get("components", []):
+            path = os.path.join(meta_root, comp["uid"], comp["version"] + ".json")
+            if not os.path.exists(path):
+                problems.append(f"缺少组件 meta: {comp['uid']} {comp['version']}")
+                continue
+            sha = hashlib.sha256(open(path, "rb").read()).hexdigest()
+            if comp.get("cachedSha256") != sha:
+                problems.append(f"{comp['uid']} 的 cachedSha256 与包内 meta 不一致（会触发联网更新）")
+
+    # 3) options.txt 不能残留 Forge 修饰符键位（会让整个 options 加载失败）
+    for opts in glob.glob(os.path.join(root, "**", "options.txt"), recursive=True):
+        text = open(opts, encoding="utf-8").read()
+        if "CONTROL_OR_COMMAND" in text or ":\u0000" in text:
+            problems.append(f"{os.path.relpath(opts, root)} 残留 Forge 风格键位修饰符")
+
+    # 4) 材质包 mcmeta 必须是 26.x 的 min_format/max_format
+    for packzip in glob.glob(os.path.join(root, "**", "resourcepacks", "*.zip"), recursive=True):
+        try:
+            import zipfile
+
+            with zipfile.ZipFile(packzip) as z:
+                meta = json.loads(z.read("pack.mcmeta"))
+        except Exception:
+            problems.append(f"材质包 mcmeta 读取失败: {os.path.basename(packzip)}")
+            continue
+        sf = meta.get("pack", {}).get("supported_formats")
+        if not isinstance(sf, dict) or "min_format" not in sf or "max_format" not in sf:
+            problems.append(f"材质包 mcmeta 字段不兼容 26.x: {os.path.basename(packzip)}")
+
+    # 5) iris 默认光影必须真实存在（光影回退版本后容易忘记改这里）
+    for props in glob.glob(os.path.join(root, "**", "config", "iris.properties"), recursive=True):
+        text = open(props, encoding="utf-8").read()
+        want = None
+        for line in text.splitlines():
+            if line.startswith("shaderPack="):
+                want = line.split("=", 1)[1].strip()
+        if want and want != "(internal)" and want != "OFF":
+            folder = os.path.join(os.path.dirname(os.path.dirname(props)), "shaderpacks")
+            if not os.path.exists(os.path.join(folder, want)):
+                problems.append(f"iris 默认光影不存在: {want}")
 
 
 def check_mmc(root, name, problems):
@@ -206,8 +267,7 @@ def check_mmc(root, name, problems):
             problems.append(f"mmc-pack 的 MC 版本 {comps.get('net.minecraft')} != {pack['minecraft']}")
         for uid, ver in common.loader_components(pack):
             if comps.get(uid) != ver:
-                problems.append(f"mmc-pack 的 {uid} {comps.get(uid)} != {ver}")
-    game = os.path.join(root, ".minecraft")
+                problems.append(f"mmc-pack 的 {uid} {comps.get(uid)} != {ver}")    game = os.path.join(root, ".minecraft")
     if not os.path.isdir(game):
         problems.append("缺少 .minecraft/")
         return problems

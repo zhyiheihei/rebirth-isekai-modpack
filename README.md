@@ -59,9 +59,25 @@ python3 scripts/fetch.py && python3 scripts/build.py --zip
 ```
 
 - 升级 Minecraft / Fabric：改 `pack/pack.json` 与 `pack/mmc-pack.json`，再跑一次 `update.py --write` 让所有模组对齐新版本。
-- 换材质/光影：把新压缩包放进 `local-assets/<类别>/`，改对应 JSON 的 `file`/`sha256`/`size`。
-  当前 45 个材质包与乌托邦源目录逐条比对内容一致（仅 `pack.mcmeta` 额外写入 `supported_formats: 8..99` 才能在 26.x 里正常启用）；`xali's Enhanced Vanilla` 上游 zip 本身是重叠条目的畸形包，本地是重建后的等价副本。
+- 换材质/光影：把新压缩包放进 `local-assets/<类别>/`，改对应 JSON 的 `file`/`sha256`/`size`；批量对齐上游用 `python3 scripts/update_assets.py`（见下）。
+  45 个材质包里，能查到上游的最新版本已替换（旧文件在替换时按上游文件名重命名，`options.txt` 的 `resourcePacks` 引用同步更新），每个 `pack.mcmeta` 都写入了 `supported_formats: {min_format, max_format}` 才能在 26.x 里正常启用——26.x 已改用这两个字段名，旧的 `min_inclusive`/`max_inclusive` 会被判为「declares support for version newer than 64, but is missing mandatory fields」而回落；`xali's Enhanced Vanilla` 上游 zip 本身是重叠条目的畸形包（`unzip` 只报 warning，Python zipfile 直接抛错），本地是用 `unzip` 兜底解出后重建的等价副本。
 - 禁用某个模组：把 `mods.json` 里的 `enabled` 改成 `false` 并写上 `disabled_reason`。
+
+## 材质/光影批量对齐上游
+
+```bash
+python3 scripts/update_assets.py            # 只报告：每个包的上游候选与判定
+python3 scripts/update_assets.py --apply    # 落地：替换文件、补 mcmeta、更新清单与 options.txt
+```
+
+判定不靠名字相似度：每个候选都会下载下来算**zip 内路径集合重合度**，同一项目的相邻版本重合度通常 >0.9，搜索误配到的别的包只有 0.0~0.4。重合度不够但作者/描述能对上的（FreshAnimations 这类结构重排过的）走脚本里的 `FORCE` 白名单。Modrinth 上找不到的项目保持原样。
+
+## 已知坑（都已在本包里处理，改包时别退化）
+
+1. **MC 26.x 需要 GLFW 3.5。** 客户端要调 `glfwSetPreeditCallback`，官方 `lwjgl-glfw-natives-linux-3.4.1.jar` 里编的其实是 GLFW 3.5.0（有 preedit 符号）。NixOS 的 prismlauncher 包装器把 `glfw-minecraft-3.4` 塞进 `LD_LIBRARY_PATH` 并默认 `UseNativeGLFW=true`，于是 `dlopen` 拿到没有该符号的 3.4 → `InputConstants.setupKeyboardCallbacks` NPE、启动即崩。本包的 `PRISM_CFG` 因此设 `UseNativeGLFW=false`；如果目标机器仍崩，用 `-Dorg.lwjgl.glfw.libname=/path/to/libglfw.so` 显式钉住正确的库。
+2. **`options.txt` 里的键位不能带 Forge 修饰符。** 原 1.20.1 包留下的 `key_xxx:key.keyboard.o:CONTROL_OR_COMMAND` 会让 26.x 的 `InputConstants.getKey` 抛 `NumberFormatException`，整个 options 加载失败（连带材质包启用顺序丢失）。写回前必须剥掉 `:MODIFIER` 后缀。
+3. **`config/iris.properties` 的 `shaderPack` 必须与实际光影文件名一致。** 光影回退版本后忘了改这里，Iris 会报 `Pack ... is not valid!` 并静默关闭光影。
+4. **`mmc-pack.json` 要带与本地 meta 文件匹配的 `cachedSha256`。** 否则 Prism 每次启动都去远程拉组件元数据，断网/代理 fake-ip 环境下直接报「组件元数据更新失败」。
 
 ## 发布
 
@@ -90,7 +106,9 @@ sha256 e72943767f766691b2d11bac742aca43a90089878dd5364450f18171a57ab9dc
 `local-assets/resourcepacks/` 与 `local-assets/shaderpacks/` 不进 git（体积与再分发限制），需要从原始来源补齐：
 
 - 材质包：乌托邦探险之旅 3.5.2 的 `resourcepacks/` 目录（45 个，逐条比对一致）
-- 光影包：乌托邦探险之旅 3.5.2 的 `shaderpacks/` 目录（Complementary 5.7.1 + EuphoriaPatches 1.8.1、Bliss 2.1.1、photon 1.2a、Helian-MMCO 0.6.12、Derivative d24.4.14、VanillaPlus 3.3）
+- 光影包：以乌托邦 3.5.2 的 `shaderpacks/` 为基础，能查到上游的已拉到最新——Complementary Unbound / Reimagined **r5.9.3**、Bliss **2.1.2**、photon **v1.4**；Helian-MMCO 0.6.12、Derivative d24.4.14、VanillaPlus 3.3 上游没有更新版本。
+- 两个 `…+ EuphoriaPatches_1.8.1` 合并包仍是 5.7.1：上游已改用 **EuphoriaPatcher** 模组在运行期打补丁，不再分发合并 zip，没有可更新的对象。想在新版 Complementary 上要 Euphoria 效果，得加 EuphoriaPatcher 模组（会动模组清单，默认不加）。
+- 材质包同理：FreshAnimations、Round-Trees、JustExpressions、EnderEyes、Assorted Allays、Better 3D Beds、Os' Colorful Grasses、3D Bamboo Shoots、xali's Enhanced Vanilla、玻璃底船、村民之声、繁花谧境、暴击音效、Excalibur 农夫乐事支持等已对齐上游最新；中文社区包（乌托邦七彩花、自定义音乐、汉化资源包等）在 Modrinth 上没有对应项目，保持原样。
 
 `fetch.py` 会校验 sha256，缺文件会直接报出缺哪个。
 
