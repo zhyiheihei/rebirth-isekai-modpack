@@ -29,6 +29,8 @@ EXCL_NAME = re.compile(r"(\.bak|\.log$|\.tmp$|\.db$)", re.I)
 EXCL_REL = {
     "resourceful-config-web.json",  # 含 web 配置口令
     "wover/cached.json",            # 运行时缓存
+    "rpg_series/tag_cache.json",    # 运行时标签缓存（每次启动重建，进版本库只会一直是旧快照）
+    "rpg_series/loot_fallback_report.json",  # 运行时战利品回退报告
 }
 
 
@@ -159,6 +161,47 @@ def diff_config(inst):
     return src, add, upd, sorted(set(dst) - set(src))
 
 
+def gson_dumps(arr):
+    """按 Minecraft（Gson）的写法序列化字符串数组：转义 & ' < > =，其余保持 UTF-8。"""
+    text = json.dumps(arr, ensure_ascii=False, separators=(",", ":"))
+    for ch, esc in (("&", "\\u0026"), ("'", "\\u0027"), ("<", "\\u003c"),
+                    (">", "\\u003e"), ("=", "\\u003d")):
+        text = text.replace(ch, esc)
+    return text
+
+
+def sanitize_options(raw, manifest):
+    """把 options.txt 的 resourcePacks 收敛到随包分发的范围。
+
+    实例里可能启用着玩家自己的私有材质包（不在 pack/resourcepacks.json 里），
+    直接同步出去会让别人的 options.txt 引用一个不存在的文件。只保留
+    `file/` 前缀且在清单内的条目，其余（vanilla / moonlight:merged_pack 之类的
+    模组虚拟包）原样保留。返回 (新文本, 被剔除的条目列表)。
+    """
+    out, dropped = [], []
+    for line in raw.splitlines():
+        if not line.startswith("resourcePacks:"):
+            out.append(line)
+            continue
+        key, val = line.split(":", 1)
+        try:
+            arr = json.loads(val)
+        except ValueError:
+            out.append(line)
+            continue
+        kept = []
+        for item in arr:
+            if item.startswith("file/") and item[5:] not in manifest:
+                dropped.append(item[5:])
+            else:
+                kept.append(item)
+        if len(kept) == len(arr):
+            out.append(line)          # 没剔除任何东西就保留原文，避免格式漂移
+            continue
+        out.append(key + ":" + gson_dumps(kept))
+    return "\n".join(out) + ("\n" if raw.endswith("\n") else ""), dropped
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--instance", help="客户端实例目录")
@@ -193,9 +236,15 @@ def main():
     # ---- options.txt ----
     src_opt = os.path.join(inst, "options.txt")
     dst_opt = os.path.join(common.PACK, "options.txt")
-    opt_changed = os.path.exists(src_opt) and (
-        not os.path.exists(dst_opt) or common.sha("sha256", src_opt) != common.sha("sha256", dst_opt))
-    print(f"[options.txt] 有变化: {opt_changed}")
+    opt_text, opt_dropped = "", []
+    if os.path.exists(src_opt):
+        raw = open(src_opt, encoding="utf-8").read()
+        manifest = {e["file"] for e in common.load("resourcepacks.json")}
+        opt_text, opt_dropped = sanitize_options(raw, manifest)
+    dst_text = open(dst_opt, encoding="utf-8").read() if os.path.exists(dst_opt) else None
+    opt_changed = bool(opt_text) and opt_text != dst_text
+    print(f"[options.txt] 有变化: {opt_changed}"
+          + (f"（剔除私有材质包 {len(opt_dropped)} 个: {opt_dropped}）" if opt_dropped else ""))
 
     if not args.apply:
         print("\n（预演模式，未写入。加 --apply 执行）")
@@ -216,7 +265,8 @@ def main():
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         shutil.copy2(src[rel], dest)
     if opt_changed:
-        shutil.copy2(src_opt, dst_opt)
+        with open(dst_opt, "w", encoding="utf-8", newline="\n") as fh:
+            fh.write(opt_text)
     print(f"config: 写入 {len(cfg_add) + len(cfg_upd)} 个文件" + ("，options.txt 已同步" if opt_changed else ""))
 
     if args.release:
