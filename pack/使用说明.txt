@@ -46,7 +46,7 @@
 · macOS：Apple 芯片与 Intel 机型都已内置对应 Java。
 · 用 PCL2 的玩家：导入同名 MMC 实例包（.7z），PCL 会自己准备 Java 和游戏资源。
 · 这个版本对齐的是 MC {minecraft} + Fabric，方便接 Arclight 混合端开插件服。
-  原乌托邦 3.5.2 的 459 个模组里，有 213 个在 26.1.2 上还没有 Fabric 移植
+  上游清单里的 459 个模组中，有 213 个在 26.1.2 上还没有 Fabric 移植
   （多为止步 1.20.1/1.21.1，或只在 CurseForge 发布），完整清单见仓库
   pack/dropped.json。
 

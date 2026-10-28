@@ -4,9 +4,11 @@
 > 模组文件名里出现 `26.2`/`26.3`、材质包里出现 `EnderEyes_26.3`、`dropped.json` 里写「止于 26.3」，
 > 都是上游的版本命名或排除原因，不代表本项目目标版本。详见 `AGENTS.md` 的「版本」一节。
 
-Minecraft 26.1.2 + **Fabric 0.20.1** 的整合包（对齐 Arclight 混合端 26.1.2 测试版 `Dipper/1.0.0-SNAPSHOT`，便于开插件服），261 个模组、45 个材质包、9 个光影包，打包成开箱即玩的三平台便携包（自带 Java 25 与全部游戏资源），Windows 另有 PCL2 可导入的 MMC 实例包。
+Minecraft 26.1.2 + **Fabric 0.20.1** 的整合包。客户端版本与服务器保持一致（服务端为 26.1.2 混合端），261 个模组、45 个材质包、9 个光影包，打包成开箱即玩的三平台便携包（自带 Java 25 与全部游戏资源），Windows 另有 PCL2 可导入的 MMC 实例包。
 
-模组、材质、光影全部来自《乌托邦探险之旅 3.5.2》（Fabric 1.20.1，459 个模组）。加载器按「这些模组在 26.1.2 上的可移植数」选定：Fabric **244** / NeoForge **209**（252 个有移植的模组里 Fabric 覆盖 96.8%），且仅 Fabric 可用的 43 个里多为内容模组（BetterEnd、BetterNether、BCLib、The Bumblezone、Brewery、Macaw's Holidays、Sit、Ube's Delight 等）。
+名字取自「重生」+「异世界冒险」：进服那一刻起，你在一个重开的世界里从头活一遍——不是快节奏的战斗包，而是偏探索与建造的长期生存。地图换了、生物群系重织、村庄与要塞重做，附魔与饰品把成长线拉长；难度靠结构与地牢推进，不靠数值堆砌。适合几个人长期泡在一个存档里，也适合单人慢慢逛。
+
+模组、材质、光影沿用原整合包的清单，逐条核对到 26.1.2 有可用构建后再固定版本。加载器是按可移植数量选出来的：Fabric **244** / NeoForge **209**（252 个可移植模组里 Fabric 覆盖 96.8%），且仅 Fabric 可用的 43 个里多为内容模组（BetterEnd、BetterNether、BCLib、The Bumblezone、Brewery、Macaw's Holidays、Sit、Ube's Delight 等）。
 
 
 ## 目录结构
@@ -112,16 +114,16 @@ sha256 eea00b797562eec6a0c12bcab0ce2c5428f30045513b316367e253219200ceca
 
 `local-assets/resourcepacks/` 与 `local-assets/shaderpacks/` 不进 git（体积与再分发限制），需要从原始来源补齐：
 
-- 材质包：乌托邦探险之旅 3.5.2 的 `resourcepacks/` 目录（45 个，逐条比对一致）
-- 光影包：以乌托邦 3.5.2 的 `shaderpacks/` 为基础，能查到上游的已拉到最新——Complementary Unbound / Reimagined **r5.9.3**、Bliss **2.1.2**、photon **v1.4**；Helian-MMCO 0.6.12、Derivative d24.4.14、VanillaPlus 3.3 上游没有更新版本。
+- 材质包：随包托管的 45 个（清单见 `pack/resourcepacks.json`，逐条记录 sha256）
+- 光影包：Complementary Unbound / Reimagined **r5.9.3**、Bliss **2.1.2**、photon **v1.4**、Helian-MMCO 0.6.12、Derivative d24.4.14、VanillaPlus 3.3
 - 两个 `…+ EuphoriaPatches_1.8.1` 合并包仍是 5.7.1：上游已改用 **EuphoriaPatcher** 模组在运行期打补丁，不再分发合并 zip，没有可更新的对象。想在新版 Complementary 上要 Euphoria 效果，得加 EuphoriaPatcher 模组（会动模组清单，默认不加）。
-- 材质包同理：FreshAnimations、Round-Trees、JustExpressions、EnderEyes、Assorted Allays、Better 3D Beds、Os' Colorful Grasses、3D Bamboo Shoots、xali's Enhanced Vanilla、玻璃底船、村民之声、繁花谧境、暴击音效、Excalibur 农夫乐事支持等已对齐上游最新；中文社区包（乌托邦七彩花、自定义音乐、汉化资源包等）在 Modrinth 上没有对应项目，保持原样。
+- 材质包里能查到上游的已对齐最新：FreshAnimations、Round-Trees、JustExpressions、EnderEyes、Assorted Allays、Better 3D Beds、Os' Colorful Grasses、3D Bamboo Shoots、xali's Enhanced Vanilla、玻璃底船、村民之声、繁花谧境、暴击音效、Excalibur 农夫乐事支持等；中文社区包（七彩花透明 GUI、自定义音乐、汉化资源包等）在 Modrinth 上没有对应项目，保持原样。
 
 `fetch.py` 会校验 sha256，缺文件会直接报出缺哪个。
 
-## 未纳入的源模组
+## 未纳入的模组
 
-乌托邦 3.5.2 的 459 个模组里，213 个在 26.1.2 上没有 Fabric 构建，全部记在 `pack/dropped.json`：
+上游清单里的 459 个模组中，213 个在 26.1.2 上没有 Fabric 构建，全部记在 `pack/dropped.json`：
 
 | 分类 | 数量 | 说明 |
 | --- | --- | --- |
