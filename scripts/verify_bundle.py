@@ -321,7 +321,12 @@ def check_runnable(root, problems):
     if os.path.exists(opts) and os.path.isdir(rp_dir):
         line = [l for l in open(opts, encoding="utf-8").read().splitlines() if l.startswith("resourcePacks:[")]
         if line:
-            refs = re.findall(r'file/([^"]+)"', line[0])
+
+            def gson_unescape(s):
+                # options.txt 里 resourcePacks 的值是 Gson 序列化的 JSON，会把 & ' " 等写成 \uXXXX
+                return re.sub(r"\\u([0-9a-fA-F]{4})", lambda m: chr(int(m.group(1), 16)), s)
+
+            refs = [gson_unescape(r) for r in re.findall(r'file/([^"]+)"', line[0])]
             have = set(os.listdir(rp_dir))
             missing = [r for r in refs if r not in have]
             if missing:
