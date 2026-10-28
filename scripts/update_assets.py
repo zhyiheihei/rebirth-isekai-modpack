@@ -25,6 +25,8 @@ STAGE = os.path.join(ROOT, "cache", "asset-updates")
 BACKUP = os.path.join(ROOT, "cache", "asset-old")
 KINDS = {"resourcepacks": "resourcepack", "shaderpacks": "shader"}
 MIN_OVERLAP = 0.55
+TARGET_MC = json.load(open(os.path.join(ROOT, "pack", "pack.json"), encoding="utf-8"))["minecraft"]
+TARGET_LINE = ".".join(TARGET_MC.split(".")[:2])          # 26.1.2 -> "26.1"
 
 # 结构重排导致路径重合度偏低、但作者与 pack.mcmeta 能证明是同一上游的
 FORCE = {
@@ -35,6 +37,10 @@ FORCE = {
 SKIP = {
     "ComplementaryUnbound_r5.7.1 + EuphoriaPatches_1.8.1.zip": "Euphoria 合并包，上游已改为模组形式",
     "ComplementaryReimagined_r5.7.1 + EuphoriaPatches_1.8.1.zip": "Euphoria 合并包，上游已改为模组形式",
+}
+# 内容已按 26.x 的要求重建过，不能拿上游原始 zip 覆盖（上游那个是条目重叠的畸形包）
+PINNED = {
+    "xali's Enhanced Vanilla -1.11.2b-rev.54d51d4.zip": "上游原始 zip 条目重叠，本地是 26.x 可用的重建副本",
 }
 # 同一项目有多个变体时，只换同名变体
 VARIANT = {"Os' Colorful Grasses (Mix).zip": "Mix-26.3"}
@@ -100,15 +106,21 @@ def search(name, want_type):
 
 
 def latest_version(project, prefer_variant=None):
+    """优先选声明支持目标版本（26.1.2）的最新版；没有才退回 26.1 线，再没有才取最新。
+
+    这样不会因为「上游发了只支持 26.2/26.3 的新版」把整包拽离 26.1。
+    """
     versions = api(f"/project/{project['id']}/version")
     if prefer_variant:
         versions = [v for v in versions if v["version_number"] == prefer_variant] or versions
+    if not versions:
+        return None
 
     def key(v):
         gv = v.get("game_versions") or []
-        return (any(g.startswith("26.") for g in gv), v.get("date_published") or "")
+        return (TARGET_MC in gv, any(g.startswith(TARGET_LINE) for g in gv), v.get("date_published") or "")
 
-    return sorted(versions, key=key, reverse=True)[0] if versions else None
+    return sorted(versions, key=key, reverse=True)[0]
 
 
 def sha256(path):
@@ -171,6 +183,9 @@ def plan():
             if fn in SKIP:
                 print(f"· {fn}: {SKIP[fn]}，保留")
                 continue
+            if fn in PINNED:
+                print(f"· {fn}: {PINNED[fn]}，保留")
+                continue
             old_path = os.path.join(folder, fn)
             forced = fn in FORCE
             proj = api(f"/project/{FORCE[fn]}") if forced else search(fn, ptype)
@@ -197,6 +212,7 @@ def plan():
                 items.append({"kind": sub, "old": fn, "project": proj["slug"],
                               "version": ver["version_number"], "filename": f["filename"],
                               "published": (ver.get("date_published") or "")[:10],
+                              "game_versions": ver.get("game_versions") or [],
                               "staged": staged, "same": same})
             else:
                 print(f"✘ {fn}: 候选 {proj['slug']} 重合度只有 {overlap:.2f}，判定为不同项目")

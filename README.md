@@ -1,5 +1,9 @@
 # 重生：异世界冒险 —— Minecraft 26.1.2 整合包
 
+> **版本：Minecraft 26.1.2 / Fabric 0.20.1。** 唯一事实来源是 `pack/pack.json` 的 `minecraft` 字段。
+> 模组文件名里出现 `26.2`/`26.3`、材质包里出现 `EnderEyes_26.3`、`dropped.json` 里写「止于 26.3」，
+> 都是上游的版本命名或排除原因，不代表本项目目标版本。详见 `AGENTS.md` 的「版本」一节。
+
 Minecraft 26.1.2 + **Fabric 0.20.1** 的整合包（对齐 Arclight 混合端 26.1.2 测试版 `Dipper/1.0.0-SNAPSHOT`，便于开插件服），261 个模组、45 个材质包、9 个光影包，打包成开箱即玩的三平台便携包（自带 Java 25 与全部游戏资源），Windows 另有 PCL2 可导入的 MMC 实例包。
 
 模组、材质、光影全部来自《乌托邦探险之旅 3.5.2》（Fabric 1.20.1，459 个模组）。加载器按「这些模组在 26.1.2 上的可移植数」选定：Fabric **244** / NeoForge **209**（252 个有移植的模组里 Fabric 覆盖 96.8%），且仅 Fabric 可用的 43 个里多为内容模组（BetterEnd、BetterNether、BCLib、The Bumblezone、Brewery、Macaw's Holidays、Sit、Ube's Delight 等）。

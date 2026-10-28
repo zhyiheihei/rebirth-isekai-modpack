@@ -2,6 +2,7 @@
  "name": "重生：异世界冒险",
  "version": "0.2.1",
  "minecraft": "26.1.2",
+ "minecraft_line": "26.1",
  "loader": {
   "type": "fabric",
   "version": "0.20.1"
