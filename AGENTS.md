@@ -66,6 +66,16 @@ python3 scripts/sync_client.py --apply --release 0.2.2   # 落盘 + 改版本 + 
 Actions 页面点一次 `Run workflow`（`build`）即构建 + 自检 + 发 Release，`release` 输入默认 `true`。
 也可以 `git tag v<版本> && git push origin v<版本>`，工作流会校验 tag 与 `pack/pack.json` 的 `version` 一致。
 
+失败/发现问题时的规矩（测试期）：
+
+- **禁止回退上一版本去「修」问题**，直接改 `pack/pack.json` 的 `version` 加一位（0.2.2 → 0.2.3）再跑一次。
+- 自检步骤 `continue-on-error: true`：只报告问题，不阻断发布。测试版允许带着已知问题发出去。
+- `0.x` 版本一律标 pre-release。
+
+
+Actions 页面点一次 `Run workflow`（`build`）即构建 + 自检 + 发 Release，`release` 输入默认 `true`。
+也可以 `git tag v<版本> && git push origin v<版本>`，工作流会校验 tag 与 `pack/pack.json` 的 `version` 一致。
+
 ## 已知坑（都已处理，改包时别退化）
 
 - MC 26.x 要 GLFW 3.5 的 `glfwSetPreeditCallback`。NixOS 系统 GLFW 3.4 没有这个符号，`UseNativeGLFW=true` 会在 `InputConstants` 初始化时 NPE 崩掉；便携包的 `prismlauncher.cfg` 必须 `UseNativeGLFW=false`。

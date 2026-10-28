@@ -62,7 +62,10 @@ jobs:
         id: notes
         run: python3 scripts/release_notes.py --github
 
-      - name: 产物自检（启动免下载）
+      - name: 产物自检（启动免下载，不阻断发布）
+        # 测试版策略：自检只报告，不阻断。发现问题就把 pack.json 的 version 加一位发新版，
+        # 绝不靠回退上一版本来「修」问题。
+        continue-on-error: true
         run: python3 scripts/verify_bundle.py
 
       - name: 上传构建产物
@@ -82,5 +85,5 @@ jobs:
           tag_name: ${{ steps.ver.outputs.version }}
           body: ${{ steps.notes.outputs.notes }}
           files: dist/*.7z
-          prerelease: ${{ contains(steps.ver.outputs.version, '-') }}
+          prerelease: ${{ startsWith(steps.ver.outputs.version, 'v0.') }}
           fail_on_unmatched_files: true
