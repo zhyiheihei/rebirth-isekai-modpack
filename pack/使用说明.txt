@@ -8,13 +8,13 @@
    · macOS：启动游戏.command（若提示「无法验证开发者」，右键 → 打开）
    · Linux：启动游戏.sh（终端执行 ./启动游戏.sh）
 3. 玩家名首次启动自动随机生成（Player + 6 位十六进制），之后固定不变
-4. 想用正版账号联机：启动器右上「账户」→「添加账户」登录 Microsoft，
+4. 想用正版账号联机：启动器右上「账户」→「添加账户」登录 Microsoft,
    再在主界面点「启动」即可（不带离线参数）
 
 启动器、Java 25、全部游戏资源、材质、光影都已放在包里，不需要另外装 Java 或下载游戏本体。
 
 【包里有什么】
-· Minecraft {minecraft} + NeoForge {loader}
+· Minecraft {minecraft} + Fabric {loader}
 · {modcount} 个模组（冒险/RPG/地牢/结构/界面/性能优化）
 · {rpcount} 个材质包，已默认启用，进游戏即生效
 · {spcount} 个光影包：进游戏后 选项 → 视频设置 → 光影包 里挑
@@ -23,9 +23,14 @@
 
 【光影怎么选】
 · Complementary Unbound —— 默认已启用，氛围重
+· Complementary Unbound + EuphoriaPatches —— 同上的增强版，更花哨、更吃配置
 · Complementary Reimagined —— 均衡、稳，集显/老显卡建议换这个
+· Complementary Reimagined + EuphoriaPatches —— 同上增强版
 · Photon —— 写实向
 · Bliss —— 明亮清爽
+· Helian-MMCO —— 自然向
+· Derivative —— 国创写实向
+· 低配原版 VanillaPlus —— 只加光影不加风格，最省
 卡的话再关掉 Distant Horizons。
 
 【常见问题】
@@ -37,9 +42,10 @@
   NixOS 用户请用 nixpkgs 的 prismlauncher，把这个实例目录导入进去即可。
 · macOS：Apple 芯片与 Intel 机型都已内置对应 Java。
 · 用 PCL2 的玩家：导入同名 MMC 实例包（.7z），PCL 会自己准备 Java 和游戏资源。
-· 这个版本对齐的是 MC {minecraft}，方便以后接 Arclight 插件服；
-  被剔除的 4 个模组（Macaw's Holidays、Naturalist、Perception、qrafty's Jungle
-  Villages）只支持 26.2/26.3，本版本暂时没有。
+· 这个版本对齐的是 MC {minecraft} + Fabric，方便接 Arclight 混合端开插件服。
+  原乌托邦 3.5.2 的 459 个模组里，有 213 个在 26.1.2 上还没有 Fabric 移植
+  （多为止步 1.20.1/1.21.1，或只在 CurseForge 发布），完整清单见仓库
+  pack/dropped.json。
 
 【版权】
 模组、材质、光影版权归各自作者所有，本包只做整合与配置，请勿用于商业用途。

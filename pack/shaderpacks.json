@@ -1,44 +1,56 @@
 [
  {
-  "file": "Bliss_v2.1.2_(Chocapic13_Shaders_edit).zip",
-  "sha256": "f41db92acc585fe9ffe0cc124d6ecaea27cef9ded91129ebc2a8e60226947b2c",
-  "size": 1791406,
+  "file": "Bliss_v2.1.1_(Chocapic13_Shaders_edit).zip",
+  "sha256": "beed09189ddb105f33a827c1ff543255067b95e2aa0e24fb81a55b99384a8484",
+  "size": 1801687,
   "source": "local"
  },
  {
-  "file": "ComplementaryReimagined_r5.9.3.zip",
-  "sha256": "fed6c879e732cf7fc7bc6570ebb1def43235aa7e96f62859fbdbdbfa0b484b38",
-  "size": 553397,
+  "file": "ComplementaryReimagined_r5.7.1 + EuphoriaPatches_1.8.1.zip",
+  "sha256": "7e2e76f40550a0eca036f5421ee892fe851a0c39820e546ea48a7ba6718631bb",
+  "size": 1517740,
   "source": "local"
  },
  {
-  "file": "ComplementaryUnbound_r5.9.3.zip",
-  "sha256": "98ac741dee294d2a3c82d153349148c3bb7fb688c30eb3b49c3b9ac37e968c5a",
-  "size": 553400,
+  "file": "ComplementaryReimagined_r5.7.1.zip",
+  "sha256": "24a20634a7832d422d3cd5023be16829f26840e25c69404dd418306ea79f63f0",
+  "size": 522970,
   "source": "local"
  },
  {
-  "file": "Derivative_v2.0.1.zip",
+  "file": "ComplementaryUnbound_r5.7.1 + EuphoriaPatches_1.8.1.zip",
+  "sha256": "be4200de9394f10992b73fce4c11d9958e9a28268204b260153fa32c807bf8b4",
+  "size": 1517742,
+  "source": "local"
+ },
+ {
+  "file": "ComplementaryUnbound_r5.7.1.zip",
+  "sha256": "5cbf4d99bc7ce4f0df5c15974d276e0949bf6974d48d88a77d5e307b0b9be8af",
+  "size": 522973,
+  "source": "local"
+ },
+ {
+  "file": "Helian-MMCO_v0.6.12_(Sundial-lite_edit).zip",
+  "sha256": "384662d06961cd45e6adbc39048c0900cc7a7d0cfd6a54477b4e3b8b21db543c",
+  "size": 1351387,
+  "source": "local"
+ },
+ {
+  "file": "photon_v1.2a.zip",
+  "sha256": "a7134a10138f6e5fe523dafa23bd266ba2e53621ac65a5e23294fe9a125b9d73",
+  "size": 3737845,
+  "source": "local"
+ },
+ {
+  "file": "【国创】Derivative Main d24.4.14.zip",
   "sha256": "71d2ee4bca827efa0bd9419ce9c0f94d0f2fe3b882bedc2a565d6d2f612e0e95",
   "size": 19813468,
   "source": "local"
  },
  {
-  "file": "Helian-MMCO.v1.2.16.Sundial.Lite.edit.zip",
-  "sha256": "3942920b519a857d59495442e6780f146a56ecbc03f51ecb3dd56269fbb6facb",
-  "size": 1406369,
-  "source": "local"
- },
- {
-  "file": "VanillaPlus_v3.3.zip",
+  "file": "低配原版VanillaPlus_v3.3.zip",
   "sha256": "d14c6f0331a33d3dd16e613f3c98fc8e77b8707fc4f2544231b2468a69f51d2b",
   "size": 445002,
-  "source": "local"
- },
- {
-  "file": "photon_v1.4.zip",
-  "sha256": "da0929b38f5fd99befaaa8cd141cbf60e1fad05b92d916d0eeeee7c79f86c0fd",
-  "size": 3857333,
   "source": "local"
  }
 ]

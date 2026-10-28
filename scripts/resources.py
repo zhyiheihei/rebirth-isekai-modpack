@@ -12,7 +12,11 @@ import os
 import common
 
 META = "https://meta.prismlauncher.org/v1"
-LIBRARY_HOSTS = ("https://libraries.minecraft.net/", "https://maven.neoforged.net/releases/")
+LIBRARY_HOSTS = (
+    "https://libraries.minecraft.net/",
+    "https://maven.neoforged.net/releases/",
+    "https://maven.fabricmc.net/",
+)
 OS_NAMES = {"linux", "windows", "osx", "osx-arm64"}
 
 
@@ -47,6 +51,9 @@ def _download_lib(lib, libdir):
     artifact = (lib.get("downloads") or {}).get("artifact") or {}
     url = artifact.get("url")
     sha1 = artifact.get("sha1")
+    if not url and lib.get("url"):
+        # Prism 的 meta 里 Fabric 相关库只给 maven 根地址，没有直链与校验和
+        return common.download(lib["url"].rstrip("/") + "/" + rel, dest, None, "sha1", retries=2, quiet=True), rel
     if not url:
         url = LIBRARY_HOSTS[0] + rel
         if not common.download(url, dest, sha1, "sha1", retries=1, quiet=True):
@@ -63,8 +70,7 @@ def components(pack):
             if version:
                 comps.append(("org.lwjgl3", version))
     loader = pack["loader"]
-    if loader["type"] == "neoforge":
-        comps.append(("net.neoforged", loader["version"]))
+    comps += common.loader_components(pack)
     return comps, mc
 
 

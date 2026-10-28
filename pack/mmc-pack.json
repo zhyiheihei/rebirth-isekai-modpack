@@ -1,37 +1,57 @@
 {
     "components": [
         {
-            "cachedName": "LWJGL 3",
-            "cachedVersion": "3.4.3",
+            "uid": "org.lwjgl3",
+            "version": "3.4.1",
+            "cachedName": "org.lwjgl3",
+            "cachedVersion": "3.4.1",
             "cachedVolatile": true,
             "dependencyOnly": true,
-            "uid": "org.lwjgl3",
-            "version": "3.4.3"
+            "cachedSha256": "4f4b813add0e29312ef42a4d8418a4070f62a8c022c7831d522043cd1fb65ae0"
         },
         {
-            "cachedName": "Minecraft",
-            "cachedRequires": [
-                {
-                    "suggests": "3.4.3",
-                    "uid": "org.lwjgl3"
-                }
-            ],
-            "cachedVersion": "26.3",
-            "important": true,
             "uid": "net.minecraft",
-            "version": "26.3"
-        },
-        {
-            "cachedName": "NeoForge",
+            "version": "26.1.2",
+            "cachedName": "net.minecraft",
+            "cachedVersion": "26.1.2",
+            "important": true,
             "cachedRequires": [
                 {
-                    "equals": "26.3",
-                    "uid": "net.minecraft"
+                    "uid": "org.lwjgl3",
+                    "suggests": "3.4.1"
                 }
             ],
-            "cachedVersion": "26.3.0.99",
-            "uid": "net.neoforged",
-            "version": "26.3.0.99"
+            "cachedSha256": "2fddeb6f7a9b34b4748c0c22bce27cbdb5839ffab336bbebd5a12e724e016416"
+        },
+        {
+            "uid": "net.fabricmc.intermediary",
+            "version": "26.1.2",
+            "cachedName": "net.fabricmc.intermediary",
+            "cachedVersion": "26.1.2",
+            "important": false,
+            "cachedRequires": [
+                {
+                    "uid": "net.minecraft",
+                    "equals": "26.1.2"
+                }
+            ]
+        },
+        {
+            "uid": "net.fabricmc.fabric-loader",
+            "version": "0.20.1",
+            "cachedName": "net.fabricmc.fabric-loader",
+            "cachedVersion": "0.20.1",
+            "important": false,
+            "cachedRequires": [
+                {
+                    "uid": "net.minecraft",
+                    "equals": "26.1.2"
+                },
+                {
+                    "uid": "net.fabricmc.intermediary",
+                    "equals": "26.1.2"
+                }
+            ]
         }
     ],
     "formatVersion": 1

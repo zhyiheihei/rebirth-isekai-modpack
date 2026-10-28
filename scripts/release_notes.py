@@ -4,6 +4,8 @@ import sys
 
 import common
 
+LOADER_NAMES = {"fabric": "Fabric", "neoforge": "NeoForge", "forge": "Forge"}
+
 
 def main():
     pack = common.load("pack.json")
@@ -15,7 +17,7 @@ def main():
         "",
         ("**测试版**：功能与配置已可用，仍在迭代。" if pack["version"].startswith("0.") else ""),
         "",
-        f"- Minecraft **{pack['minecraft']}** + NeoForge **{pack['loader']['version']}**",
+        f"- Minecraft **{pack['minecraft']}** + {LOADER_NAMES.get(pack['loader']['type'], pack['loader']['type'])} **{pack['loader']['version']}**",
         f"- 模组 **{len(enabled)}** 个，材质包 **{len(common.load('resourcepacks.json'))}** 个（默认启用），光影包 **{len(common.load('shaderpacks.json'))}** 个",
         f"- 内置 Eclipse Temurin JDK {pack['java']['release']}，启动无需任何下载",
         "",
@@ -33,7 +35,7 @@ def main():
         "3. 启动器已预配离线账户与服务器，等游戏起来自动进服；玩家名首次启动随机生成",
         "4. 要正版联机再「账户」→ 添加账户 登录 Microsoft",
         "",
-        "光影：进游戏后在「选项 → 视频设置 → 光影包」里选，默认 Complementary Unbound（r5.9.3）。",
+        "光影：进游戏后在「选项 → 视频设置 → 光影包」里选，默认 Complementary Unbound（r5.7.1）。",
         "",
     ]
     try:

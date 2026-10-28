@@ -95,10 +95,10 @@ def natives(libdir, os_key, meta_dir):
     allowed = {"windows": {"windows"}, "osx": {"osx", "osx-arm64"}, "linux": {"linux"}}[os_key]
     manifests = []
     mc_json = os.path.join(meta_dir, "net.minecraft", PACK["minecraft"] + ".json")
-    nf_json = os.path.join(
-        meta_dir, "net.neoforged", "neoforge", PACK["loader"]["version"] + ".json"
-    )
-    for path in (mc_json, nf_json):
+    if os.path.exists(mc_json):
+        manifests.append(mc_json)
+    for uid, version in common.loader_components(PACK):
+        path = os.path.join(meta_dir, uid, version + ".json")
         if os.path.exists(path):
             manifests.append(path)
     fetched = 0
@@ -197,6 +197,11 @@ def write_mmc_pack(dest):
             entry["important"] = uid == "net.minecraft"
             if uid == "net.minecraft":
                 entry["cachedRequires"] = [{"uid": "org.lwjgl3", "suggests": lwjgl}]
+            elif uid == "net.fabricmc.fabric-loader":
+                entry["cachedRequires"] = [
+                    {"uid": "net.minecraft", "equals": PACK["minecraft"]},
+                    {"uid": "net.fabricmc.intermediary", "equals": PACK["minecraft"]},
+                ]
             else:
                 entry["cachedRequires"] = [{"uid": "net.minecraft", "equals": PACK["minecraft"]}]
         s = sha(uid, version)
@@ -206,11 +211,8 @@ def write_mmc_pack(dest):
         return entry
 
     data = {
-        "components": [
-            comp("org.lwjgl3", lwjgl),
-            comp("net.minecraft", PACK["minecraft"]),
-            comp("net.neoforged", PACK["loader"]["version"]),
-        ],
+        "components": [comp("org.lwjgl3", lwjgl), comp("net.minecraft", PACK["minecraft"])]
+        + [comp(uid, version) for uid, version in common.loader_components(PACK)],
         "formatVersion": 1,
     }
     with open(os.path.join(dest, "mmc-pack.json"), "w", encoding="utf-8") as f:

@@ -24,6 +24,24 @@ def save(name, data):
         f.write("\n")
 
 
+LOADER_COMPONENTS = {
+    "neoforge": lambda pack: [("net.neoforged", pack["loader"]["version"])],
+    "fabric": lambda pack: [
+        ("net.fabricmc.intermediary", pack["minecraft"]),
+        ("net.fabricmc.fabric-loader", pack["loader"]["version"]),
+    ],
+}
+
+
+def loader_components(pack=None):
+    """加载器在 Prism/MultiMC 里的组件列表（uid, version）；顺序即依赖顺序。"""
+    pack = pack or load("pack.json")
+    try:
+        return LOADER_COMPONENTS[pack["loader"]["type"]](pack)
+    except KeyError:
+        raise SystemExit(f"未知加载器类型: {pack['loader']['type']}")
+
+
 def sha(algorithm, path, chunk=1 << 20):
     h = hashlib.new(algorithm)
     with open(path, "rb") as f:

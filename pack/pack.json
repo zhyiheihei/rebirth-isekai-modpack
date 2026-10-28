@@ -1,10 +1,10 @@
 {
  "name": "重生：异世界冒险",
- "version": "0.1.0",
+ "version": "0.2.0",
  "minecraft": "26.1.2",
  "loader": {
-  "type": "neoforge",
-  "version": "26.1.2.109"
+  "type": "fabric",
+  "version": "0.20.1"
  },
  "java": {
   "vendor": "Eclipse Temurin",

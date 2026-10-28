@@ -47,10 +47,7 @@ def check_bundle(root):
     for candidate in ("meta", "PrismLauncher-data/meta"):
         meta = os.path.join(root, candidate)
         if os.path.isdir(meta):
-            for uid, ver in (
-                ("net.minecraft", pack["minecraft"]),
-                ("net.neoforged", pack["loader"]["version"]),
-            ):
+            for uid, ver in [("net.minecraft", pack["minecraft"])] + common.loader_components(pack):
                 if not os.path.exists(os.path.join(meta, uid, ver + ".json")):
                     problems.append(f"缺少组件元数据 {uid}/{ver}.json")
             break
@@ -178,10 +175,7 @@ def check_bundle(root):
     if meta_root:
         if not os.path.exists(os.path.join(meta_root, "index.json")):
             problems.append("meta 缺少 index.json（离线解析组件会失败）")
-        for uid, ver in (
-            ("net.minecraft", pack["minecraft"]),
-            ("net.neoforged", pack["loader"]["version"]),
-        ):
+        for uid, ver in [("net.minecraft", pack["minecraft"])] + common.loader_components(pack):
             for rel in (f"{uid}/index.json", f"{uid}/{ver}.json"):
                 if not os.path.exists(os.path.join(meta_root, rel)):
                     problems.append(f"meta 缺少 {rel}")
@@ -210,8 +204,9 @@ def check_mmc(root, name, problems):
         pack = common.load("pack.json")
         if comps.get("net.minecraft") != pack["minecraft"]:
             problems.append(f"mmc-pack 的 MC 版本 {comps.get('net.minecraft')} != {pack['minecraft']}")
-        if comps.get("net.neoforged") != pack["loader"]["version"]:
-            problems.append(f"mmc-pack 的 NeoForge {comps.get('net.neoforged')} != {pack['loader']['version']}")
+        for uid, ver in common.loader_components(pack):
+            if comps.get(uid) != ver:
+                problems.append(f"mmc-pack 的 {uid} {comps.get(uid)} != {ver}")
     game = os.path.join(root, ".minecraft")
     if not os.path.isdir(game):
         problems.append("缺少 .minecraft/")
