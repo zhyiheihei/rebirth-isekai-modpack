@@ -267,7 +267,8 @@ def check_mmc(root, name, problems):
             problems.append(f"mmc-pack 的 MC 版本 {comps.get('net.minecraft')} != {pack['minecraft']}")
         for uid, ver in common.loader_components(pack):
             if comps.get(uid) != ver:
-                problems.append(f"mmc-pack 的 {uid} {comps.get(uid)} != {ver}")    game = os.path.join(root, ".minecraft")
+                problems.append(f"mmc-pack 的 {uid} {comps.get(uid)} != {ver}")
+    game = os.path.join(root, ".minecraft")
     if not os.path.isdir(game):
         problems.append("缺少 .minecraft/")
         return problems
@@ -291,7 +292,7 @@ def main():
     roots = [
         os.path.join(common.DIST, d)
         for d in sorted(os.listdir(common.DIST))
-        if os.path.isdir(os.path.join(common.DIST, d))
+        if os.path.isdir(os.path.join(common.DIST, d)) and d.startswith(common.load("pack.json")["name"])
     ]
     if not roots:
         print("dist/ 里没有产物")

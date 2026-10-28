@@ -353,6 +353,9 @@ def extract_runtime(archive, kind, dest):
         with tarfile.open(archive) as tar:
             tar.extractall(tmp)
     inner = os.path.join(tmp, os.listdir(tmp)[0])
+    if os.path.isdir(dest):
+        shutil.rmtree(dest)          # 幂等：重复解到同一目录时别和旧树合并（macOS .app 会嵌套出 Contents/Contents）
+    common.ensure_dir(dest)
     for item in os.listdir(inner):
         shutil.move(os.path.join(inner, item), os.path.join(dest, item))
     shutil.rmtree(tmp)
@@ -414,7 +417,11 @@ def assemble(platform, source, fill_natives=True, fast=False):
         shutil.copytree(logs, os.path.join(datadir, "assets", "log_configs"), dirs_exist_ok=True)
 
     java_dir = os.path.join(datadir, "java", JRE_DIRNAME)
-    if reuse and os.path.isdir(java_dir):
+    java_ready = (
+        all(os.path.isdir(os.path.join(datadir, "java", f"{JRE_DIRNAME}-{a}")) for a in ("aarch64", "x64"))
+        if platform == "macos" else os.path.isdir(java_dir)
+    )
+    if reuse and java_ready:
         print(f"[{platform}] Java {PACK['java']['release']}（复用）", flush=True)
     else:
         print(f"[{platform}] Java {PACK['java']['release']}", flush=True)
