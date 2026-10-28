@@ -112,6 +112,7 @@ def check_bundle(root):
             cfg = open(cfg_path, encoding="utf-8").read()
             for key, want in (
                 ("IgnoreJavaWizard", "true"),
+                ("AutomaticJavaSwitch", "true"),
                 ("Language", "zh"),
                 ("ApplicationTheme", "system"),
                 ("IconTheme", "pe_colored"),
@@ -197,6 +198,12 @@ def check_bundle(root):
     return problems
 
 
+def _read(path):
+    if not os.path.exists(path):
+        return ""
+    return open(path, encoding="utf-8", errors="replace").read()
+
+
 def check_runnable(root, problems):
     """各平台「双击就能起来」的必要条件：实例目录、自带 Java、启动脚本、配置占位符。"""
     pack = common.load("pack.json")
@@ -238,25 +245,32 @@ def check_runnable(root, problems):
             exe = os.path.join(java_root, f"{jre}-{arch}", "Contents", "Home", "bin", "java")
             if not os.path.exists(exe):
                 problems.append(f"macOS 包缺少 {jre}-{arch} 的 java 可执行文件")
-        script = os.path.join(root, "启动游戏.command")
-        if not os.path.exists(script):
-            problems.append("macOS 包缺少 启动游戏.command")
-        elif not os.access(script, os.X_OK):
-            problems.append("启动游戏.command 没有可执行权限")
+        for script in ("启动游戏.command", "启动正版.command"):
+            path = os.path.join(root, script)
+            if not os.path.exists(path):
+                problems.append(f"macOS 包缺少 {script}")
+            elif not os.access(path, os.X_OK):
+                problems.append(f"{script} 没有可执行权限")
+        text = _read(os.path.join(root, "启动游戏.command"))
+        if text and "refresh_token" not in text:
+            problems.append("启动游戏.command 缺少正版账号检测（登录微软后无法自动切正版）")
     elif is_windows:
         exe = os.path.join(java_root, jre, "bin", "java.exe")
         if not os.path.exists(exe):
             problems.append(f"Windows 包缺少包内 java.exe: {os.path.relpath(exe, root)}")
-        for f in ("启动游戏.bat", "launch.ps1"):
+        for f in ("启动游戏.bat", "launch.ps1", "启动正版.bat"):
             if not os.path.exists(os.path.join(root, f)):
                 problems.append(f"Windows 包缺少 {f}")
-        bat = os.path.join(root, "启动游戏.bat")
-        if os.path.exists(bat):
-            raw = open(bat, "rb").read()
-            if b"\r\r\n" in raw:
-                problems.append("启动游戏.bat 的换行是 CRCRLF（cmd 会解析异常）")
-            if b"-File" not in raw or b"launch.ps1" not in raw:
-                problems.append("启动游戏.bat 没有用 -File 调用 launch.ps1")
+        for f in ("启动游戏.bat", "启动正版.bat"):
+            bat = os.path.join(root, f)
+            if os.path.exists(bat):
+                raw = open(bat, "rb").read()
+                if b"\r\r\n" in raw:
+                    problems.append(f"{f} 的换行是 CRCRLF（cmd 会解析异常）")
+                if b"-File" not in raw or b"launch.ps1" not in raw:
+                    problems.append(f"{f} 没有用 -File 调用 launch.ps1")
+        if os.path.exists(os.path.join(root, "启动正版.bat")) and b"-Mode msa" not in open(os.path.join(root, "启动正版.bat"), "rb").read():
+            problems.append("启动正版.bat 没有传 -Mode msa")
         ps1 = os.path.join(root, "launch.ps1")
         if os.path.exists(ps1):
             raw = open(ps1, "rb").read()
@@ -264,20 +278,29 @@ def check_runnable(root, problems):
                 problems.append("launch.ps1 缺少 UTF-8 BOM（PowerShell 5.1 会把中文读成乱码）")
             if b"Start-Process" not in raw:
                 problems.append("launch.ps1 没有启动启动器")
+            text = raw.decode("utf-8-sig")
+            if "refresh_token" not in text:
+                problems.append("launch.ps1 缺少正版账号检测（登录微软后无法自动切正版）")
+            if "ProxyType" not in text:
+                problems.append("launch.ps1 缺少死代理维护逻辑（占位账号会弹重新认证框）")
     elif is_linux:
         exe = os.path.join(java_root, jre, "bin", "java")
         if not os.path.exists(exe):
             problems.append(f"Linux 包缺少包内 java: {os.path.relpath(exe, root)}")
-        script = os.path.join(root, "启动游戏.sh")
-        if not os.path.exists(script):
-            problems.append("Linux 包缺少 启动游戏.sh")
-        elif not os.access(script, os.X_OK):
-            problems.append("启动游戏.sh 没有可执行权限")
+        for script in ("启动游戏.sh", "启动正版.sh"):
+            path = os.path.join(root, script)
+            if not os.path.exists(path):
+                problems.append(f"Linux 包缺少 {script}")
+            elif not os.access(path, os.X_OK):
+                problems.append(f"{script} 没有可执行权限")
+        text = _read(os.path.join(root, "启动游戏.sh"))
+        if text and "refresh_token" not in text:
+            problems.append("启动游戏.sh 缺少正版账号检测（登录微软后无法自动切正版）")
     else:
         problems.append("无法判断平台（没有 prismlauncher.exe / *.app / PrismLauncher）")
 
     # 启动脚本里引用的实例 id 必须与实际目录一致
-    for script in ("启动游戏.sh", "启动游戏.command", "launch.ps1"):
+    for script in ("启动游戏.sh", "启动正版.sh", "启动游戏.command", "启动正版.command", "launch.ps1"):
         path = os.path.join(root, script)
         if os.path.exists(path):
             text = open(path, encoding="utf-8", errors="replace").read()

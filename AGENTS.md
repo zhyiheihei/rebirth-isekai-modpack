@@ -90,3 +90,5 @@ git push origin master
 - Windows 启动逻辑全在 `launch.ps1`（UTF-8 **带 BOM**，否则 PowerShell 5.1 读中文乱码），`启动游戏.bat` 只用 `-File` 调用；`.bat` 必须是 CRLF，写成 CRCRLF 会解析异常。
 - `verify_bundle.py` 的 `check_runnable()` 按产物自身的标志文件判断平台（`prismlauncher.exe` / `*.app` / `PrismLauncher`），不看宿主机；换启动器文件名时记得同步那里。
 - `xali's Enhanced Vanilla` 上游 zip 条目重叠（`unzip` 只报 warning，Python `zipfile` 直接抛错），本地是解出后重建的副本，不要用上游原包覆盖。
+- 账号机制（别拆）：`accounts.json` 里的占位 MSA 账号 + `prismlauncher.cfg` 里的死代理（SOCKS5 127.0.0.1:9）是离线打开即用的前提——Prism 11 的 `ownsMinecraft()` 排除 Offline 类型账号，没有占位 MSA 会弹 Demo 确认框/登录向导；死代理让占位账号的静默刷新以网络错误收场（STATE_OFFLINE），不弹重新认证框。启动脚本检测到 `accounts.json` 出现非占位 `refresh_token`（玩家已登录微软正版）时，会撤掉死代理、不再传 `--offline`，由 Prism 官方逻辑用正版账号启动；「启动正版」脚本则无条件走这条路。`verify_bundle.py` 对这套机制有回归检查。
+- `AutomaticJavaSwitch=true` 是 Java 自动兜底的开关：实例固定的包内 Java 路径失效时，启动器会从系统检测到的 Java 里挑兼容主版本（MC 26.x = Java 25）；`AutomaticJavaDownload` 必须保持 `false`——自动下载走 meta.prismlauncher.org，失败会直接中止启动。

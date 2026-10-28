@@ -41,8 +41,11 @@ Language=zh
 ApplicationTheme=system
 IconTheme=pe_colored
 IgnoreJavaWizard=true
+# 自动切换：实例 Java 指向包内自带 Java；包被挪动导致路径失效时，启动器会从系统检测到的
+# Java 里自动挑兼容主版本（MC 26.x = Java 25），并在多个 Java 里优先选受支持的那个。
+# 自动下载保持关闭：下载走 meta.prismlauncher.org，失败会直接中止启动，不如回退默认路径。
+AutomaticJavaSwitch=true
 AutomaticJavaDownload=false
-AutomaticJavaSwitch=false
 UserAskedAboutAutomaticJavaDownload=true
 PastebinURL=
 # MC 26.x 需要 GLFW 3.5 的 glfwSetPreeditCallback；NixOS/系统自带 GLFW 3.4 没有该符号，
@@ -449,8 +452,16 @@ def assemble(platform, source, fill_natives=True, fast=False):
         shutil.copytree(trans_src, os.path.join(datadir, "translations"), dirs_exist_ok=True)
 
     server_arg = f' -s {PACK["server"]["ip"]}' if PACK.get("server", {}).get("auto_join") else ""
+
+    # 账号策略：占位 MSA 账号（Prism 11 要求必须有「拥有 MC 的账号」才不弹 Demo/登录向导）
+    # + 死代理让它的静默刷新以网络错误收场（STATE_OFFLINE），实现离线打开即用。
+    # accounts.json 里出现非占位的 refresh_token = 玩家已登录微软正版，此时撤掉死代理、
+    # 不再传 --offline，由 Prism 官方逻辑决定启动方式（默认账号是正版就直接正版进服）。
+    SH_PROXY_STRIP = "sed -i '/^ProxyType=/d;/^ProxyAddr=/d;/^ProxyPort=/d'"  # GNU sed（Linux）
+    SH_PROXY_STRIP_MAC = 'sed -i "" \'/^ProxyType=/d;/^ProxyAddr=/d;/^ProxyPort=/d\''  # BSD sed（macOS 的 -i 后必须紧跟后缀参数）
+
     if platform == "linux":
-        launcher_script = (
+        sh_prologue = (
             "#!/bin/sh\n"
             'cd "$(dirname "$0")" || exit 1\n'
             f'JAVA="$(pwd)/java/{JRE_DIRNAME}/{runtime["java_path"]}"\n'
@@ -462,18 +473,33 @@ def assemble(platform, source, fill_natives=True, fast=False):
             '  printf "%s" "$PLAYER" > player.txt\n'
             '  sed -i "s/__RANDOM_NAME__/$PLAYER/g" accounts.json\n'
             'fi\n'
+        )
+        launcher_script = sh_prologue + (
+            "if grep -oE '\"refresh_token\": *\"[^\"]+\"' accounts.json 2>/dev/null | grep -qv placeholder; then\n"
+            f'  {SH_PROXY_STRIP} prismlauncher.cfg\n'
+            f'  exec ./PrismLauncher -l "{INSTANCE_ID}"{server_arg} "$@"\n'
+            'fi\n'
+            "grep -q '^ProxyType=' prismlauncher.cfg || printf 'ProxyType=SOCKS5\\nProxyAddr=127.0.0.1\\nProxyPort=9\\n' >> prismlauncher.cfg\n"
             f'exec ./PrismLauncher -l "{INSTANCE_ID}"{server_arg} --offline "$PLAYER" "$@"\n'
         )
         path = os.path.join(root, "启动游戏.sh")
         open(path, "w", encoding="utf-8").write(launcher_script)
         os.chmod(path, 0o755)
+        msa_script = sh_prologue + (
+            f"# 正版模式：始终关死代理直连；未登录时启动器会弹微软登录，登录后自动进服\n"
+            f"{SH_PROXY_STRIP} prismlauncher.cfg\n"
+            f'exec ./PrismLauncher -l "{INSTANCE_ID}"{server_arg} "$@"\n'
+        )
+        path = os.path.join(root, "启动正版.sh")
+        open(path, "w", encoding="utf-8").write(msa_script)
+        os.chmod(path, 0o755)
     elif platform == "windows":
         # 全部逻辑放进 UTF-8 BOM 的 .ps1，.bat 只负责调用：
         # cmd 用命令行传中文参数会因代码页丢字符，之前 JavaPath 没被替换就是这里出的问题。
         java_rel = runtime["java_path"].replace("/", "\\")
-        join = ", '-s', '" + PACK["server"]["ip"] + "'" if PACK.get("server", {}).get("auto_join") else ""
-        launch_args = "@('-l', '" + INSTANCE_ID + "'" + join + ", '--offline', $player)"
-        ps1 = f'''$ErrorActionPreference = 'Stop'
+        join_arg = f", '-s', '{PACK['server']['ip']}'" if PACK.get("server", {}).get("auto_join") else ""
+        ps1 = f'''param([string]$Mode = 'offline')
+$ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath $PSScriptRoot
 $d = $PSScriptRoot
 
@@ -496,10 +522,10 @@ $playerFile = Join-Path $d 'player.txt'
 if (-not (Test-Path -LiteralPath $playerFile)) {{
     $name = 'Player' + (-join (1..6 | ForEach-Object {{ '{{0:x}}' -f (Get-Random -Max 16) }}))
     [IO.File]::WriteAllText($playerFile, $name, (New-Object System.Text.ASCIIEncoding))
-    $acc = Join-Path $d 'accounts.json'
-    if (Test-Path -LiteralPath $acc) {{
-        $t = [IO.File]::ReadAllText($acc)
-        [IO.File]::WriteAllText($acc, $t.Replace('__RANDOM_NAME__', $name), (New-Object System.Text.UTF8Encoding($false)))
+    $acc0 = Join-Path $d 'accounts.json'
+    if (Test-Path -LiteralPath $acc0) {{
+        $t = [IO.File]::ReadAllText($acc0)
+        [IO.File]::WriteAllText($acc0, $t.Replace('__RANDOM_NAME__', $name), (New-Object System.Text.UTF8Encoding($false)))
     }}
 }}
 $player = (Get-Content -LiteralPath $playerFile -Raw).Trim()
@@ -518,19 +544,44 @@ foreach ($p in $targets) {{
     [IO.File]::WriteAllText($p, $t, (New-Object System.Text.UTF8Encoding($false)))
 }}
 
-# 4) 启动
+# 4) 账号模式：
+#    -Mode msa  正版模式：始终关死代理直连，由启动器默认账号决定（未登录会弹微软登录框）
+#    默认（离线优先）：accounts.json 里出现非占位的 refresh_token = 已登录微软正版，同样直连；
+#    否则保留死代理（占位账号静默刷新以网络错误收场，不弹重新认证框），--offline 打开即用
+$accFile = Join-Path $d 'accounts.json'
+$realMsa = ($Mode -eq 'msa')
+if (-not $realMsa -and (Test-Path -LiteralPath $accFile)) {{
+    try {{
+        $list = Get-Content -LiteralPath $accFile -Raw | ConvertFrom-Json
+        foreach ($a in @($list.accounts)) {{
+            if ($a.type -eq 'MSA' -and $a.msa -and $a.msa.refresh_token -and $a.msa.refresh_token -ne 'placeholder') {{ $realMsa = $true; break }}
+        }}
+    }} catch {{}}
+}}
+$cfgPath = Join-Path $d 'prismlauncher.cfg'
+$cfgLines = @([IO.File]::ReadAllText($cfgPath) -split "`r?`n" | Where-Object {{ $_ -ne '' }})
+if ($realMsa) {{
+    $cfgLines = @($cfgLines | Where-Object {{ $_ -notmatch '^Proxy(Type|Addr|Port)=' }})
+}} elseif (@($cfgLines | Where-Object {{ $_ -match '^ProxyType=' }}).Count -eq 0) {{
+    $cfgLines = @($cfgLines) + 'ProxyType=SOCKS5' + 'ProxyAddr=127.0.0.1' + 'ProxyPort=9'
+}}
+[IO.File]::WriteAllText($cfgPath, (($cfgLines -join "`r`n") + "`r`n"), (New-Object System.Text.UTF8Encoding($false)))
+
+# 5) 启动
 $exe = Join-Path $d 'prismlauncher.exe'
 if (-not (Test-Path -LiteralPath $exe)) {{
     Write-Host '找不到 prismlauncher.exe，请确认解压完整。' -ForegroundColor Red
     Read-Host '按回车退出'
     exit 1
 }}
-Start-Process -FilePath $exe -ArgumentList {launch_args} -WorkingDirectory $d
+$launchArgs = @('-l', '{INSTANCE_ID}'{join_arg})
+if (-not $realMsa) {{ $launchArgs += @('--offline', $player) }}
+Start-Process -FilePath $exe -ArgumentList $launchArgs -WorkingDirectory $d
 '''
-        ps1 = ps1.replace("{launch_args}", launch_args)
         # Windows PowerShell 5.1 靠 BOM 才认 UTF-8；没有 BOM 时中文提示会乱码。
         with open(os.path.join(root, "launch.ps1"), "w", encoding="utf-8-sig", newline="\r\n") as f:
             f.write(ps1)
+
         bat = (
             "@echo off\r\n"
             "chcp 65001 >nul\r\n"
@@ -539,8 +590,16 @@ Start-Process -FilePath $exe -ArgumentList {launch_args} -WorkingDirectory $d
         )
         with open(os.path.join(root, "启动游戏.bat"), "w", encoding="utf-8", newline="") as f:
             f.write(bat)
+        bat_msa = (
+            "@echo off\r\n"
+            "chcp 65001 >nul\r\n"
+            'cd /d "%~dp0"\r\n'
+            'powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0launch.ps1" -Mode msa\r\n'
+        )
+        with open(os.path.join(root, "启动正版.bat"), "w", encoding="utf-8", newline="") as f:
+            f.write(bat_msa)
     else:
-        launcher_script = (
+        sh_prologue = (
             "#!/bin/sh\n"
             'cd "$(dirname "$0")" || exit 1\n'
             'ARCH="$(uname -m)"\n'
@@ -557,10 +616,27 @@ Start-Process -FilePath $exe -ArgumentList {launch_args} -WorkingDirectory $d
             '  printf "%s" "$PLAYER" > player.txt\n'
             '  sed -i "" "s/__RANDOM_NAME__/$PLAYER/g" "PrismLauncher-data/accounts.json"\n'
             'fi\n'
-            f'exec "./Prism Launcher.app/Contents/MacOS/prismlauncher" -d "$(pwd)/PrismLauncher-data" -l "{INSTANCE_ID}"{server_arg} --offline "$PLAYER" "$@"\n'
+            'CFG="PrismLauncher-data/prismlauncher.cfg"\n'
+            'LAUNCHER="./Prism Launcher.app/Contents/MacOS/prismlauncher"\n'
+        )
+        launcher_script = sh_prologue + (
+            "if grep -oE '\"refresh_token\": *\"[^\"]+\"' \"PrismLauncher-data/accounts.json\" 2>/dev/null | grep -qv placeholder; then\n"
+            f'  {SH_PROXY_STRIP_MAC} "$CFG"\n'
+            f'  exec "$LAUNCHER" -d "$(pwd)/PrismLauncher-data" -l "{INSTANCE_ID}"{server_arg} "$@"\n'
+            'fi\n'
+            "grep -q '^ProxyType=' \"$CFG\" || printf 'ProxyType=SOCKS5\\nProxyAddr=127.0.0.1\\nProxyPort=9\\n' >> \"$CFG\"\n"
+            f'exec "$LAUNCHER" -d "$(pwd)/PrismLauncher-data" -l "{INSTANCE_ID}"{server_arg} --offline "$PLAYER" "$@"\n'
         )
         path = os.path.join(root, "启动游戏.command")
         open(path, "w", encoding="utf-8").write(launcher_script)
+        os.chmod(path, 0o755)
+        msa_script = sh_prologue + (
+            '# 正版模式：始终关死代理直连；未登录时启动器会弹微软登录，登录后自动进服\n'
+            f'{SH_PROXY_STRIP_MAC} "$CFG"\n'
+            f'exec "$LAUNCHER" -d "$(pwd)/PrismLauncher-data" -l "{INSTANCE_ID}"{server_arg} "$@"\n'
+        )
+        path = os.path.join(root, "启动正版.command")
+        open(path, "w", encoding="utf-8").write(msa_script)
         os.chmod(path, 0o755)
 
     write_guide(root)
