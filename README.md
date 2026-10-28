@@ -86,13 +86,11 @@ python3 scripts/update_assets.py --apply    # 落地：替换文件、补 mcmeta
 ## 发布
 
 ```bash
-# 方式一：Actions 页面点 Run workflow（build），默认就发 Release
-# 方式二：打 tag（工作流会校验 tag 与 pack/pack.json 的 version 一致）
-git tag v0.2.1 && git push origin v0.2.1
+git commit -m "release: 0.2.4 简述改动"
+git push origin master
 ```
 
-工作流完全自包含，不需要本地任何文件：只从仓库读配置，从公网拉模组/启动器/Java/游戏资源/材质原件（材质原件走 `pack/local-assets.json` 里记录的 release 资产直链），构建完四平台并自检通过后发 Release。手动触发时 `release` 输入默认为 `true`，想只出 artifact 就关掉它。
-
+滚动更新，不打 tag：提交信息里带 `release: <版本>` 就自动构建并发到同一个滚动 Release（tag 固定 `rolling`，每次先清旧资产再传新包），下载入口不变。工作流完全自包含，不依赖本地任何文件。
 - 工作流会校验 tag 与 `pack/pack.json` 的 `version` 一致，跑完 `scripts/verify_bundle.py` 才会上传
 - 产物：`*-Windows-x64.7z`、`*-macOS.7z`、`*-Linux-x64.7z`、`*-MMC.7z`（PCL2/HMCL 导入用）
 - 每个便携包内置启动器 + Temurin JDK 25 + 客户端 jar + 135 个库 + 素材对象 + 组件 meta + 中文翻译，**启动不需要联网下载任何东西**

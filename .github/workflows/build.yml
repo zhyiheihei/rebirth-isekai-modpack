@@ -1,27 +1,29 @@
 name: build
 
+# 滚动更新：只有一个分支 master，不打 tag。
+# 版本写在提交信息里，形如 `release: 0.2.4`（或 `[release 0.2.4]`），这一句决定是否构建。
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - master
   workflow_dispatch:
-    inputs:
-      release:
-        description: "构建完成后发布 Release（默认发）"
-        type: boolean
-        default: true
 
 permissions:
   contents: write
 
 concurrency:
-  group: build-${{ github.ref }}
+  group: build-master
   cancel-in-progress: false
+
+env:
+  RELEASE_TAG: rolling
 
 jobs:
   package:
     runs-on: ubuntu-24.04
     timeout-minutes: 240
+    # 普通提交不构建；提交信息里出现 release 才构建。手动触发无条件构建。
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, 'release')
     steps:
       - uses: actions/checkout@v4
 
@@ -34,11 +36,29 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends p7zip-full zstd curl unzip
 
-      - name: 取版本号并校验 tag
+      - name: 从提交信息取版本
         id: ver
         run: |
-          python3 -c "import json,os,sys; v=json.load(open('pack/pack.json',encoding='utf-8'))['version']; t=os.environ.get('GITHUB_REF_NAME',''); sys.exit(0 if (not t.startswith('v') or t.lstrip('v')==v) else f'tag {t} 与 pack.json 的 version {v} 不一致')"
-          echo "version=v$(python3 -c "import json;print(json.load(open('pack/pack.json',encoding='utf-8'))['version'])")" >> "$GITHUB_OUTPUT"
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, os, re
+          msg = os.environ.get("COMMIT_MSG", "") or os.environ.get("GITHUB_REF_NAME", "")
+          m = re.search(r"release[:\s]+v?(\d+\.\d+\.\d+(?:-[0-9A-Za-z.]+)?)", msg)
+          if m:
+              version = m.group(1)
+              print(f"source=提交信息")
+          else:
+              version = json.load(open("pack/pack.json", encoding="utf-8"))["version"]
+              print(f"source=pack.json（提交信息里没写版本）", file=os.sys.stderr)
+          print(f"version={version}")
+          print(f"tag=v{version}")
+          PY
+        env:
+          COMMIT_MSG: ${{ github.event.head_commit.message || '' }}
+
+      - name: 把版本写进 pack.json
+        run: |
+          echo "构建版本：${{ steps.ver.outputs.version }}"
+          python3 scripts/set_version.py "${{ steps.ver.outputs.version }}"
 
       - name: 缓存下载物
         uses: actions/cache@v4
@@ -63,27 +83,39 @@ jobs:
         run: python3 scripts/release_notes.py --github
 
       - name: 产物自检（启动免下载，不阻断发布）
-        # 测试版策略：自检只报告，不阻断。发现问题就把 pack.json 的 version 加一位发新版，
-        # 绝不靠回退上一版本来「修」问题。
+        # 测试版策略：自检只报告，不阻断。发现问题就把版本加一位发新版，不回退旧版本。
         continue-on-error: true
         run: python3 scripts/verify_bundle.py
 
       - name: 上传构建产物
         uses: actions/upload-artifact@v4
         with:
-          name: modpack-${{ github.ref_name }}
+          name: modpack-${{ steps.ver.outputs.version }}
           path: |
             dist/*.7z
           if-no-files-found: error
           retention-days: 14
 
-      - name: 发布
-        if: startsWith(github.ref, 'refs/tags/v') || inputs.release
+      - name: 清掉滚动 Release 上的旧资产
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release view "$RELEASE_TAG" --json assets --jq '.assets[].name' 2>/dev/null |
+            while read -r name; do
+              [ -n "$name" ] && gh release delete-asset "$RELEASE_TAG" "$name" -y
+            done
+
+      - name: 发布（滚动覆盖同一个 Release）
         uses: softprops/action-gh-release@v2
         with:
-          name: "重生：异世界冒险 ${{ steps.ver.outputs.version }}"
-          tag_name: ${{ steps.ver.outputs.version }}
-          body: ${{ steps.notes.outputs.notes }}
+          name: "重生：异世界冒险 ${{ steps.ver.outputs.version }}（滚动测试版）"
+          tag_name: ${{ env.RELEASE_TAG }}
+          body: |
+            **版本 ${{ steps.ver.outputs.version }}** — 由提交 `${{ github.sha }}` 自动构建。
+
+            ${{ steps.notes.outputs.notes }}
           files: dist/*.7z
-          prerelease: ${{ startsWith(steps.ver.outputs.version, 'v0.') }}
+          prerelease: true
           fail_on_unmatched_files: true
+          overwrite_files: true

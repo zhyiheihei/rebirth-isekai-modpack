@@ -61,20 +61,23 @@ python3 scripts/sync_client.py --apply --release 0.2.2   # 落盘 + 改版本 + 
 3. `python3 scripts/sync_client.py --apply --release <新版本>` → 改 `pack.json` version、提交、打 tag 并推送，
    Actions 构建完自动发 Release，玩家从 Release 页下载即可。
 
-## 发布
+## 发布（滚动更新）
 
-Actions 页面点一次 `Run workflow`（`build`）即构建 + 自检 + 发 Release，`release` 输入默认 `true`。
-也可以 `git tag v<版本> && git push origin v<版本>`，工作流会校验 tag 与 `pack/pack.json` 的 `version` 一致。
+只有一个分支 `master`，**不打 tag**，版本不进 git 历史文件、也不靠 tag：
 
-失败/发现问题时的规矩（测试期）：
+- 版本号写在**提交信息**里，形如 `release: 0.2.4`（`[release 0.2.4]` 也认）。工作流看到这一句才构建，
+  普通提交直接跳过；手动 `Run workflow` 无条件构建。
+- 版本以提交信息为准，CI 用 `python3 scripts/set_version.py <版本>` 把它写进 `pack/pack.json` 再打包。
+- 发布到**同一个滚动 Release**（tag 固定为 `rolling`，由工作流自动创建，永远不要手工打 tag）：
+  每次构建先删掉旧资产再传新的，所以下载入口固定不变，内容永远是最新一次构建。
+- 测试期策略：自检 `continue-on-error`，只报告不阻断，带着问题也照发；
+  出问题**禁止回退旧版本**，把版本加一位、提交信息写 `release: <新版本>` 再发一次。
 
-- **禁止回退上一版本去「修」问题**，直接改 `pack/pack.json` 的 `version` 加一位（0.2.2 → 0.2.3）再跑一次。
-- 自检步骤 `continue-on-error: true`：只报告问题，不阻断发布。测试版允许带着已知问题发出去。
-- `0.x` 版本一律标 pre-release。
-
-
-Actions 页面点一次 `Run workflow`（`build`）即构建 + 自检 + 发 Release，`release` 输入默认 `true`。
-也可以 `git tag v<版本> && git push origin v<版本>`，工作流会校验 tag 与 `pack/pack.json` 的 `version` 一致。
+```bash
+python3 scripts/set_version.py 0.2.4      # 本地同步版本号（CI 会自动做）
+git commit -m "release: 0.2.4 简述改动"    # 提交信息带版本即触发工作流
+git push origin master
+```
 
 ## 已知坑（都已处理，改包时别退化）
 
