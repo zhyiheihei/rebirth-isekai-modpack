@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       release:
-        description: "构建完成后发布 Release"
+        description: "构建完成后发布 Release（默认发）"
         type: boolean
-        default: false
+        default: true
 
 permissions:
   contents: write
@@ -32,7 +32,7 @@ jobs:
       - name: 安装工具
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends p7zip-full zstd curl
+          sudo apt-get install -y --no-install-recommends p7zip-full zstd curl unzip
 
       - name: 取版本号并校验 tag
         id: ver
@@ -50,7 +50,7 @@ jobs:
             cache/translations
             cache/resources
             local-assets
-          key: deps-${{ hashFiles('pack/*.json') }}
+          key: deps-${{ hashFiles('pack/mods.json', 'pack/runtimes.json', 'pack/launcher.json', 'pack/local-assets.json') }}
 
       - name: 拉取依赖（mods / 启动器 / Java / 翻译 / 游戏资源 / 材质）
         run: python3 scripts/fetch.py
@@ -82,5 +82,5 @@ jobs:
           tag_name: ${{ steps.ver.outputs.version }}
           body: ${{ steps.notes.outputs.notes }}
           files: dist/*.7z
-          prerelease: ${{ startsWith(steps.ver.outputs.version, 'v0.') }}
+          prerelease: ${{ contains(steps.ver.outputs.version, '-') }}
           fail_on_unmatched_files: true

@@ -179,8 +179,27 @@ def fetch_translations(langs=("zh",)):
     return ok
 
 
+def prune_local_assets():
+    """删掉 local-assets 里不在清单内的文件。
+
+    发布资产里的 tar 会整包解压，改名/回退过的旧文件会一起落盘；清单才是唯一事实来源，
+    多余文件留着会既占体积又出现在游戏内的材质包列表里。
+    """
+    removed = []
+    for name in ("resourcepacks", "shaderpacks"):
+        keep = {e["file"] for e in load(name + ".json")}
+        folder = os.path.join(LOCAL, name)
+        if not os.path.isdir(folder):
+            continue
+        for fn in os.listdir(folder):
+            if fn not in keep:
+                os.remove(os.path.join(folder, fn))
+                removed.append(os.path.relpath(os.path.join(folder, fn), ROOT))
+    return removed
+
+
 def fetch_local_assets():
-    """按 pack/local-assets.json 拉取材质/光影原始包并解压到 local-assets/。"""
+    """按 pack/local-assets.json 拉取材质/光影原始包，解压到 local-assets/ 并按清单剪枝。"""
     info = load("local-assets.json")
     if not info.get("url"):
         return False
@@ -192,4 +211,6 @@ def fetch_local_assets():
         cmd = ["tar", "--zstd", "-xf", archive, "-C", ROOT]
     if subprocess.run(cmd, capture_output=True).returncode != 0:
         return False
+    for gone in prune_local_assets():
+        print("   清掉清单外的旧文件:", gone)
     return True

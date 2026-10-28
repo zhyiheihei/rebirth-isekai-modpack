@@ -82,9 +82,12 @@ python3 scripts/update_assets.py --apply    # 落地：替换文件、补 mcmeta
 ## 发布
 
 ```bash
-# 打 tag 即自动构建 + 发 Release（工作流见 .github/workflows/build.yml）
-git tag v1.0.0 && git push origin v1.0.0
+# 方式一：Actions 页面点 Run workflow（build），默认就发 Release
+# 方式二：打 tag（工作流会校验 tag 与 pack/pack.json 的 version 一致）
+git tag v0.2.1 && git push origin v0.2.1
 ```
+
+工作流完全自包含，不需要本地任何文件：只从仓库读配置，从公网拉模组/启动器/Java/游戏资源/材质原件（材质原件走 `pack/local-assets.json` 里记录的 release 资产直链），构建完四平台并自检通过后发 Release。手动触发时 `release` 输入默认为 `true`，想只出 artifact 就关掉它。
 
 - 工作流会校验 tag 与 `pack/pack.json` 的 `version` 一致，跑完 `scripts/verify_bundle.py` 才会上传
 - 产物：`*-Windows-x64.7z`、`*-macOS.7z`、`*-Linux-x64.7z`、`*-MMC.7z`（PCL2/HMCL 导入用）
@@ -92,14 +95,16 @@ git tag v1.0.0 && git push origin v1.0.0
 
 ### 材质原件托管
 
-`local-assets/` 的 260MB 原始材质不走 git，作为 release `assets-1.0.0` 的资产托管：
+`local-assets/` 的约 262MB 原始材质不走 git，作为 release `assets-0.2.1` 的资产托管，`pack/local-assets.json` 记录直链与 sha256：
 
 ```
-https://github.com/zhyiheihei/rebirth-isekai-modpack/releases/download/assets-1.0.0/local-assets-1.0.0.tar.zst
-sha256 e72943767f766691b2d11bac742aca43a90089878dd5364450f18171a57ab9dc
+https://github.com/zhyiheihei/rebirth-isekai-modpack/releases/download/assets-0.2.1/local-assets-0.2.1.tar.zst
+sha256 eea00b797562eec6a0c12bcab0ce2c5428f30045513b316367e253219200ceca
 ```
 
-改材质时：更新 `local-assets/` → `python3 scripts/package_assets.py` 生成新 tar.zst → 传到 `assets-<版本>` release → 把新 url/sha256 写进 `pack/local-assets.json`。
+改材质时的流程：更新 `local-assets/` → `python3 scripts/package_assets.py` 生成新 tar.zst → `gh release create assets-<版本> dist/local-assets-<版本>.tar.zst` → 把新 url/sha256 写进 `pack/local-assets.json`。
+
+`fetch.py` 解压后会**按清单剪枝**：清单里没有的文件一律删掉，所以改名/回退过的旧文件不会残留在产物里，也不会出现在游戏内的材质包列表。
 
 ## local-assets 来源
 

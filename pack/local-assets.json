@@ -1,8 +1,8 @@
 {
- "version": "1.0.0",
- "file": "local-assets-1.0.0.tar.zst",
- "size": 272924025,
- "sha256": "e72943767f766691b2d11bac742aca43a90089878dd5364450f18171a57ab9dc",
- "url": "https://github.com/zhyiheihei/rebirth-isekai-modpack/releases/download/assets-1.0.0/local-assets-1.0.0.tar.zst",
- "note": "材质包与光影原始压缩包（约 260MB，不进 git）。作为 assets-1.0.0 这个 release 的资产上传，CI 构建时按 url+sha256 拉取。"
+  "version": "0.2.1",
+  "file": "local-assets-0.2.1.tar.zst",
+  "size": 274608669,
+  "sha256": "eea00b797562eec6a0c12bcab0ce2c5428f30045513b316367e253219200ceca",
+  "url": "https://github.com/zhyiheihei/rebirth-isekai-modpack/releases/download/assets-0.2.1/local-assets-0.2.1.tar.zst",
+  "note": "材质包与光影原始压缩包（约 262MB，不进 git）。作为 assets-0.2.1 这个 release 的资产上传，CI 构建时按 url+sha256 拉取，解压后按 pack/resourcepacks.json / shaderpacks.json 逐条校验并清掉多余文件。"
 }

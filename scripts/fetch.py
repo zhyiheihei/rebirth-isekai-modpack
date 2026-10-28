@@ -25,13 +25,14 @@ def main():
     resources.fetch()
 
     print("== 本地资产（材质/光影，不进 git）==")
+    common.prune_local_assets()          # 先按清单剪枝，避免上一次构建的旧文件被当成缺件
     missing = common.check_local_assets()
     if missing:
         print("   尝试从发布资产拉取…")
         if common.fetch_local_assets():
             missing = common.check_local_assets()
     if missing:
-        print("   缺少以下文件，请从原始来源补齐 local-assets/：")
+        print("   缺少以下文件（既不随包也不在发布资产里），请补齐 local-assets/：")
         for m in missing:
             print("    -", m)
         return 1
