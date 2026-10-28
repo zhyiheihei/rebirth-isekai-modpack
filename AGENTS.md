@@ -86,4 +86,7 @@ git push origin master
 - 材质包 `pack.mcmeta` 必须是 `supported_formats: {min_format, max_format}`；26.x 里写 `min_inclusive`/`max_inclusive` 会被判为「declares support for version newer than 64, but is missing mandatory fields」而回落。
 - `mmc-pack.json` 里带 `cachedSha256` 且与随包 meta 文件一致，启动器才不会去远程拉组件元数据（假 IP/断网环境会直接拦住启动）。MMC 导入包不含 meta，故不写。
 - `~/Documents` 是 bindfs（FUSE）挂载，同时只能再打开约 50 个文件。Minecraft 客户端/服务端都不能直接从仓库目录启动，要复制到 `/var/tmp` 之类路径再跑。
+- 实例目录名固定 ASCII `RebirthIsekai`（显示名 `name=` 才是中文）：Windows 上 cmd/PowerShell 传中文参数会因代码页丢字符，`JavaPath` 替换曾经就是这样失效的。
+- Windows 启动逻辑全在 `launch.ps1`（UTF-8 **带 BOM**，否则 PowerShell 5.1 读中文乱码），`启动游戏.bat` 只用 `-File` 调用；`.bat` 必须是 CRLF，写成 CRCRLF 会解析异常。
+- `verify_bundle.py` 的 `check_runnable()` 按产物自身的标志文件判断平台（`prismlauncher.exe` / `*.app` / `PrismLauncher`），不看宿主机；换启动器文件名时记得同步那里。
 - `xali's Enhanced Vanilla` 上游 zip 条目重叠（`unzip` 只报 warning，Python `zipfile` 直接抛错），本地是解出后重建的副本，不要用上游原包覆盖。

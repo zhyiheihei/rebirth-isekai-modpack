@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """构建产物自检：确认「启动免下载」所需的资源都在包里。"""
+import glob
 import json
 import os
+import re
 import sys
 
 import common
@@ -55,11 +57,18 @@ def check_bundle(root):
         problems.append("缺少 meta/")
 
     gamedir = None
-    for base in ("instances", "PrismLauncher-data/instances", ""):
-        path = os.path.join(root, base, name, "minecraft")
-        if os.path.isdir(path):
-            gamedir = path
+    for base in ("instances", "PrismLauncher-data/instances"):
+        inst_root = os.path.join(root, base)
+        if os.path.isdir(inst_root):
+            for inst in sorted(os.listdir(inst_root)):
+                path = os.path.join(inst_root, inst, "minecraft")
+                if os.path.isdir(path):
+                    gamedir = path
+                    break
+        if gamedir:
             break
+    if not gamedir and os.path.isdir(os.path.join(root, ".minecraft")):
+        gamedir = os.path.join(root, ".minecraft")
     if gamedir:
         mods = [f for f in os.listdir(os.path.join(gamedir, "mods")) if f.endswith(".jar")]
         want = sum(1 for m in common.load("mods.json") if m["enabled"])
@@ -138,17 +147,12 @@ def check_bundle(root):
     else:
         problems.append("缺少 prismlauncher_update.cfg auto_check=false（会检查更新）")
 
-    if server:
-        for base in ("instances", "PrismLauncher-data/instances", ""):
-            dat = os.path.join(root, base, name, "minecraft", "servers.dat")
-            if not os.path.exists(dat):
-                dat = os.path.join(root, base, ".minecraft", "servers.dat")
-            if os.path.exists(dat):
-                if server["ip"].encode() not in open(dat, "rb").read():
-                    problems.append(f"servers.dat 里没有 {server['ip']}")
-                break
-        else:
+    if server and gamedir:
+        dat = os.path.join(gamedir, "servers.dat")
+        if not os.path.exists(dat):
             problems.append("缺少 servers.dat")
+        elif server["ip"].encode() not in open(dat, "rb").read():
+            problems.append(f"servers.dat 里没有 {server['ip']}")
 
     for base in (".", "PrismLauncher-data"):
         cfg_path = os.path.join(root, base, "prismlauncher.cfg")
@@ -188,8 +192,117 @@ def check_bundle(root):
         problems.append("缺少中文翻译（启动器会去联网下载）")
 
     check_portable_extras(root, problems)
+    check_runnable(root, problems)
 
     return problems
+
+
+def check_runnable(root, problems):
+    """各平台「双击就能起来」的必要条件：实例目录、自带 Java、启动脚本、配置占位符。"""
+    pack = common.load("pack.json")
+    name = pack["name"]
+    jre = "jre" + str(pack["java"]["major"])
+
+    # 平台按产物自身的标志文件判断，不看宿主机
+    is_windows = os.path.exists(os.path.join(root, "prismlauncher.exe"))
+    apps = glob.glob(os.path.join(root, "*.app"))
+    is_macos = bool(apps)
+    is_linux = os.path.exists(os.path.join(root, "PrismLauncher"))
+    if os.path.basename(root).endswith("-MMC"):
+        return
+
+    base = "PrismLauncher-data" if os.path.isdir(os.path.join(root, "PrismLauncher-data")) else "."
+    inst_root = os.path.join(root, base, "instances")
+    ids = [d for d in os.listdir(inst_root) if os.path.isdir(os.path.join(inst_root, d))] if os.path.isdir(inst_root) else []
+    if not ids:
+        problems.append("instances/ 里没有实例")
+        return
+    if len(ids) != 1:
+        problems.append(f"instances/ 里有 {len(ids)} 个实例目录：{ids}")
+    inst_id = ids[0]
+    if not inst_id.isascii():
+        problems.append(f"实例目录名不是 ASCII（Windows 上会因代码页出问题）：{inst_id}")
+
+    inst_cfg = os.path.join(inst_root, inst_id, "instance.cfg")
+    cfg = open(inst_cfg, encoding="utf-8").read()
+    if f"name={name}" not in cfg:
+        problems.append("instance.cfg 的显示名不是整合包名")
+    if "JavaPath=__BUNDLED_JAVA__" not in cfg:
+        problems.append("instance.cfg 缺少 JavaPath 占位符（启动脚本靠它写包内 Java）")
+    if "LowMemWarning=false" not in cfg:
+        problems.append("instance.cfg 缺少 LowMemWarning=false")
+
+    java_root = os.path.join(root, base, "java")
+    if is_macos:
+        for arch in ("aarch64", "x64"):
+            exe = os.path.join(java_root, f"{jre}-{arch}", "Contents", "Home", "bin", "java")
+            if not os.path.exists(exe):
+                problems.append(f"macOS 包缺少 {jre}-{arch} 的 java 可执行文件")
+        script = os.path.join(root, "启动游戏.command")
+        if not os.path.exists(script):
+            problems.append("macOS 包缺少 启动游戏.command")
+        elif not os.access(script, os.X_OK):
+            problems.append("启动游戏.command 没有可执行权限")
+    elif is_windows:
+        exe = os.path.join(java_root, jre, "bin", "java.exe")
+        if not os.path.exists(exe):
+            problems.append(f"Windows 包缺少包内 java.exe: {os.path.relpath(exe, root)}")
+        for f in ("启动游戏.bat", "launch.ps1"):
+            if not os.path.exists(os.path.join(root, f)):
+                problems.append(f"Windows 包缺少 {f}")
+        bat = os.path.join(root, "启动游戏.bat")
+        if os.path.exists(bat):
+            raw = open(bat, "rb").read()
+            if b"\r\r\n" in raw:
+                problems.append("启动游戏.bat 的换行是 CRCRLF（cmd 会解析异常）")
+            if b"-File" not in raw or b"launch.ps1" not in raw:
+                problems.append("启动游戏.bat 没有用 -File 调用 launch.ps1")
+        ps1 = os.path.join(root, "launch.ps1")
+        if os.path.exists(ps1):
+            raw = open(ps1, "rb").read()
+            if not raw.startswith(b"\xef\xbb\xbf"):
+                problems.append("launch.ps1 缺少 UTF-8 BOM（PowerShell 5.1 会把中文读成乱码）")
+            if b"Start-Process" not in raw:
+                problems.append("launch.ps1 没有启动启动器")
+    elif is_linux:
+        exe = os.path.join(java_root, jre, "bin", "java")
+        if not os.path.exists(exe):
+            problems.append(f"Linux 包缺少包内 java: {os.path.relpath(exe, root)}")
+        script = os.path.join(root, "启动游戏.sh")
+        if not os.path.exists(script):
+            problems.append("Linux 包缺少 启动游戏.sh")
+        elif not os.access(script, os.X_OK):
+            problems.append("启动游戏.sh 没有可执行权限")
+    else:
+        problems.append("无法判断平台（没有 prismlauncher.exe / *.app / PrismLauncher）")
+
+    # 启动脚本里引用的实例 id 必须与实际目录一致
+    for script in ("启动游戏.sh", "启动游戏.command", "launch.ps1"):
+        path = os.path.join(root, script)
+        if os.path.exists(path):
+            text = open(path, encoding="utf-8", errors="replace").read()
+            if inst_id not in text:
+                problems.append(f"{script} 里没有引用实例 {inst_id}")
+
+    iris = os.path.join(inst_root, inst_id, "minecraft", "config", "iris.properties")
+    if os.path.exists(iris):
+        want = [l.split("=", 1)[1] for l in open(iris, encoding="utf-8").read().splitlines() if l.startswith("shaderPack=")]
+        if want:
+            sp_dir = os.path.join(inst_root, inst_id, "minecraft", "shaderpacks")
+            have = set(os.listdir(sp_dir)) if os.path.isdir(sp_dir) else set()
+            if want[0] not in have:
+                problems.append(f"iris 默认光影不存在: {want[0]}")
+
+    opts = os.path.join(inst_root, inst_id, "minecraft", "options.txt")
+    rp_dir = os.path.join(inst_root, inst_id, "minecraft", "resourcepacks")
+    if os.path.exists(opts) and os.path.isdir(rp_dir):
+        line = [l for l in open(opts, encoding="utf-8").read().splitlines() if l.startswith("resourcePacks:[")]
+        if line:
+            refs = re.findall(r'file/([^"]+)"', line[0])
+            have = set(os.listdir(rp_dir))
+            missing = [r for r in refs if r not in have]
+            if missing:
+                problems.append(f"options.txt 引用了不存在的材质包: {missing[:3]}")
 
 
 def check_portable_extras(root, problems):

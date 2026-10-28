@@ -20,6 +20,9 @@ import common
 
 PACK = common.load("pack.json")
 NAME = PACK["name"]
+# 实例目录名用 ASCII：Windows 上 cmd/PowerShell 传递中文路径会因代码页出错，
+# 显示名（instance.cfg 的 name=）仍然是中文。
+INSTANCE_ID = "RebirthIsekai"
 VERSION = PACK["version"]
 JRE_DIRNAME = "jre" + str(PACK["java"]["major"])
 
@@ -398,7 +401,7 @@ def assemble(platform, source, fill_natives=True, fast=False):
     common.ensure_dir(datadir)
 
     print(f"[{platform}] 实例与配置", flush=True)
-    instance_dir = os.path.join(datadir, "instances", NAME)
+    instance_dir = os.path.join(datadir, "instances", INSTANCE_ID)
     if os.path.exists(instance_dir):
         shutil.rmtree(instance_dir)
     build_instance(instance_dir)
@@ -451,7 +454,7 @@ def assemble(platform, source, fill_natives=True, fast=False):
             "#!/bin/sh\n"
             'cd "$(dirname "$0")" || exit 1\n'
             f'JAVA="$(pwd)/java/{JRE_DIRNAME}/{runtime["java_path"]}"\n'
-            f'sed -i "s|^JavaPath=.*|JavaPath=$JAVA|" "prismlauncher.cfg" "instances/{NAME}/instance.cfg"\n'
+            f'sed -i "s|^JavaPath=.*|JavaPath=$JAVA|" "prismlauncher.cfg" "instances/{INSTANCE_ID}/instance.cfg"\n'
             'if [ -f player.txt ]; then\n'
             '  PLAYER="$(cat player.txt)"\n'
             'else\n'
@@ -459,36 +462,83 @@ def assemble(platform, source, fill_natives=True, fast=False):
             '  printf "%s" "$PLAYER" > player.txt\n'
             '  sed -i "s/__RANDOM_NAME__/$PLAYER/g" accounts.json\n'
             'fi\n'
-            f'exec ./PrismLauncher -l "{NAME}"{server_arg} --offline "$PLAYER" "$@"\n'
+            f'exec ./PrismLauncher -l "{INSTANCE_ID}"{server_arg} --offline "$PLAYER" "$@"\n'
         )
         path = os.path.join(root, "启动游戏.sh")
         open(path, "w", encoding="utf-8").write(launcher_script)
         os.chmod(path, 0o755)
     elif platform == "windows":
+        # 全部逻辑放进 UTF-8 BOM 的 .ps1，.bat 只负责调用：
+        # cmd 用命令行传中文参数会因代码页丢字符，之前 JavaPath 没被替换就是这里出的问题。
         java_rel = runtime["java_path"].replace("/", "\\")
-        ps = (
-            "$d = Get-Location; "
-            "if (-not (Test-Path 'player.txt')) { "
-            "$n = 'Player' + (-join (1..6 | ForEach-Object { '{0:x}' -f (Get-Random -Max 16) })); "
-            "[IO.File]::WriteAllText((Join-Path $d 'player.txt'), $n, (New-Object System.Text.ASCIIEncoding)); "
-            "$a = Join-Path $d 'accounts.json'; "
-            "$t = [IO.File]::ReadAllText($a); "
-            "[IO.File]::WriteAllText($a, $t.Replace('__RANDOM_NAME__', $n), (New-Object System.Text.UTF8Encoding($false))) }; "
-            "$j = Join-Path $d 'java\\" + JRE_DIRNAME + "\\" + java_rel + "'; "
-            "foreach ($p in @('prismlauncher.cfg','instances\\" + NAME + "\\instance.cfg')) "
-            "{ $t = Get-Content -LiteralPath $p -Raw -Encoding UTF8; "
-            "$t = [regex]::Replace($t, '(?m)^JavaPath=.*', 'JavaPath=' + $j); "
-            "[IO.File]::WriteAllText((Resolve-Path $p).Path, $t, (New-Object System.Text.UTF8Encoding($false))) }"
-        )
+        join = ", '-s', '" + PACK["server"]["ip"] + "'" if PACK.get("server", {}).get("auto_join") else ""
+        launch_args = "@('-l', '" + INSTANCE_ID + "'" + join + ", '--offline', $player)"
+        ps1 = f'''$ErrorActionPreference = 'Stop'
+Set-Location -LiteralPath $PSScriptRoot
+$d = $PSScriptRoot
+
+# 1) 找包内 Java；布局变了就扫 java\\*\\{java_rel}
+$java = Join-Path $d 'java\\{JRE_DIRNAME}\\{java_rel}'
+if (-not (Test-Path -LiteralPath $java)) {{
+    $hit = Get-ChildItem -LiteralPath (Join-Path $d 'java') -Recurse -Filter (Split-Path '{java_rel}' -Leaf) -ErrorAction SilentlyContinue |
+           Where-Object {{ $_.FullName -like '*\\bin\\*' }} | Select-Object -First 1
+    if ($hit) {{ $java = $hit.FullName }}
+}}
+if (-not (Test-Path -LiteralPath $java)) {{
+    Write-Host '找不到自带的 Java（java\\{JRE_DIRNAME}\\{java_rel}）' -ForegroundColor Red
+    Write-Host '请确认解压完整，或用 7-Zip 重新解压整个文件夹。' -ForegroundColor Yellow
+    Read-Host '按回车退出'
+    exit 1
+}}
+
+# 2) 首次运行生成随机玩家名，并替换 accounts.json 里的占位符
+$playerFile = Join-Path $d 'player.txt'
+if (-not (Test-Path -LiteralPath $playerFile)) {{
+    $name = 'Player' + (-join (1..6 | ForEach-Object {{ '{{0:x}}' -f (Get-Random -Max 16) }}))
+    [IO.File]::WriteAllText($playerFile, $name, (New-Object System.Text.ASCIIEncoding))
+    $acc = Join-Path $d 'accounts.json'
+    if (Test-Path -LiteralPath $acc) {{
+        $t = [IO.File]::ReadAllText($acc)
+        [IO.File]::WriteAllText($acc, $t.Replace('__RANDOM_NAME__', $name), (New-Object System.Text.UTF8Encoding($false)))
+    }}
+}}
+$player = (Get-Content -LiteralPath $playerFile -Raw).Trim()
+
+# 3) 把 JavaPath 写进启动器全局配置和每个实例配置（不硬编码实例名，避免中文路径）
+$targets = @(Join-Path $d 'prismlauncher.cfg')
+$instRoot = Join-Path $d 'instances'
+if (Test-Path -LiteralPath $instRoot) {{
+    $targets += Get-ChildItem -LiteralPath $instRoot -Directory | ForEach-Object {{ Join-Path $_.FullName 'instance.cfg' }}
+}}
+foreach ($p in $targets) {{
+    if (-not (Test-Path -LiteralPath $p)) {{ continue }}
+    $t = [IO.File]::ReadAllText($p)
+    if ($t -notmatch '(?m)^JavaPath=.*') {{ $t = $t.TrimEnd() + "`r`nJavaPath=$java`r`n" }}
+    else {{ $t = [regex]::Replace($t, '(?m)^JavaPath=.*', 'JavaPath=' + $java) }}
+    [IO.File]::WriteAllText($p, $t, (New-Object System.Text.UTF8Encoding($false)))
+}}
+
+# 4) 启动
+$exe = Join-Path $d 'prismlauncher.exe'
+if (-not (Test-Path -LiteralPath $exe)) {{
+    Write-Host '找不到 prismlauncher.exe，请确认解压完整。' -ForegroundColor Red
+    Read-Host '按回车退出'
+    exit 1
+}}
+Start-Process -FilePath $exe -ArgumentList {launch_args} -WorkingDirectory $d
+'''
+        ps1 = ps1.replace("{launch_args}", launch_args)
+        # Windows PowerShell 5.1 靠 BOM 才认 UTF-8；没有 BOM 时中文提示会乱码。
+        with open(os.path.join(root, "launch.ps1"), "w", encoding="utf-8-sig", newline="\r\n") as f:
+            f.write(ps1)
         bat = (
             "@echo off\r\n"
             "chcp 65001 >nul\r\n"
             'cd /d "%~dp0"\r\n'
-            f'powershell -NoProfile -ExecutionPolicy Bypass -Command "{ps}"\r\n'
-            "set /p PLAYER=<player.txt\r\n"
-            f'start "" "prismlauncher.exe" -l "{NAME}"{server_arg} --offline "%PLAYER%"\r\n'
+            'powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0launch.ps1"\r\n'
         )
-        open(os.path.join(root, "启动游戏.bat"), "w", encoding="utf-8").write(bat)
+        with open(os.path.join(root, "启动游戏.bat"), "w", encoding="utf-8", newline="") as f:
+            f.write(bat)
     else:
         launcher_script = (
             "#!/bin/sh\n"
@@ -499,7 +549,7 @@ def assemble(platform, source, fill_natives=True, fast=False):
             f'  *)     JRE="${{PWD}}/PrismLauncher-data/java/{JRE_DIRNAME}-x64" ;;\n'
             'esac\n'
             'JAVA="$JRE/Contents/Home/bin/java"\n'
-            f'sed -i "" "s|^JavaPath=.*|JavaPath=$JAVA|" "PrismLauncher-data/prismlauncher.cfg" "PrismLauncher-data/instances/{NAME}/instance.cfg"\n'
+            f'sed -i "" "s|^JavaPath=.*|JavaPath=$JAVA|" "PrismLauncher-data/prismlauncher.cfg" "PrismLauncher-data/instances/{INSTANCE_ID}/instance.cfg"\n'
             'if [ -f player.txt ]; then\n'
             '  PLAYER="$(cat player.txt)"\n'
             'else\n'
@@ -507,7 +557,7 @@ def assemble(platform, source, fill_natives=True, fast=False):
             '  printf "%s" "$PLAYER" > player.txt\n'
             '  sed -i "" "s/__RANDOM_NAME__/$PLAYER/g" "PrismLauncher-data/accounts.json"\n'
             'fi\n'
-            f'exec "./Prism Launcher.app/Contents/MacOS/prismlauncher" -d "$(pwd)/PrismLauncher-data" -l "{NAME}"{server_arg} --offline "$PLAYER" "$@"\n'
+            f'exec "./Prism Launcher.app/Contents/MacOS/prismlauncher" -d "$(pwd)/PrismLauncher-data" -l "{INSTANCE_ID}"{server_arg} --offline "$PLAYER" "$@"\n'
         )
         path = os.path.join(root, "启动游戏.command")
         open(path, "w", encoding="utf-8").write(launcher_script)
