@@ -210,6 +210,43 @@ def prune_local_assets():
     return removed
 
 
+def extract_tar(archive, dest):
+    """解 tar / tar.zst。
+
+    Windows 上 Git Bash 的 GNU tar 没有内置 zstd 支持，`--zstd` 会去 exec 一个
+    不存在的 zstd 程序直接失败；系统自带的是 bsdtar（libarchive，自带 zstd）。
+    所以按 tar --zstd -> bsdtar -> python zstandard 三级兜底，Linux/CI 走第一条。
+    """
+    zst = archive.endswith(".zst")
+    bsdtar = os.path.join(os.environ.get("SystemRoot", r"C:\Windows"), "System32", "tar.exe")
+    tries = []
+    if zst:
+        tries.append(["tar", "--zstd", "-xf", archive, "-C", dest])
+        if os.path.exists(bsdtar):
+            tries.append([bsdtar, "-xf", archive, "-C", dest])
+    else:
+        tries.append(["tar", "-xf", archive, "-C", dest])
+    for cmd in tries:
+        if subprocess.run(cmd, capture_output=True).returncode == 0:
+            return True
+    if not zst:
+        return False
+    try:
+        import tarfile
+
+        import zstandard
+    except ImportError:
+        return False
+    with open(archive, "rb") as raw:
+        reader = zstandard.ZstdDecompressor().stream_reader(raw)
+        with tarfile.open(fileobj=reader, mode="r|") as tar:
+            try:
+                tar.extractall(dest, filter="data")
+            except TypeError:  # Python < 3.12 没有 filter 参数
+                tar.extractall(dest)
+    return True
+
+
 def fetch_local_assets():
     """按 pack/local-assets.json 拉取材质/光影原始包，解压到 local-assets/ 并按清单剪枝。"""
     info = load("local-assets.json")
@@ -218,10 +255,8 @@ def fetch_local_assets():
     archive = os.path.join(CACHE, "launcher", info["file"])
     if not download(info["url"], archive, info.get("sha256") or None):
         return False
-    cmd = ["tar", "-xf", archive, "-C", ROOT]
-    if archive.endswith(".zst"):
-        cmd = ["tar", "--zstd", "-xf", archive, "-C", ROOT]
-    if subprocess.run(cmd, capture_output=True).returncode != 0:
+    if not extract_tar(archive, ROOT):
+        print(f"   解压失败: {os.path.basename(archive)}", file=sys.stderr)
         return False
     for gone in prune_local_assets():
         print("   清掉清单外的旧文件:", gone)
