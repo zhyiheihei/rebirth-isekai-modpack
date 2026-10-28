@@ -1,0 +1,9 @@
+{
+  "tameWhenMounted": [
+    "minecraft:camel",
+    "minecraft:camel_husk",
+    "minecraft:skeleton_horse"
+  ],
+  "respawnAfterSleep": true,
+  "timeOfDayToRespawn": -1
+}

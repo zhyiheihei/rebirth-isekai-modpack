@@ -1,9 +1,4 @@
 {
-	"abandoned_camps": {
-		"abandoned_camp": {
-			"alpine_highlands": true
-		}
-	},
 	"mage": {
 		"mage_complex": true,
 		"mage_tower": true,

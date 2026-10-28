@@ -14,20 +14,10 @@
 		"separation": 30,
 		"spacing": 70
 	},
-	"common_remnants": {
-		"salt": 583924,
-		"separation": 30,
-		"spacing": 80
-	},
-	"conduit_ruin": {
-		"salt": 6574832,
-		"separation": 8,
-		"spacing": 32
-	},
 	"crypts": {
 		"salt": 96586859,
-		"separation": 25,
-		"spacing": 50
+		"separation": 30,
+		"spacing": 55
 	},
 	"desert_structures": {
 		"salt": 239021,
@@ -47,18 +37,18 @@
 	},
 	"firewatch_towers": {
 		"salt": 123,
-		"separation": 8,
-		"spacing": 38
+		"separation": 15,
+		"spacing": 50
 	},
 	"illager_barracks": {
-		"salt": 965485949,
+		"salt": 2059314391,
 		"separation": 25,
 		"spacing": 60
 	},
-	"illager_camps": {
-		"salt": 85493022,
-		"separation": 12,
-		"spacing": 36
+	"illager_camp": {
+		"salt": 4533232,
+		"separation": 32,
+		"spacing": 50
 	},
 	"illager_hideout": {
 		"salt": 3094032,
@@ -101,7 +91,7 @@
 		"spacing": 60
 	},
 	"remnants": {
-		"salt": 97857373,
+		"salt": 1195802790,
 		"separation": 30,
 		"spacing": 80
 	},
@@ -117,21 +107,16 @@
 	},
 	"shrines": {
 		"salt": 78409300,
-		"separation": 14,
-		"spacing": 50
+		"separation": 26,
+		"spacing": 70
 	},
 	"small_cave_structures": {
 		"salt": 79984849,
 		"separation": 6,
 		"spacing": 16
 	},
-	"small_overworld_dungeons": {
-		"salt": 6894540,
-		"separation": 16,
-		"spacing": 40
-	},
 	"stray_big_structures": {
-		"salt": 500493890,
+		"salt": 709971604,
 		"separation": 70,
 		"spacing": 150
 	},
@@ -150,15 +135,25 @@
 		"separation": 190,
 		"spacing": 200
 	},
-	"villages": {
+	"villages_birch": {
 		"salt": 10387312,
-		"separation": 16,
-		"spacing": 51
+		"separation": 8,
+		"spacing": 34
+	},
+	"villages_jungle": {
+		"salt": 10387312,
+		"separation": 8,
+		"spacing": 34
+	},
+	"villages_swamp": {
+		"salt": 10387312,
+		"separation": 8,
+		"spacing": 34
 	},
 	"wells": {
 		"salt": 430930,
-		"separation": 8,
-		"spacing": 32
+		"separation": 15,
+		"spacing": 40
 	},
 	"wild_ruin": {
 		"salt": 75489234,

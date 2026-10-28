@@ -7,14 +7,14 @@
     "bonus_per_stack": 0.1
   },
   "secondary_effects": {
+    "critical_chance": {
+      "bonus_per_stack": 0.05
+    },
     "haste": {
       "bonus_per_stack": 0.05
     },
     "critical_damage": {
       "bonus_per_stack": 0.1
-    },
-    "critical_chance": {
-      "bonus_per_stack": 0.05
     }
   },
   "enchantments_require_matching_attribute": true,

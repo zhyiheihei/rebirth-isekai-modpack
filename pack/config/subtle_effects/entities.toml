@@ -38,6 +38,7 @@ snowGolemStepSounds = true
 chargedCreeperParticlesDensity = 0.2
 chargedCreeperExplosionParticles = true
 lightningStrikeParticles = true
+shulkerTeleportParticles = true
 entityUpdateFrequency = 20
 
 [sleeping]

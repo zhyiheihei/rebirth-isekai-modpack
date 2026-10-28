@@ -8,14 +8,6 @@
 	"bunker": {
 		"bunker": true
 	},
-	"common_remnants": {
-		"remnant_classic_village": true,
-		"remnant_miner_hut": true
-	},
-	"conduit_ruin": {
-		"small_conduit_ruin_cold": true,
-		"small_conduit_ruin_warm": true
-	},
 	"crypts": {
 		"catacomb": true,
 		"creeping_crypt": true,
@@ -36,7 +28,6 @@
 	"firewatch_towers": {
 		"firewatch_tower_birch": true,
 		"firewatch_tower_cherry": true,
-		"firewatch_tower_dappled": true,
 		"firewatch_tower_dark_oak": true,
 		"firewatch_tower_forest": true,
 		"firewatch_tower_jungle": true,
@@ -49,11 +40,10 @@
 	"illager_barracks": {
 		"illager_barracks": true,
 		"illager_camp": true,
-		"illager_treehouse": true
+		"minecraft:pillager_outpost": true
 	},
-	"illager_camps": {
-		"illager_camp": true,
-		"illager_treehouse": true
+	"illager_camp": {
+		"illager_camp": true
 	},
 	"illager_hideout": {
 		"illager_hideout": true
@@ -68,10 +58,6 @@
 		"mangrove_witch_hut": true
 	},
 	"nether_encampments": {
-		"nether_skeleton_camp_crimson": true,
-		"nether_skeleton_camp_fort": true,
-		"nether_skeleton_camp_soul": true,
-		"nether_skeleton_camp_warped": true,
 		"nether_skeleton_tower_crimson": true,
 		"nether_skeleton_tower_fort": true,
 		"nether_skeleton_tower_soul": true,
@@ -102,24 +88,22 @@
 		"remnant_bridge_remnant": true,
 		"remnant_bundle_tent": true,
 		"remnant_bunny_base": true,
-		"remnant_creeper_homestead": true,
+		"remnant_classic_village": true,
 		"remnant_desert_remnant": true,
 		"remnant_forest_smith": true,
 		"remnant_frog_ranch": true,
 		"remnant_graveyard": true,
-		"remnant_lone_shrine_sentinel": true,
 		"remnant_medium_remnant": true,
 		"remnant_medium_remnant_2": true,
+		"remnant_miner_hut": true,
 		"remnant_mud_brick_constructor": true,
 		"remnant_ominous_shop": true,
 		"remnant_ruin_farmer": true,
 		"remnant_ruin_smith": true,
 		"remnant_sawmill": true,
 		"remnant_school_remnant": true,
-		"remnant_shrine_sentinel_mass_grave": true,
 		"remnant_taiga_castle": true,
 		"remnant_woodland_hud": true,
-		"remnant_youth_spring": true,
 		"remnant_zombie_horse_ranch": true
 	},
 	"ruin_town": {
@@ -151,27 +135,12 @@
 		"trial_dungeon": true,
 		"underground_house": true
 	},
-	"small_overworld_dungeons": {
-		"bogged_camp": true,
-		"parched_camp": true,
-		"small_creeping_crypt": true,
-		"small_undead_crypt": true,
-		"stray_camp": true,
-		"surface_dungeon_default": true,
-		"surface_dungeon_desert": true,
-		"surface_dungeon_snowy": true,
-		"surface_dungeon_swamp": true,
-		"surface_trial_dungeon_default": true,
-		"surface_trial_dungeon_desert": true,
-		"surface_trial_dungeon_snowy": true,
-		"surface_trial_dungeon_swamp": true
-	},
 	"stray_big_structures": {
 		"lone_citadel": true,
 		"stray_fort": true,
 		"stray_outlook": true
 	},
-	"strongholds_bunker": {
+	"strongholds_buinker": {
 		"bunker": true
 	},
 	"swamp_structure": {
@@ -182,7 +151,6 @@
 		"tavern_acacia": true,
 		"tavern_birch": true,
 		"tavern_cherry": true,
-		"tavern_dappled": true,
 		"tavern_dark_oak": true,
 		"tavern_desert": true,
 		"tavern_jungle": true,
@@ -196,27 +164,22 @@
 	"trident_trial_monument": {
 		"trident_trial_monument": true
 	},
-	"villages": {
-		"dappled_townhall": true,
-		"village_birch": true,
-		"village_dappled": true,
-		"village_jungle": true,
+	"villages_birch": {
+		"village_birch": true
+	},
+	"villages_jungle": {
+		"village_jungle": true
+	},
+	"villages_swamp": {
 		"village_swamp": true
 	},
 	"wells": {
 		"well_birch": true,
-		"well_cherry": true,
-		"well_dappled": true,
 		"well_dark_oak": true,
-		"well_desert": true,
 		"well_jungle": true,
-		"well_mangrove": true,
 		"well_oak": true,
-		"well_pale": true,
-		"well_savanna": true,
-		"well_snowy": true,
-		"well_spruce": true,
-		"well_swamp": true
+		"well_savana": true,
+		"well_spruce": true
 	},
 	"wild_ruin": {
 		"wild_ruin": true

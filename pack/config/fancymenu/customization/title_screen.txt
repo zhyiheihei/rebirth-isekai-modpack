@@ -1,0 +1,32 @@
+type = fancymenu_layout
+
+layout-meta {
+identifier = net.minecraft.client.gui.screens.TitleScreen
+render_custom_elements_behind_vanilla = false
+last_edited_time = 1793123115745
+is_enabled = true
+randommode = false
+randomgroup = 1
+randomonlyfirsttime = false
+layout_index = 0
+}
+
+menu_background {
+instance_identifier = c3c7f2c1-a24a-420a-8fa6-2f14358239dd
+background_type = glsl
+inline_shader_source = float hash21(vec2 p) {%%!serialized_property_newline!%%    p = fract(p * vec2(127.31, 311.7));%%!serialized_property_newline!%%    p += dot(p, p + 34.23);%%!serialized_property_newline!%%    return fract(p.x * p.y);%%!serialized_property_newline!%%}%%!serialized_property_newline!%%%%!serialized_property_newline!%%float snowLayer(vec2 uv, float t, float density, float speed, float size, float seed) {%%!serialized_property_newline!%%    vec2 p = uv * density;%%!serialized_property_newline!%%    p.y -= t * speed;%%!serialized_property_newline!%%    p.x += sin(t * 0.22 + seed) * 0.35;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    vec2 id = floor(p);%%!serialized_property_newline!%%    vec2 f = fract(p) - 0.5;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    float h1 = hash21(id + seed);%%!serialized_property_newline!%%    float h2 = hash21(id + seed + 7.77);%%!serialized_property_newline!%%    float h3 = hash21(id + seed + 13.13);%%!serialized_property_newline!%%%%!serialized_property_newline!%%    vec2 pos = vec2((h1 - 0.5) * 0.82, (h2 - 0.5) * 0.82);%%!serialized_property_newline!%%    pos.x += sin(t * (0.6 + h3 * 0.9) + h1 * 6.2831) * 0.13;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    float d = length(f - pos);%%!serialized_property_newline!%%    float r = size * (0.55 + 0.8 * h3);%%!serialized_property_newline!%%    float flake = 1.0 - smoothstep(r * 0.25, r, d);%%!serialized_property_newline!%%    flake *= step(0.45, h1);%%!serialized_property_newline!%%%%!serialized_property_newline!%%    return flake * (0.35 + 0.65 * h2);%%!serialized_property_newline!%%}%%!serialized_property_newline!%%%%!serialized_property_newline!%%void mainImage(out vec4 fragColor, in vec2 fragCoord) {%%!serialized_property_newline!%%    vec2 res = iResolution.xy;%%!serialized_property_newline!%%    float asp = res.x / max(res.y, 1.0);%%!serialized_property_newline!%%    vec2 uv = fragCoord / max(res.y, 1.0);%%!serialized_property_newline!%%    float t = iTime;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    vec3 col = mix(vec3(0.014, 0.021, 0.038), vec3(0.052, 0.074, 0.108), uv.y);%%!serialized_property_newline!%%%%!serialized_property_newline!%%    vec2 c = fragCoord / res - vec2(0.5, 0.4);%%!serialized_property_newline!%%    c.x *= asp;%%!serialized_property_newline!%%    col += vec3(0.018, 0.030, 0.050) * exp(-length(c) * 2.8);%%!serialized_property_newline!%%%%!serialized_property_newline!%%    float star = pow(hash21(floor(fragCoord / 2.0)), 42.0) * 0.5;%%!serialized_property_newline!%%    col += vec3(0.55, 0.72, 0.95) * star;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    float s = 0.0;%%!serialized_property_newline!%%    s += snowLayer(uv, t, 9.0, 0.20, 0.048, 1.0) * 0.45;%%!serialized_property_newline!%%    s += snowLayer(uv, t, 6.0, 0.34, 0.065, 5.0) * 0.70;%%!serialized_property_newline!%%    s += snowLayer(uv, t, 4.2, 0.56, 0.088, 9.0) * 0.95;%%!serialized_property_newline!%%    s += snowLayer(uv * 1.35, t, 2.6, 0.86, 0.115, 21.0) * 0.75;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    col += vec3(0.82, 0.91, 1.0) * s;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    vec2 vuv = (fragCoord / res - 0.5) * vec2(asp, 1.0);%%!serialized_property_newline!%%    col *= 1.0 - 0.5 * pow(length(vuv) * 1.05, 1.7);%%!serialized_property_newline!%%%%!serialized_property_newline!%%    fragColor = vec4(clamp(col, 0.0, 1.0), 1.0);%%!serialized_property_newline!%%}
+}
+
+element {
+element_type = image
+instance_identifier = 611feeb5-7ab1-4e5f-b347-44efd6af61a9
+source = [source:local]config/fancymenu/assets/rebirth_title.png
+anchor_point = top-centered
+sticky_anchor = true
+x = 0
+y = 16
+width = 360
+height = 76
+auto_sizing = false
+base_opacity = 1.0
+}

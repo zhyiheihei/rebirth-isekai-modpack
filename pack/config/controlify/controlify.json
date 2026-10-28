@@ -14,29 +14,8 @@
     "use_enhanced_steam_deck_driver": true,
     "keyboard_movement": false,
     "analogue_movement_whitelist": [],
-    "seen_servers": [
-      "122.51.242.40:25565"
-    ],
+    "seen_servers": [],
     "show_splitscreen_ad": true
   },
-  "devices": {
-    "326cd75673394c450fcfe815e0ddd3bd": {
-      "name": "Xbox Controller",
-      "last_seen": 1793083006278,
-      "controller_type": "controlify:xbox_one",
-      "gyro_calibration": {}
-    },
-    "2e84861c50e30b16f805ff0326326d09": {
-      "name": "Xbox Controller",
-      "last_seen": 1793091754706,
-      "controller_type": "controlify:xbox_one",
-      "gyro_calibration": {}
-    },
-    "666b3c0d32890b46892a18cb89953f43": {
-      "name": "Xbox Controller",
-      "last_seen": 1793082972007,
-      "controller_type": "controlify:xbox_one",
-      "gyro_calibration": {}
-    }
-  }
+  "devices": {}
 }

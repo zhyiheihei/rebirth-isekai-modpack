@@ -1,0 +1,12 @@
+{
+  "general": {
+    "global_datapacks_folder": "moonlight-global-datapacks"
+  },
+  "dynamic_pack": {
+    "multi_threaded_generation": true,
+    "faster_cache_search": true,
+    "dump_generated_resources": false,
+    "extra_debug": false,
+    "extra_children_debug": false
+  }
+}

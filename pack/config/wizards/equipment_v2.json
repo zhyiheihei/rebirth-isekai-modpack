@@ -163,6 +163,39 @@
           "operation": "ADD_VALUE"
         }
       ]
+    },
+    "staff_ruby_fire": {
+      "attack_damage": 4.0,
+      "attack_speed": -3.0,
+      "attributes": [
+        {
+          "attribute": "spell_power:fire",
+          "value": 8.0,
+          "operation": "ADD_VALUE"
+        }
+      ]
+    },
+    "staff_crystal_arcane": {
+      "attack_damage": 4.0,
+      "attack_speed": -3.0,
+      "attributes": [
+        {
+          "attribute": "spell_power:arcane",
+          "value": 8.0,
+          "operation": "ADD_VALUE"
+        }
+      ]
+    },
+    "staff_smaragdant_frost": {
+      "attack_damage": 4.0,
+      "attack_speed": -3.0,
+      "attributes": [
+        {
+          "attribute": "spell_power:frost",
+          "value": 8.0,
+          "operation": "ADD_VALUE"
+        }
+      ]
     }
   },
   "armor_sets": {

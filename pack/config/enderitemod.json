@@ -1,7 +1,6 @@
 {
   "general": {
     "allowVoidFloatingEnchantment": true,
-    "sulfurCubeCrackedEnderiteOreRenderFix": true,
     "enderiteUpgradeTemplateChance": 0.5
   },
   "tools": {

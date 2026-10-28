@@ -1,0 +1,70 @@
+type = fancymenu_layout
+
+layout-meta {
+identifier = net.minecraft.client.gui.screens.LoadingOverlay
+render_custom_elements_behind_vanilla = false
+last_edited_time = 1793150000000
+is_enabled = true
+randommode = false
+randomgroup = 1
+randomonlyfirsttime = false
+layout_index = 0
+}
+
+menu_background {
+instance_identifier = 113e1e3e-b7d6-4189-b1ae-94e358b77329
+background_type = glsl
+inline_shader_source = float hash21(vec2 p) {%%!serialized_property_newline!%%    p = fract(p * vec2(127.31, 311.7));%%!serialized_property_newline!%%    p += dot(p, p + 34.23);%%!serialized_property_newline!%%    return fract(p.x * p.y);%%!serialized_property_newline!%%}%%!serialized_property_newline!%%%%!serialized_property_newline!%%float snowLayer(vec2 uv, float t, float density, float speed, float size, float seed) {%%!serialized_property_newline!%%    vec2 p = uv * density;%%!serialized_property_newline!%%    p.y -= t * speed;%%!serialized_property_newline!%%    p.x += sin(t * 0.22 + seed) * 0.35;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    vec2 id = floor(p);%%!serialized_property_newline!%%    vec2 f = fract(p) - 0.5;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    float h1 = hash21(id + seed);%%!serialized_property_newline!%%    float h2 = hash21(id + seed + 7.77);%%!serialized_property_newline!%%    float h3 = hash21(id + seed + 13.13);%%!serialized_property_newline!%%%%!serialized_property_newline!%%    vec2 pos = vec2((h1 - 0.5) * 0.82, (h2 - 0.5) * 0.82);%%!serialized_property_newline!%%    pos.x += sin(t * (0.6 + h3 * 0.9) + h1 * 6.2831) * 0.13;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    float d = length(f - pos);%%!serialized_property_newline!%%    float r = size * (0.55 + 0.8 * h3);%%!serialized_property_newline!%%    float flake = 1.0 - smoothstep(r * 0.25, r, d);%%!serialized_property_newline!%%    flake *= step(0.45, h1);%%!serialized_property_newline!%%%%!serialized_property_newline!%%    return flake * (0.35 + 0.65 * h2);%%!serialized_property_newline!%%}%%!serialized_property_newline!%%%%!serialized_property_newline!%%void mainImage(out vec4 fragColor, in vec2 fragCoord) {%%!serialized_property_newline!%%    vec2 res = iResolution.xy;%%!serialized_property_newline!%%    float asp = res.x / max(res.y, 1.0);%%!serialized_property_newline!%%    vec2 uv = fragCoord / max(res.y, 1.0);%%!serialized_property_newline!%%    float t = iTime;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    vec3 col = mix(vec3(0.014, 0.021, 0.038), vec3(0.052, 0.074, 0.108), uv.y);%%!serialized_property_newline!%%%%!serialized_property_newline!%%    vec2 c = fragCoord / res - vec2(0.5, 0.4);%%!serialized_property_newline!%%    c.x *= asp;%%!serialized_property_newline!%%    col += vec3(0.018, 0.030, 0.050) * exp(-length(c) * 2.8);%%!serialized_property_newline!%%%%!serialized_property_newline!%%    float star = pow(hash21(floor(fragCoord / 2.0)), 42.0) * 0.5;%%!serialized_property_newline!%%    col += vec3(0.55, 0.72, 0.95) * star;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    float s = 0.0;%%!serialized_property_newline!%%    s += snowLayer(uv, t, 9.0, 0.20, 0.048, 1.0) * 0.45;%%!serialized_property_newline!%%    s += snowLayer(uv, t, 6.0, 0.34, 0.065, 5.0) * 0.70;%%!serialized_property_newline!%%    s += snowLayer(uv, t, 4.2, 0.56, 0.088, 9.0) * 0.95;%%!serialized_property_newline!%%    s += snowLayer(uv * 1.35, t, 2.6, 0.86, 0.115, 21.0) * 0.75;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    col += vec3(0.82, 0.91, 1.0) * s;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    vec2 vuv = (fragCoord / res - 0.5) * vec2(asp, 1.0);%%!serialized_property_newline!%%    col *= 1.0 - 0.5 * pow(length(vuv) * 1.05, 1.7);%%!serialized_property_newline!%%%%!serialized_property_newline!%%    fragColor = vec4(clamp(col, 0.0, 1.0), 1.0);%%!serialized_property_newline!%%}
+}
+
+element {
+element_type = image
+instance_identifier = b880f5a7-c2a7-4d7c-9379-4f32fab5ab53
+source = [source:local]config/fancymenu/assets/rebirth_title.png
+anchor_point = top-centered
+sticky_anchor = true
+x = 0
+y = 46
+width = 520
+height = 110
+auto_sizing = false
+base_opacity = 1.0
+}
+element {
+element_type = progressbar
+instance_identifier = bfaade2b-8ada-425d-bac6-d3382ee2813b
+anchor_point = centered
+sticky_anchor = true
+x = 0
+y = 86
+width = 400
+height = 16
+direction = LEFT
+value_mode = PERCENTAGE
+progress_source = 100.0
+smooth_filling_animation = true
+bar_texture = [source:local]config/fancymenu/assets/loading_bar_fill.png
+bar_nine_slice = true
+bar_nine_slice_border_top = 8
+bar_nine_slice_border_right = 8
+bar_nine_slice_border_bottom = 8
+bar_nine_slice_border_left = 8
+background_texture = [source:local]config/fancymenu/assets/loading_bar_bg.png
+background_nine_slice = true
+background_nine_slice_border_top = 8
+background_nine_slice_border_right = 8
+background_nine_slice_border_bottom = 8
+background_nine_slice_border_left = 8
+}
+element {
+element_type = text
+instance_identifier = 17176cd7-ac41-42e2-bb24-904f810f5224
+text = 正在踏入异世界...
+anchor_point = centered
+sticky_anchor = true
+x = 0
+y = 122
+base_color = 2147483647
+line_spacing = 2
+text_border = false
+}

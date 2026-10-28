@@ -4,6 +4,7 @@
     "particleLimit": 16384,
     "cleanupStrategy": "PARALLEL_WITH_TICK",
     "parallelQueueRemoval": false,
+    "parallelQueueEviction": false,
     "particleLightCache": true,
     "cullUnderwaterParticleType": true
   },

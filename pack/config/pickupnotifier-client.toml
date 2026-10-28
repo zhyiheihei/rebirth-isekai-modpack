@@ -1,44 +1,7 @@
 [display]
-	#Percentage of relative screen height entries are allowed to fill at max.
-	#Default Value: 0.5
-	# Default: 0.5
-	# Range: 0.0 ~ 1.0
-	max_height = 0.5
 	#Should the picked up amount be shown when it's just a single item.
 	#Default Value: true
 	display_single_count = true
-	#Offset on y-axis from screen border.
-	#Default Value: 4
-	# Default: 4
-	# Range: > 0
-	offset_y = 4
-	#Offset on x-axis from screen border.
-	#Default Value: 8
-	# Default: 8
-	# Range: > 0
-	offset_x = 8
-	#Add the name of the item to the entry.
-	#Default Value: true
-	display_item_name = true
-	#Where and if to display the amount of items picked up. 'SPRITE' will render the amount on the item sprite like in inventories, 'TEXT' will add a dedicated text including the amount to the item name display.
-	#Default Value: TEXT
-	#Allowed Values: OFF, SPRITE, TEXT, BOTH
-	display_amount = "TEXT"
-	#Scale of entries. A lower scale will make room for more rows to show. Works together with "GUI Scale" option in "Video Settings".
-	#Default Value: 4
-	# Default: 4
-	# Range: 1 ~ 24
-	display_scale = 4
-	#Screen corner for entry list to be drawn in.
-	#Default Value: BOTTOM_RIGHT
-	#Allowed Values: TOP_LEFT, TOP_CENTER, TOP_RIGHT, CENTER_LEFT, CENTER, CENTER_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
-	screen_corner = "BOTTOM_RIGHT"
-	#Ignore rarity when determining item name color.
-	#Default Value: false
-	ignore_rarity = false
-	#Show a small sprite next to the name of each entry showing its contents.
-	#Default Value: true
-	draw_sprite = true
 	#Add the total amount of an item in your inventory to the entry.
 	#Default Value: false
 	inventory_count = false
@@ -46,9 +9,39 @@
 	#Default Value: CHAT
 	#Allowed Values: NONE, CHAT, TOOLTIP
 	entry_background = "CHAT"
-	#Color for the entry name text.
+	#Add the name of the item to the entry.
+	#Default Value: true
+	display_item_name = true
+	#Where and if to display the amount of items picked up. 'SPRITE' will render the amount on the item sprite like in inventories, 'TEXT' will add a dedicated text including the amount to the item name display.
+	#Default Value: TEXT
+	#Allowed Values: OFF, SPRITE, TEXT, BOTH
+	display_amount = "TEXT"
+	#Show a small sprite next to the name of each entry showing its contents.
+	draw_sprite = true
+	#Color of the entry name text.
 	#Allowed Values: BLACK, DARK_BLUE, DARK_GREEN, DARK_AQUA, DARK_RED, DARK_PURPLE, GOLD, GRAY, DARK_GRAY, BLUE, GREEN, AQUA, RED, LIGHT_PURPLE, YELLOW, WHITE
 	default_text_color = "WHITE"
+	#Ignore rarity when determining item name color.
+	ignore_rarity = false
+	#Screen corner for entry list to be drawn in.
+	#Allowed Values: TOP_LEFT, TOP_CENTER, TOP_RIGHT, CENTER_LEFT, CENTER, CENTER_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
+	screen_corner = "BOTTOM_RIGHT"
+	#Offset on x-axis from screen border.
+	# Default: 8
+	# Range: > 0
+	offset_x = 8
+	#Offset on y-axis from screen border.
+	# Default: 4
+	# Range: > 0
+	offset_y = 4
+	#Percentage of relative screen height entries are allowed to fill at max.
+	# Default: 0.5
+	# Range: 0.0 ~ 1.0
+	max_height = 0.5
+	#Scale of entries. A lower scale will make room for more rows to show. Works together with "GUI Scale" option in "Video Settings".
+	# Default: 4
+	# Range: 1 ~ 24
+	display_scale = 4
 
 [general]
 	#Force the mod to run client-side only.
@@ -82,9 +75,9 @@
 	fade_out = true
 	#Make outdated entries slowly move out of the screen.
 	#Not necessarily supported by all position presets.
-	#Default Value: VERTICAL
-	#Allowed Values: NONE, HORIZONTAL, VERTICAL, ALL
-	move_out = "VERTICAL"
+	#Default Value: VERTICALLY_ONLY
+	#Allowed Values: DISABLED, HORIZONTALLY_ONLY, VERTICALLY_ONLY, ENABLED
+	move_out = "VERTICALLY_ONLY"
 	#Amount of ticks each entry will be shown for. Set to zero to only remove entries when space for new ones is needed.
 	#Default Value: 80
 	# Default: 80

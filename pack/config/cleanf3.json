@@ -1,0 +1,21 @@
+{
+  "activeProfile": "CUSTOM",
+  "hudEnabled": true,
+  "showFps": true,
+  "showCoords": true,
+  "showDirection": true,
+  "showBiome": true,
+  "showLightLevel": true,
+  "showDayTime": false,
+  "showMemory": false,
+  "showSessionStats": false,
+  "showSpeedrunTimer": false,
+  "hudAnchor": "TOP_LEFT",
+  "hudScale": 1.0,
+  "hudTextColor": 16777215,
+  "hudLabelColor": 11184810,
+  "hudBgOpacity": 128,
+  "hudPadding": 4,
+  "hudLineSpacing": 3,
+  "hudShowHeader": true
+}
