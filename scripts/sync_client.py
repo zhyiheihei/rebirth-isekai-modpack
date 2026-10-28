@@ -7,7 +7,7 @@
     python3 scripts/sync_client.py                          # 预演
     python3 scripts/sync_client.py --apply                  # 落盘
     python3 scripts/sync_client.py --apply --prune-mods     # 同时删掉本机已移除的模组条目
-    python3 scripts/sync_client.py --apply --release 0.2.2  # 落盘 + 改版本 + 提交 + 打 tag 推送
+    python3 scripts/sync_client.py --apply --release 0.2.2  # 落盘 + 改版本 + 提交推送（滚动 Release）
 
 实例路径优先级: --instance > 环境变量 MODPACK_INSTANCE > <repo>/.instance > 内置缺省
 """
@@ -143,7 +143,7 @@ def diff_mods(inst):
     local = {n: p for n, p in walk(os.path.join(inst, "mods")).items()
              if n.lower().endswith(".jar") and "/" not in n}
     added = sorted(set(local) - known)
-    gone = sorted(e for e in entries if e["file"] not in local)
+    gone = sorted(e["file"] for e in entries if e["file"] not in local)
     return entries, local, added, gone
 
 
@@ -232,24 +232,24 @@ def git(*cmd, check=True):
 
 
 def release(version):
-    """改 pack.json 版本 → 提交 → 打 tag → 推送，触发 CI 出 Release。"""
+    """写版本到 pack.json → 提交（提交信息带 release: x.y.z）→ 推送。
+
+    本仓库是滚动发布：只有一个滚动 Release（tag 固定 rolling），版本以提交信息为权威，
+    由 CI 用 scripts/set_version.py 落地。**不要手工打 tag**。
+    """
     pack = common.load("pack.json")
     old = pack["version"]
-    pack["version"] = version
-    common.save("pack.json", pack)
+    subprocess.run([sys.executable, os.path.join(common.ROOT, "scripts", "set_version.py"), version],
+                   cwd=common.ROOT, check=True, capture_output=True)
     print(f"\npack.json: {old} -> {version}")
 
-    git("add", "-A", "pack")
+    git("add", "-A")
     if not git("diff", "--cached", "--quiet", check=False).returncode:
         print("没有待提交的改动")
     else:
-        git("commit", "-m", f"chore(pack): 同步客户端 {old} -> {version}")
-    if git("rev-parse", "-q", "--verify", f"refs/tags/v{version}", check=False).returncode == 0:
-        raise SystemExit(f"tag v{version} 已存在，换个版本号")
-    git("tag", f"v{version}")
+        git("commit", "-m", f"release: {version} 同步客户端模组与配置")
     git("push", "origin", "HEAD")
-    git("push", "origin", f"v{version}")
-    print(f"已推送 tag v{version}，Actions 构建完成后会自动发 Release")
+    print(f"已推送 master（提交信息含 release: {version}），Actions 构建完成后更新滚动 Release")
     return 0
 
 

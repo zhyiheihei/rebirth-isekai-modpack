@@ -1,1268 +1,1280 @@
 [
- {
-  "file": "0Pack2Reload-Fabric-1.20.1-1.0.1.jar",
-  "project": null,
-  "modid": "opack2reload",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "0World2Create-Universal-1.19-1.20.X-1.0.0.jar",
-  "project": null,
-  "modid": "oworld2create",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "[1.20.1-Fabric] Hybrid Aquatic 1.5.4.jar",
-  "project": "HH4FjUqN",
-  "modid": "hybrid-aquatic",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "[FTB 区块] ftb-chunks-fabric-2001.3.6.jar",
-  "project": "aDOJNNsW",
-  "modid": "ftbchunks",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：neoforge）"
- },
- {
-  "file": "[修复】carpet-fixes-1.20-1.16.1.jar",
-  "project": "7Jaxgqip",
-  "modid": "carpet-fixes",
-  "reason": "止于 1.20.4（无 26.1.2 构建，可用加载器：fabric/quilt）"
- },
- {
-  "file": "[内存泄漏修复] memoryleakfix-fabric-1.17+-1.1.5.jar",
-  "project": "NRjRiSSD",
-  "modid": "memoryleakfix",
-  "reason": "止于 1.20.4（无 26.1.2 构建，可用加载器：fabric/forge/quilt）"
- },
- {
-  "file": "[我的细胞] minecells-2.0.0.jar",
-  "project": "9Qdvz1OV",
-  "modid": "minecells",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/quilt）"
- },
- {
-  "file": "[扩展存储] expandedstorage-10.3.0-beta.5+1.20.1-fabric.jar",
-  "project": null,
-  "modid": "expandedstorage",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "[树洞] tree-hollows-fabric-3.1.0.jar",
-  "project": "g744qmft",
-  "modid": "tree-hollows",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "[植树盆栽] BotanyTrees-Fabric-1.20.1-9.0.18.jar",
-  "project": null,
-  "modid": "botanytrees",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "[植物盆栽] BotanyPots-Fabric-1.20.1-13.0.41.jar",
-  "project": "WjA2S6fr",
-  "modid": "botanypots",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/neoforge）"
- },
- {
-  "file": "accessories-fabric-1.0.0-beta.48+1.20.1.jar",
-  "project": "jtmvUHXj",
-  "modid": "accessories",
-  "reason": "止于 1.21.10（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "AddurDisc-Fabric-1.20.x-1.3.jar",
-  "project": "gcH4oguI",
-  "modid": "addurdisc",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/forge）"
- },
- {
-  "file": "adorablehamsterpets-3.5.0-1.20.1+fabric.jar",
-  "project": "LmrhZdK2",
-  "modid": "adorablehamsterpets",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "animatica-0.6.1+1.20.4.jar",
-  "project": "PRN43VSY",
-  "modid": "animatica",
-  "reason": "止于 1.21.6（无 26.1.2 构建，可用加载器：fabric/quilt）"
- },
- {
-  "file": "another_furniture-fabric-1.20.1-3.0.5.jar",
-  "project": "ulloLmqG",
-  "modid": "another_furniture",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "Aquamirae 6.jar",
-  "project": "k23mNPhZ",
-  "modid": "aquamirae",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "async-locator-fabric-1.20-1.3.0.jar",
-  "project": "rkN8aqci",
-  "modid": "asynclocator",
-  "reason": "止于 1.20.2（无 26.1.2 构建，可用加载器：fabric/forge）"
- },
- {
-  "file": "automobility-0.4.2+1.20.1-fabric.jar",
-  "project": "rqIsPf9F",
-  "modid": "automobility",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "azurelibarmor-fabric-1.20.1-2.0.14.jar",
-  "project": "pduQXSbl",
-  "modid": "azurelibarmor",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "bbb-fabric-2.0pre4.jar",
-  "project": "OSDpLd82",
-  "modid": "bbb",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/forge）"
- },
- {
-  "file": "bc_particle-0.0.2-1.20.1.jar",
-  "project": null,
-  "modid": "malfu-mods",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "beautify-2.0.0+1.20.1.jar",
-  "project": "9BPuv4vL",
-  "modid": "beautify",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：forge/neoforge）"
- },
- {
-  "file": "biomemusic-fabric-1.20.1-3.5.jar",
-  "project": null,
-  "modid": "biomemusic",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "BiomesOPlenty-fabric-1.20.1-19.0.0.96.jar",
-  "project": null,
-  "modid": "biomesoplenty",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "BlazingBamboo-Fabric-1.20.1-1.0.1.jar",
-  "project": "qeChSM8z",
-  "modid": "blazingbamboo",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/forge）"
- },
- {
-  "file": "blossom.jar",
-  "project": "UMmSTwE0",
-  "modid": "mr_blossom_blade",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：datapack/fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "BOMD-1.7.5-1.20.1.jar",
-  "project": null,
-  "modid": "bosses_of_mass_destruction",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "bountifulfares-1.2.1-1.20.1.jar",
-  "project": "YgrSDjlb",
-  "modid": "bountifulfares",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/neoforge）"
- },
- {
-  "file": "bushierflowers-0.0.3-1.20.1.jar",
-  "project": "OK421ZCh",
-  "modid": "bushierflowers",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge）"
- },
- {
-  "file": "carrasconlib-fabric-1.20.1-0.1.jar",
-  "project": "QpsOhpBa",
-  "modid": "carrasconlib",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "charmofundying-fabric-6.5.0+1.20.1.jar",
-  "project": "b5GyyYkp",
-  "modid": "charmofundying",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "chipped-fabric-1.20.1-3.0.7.jar",
-  "project": "BAscRYKm",
-  "modid": "chipped",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "clickadv-fabric-1.20.1-3.8.jar",
-  "project": null,
-  "modid": "clickadv",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "Cluttered-2.1.0-1.20.1[Fabric].jar",
-  "project": "UnAEo77V",
-  "modid": "luphieclutteredmod",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "ContingameIME-1.0.7-1.20.1-fabric.jar",
-  "project": "5Z2YdwIT",
-  "modid": "ingameime",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "convenientdecor-0.4.3.jar",
-  "project": "gMWAhU1n",
-  "modid": "convenientdecor",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "Corgilib-Fabric-1.20.1-4.0.3.4.jar",
-  "project": "ziOp6EO8",
-  "modid": "corgilib",
-  "reason": "止于 1.21.11（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "coroutil-fabric-1.20.1-1.3.7.jar",
-  "project": "rLLJ1OZM",
-  "modid": "coroutil",
-  "reason": "止于 1.21.4（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "CosmeticArmor-1.20-1.6.0.jar",
-  "project": "JrIYhb1P",
-  "modid": "cosmetic-armor",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/quilt）"
- },
- {
-  "file": "CosmeticArmorCompatibility-1.1.3fix.jar",
-  "project": "1UjQ96Vt",
-  "modid": "cosmeticarmorcompatibility",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "creeperoverhaul-3.0.2-fabric.jar",
-  "project": "MI1LWe93",
-  "modid": "creeperoverhaul",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "crittersandcompanions-fabric-1.20.1-2.3.5.jar",
-  "project": "Yd4wb5wZ",
-  "modid": "crittersandcompanions",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "CrosshairBobbing-1.10.jar",
-  "project": null,
-  "modid": "xbob_modloader",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "cupboard-fabric-1.20.1-2.7.jar",
-  "project": "qMjBT1aG",
-  "modid": "cupboard",
-  "reason": "止于 b1.7.3（无 26.1.2 构建，可用加载器：bta-babric）"
- },
- {
-  "file": "customsplashscreen-2.1.1.jar",
-  "project": "BwFQLeCh",
-  "modid": "customsplashscreen",
-  "reason": "止于 1.21.3（无 26.1.2 构建，可用加载器：fabric/quilt）"
- },
- {
-  "file": "DisableCustomWorldsAdvice-4.1.jar",
-  "project": "HdwRs3kc",
-  "modid": "disable_custom_worlds_advice",
-  "reason": "止于 1.21.7（无 26.1.2 构建，可用加载器：fabric/quilt）"
- },
- {
-  "file": "draggable_lists-mc1.20-1.0.1-rev.824b2f3.jar",
-  "project": "aLcHfalx",
-  "modid": "draggable_lists",
-  "reason": "止于 1.21.8（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "dragonloot-1.1.4.jar",
-  "project": "EldwHO4Z",
-  "modid": "dragonloot",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "DramaticDoors-QuiFabrge-1.20.1-3.3.3.jar",
-  "project": null,
-  "modid": "dramaticdoors",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "duckling-fabric-1.20.4-4.0.0.jar",
-  "project": "jkb861Ih",
-  "modid": "duckling",
-  "reason": "止于 1.21（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "DustyDecoRefabricated-1.1-1.20.1+1.20.2.jar",
-  "project": null,
-  "modid": "dustydecorations",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "dynamiccrosshaircompat-4.4+1.20.1-fabric.jar",
-  "project": "EwPIWPJ9",
-  "modid": "dynamiccrosshaircompat",
-  "reason": "止于 1.21.11（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "DynamicSurroundings-Fabric-1.20.1-0.3.3.jar",
-  "project": "H7fshfpD",
-  "modid": "dsurround",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/neoforge）"
- },
- {
-  "file": "eating-animation-1.20+1.9.61.jar",
-  "project": "rUgZvGzi",
-  "modid": "eatinganimationid",
-  "reason": "止于 1.21.3（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "elytra-drag-0.3-1.20+.jar",
-  "project": "c9J3k0tK",
-  "modid": "elytra-drag",
-  "reason": "止于 26.3（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "elytraslot-fabric-6.4.4+1.20.1.jar",
-  "project": "mlbhj1OD",
-  "modid": "elytraslot",
-  "reason": "止于 26.2（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "EnchantmentDescriptions-Fabric-1.20.1-17.1.21.jar",
-  "project": null,
-  "modid": "enchdesc",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "endermanoverhaul-fabric-1.20.1-1.0.4.jar",
-  "project": "Lq6ojcWv",
-  "modid": "endermanoverhaul",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "ends_delight-refabricated-1.20.1-2.5.jar",
-  "project": "yHN0njMr",
-  "modid": "ends_delight",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "enhancedblockentities-0.9+1.20.jar",
-  "project": "OVuFYfre",
-  "modid": "enhancedblockentities",
-  "reason": "止于 1.21.4（无 26.1.2 构建，可用加载器：fabric/quilt）"
- },
- {
-  "file": "Evoodooers-fabric-1.20.1-1.0.0.jar",
-  "project": null,
-  "modid": "mod_id",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "expores-1.0.0+mc1.20.1.jar",
-  "project": "a8H99agr",
-  "modid": "expores",
-  "reason": "止于 1.20.4（无 26.1.2 构建，可用加载器：fabric/quilt）"
- },
- {
-  "file": "exposure-fabric-1.20.1-1.9.16.jar",
-  "project": "hB899VmG",
-  "modid": "exposure",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "fabric-medievalend-1.0.1.jar",
-  "project": null,
-  "modid": "medievalend",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "fabric-seasons-2.4.2-BETA+1.20.jar",
-  "project": "KJe6y9Eu",
-  "modid": "seasons",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "fabric-seasons-delight-1.3.9-compat-1.0.jar",
-  "project": "4VYO7ir0",
-  "modid": "seasonsdelightcompat",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "fabric-seasons-extras-1.3.2-BETA+1.20.jar",
-  "project": "64FYdx5z",
-  "modid": "seasonsextras",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "fabric-seasons-terralith-2.3.7-compat-1.0.jar",
-  "project": "D53qveoj",
-  "modid": "seasonsterralithcompat",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "farmers-cutting-biomes-o-plenty-1.20.1-1.1.0-fabric.jar",
-  "project": null,
-  "modid": "mr_farmers_cuttingbiomesoplenty",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "FarmersDelight-1.20.1-2.4.1+refabricated.jar",
-  "project": "R2OftAxM",
-  "modid": "farmersdelight",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：forge/neoforge）"
- },
- {
-  "file": "FarmersStructures-1.0.0-1.20_fabric.jar",
-  "project": null,
-  "modid": "farmers_structures",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "Female-Gender-Mod-fabric-1.20-3.0.1.jar",
-  "project": null,
-  "modid": "wildfire_gender",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "fennecfox-fabric-1.20.1-1.0.0.jar",
-  "project": "mBczJISa",
-  "modid": "fennecfox",
-  "reason": "止于 1.21.8（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "fishingreal-fabric-1.20.1-1.9.1-backport.jar",
-  "project": null,
-  "modid": "fishingreal",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "forgottengraves-3.2.26+1.20.1.jar",
-  "project": "FrZIkosK",
-  "modid": "forgottengraves",
-  "reason": "止于 1.20.4（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "FriendlyFire-Fabric-1.20.1-18.0.8.jar",
-  "project": null,
-  "modid": "friendlyfire",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "friendsandfoes-fabric-mc1.20.1-3.0.9.jar",
-  "project": null,
-  "modid": "friendsandfoes",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "ftb-library-fabric-2001.2.12.jar",
-  "project": null,
-  "modid": "ftblibrary",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "ftb-ultimine-fabric-2001.1.7.jar",
-  "project": "FTUEqY9e",
-  "modid": "ftbultimine",
-  "reason": "26.1.2 只有 forge/neoforge 构建"
- },
- {
-  "file": "ftb-xmod-compat-fabric-2.1.3.jar",
-  "project": null,
-  "modid": "ftbxmodcompat",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "Galosphere-1.20.1-1.4.1-Fabric.jar",
-  "project": "Kn7xyQ1v",
-  "modid": "galosphere",
-  "reason": "止于 1.21.5（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "GlassArmor-1.0.0+1.20.x.jar",
-  "project": "vz0zoOM2",
-  "modid": "glass_armor",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "goblintraders-fabric-1.20.1-1.9.3.jar",
-  "project": "DRM2r8fQ",
-  "modid": "goblintraders",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "gpumemleakfix-fabric-1.20.1-1.8.jar",
-  "project": null,
-  "modid": "gpumemleakfix",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "guardvillagers-2.0.9-1.20.1.jar",
-  "project": "Jiwpcpfe",
-  "modid": "guardvillagers",
-  "reason": "止于 1.21.10（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "handcrafted-fabric-1.20.1-3.0.6.jar",
-  "project": "pJmCFF0p",
-  "modid": "handcrafted",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "herdspanic-1.1.0.jar",
-  "project": "U64ZYLjC",
-  "modid": "herdspanic",
-  "reason": "止于 26.3（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "Icarus-Fabric-2.13.1.jar",
-  "project": "Dw7M6XKW",
-  "modid": "icarus",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "Icterine-fabric-1.20.0-1-1.3.0.jar",
-  "project": "7RvRWn6p",
-  "modid": "icterine",
-  "reason": "止于 1.20.4（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "Identifier-Translation-3_1.20-1.20.1.jar",
-  "project": "M2GV3t9H",
-  "modid": "identifier_translation",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/quilt）"
- },
- {
-  "file": "ImmersiveUI-FABRIC-0.3.0.jar",
-  "project": null,
-  "modid": "immersiveui",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "indium-1.0.36+mc1.20.1.jar",
-  "project": "Orvt0mRa",
-  "modid": "indium",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/quilt）"
- },
- {
-  "file": "inventoryhud.fabric.1.20.1-3.4.26.jar",
-  "project": "ZzrxBSHN",
-  "modid": "inventoryhud",
-  "reason": "26.1.2 只有 forge/neoforge 构建"
- },
- {
-  "file": "item-filters-fabric-2001.1.0-build.59.jar",
-  "project": "1KLyhGRz",
-  "modid": "itemfilters",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/forge）"
- },
- {
-  "file": "JustEnoughFarmersRecipes-1.20.1-1.0.1.jar",
-  "project": "fQhRIhD6",
-  "modid": "fdjei",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "kaleidoscopecookery-1.0.1-fabric+mc1.20.1.jar",
-  "project": "v17FatAc",
-  "modid": "kaleidoscope_cookery",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "kubejs-fabric-2001.6.5-build.16.jar",
-  "project": "umyGl7zF",
-  "modid": "kubejs",
-  "reason": "26.1.2 只有 forge/neoforge 构建"
- },
- {
-  "file": "letsdo-addon-structures-1.7.2.jar",
-  "project": "2PaVx3ow",
-  "modid": "letsdoaddon-structures",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：datapack/fabric/forge/quilt）"
- },
- {
-  "file": "letsdo-API-fabric-1.2.15-fabric.jar",
-  "project": "4XJZeZbM",
-  "modid": "doapi",
-  "reason": "止于 1.20.2（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "letsdo-bakery-fabric-2.0.6.jar",
-  "project": "WFwYiVoG",
-  "modid": "bakery",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "letsdo-beachparty-fabric-2.0.3.jar",
-  "project": "GyKzAh3l",
-  "modid": "beachparty",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "letsdo-bloomingnature-fabric-1.0.12.jar",
-  "project": "4Vno77MY",
-  "modid": "bloomingnature",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "letsdo-candlelight-fabric-2.0.5.jar",
-  "project": "mPND0Adp",
-  "modid": "candlelight",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "letsdo-farm_and_charm-fabric-1.0.14.jar",
-  "project": "HJetCzWo",
-  "modid": "farm_and_charm",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "letsdo-herbalbrews-fabric-1.0.12.jar",
-  "project": "Eh11TaTm",
-  "modid": "herbalbrews",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "letsdo-meadow-fabric-1.3.25.jar",
-  "project": "ra7o6Sl7",
-  "modid": "meadow",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "letsdo-nethervinery-fabric-1.2.19.jar",
-  "project": "4TTDxtOx",
-  "modid": "nethervinery",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "letsdo-vinery-fabric-1.4.41.jar",
-  "project": "1DWmBJVA",
-  "modid": "vinery",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "letsdo-wildernature-fabric-1.0.6.jar",
-  "project": "AAiRU4aQ",
-  "modid": "wildernature",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "letsdocompat-fabric-2.2.3.jar",
-  "project": "FNi5IMiX",
-  "modid": "letsdocompat",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "magicmirror-1.1.1.jar",
-  "project": "MU5xcAuY",
-  "modid": "magicmirror",
-  "reason": "止于 1.17.1（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "mcw-mcwstairs-1.0.2-mc1.20.1fabric.jar",
-  "project": null,
-  "modid": "mcwstairs",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "mermod-fabric-1.20.1-3.0.0.jar",
-  "project": "ORiydwz3",
-  "modid": "mermod",
-  "reason": "止于 1.21.11（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "mighty_mail-fabric-1.20.1-1.0.14.jar",
-  "project": null,
-  "modid": "mighty_mail",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "minerally-1.20.2-1.3.jar",
-  "project": "DKG1CVAt",
-  "modid": "minerally",
-  "reason": "止于 1.21（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "mobs-attempt-parkour-0.5.2-1.20.jar",
-  "project": "Lh7ROUhC",
-  "modid": "mobs_attempt_parkour",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "modernfix-fabric-5.25.2+mc1.20.1.jar",
-  "project": "nmDcB62a",
-  "modid": "modernfix",
-  "reason": "26.1.2 只有 forge/neoforge 构建"
- },
- {
-  "file": "MoogsSoaringStructures-1.20-2.0.2.jar",
-  "project": "IkGIMS9a",
-  "modid": "mss",
-  "reason": "止于 1.20.4（无 26.1.2 构建，可用加载器：neoforge）"
- },
- {
-  "file": "mythic-mounts-1.20.1-7.4.jar",
-  "project": null,
-  "modid": "mythicmounts",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "naturalist-5.0pre5+fabric-1.20.1.jar",
-  "project": "F8BQNPWX",
-  "modid": "naturalist",
-  "reason": "止于 26.3（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "niftycarts-20.1.5.jar",
-  "project": "CXd6g9xp",
-  "modid": "niftycarts",
-  "reason": "止于 1.21.11（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "NonConflictKeys-Fabric-1.18.X-1.20-1.0.0.jar",
-  "project": "XU9gCifV",
-  "modid": "nckey",
-  "reason": "止于 1.19.4（无 26.1.2 构建，可用加载器：fabric/forge）"
- },
- {
-  "file": "notenoughanimations-fabric-1.11.3-mc1.20.1.jar",
-  "project": null,
-  "modid": "notenoughanimations",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "Obscure-API-16.jar",
-  "project": "fU7jbFHc",
-  "modid": "obscure_api",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/forge）"
- },
- {
-  "file": "Oh-The-Biomes-Weve-Gone-Fabric-1.7.4.jar",
-  "project": "NTi7d3Xc",
-  "modid": "biomeswevegone",
-  "reason": "止于 1.21.11（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "oneitem-1.0.2.jar",
-  "project": null,
-  "modid": "oneitem",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "Paintings-fabric-1.20.1-11.0.0.2.jar",
-  "project": "9wf81Bma",
-  "modid": "paintings",
-  "reason": "止于 1.21.11（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "Paraglider-fabric-20.1.3.jar",
-  "project": "esqWA0aQ",
-  "modid": "paraglider",
-  "reason": "26.1.2 只有 forge/neoforge 构建"
- },
- {
-  "file": "pickup-me-1.0.3.1-1.20.jar",
-  "project": null,
-  "modid": "pickupme",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "PineappleDelight-1.1.2-1.20.1-fabric.jar",
-  "project": "8wXnuOvg",
-  "modid": "pineapple_delight",
-  "reason": "止于 1.21.3（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "Platform-fabric-1.20.1-1.2.11.5.jar",
-  "project": "i6fiqm5y",
-  "modid": "platform",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "player-animation-lib-fabric-1.0.2-rc1+1.20.jar",
-  "project": "gedNE4y2",
-  "modid": "player-animator",
-  "reason": "止于 1.21.7（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "plushies-1.4.0-fabric.jar",
-  "project": "hsOK0gUP",
-  "modid": "plushies",
-  "reason": "止于 1.21.4（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "polymorph-fabric-0.49.10+1.20.1.jar",
-  "project": "tagwiZkJ",
-  "modid": "polymorph",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "polymorphic-tom-1.0.4.jar",
-  "project": null,
-  "modid": "polymorphic_tom",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "pyrotechnic-elytra-fabric-1.20.1-1.0.0.jar",
-  "project": "SomUrE3g",
-  "modid": "pyrotechnic_elytra",
-  "reason": "止于 26.1.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "questsadditions-fabric-1.20.1-1.4.6.jar",
-  "project": null,
-  "modid": "questsadditions",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "ranged_weapon_api-1.1.4+1.20.1.jar",
-  "project": null,
-  "modid": "ranged_weapon_api",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "resourcefulconfig-fabric-1.20.1-2.1.3.jar",
-  "project": null,
-  "modid": "resourcefulconfig",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "Ribbits-1.20.1-Fabric-3.0.5.jar",
-  "project": "8YcE8y4T",
-  "modid": "ribbits",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "RidingPartners-fabric-1.20.1.jar",
-  "project": "FwMGjyuI",
-  "modid": "riding_partners",
-  "reason": "止于 1.21（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "rottencreatures-fabric-1.20.1-1.1.0.jar",
-  "project": "5Zusp48B",
-  "modid": "rottencreatures",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "seamless-2.2.2-fabric-1.20.1.jar",
-  "project": "rhyHyQke",
-  "modid": "seamless",
-  "reason": "止于 1.21.5（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "seasonhud-fabric-1.20.1-1.13.17.jar",
-  "project": "VNjUn3NA",
-  "modid": "seasonhud",
-  "reason": "26.1.2 只有 forge/neoforge 构建"
- },
- {
-  "file": "seasonsnaturesspiritcompat-1.0.4.jar",
-  "project": "VZCZSOio",
-  "modid": "seasonsnaturesspiritcompat",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/quilt）"
- },
- {
-  "file": "SellingBin-mc1.20.1-v1.0.9-fabric.jar",
-  "project": "3uiQSXgt",
-  "modid": "sellingbin",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "simplehats-fabric-1.20.1-0.4.0a.jar",
-  "project": "BzUtMUfo",
-  "modid": "simplehats",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：neoforge）"
- },
- {
-  "file": "SimplyHouses-1.1.4-1.20.1-fabric.jar",
-  "project": "cwKtPx6L",
-  "modid": "simply_houses",
-  "reason": "止于 1.21.10（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "SkyVillages-1.0.4-1.19.2-1.20.1-fabric.jar",
-  "project": "mb68eIfx",
-  "modid": "skyvillages",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "smarterfarmers-1.20-2.1.2-fabric.jar",
-  "project": "Bh6ZOMvp",
-  "modid": "smarterfarmers",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "smelting-plus-1.0.5(fabric-forge-quilt).jar",
-  "project": "xDvYGZrH",
-  "modid": "mr_smelting_plus",
-  "reason": "止于 1.21.11（无 26.1.2 构建，可用加载器：datapack/fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "smoothparticles-1.2.0-1.20.1.jar",
-  "project": "xMTLdsFH",
-  "modid": "smoothparticles",
-  "reason": "止于 1.21（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "smsn-fabric-1.3.7-1.20.1.jar",
-  "project": null,
-  "modid": "smsn",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "snowyspirit-1.20-3.0.10-fabric.jar",
-  "project": "UiFDlI7w",
-  "modid": "snowyspirit",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "Soaring-Structures-2-1.20.1-2.5.1-FABRIC.jar",
-  "project": null,
-  "modid": "soaringstructures2",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "species-1.20.1-2.3-fabric.jar",
-  "project": "s5d4P01r",
-  "modid": "species",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "spelunker-1.5.3-mc1.20.jar",
-  "project": "hwl9Rw2v",
-  "modid": "spelunker",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "starlight-1.1.2+fabric.dbc156f.jar",
-  "project": "H8CaAYZC",
-  "modid": "starlight",
-  "reason": "止于 1.20.4（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "structurecredits-1.20.1-4.0-fabric.jar",
-  "project": "9VEHG3zg",
-  "modid": "structurecredits",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "Subtitle-Highlight-11_1.20-1.20.1.jar",
-  "project": "BfdnU8IS",
-  "modid": "subtitle_highlight",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/quilt）"
- },
- {
-  "file": "supplementaries-1.20-3.1.42-fabric.jar",
-  "project": "fFEIiSDQ",
-  "modid": "supplementaries",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "swampier_swamps-1.20-4.0.0.jar",
-  "project": "C909jS7n",
-  "modid": "swampier_swamps",
-  "reason": "止于 1.20.4（无 26.1.2 构建，可用加载器：fabric/forge/quilt）"
- },
- {
-  "file": "things-0.3.3+1.20.jar",
-  "project": "VzAGdu9D",
-  "modid": "things",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/quilt）"
- },
- {
-  "file": "timeoutout-1.0.3+1.19.1.jar",
-  "project": "7cFX55fD",
-  "modid": "timeoutout",
-  "reason": "止于 1.21.10（无 26.1.2 构建，可用加载器：fabric/quilt）"
- },
- {
-  "file": "Tips-Fabric-1.20.1-12.1.9.jar",
-  "project": "AMCbgyVw",
-  "modid": "tipsmod",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "totw_modded-fabric-1.20.1-1.0.6.jar",
-  "project": "54eqfZSC",
-  "modid": "totw_modded",
-  "reason": "止于 1.21.11（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "TrampleStopper-Fabric-5.0.0+mc1.20.1.jar",
-  "project": null,
-  "modid": "tramplestopper",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "trenzalore-fabric-3.3.10+mc1.20.1.jar",
-  "project": null,
-  "modid": "trenzalore",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "trinkets-3.7.2.jar",
-  "project": "5aaWibi9",
-  "modid": "trinkets",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/quilt）"
- },
- {
-  "file": "Tumbleweed-fabric-1.20.1-0.5.5.jar",
-  "project": "msatPZQ2",
-  "modid": "tumbleweed",
-  "reason": "止于 1.19.3（无 26.1.2 构建，可用加载器：fabric/forge）"
- },
- {
-  "file": "vanillabackport-fabric-1.20.1-1.1.4.3.jar",
-  "project": "6xwxDTgf",
-  "modid": "vanillabackport",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "verdantvibes-1.0.1-1.20.1.jar",
-  "project": "NmDRyAF4",
-  "modid": "verdantvibes",
-  "reason": "止于 1.20.2（无 26.1.2 构建，可用加载器：fabric/forge）"
- },
- {
-  "file": "villagernames-1.20.1-8.2.jar",
-  "project": "PnxhZXZ2",
-  "modid": "villagernames",
-  "reason": "止于 1.21.4（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "watut-fabric-1.20.1-1.2.3.jar",
-  "project": "AtB5mHky",
-  "modid": "watut",
-  "reason": "止于 1.21.4（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "windchimes-1.2.4+1.20.jar",
-  "project": "iM50gcBD",
-  "modid": "windchimes",
-  "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/quilt）"
- },
- {
-  "file": "winterly-0.9.3+1.20.jar",
-  "project": "CEvDfomf",
-  "modid": "winterly",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/neoforge/quilt）"
- },
- {
-  "file": "wooledboots-1.7-fabric-mc1.20.1.jar",
-  "project": "YJfbVVdW",
-  "modid": "wooledboots",
-  "reason": "止于 1.21.4（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "world_preview-fabric-1.20.1-1.3.1.jar",
-  "project": "WtfpyicL",
-  "modid": "world_preview",
-  "reason": "止于 1.21（无 26.1.2 构建，可用加载器：fabric/forge/quilt）"
- },
- {
-  "file": "【FTB背景】ftbanime-1.0.0.jar",
-  "project": null,
-  "modid": "ftbanime",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "【丛林村庄结构】qraftys-jungle-villages-1.jar",
-  "project": "qSvzu3X3",
-  "modid": "mr_qraftys_junglevillages",
-  "reason": "止于 26.3（无 26.1.2 构建，可用加载器：datapack/fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "【互补补丁】EuphoriaPatcher-1.8.1-r5.7.1-fabric.jar",
-  "project": null,
-  "modid": "euphoria_patcher",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "【修复】CME_BlockMixin-1.0-SNAPSHOT.jar",
-  "project": null,
-  "modid": "cme_blockmixin",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "【修复】irisfixes-1.0.0.jar",
-  "project": null,
-  "modid": "irisfixes",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "【修复】ISE_CheckedRandom-1.0.jar",
-  "project": null,
-  "modid": "ise_checkedrandom",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "【修复】popular-biology-fix-1.0.0.jar",
-  "project": null,
-  "modid": "popular-biology-fix",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "【修复】sellingbinfix-1.0.2.jar",
-  "project": null,
-  "modid": "sellingbinfix",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "【偷偷的溜过浆果】sneak_through_berries-fabric-8.0.0+1.20.1.jar",
-  "project": "xq3wqd0E",
-  "modid": "sneak_through_berries",
-  "reason": "止于 1.21.5（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "【兼容修复】KltytonToXhcRepair-2.0.3.jar",
-  "project": null,
-  "modid": "kltytontoxhcrepair",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "【前置】libraryferret-fabric-1.20.1-4.0.0.jar",
-  "project": "DOB2l4oJ",
-  "modid": "libraryferret",
-  "reason": "止于 26.2（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "【原版方块美化+更多小细节】twigsfix-3.1.0.jar",
-  "project": "RG50cUrX",
-  "modid": "twigs",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "【唱片售卖机】recordstore-1.0.1.jar",
-  "project": null,
-  "modid": "a_record_store",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "【基石清理fix】AtomSweep-fabric-1.20.1-1.0.0.jar",
-  "project": "TuSWffJA",
-  "modid": "sweeper",
-  "reason": "26.1.2 只有 forge/neoforge 构建"
- },
- {
-  "file": "【小女仆】umu_little_maid-3.11a.jar",
-  "project": "iEwt8nJR",
-  "modid": "umu_little_maid",
-  "reason": "止于 1.20.2（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "【无缝音乐】moremusic-0.1.4+1.20.1.jar",
-  "project": "dGBEUH8l",
-  "modid": "moremusic",
-  "reason": "止于 1.20.2（无 26.1.2 构建，可用加载器：fabric/quilt）"
- },
- {
-  "file": "【更多结构飞艇温室花园】imst-2.1.0.jar",
-  "project": "CVBAErky",
-  "modid": "imst",
-  "reason": "止于 1.21.11（无 26.1.2 构建，可用加载器：datapack/fabric/forge/neoforge/quilt）"
- },
- {
-  "file": "【更多苹果】diamond_and_netherite_apples-1.0.0.jar",
-  "project": null,
-  "modid": "diamond_and_netherite_apples",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "【更好的梯子】betterladdersmod-1.20.x-No-3D-Model.jar",
-  "project": null,
-  "modid": "betterladdersmod",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "【服务器区块缓存】farsight-fabric-1.20.1-4.5.jar",
-  "project": "eEpWUjwq",
-  "modid": "farsight",
-  "reason": "止于 1.21.4（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "【死亡动画】KltytonDeathScreen-1.0.1.jar",
-  "project": null,
-  "modid": "kltytontoxhcsmod",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "【海洋结构】awesomedungeonocean-fabric-1.20.1-3.3.0.jar",
-  "project": "hn56Bq5n",
-  "modid": "awesomedungeonocean",
-  "reason": "止于 26.2（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "【热门生物】popularbiology-2.3.jar",
-  "project": null,
-  "modid": "popularbiology",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "【熔炉优化】fastfurnace-1.20.1-5.jar",
-  "project": "9X0318ev",
-  "modid": "fastfurnace",
-  "reason": "26.1.2 只有 forge/neoforge 构建"
- },
- {
-  "file": "【神秘的橡树】mysticaloaktree-1.20-1.11-fabric.jar",
-  "project": "eUma2vmY",
-  "modid": "mysticaloaktree",
-  "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "【结构】underground-jungle-fabric-20.1.2.jar",
-  "project": null,
-  "modid": "underground_jungle",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "【结构兼容】Fantastic_Remastered_Structures_1.20+1.20.6-0.5_For+fab.jar",
-  "project": null,
-  "modid": "milesplayz",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- },
- {
-  "file": "【视觉效果】Perception-FABRIC-0.1.4+1.20.1.jar",
-  "project": "P8STLvzB",
-  "modid": "perception",
-  "reason": "止于 26.3（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
- },
- {
-  "file": "【跑酷】FastMove-1.20.1-1.0.8.jar",
-  "project": "XmqpPthc",
-  "modid": "fastmove",
-  "reason": "止于 1.21（无 26.1.2 构建，可用加载器：fabric/quilt）"
- },
- {
-  "file": "【适配】emotes_replay_compat-0.1.2.jar",
-  "project": "EZojsnZ2",
-  "modid": "emotes-compat-rp",
-  "reason": "止于 1.21.11（无 26.1.2 构建，可用加载器：fabric/neoforge）"
- },
- {
-  "file": "【马的骑行体验优化】HorseBuff-1.20.1-2.1.3.jar",
-  "project": "IrrG0G8l",
-  "modid": "horsebuff",
-  "reason": "止于 1.21.4（无 26.1.2 构建，可用加载器：fabric）"
- },
- {
-  "file": "【马铠盔甲架】horsearmorstandmod-1.0.2-1.20.1.jar",
-  "project": null,
-  "modid": "horsearmorstandmod",
-  "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
- }
+  {
+    "file": "0Pack2Reload-Fabric-1.20.1-1.0.1.jar",
+    "project": null,
+    "modid": "opack2reload",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "0World2Create-Universal-1.19-1.20.X-1.0.0.jar",
+    "project": null,
+    "modid": "oworld2create",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "[1.20.1-Fabric] Hybrid Aquatic 1.5.4.jar",
+    "project": "HH4FjUqN",
+    "modid": "hybrid-aquatic",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "[FTB 区块] ftb-chunks-fabric-2001.3.6.jar",
+    "project": "aDOJNNsW",
+    "modid": "ftbchunks",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：neoforge）"
+  },
+  {
+    "file": "[修复】carpet-fixes-1.20-1.16.1.jar",
+    "project": "7Jaxgqip",
+    "modid": "carpet-fixes",
+    "reason": "止于 1.20.4（无 26.1.2 构建，可用加载器：fabric/quilt）"
+  },
+  {
+    "file": "[内存泄漏修复] memoryleakfix-fabric-1.17+-1.1.5.jar",
+    "project": "NRjRiSSD",
+    "modid": "memoryleakfix",
+    "reason": "止于 1.20.4（无 26.1.2 构建，可用加载器：fabric/forge/quilt）"
+  },
+  {
+    "file": "[我的细胞] minecells-2.0.0.jar",
+    "project": "9Qdvz1OV",
+    "modid": "minecells",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/quilt）"
+  },
+  {
+    "file": "[扩展存储] expandedstorage-10.3.0-beta.5+1.20.1-fabric.jar",
+    "project": null,
+    "modid": "expandedstorage",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "[树洞] tree-hollows-fabric-3.1.0.jar",
+    "project": "g744qmft",
+    "modid": "tree-hollows",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "[植树盆栽] BotanyTrees-Fabric-1.20.1-9.0.18.jar",
+    "project": null,
+    "modid": "botanytrees",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "[植物盆栽] BotanyPots-Fabric-1.20.1-13.0.41.jar",
+    "project": "WjA2S6fr",
+    "modid": "botanypots",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/neoforge）"
+  },
+  {
+    "file": "accessories-fabric-1.0.0-beta.48+1.20.1.jar",
+    "project": "jtmvUHXj",
+    "modid": "accessories",
+    "reason": "止于 1.21.10（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "AddurDisc-Fabric-1.20.x-1.3.jar",
+    "project": "gcH4oguI",
+    "modid": "addurdisc",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/forge）"
+  },
+  {
+    "file": "adorablehamsterpets-3.5.0-1.20.1+fabric.jar",
+    "project": "LmrhZdK2",
+    "modid": "adorablehamsterpets",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "animatica-0.6.1+1.20.4.jar",
+    "project": "PRN43VSY",
+    "modid": "animatica",
+    "reason": "止于 1.21.6（无 26.1.2 构建，可用加载器：fabric/quilt）"
+  },
+  {
+    "file": "another_furniture-fabric-1.20.1-3.0.5.jar",
+    "project": "ulloLmqG",
+    "modid": "another_furniture",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "Aquamirae 6.jar",
+    "project": "k23mNPhZ",
+    "modid": "aquamirae",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "async-locator-fabric-1.20-1.3.0.jar",
+    "project": "rkN8aqci",
+    "modid": "asynclocator",
+    "reason": "止于 1.20.2（无 26.1.2 构建，可用加载器：fabric/forge）"
+  },
+  {
+    "file": "automobility-0.4.2+1.20.1-fabric.jar",
+    "project": "rqIsPf9F",
+    "modid": "automobility",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "azurelibarmor-fabric-1.20.1-2.0.14.jar",
+    "project": "pduQXSbl",
+    "modid": "azurelibarmor",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "bbb-fabric-2.0pre4.jar",
+    "project": "OSDpLd82",
+    "modid": "bbb",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/forge）"
+  },
+  {
+    "file": "bc_particle-0.0.2-1.20.1.jar",
+    "project": null,
+    "modid": "malfu-mods",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "beautify-2.0.0+1.20.1.jar",
+    "project": "9BPuv4vL",
+    "modid": "beautify",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：forge/neoforge）"
+  },
+  {
+    "file": "biomemusic-fabric-1.20.1-3.5.jar",
+    "project": null,
+    "modid": "biomemusic",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "BiomesOPlenty-fabric-1.20.1-19.0.0.96.jar",
+    "project": null,
+    "modid": "biomesoplenty",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "BlazingBamboo-Fabric-1.20.1-1.0.1.jar",
+    "project": "qeChSM8z",
+    "modid": "blazingbamboo",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/forge）"
+  },
+  {
+    "file": "blossom.jar",
+    "project": "UMmSTwE0",
+    "modid": "mr_blossom_blade",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：datapack/fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "BOMD-1.7.5-1.20.1.jar",
+    "project": null,
+    "modid": "bosses_of_mass_destruction",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "bountifulfares-1.2.1-1.20.1.jar",
+    "project": "YgrSDjlb",
+    "modid": "bountifulfares",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/neoforge）"
+  },
+  {
+    "file": "bushierflowers-0.0.3-1.20.1.jar",
+    "project": "OK421ZCh",
+    "modid": "bushierflowers",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge）"
+  },
+  {
+    "file": "carrasconlib-fabric-1.20.1-0.1.jar",
+    "project": "QpsOhpBa",
+    "modid": "carrasconlib",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "charmofundying-fabric-6.5.0+1.20.1.jar",
+    "project": "b5GyyYkp",
+    "modid": "charmofundying",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "chipped-fabric-1.20.1-3.0.7.jar",
+    "project": "BAscRYKm",
+    "modid": "chipped",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "clickadv-fabric-1.20.1-3.8.jar",
+    "project": null,
+    "modid": "clickadv",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "Cluttered-2.1.0-1.20.1[Fabric].jar",
+    "project": "UnAEo77V",
+    "modid": "luphieclutteredmod",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "ContingameIME-1.0.7-1.20.1-fabric.jar",
+    "project": "5Z2YdwIT",
+    "modid": "ingameime",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "convenientdecor-0.4.3.jar",
+    "project": "gMWAhU1n",
+    "modid": "convenientdecor",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "Corgilib-Fabric-1.20.1-4.0.3.4.jar",
+    "project": "ziOp6EO8",
+    "modid": "corgilib",
+    "reason": "止于 1.21.11（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "coroutil-fabric-1.20.1-1.3.7.jar",
+    "project": "rLLJ1OZM",
+    "modid": "coroutil",
+    "reason": "止于 1.21.4（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "CosmeticArmor-1.20-1.6.0.jar",
+    "project": "JrIYhb1P",
+    "modid": "cosmetic-armor",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/quilt）"
+  },
+  {
+    "file": "CosmeticArmorCompatibility-1.1.3fix.jar",
+    "project": "1UjQ96Vt",
+    "modid": "cosmeticarmorcompatibility",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "creeperoverhaul-3.0.2-fabric.jar",
+    "project": "MI1LWe93",
+    "modid": "creeperoverhaul",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "crittersandcompanions-fabric-1.20.1-2.3.5.jar",
+    "project": "Yd4wb5wZ",
+    "modid": "crittersandcompanions",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "CrosshairBobbing-1.10.jar",
+    "project": null,
+    "modid": "xbob_modloader",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "cupboard-fabric-1.20.1-2.7.jar",
+    "project": "qMjBT1aG",
+    "modid": "cupboard",
+    "reason": "止于 b1.7.3（无 26.1.2 构建，可用加载器：bta-babric）"
+  },
+  {
+    "file": "customsplashscreen-2.1.1.jar",
+    "project": "BwFQLeCh",
+    "modid": "customsplashscreen",
+    "reason": "止于 1.21.3（无 26.1.2 构建，可用加载器：fabric/quilt）"
+  },
+  {
+    "file": "DisableCustomWorldsAdvice-4.1.jar",
+    "project": "HdwRs3kc",
+    "modid": "disable_custom_worlds_advice",
+    "reason": "止于 1.21.7（无 26.1.2 构建，可用加载器：fabric/quilt）"
+  },
+  {
+    "file": "draggable_lists-mc1.20-1.0.1-rev.824b2f3.jar",
+    "project": "aLcHfalx",
+    "modid": "draggable_lists",
+    "reason": "止于 1.21.8（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "dragonloot-1.1.4.jar",
+    "project": "EldwHO4Z",
+    "modid": "dragonloot",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "DramaticDoors-QuiFabrge-1.20.1-3.3.3.jar",
+    "project": null,
+    "modid": "dramaticdoors",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "duckling-fabric-1.20.4-4.0.0.jar",
+    "project": "jkb861Ih",
+    "modid": "duckling",
+    "reason": "止于 1.21（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "DustyDecoRefabricated-1.1-1.20.1+1.20.2.jar",
+    "project": null,
+    "modid": "dustydecorations",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "dynamiccrosshaircompat-4.4+1.20.1-fabric.jar",
+    "project": "EwPIWPJ9",
+    "modid": "dynamiccrosshaircompat",
+    "reason": "止于 1.21.11（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "DynamicSurroundings-Fabric-1.20.1-0.3.3.jar",
+    "project": "H7fshfpD",
+    "modid": "dsurround",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/neoforge）"
+  },
+  {
+    "file": "eating-animation-1.20+1.9.61.jar",
+    "project": "rUgZvGzi",
+    "modid": "eatinganimationid",
+    "reason": "止于 1.21.3（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "elytra-drag-0.3-1.20+.jar",
+    "project": "c9J3k0tK",
+    "modid": "elytra-drag",
+    "reason": "止于 26.3（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "elytraslot-fabric-6.4.4+1.20.1.jar",
+    "project": "mlbhj1OD",
+    "modid": "elytraslot",
+    "reason": "止于 26.2（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "EnchantmentDescriptions-Fabric-1.20.1-17.1.21.jar",
+    "project": null,
+    "modid": "enchdesc",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "endermanoverhaul-fabric-1.20.1-1.0.4.jar",
+    "project": "Lq6ojcWv",
+    "modid": "endermanoverhaul",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "ends_delight-refabricated-1.20.1-2.5.jar",
+    "project": "yHN0njMr",
+    "modid": "ends_delight",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "enhancedblockentities-0.9+1.20.jar",
+    "project": "OVuFYfre",
+    "modid": "enhancedblockentities",
+    "reason": "止于 1.21.4（无 26.1.2 构建，可用加载器：fabric/quilt）"
+  },
+  {
+    "file": "Evoodooers-fabric-1.20.1-1.0.0.jar",
+    "project": null,
+    "modid": "mod_id",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "expores-1.0.0+mc1.20.1.jar",
+    "project": "a8H99agr",
+    "modid": "expores",
+    "reason": "止于 1.20.4（无 26.1.2 构建，可用加载器：fabric/quilt）"
+  },
+  {
+    "file": "exposure-fabric-1.20.1-1.9.16.jar",
+    "project": "hB899VmG",
+    "modid": "exposure",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "fabric-medievalend-1.0.1.jar",
+    "project": null,
+    "modid": "medievalend",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "fabric-seasons-2.4.2-BETA+1.20.jar",
+    "project": "KJe6y9Eu",
+    "modid": "seasons",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "fabric-seasons-delight-1.3.9-compat-1.0.jar",
+    "project": "4VYO7ir0",
+    "modid": "seasonsdelightcompat",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "fabric-seasons-extras-1.3.2-BETA+1.20.jar",
+    "project": "64FYdx5z",
+    "modid": "seasonsextras",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "fabric-seasons-terralith-2.3.7-compat-1.0.jar",
+    "project": "D53qveoj",
+    "modid": "seasonsterralithcompat",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "farmers-cutting-biomes-o-plenty-1.20.1-1.1.0-fabric.jar",
+    "project": null,
+    "modid": "mr_farmers_cuttingbiomesoplenty",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "FarmersDelight-1.20.1-2.4.1+refabricated.jar",
+    "project": "R2OftAxM",
+    "modid": "farmersdelight",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：forge/neoforge）"
+  },
+  {
+    "file": "FarmersStructures-1.0.0-1.20_fabric.jar",
+    "project": null,
+    "modid": "farmers_structures",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "Female-Gender-Mod-fabric-1.20-3.0.1.jar",
+    "project": null,
+    "modid": "wildfire_gender",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "fennecfox-fabric-1.20.1-1.0.0.jar",
+    "project": "mBczJISa",
+    "modid": "fennecfox",
+    "reason": "止于 1.21.8（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "fishingreal-fabric-1.20.1-1.9.1-backport.jar",
+    "project": null,
+    "modid": "fishingreal",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "forgottengraves-3.2.26+1.20.1.jar",
+    "project": "FrZIkosK",
+    "modid": "forgottengraves",
+    "reason": "止于 1.20.4（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "FriendlyFire-Fabric-1.20.1-18.0.8.jar",
+    "project": null,
+    "modid": "friendlyfire",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "friendsandfoes-fabric-mc1.20.1-3.0.9.jar",
+    "project": null,
+    "modid": "friendsandfoes",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "ftb-library-fabric-2001.2.12.jar",
+    "project": null,
+    "modid": "ftblibrary",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "ftb-ultimine-fabric-2001.1.7.jar",
+    "project": "FTUEqY9e",
+    "modid": "ftbultimine",
+    "reason": "26.1.2 只有 forge/neoforge 构建"
+  },
+  {
+    "file": "ftb-xmod-compat-fabric-2.1.3.jar",
+    "project": null,
+    "modid": "ftbxmodcompat",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "Galosphere-1.20.1-1.4.1-Fabric.jar",
+    "project": "Kn7xyQ1v",
+    "modid": "galosphere",
+    "reason": "止于 1.21.5（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "GlassArmor-1.0.0+1.20.x.jar",
+    "project": "vz0zoOM2",
+    "modid": "glass_armor",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "goblintraders-fabric-1.20.1-1.9.3.jar",
+    "project": "DRM2r8fQ",
+    "modid": "goblintraders",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "gpumemleakfix-fabric-1.20.1-1.8.jar",
+    "project": null,
+    "modid": "gpumemleakfix",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "guardvillagers-2.0.9-1.20.1.jar",
+    "project": "Jiwpcpfe",
+    "modid": "guardvillagers",
+    "reason": "止于 1.21.10（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "handcrafted-fabric-1.20.1-3.0.6.jar",
+    "project": "pJmCFF0p",
+    "modid": "handcrafted",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "herdspanic-1.1.0.jar",
+    "project": "U64ZYLjC",
+    "modid": "herdspanic",
+    "reason": "止于 26.3（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "Icarus-Fabric-2.13.1.jar",
+    "project": "Dw7M6XKW",
+    "modid": "icarus",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "Icterine-fabric-1.20.0-1-1.3.0.jar",
+    "project": "7RvRWn6p",
+    "modid": "icterine",
+    "reason": "止于 1.20.4（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "Identifier-Translation-3_1.20-1.20.1.jar",
+    "project": "M2GV3t9H",
+    "modid": "identifier_translation",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/quilt）"
+  },
+  {
+    "file": "ImmersiveUI-FABRIC-0.3.0.jar",
+    "project": null,
+    "modid": "immersiveui",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "indium-1.0.36+mc1.20.1.jar",
+    "project": "Orvt0mRa",
+    "modid": "indium",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/quilt）"
+  },
+  {
+    "file": "inventoryhud.fabric.1.20.1-3.4.26.jar",
+    "project": "ZzrxBSHN",
+    "modid": "inventoryhud",
+    "reason": "26.1.2 只有 forge/neoforge 构建"
+  },
+  {
+    "file": "item-filters-fabric-2001.1.0-build.59.jar",
+    "project": "1KLyhGRz",
+    "modid": "itemfilters",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/forge）"
+  },
+  {
+    "file": "JustEnoughFarmersRecipes-1.20.1-1.0.1.jar",
+    "project": "fQhRIhD6",
+    "modid": "fdjei",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "kaleidoscopecookery-1.0.1-fabric+mc1.20.1.jar",
+    "project": "v17FatAc",
+    "modid": "kaleidoscope_cookery",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "kubejs-fabric-2001.6.5-build.16.jar",
+    "project": "umyGl7zF",
+    "modid": "kubejs",
+    "reason": "26.1.2 只有 forge/neoforge 构建"
+  },
+  {
+    "file": "letsdo-addon-structures-1.7.2.jar",
+    "project": "2PaVx3ow",
+    "modid": "letsdoaddon-structures",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：datapack/fabric/forge/quilt）"
+  },
+  {
+    "file": "letsdo-API-fabric-1.2.15-fabric.jar",
+    "project": "4XJZeZbM",
+    "modid": "doapi",
+    "reason": "止于 1.20.2（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "letsdo-bakery-fabric-2.0.6.jar",
+    "project": "WFwYiVoG",
+    "modid": "bakery",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "letsdo-beachparty-fabric-2.0.3.jar",
+    "project": "GyKzAh3l",
+    "modid": "beachparty",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "letsdo-bloomingnature-fabric-1.0.12.jar",
+    "project": "4Vno77MY",
+    "modid": "bloomingnature",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "letsdo-candlelight-fabric-2.0.5.jar",
+    "project": "mPND0Adp",
+    "modid": "candlelight",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "letsdo-farm_and_charm-fabric-1.0.14.jar",
+    "project": "HJetCzWo",
+    "modid": "farm_and_charm",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "letsdo-herbalbrews-fabric-1.0.12.jar",
+    "project": "Eh11TaTm",
+    "modid": "herbalbrews",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "letsdo-meadow-fabric-1.3.25.jar",
+    "project": "ra7o6Sl7",
+    "modid": "meadow",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "letsdo-nethervinery-fabric-1.2.19.jar",
+    "project": "4TTDxtOx",
+    "modid": "nethervinery",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "letsdo-vinery-fabric-1.4.41.jar",
+    "project": "1DWmBJVA",
+    "modid": "vinery",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "letsdo-wildernature-fabric-1.0.6.jar",
+    "project": "AAiRU4aQ",
+    "modid": "wildernature",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "letsdocompat-fabric-2.2.3.jar",
+    "project": "FNi5IMiX",
+    "modid": "letsdocompat",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "magicmirror-1.1.1.jar",
+    "project": "MU5xcAuY",
+    "modid": "magicmirror",
+    "reason": "止于 1.17.1（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "mcw-mcwstairs-1.0.2-mc1.20.1fabric.jar",
+    "project": null,
+    "modid": "mcwstairs",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "mermod-fabric-1.20.1-3.0.0.jar",
+    "project": "ORiydwz3",
+    "modid": "mermod",
+    "reason": "止于 1.21.11（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "mighty_mail-fabric-1.20.1-1.0.14.jar",
+    "project": null,
+    "modid": "mighty_mail",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "minerally-1.20.2-1.3.jar",
+    "project": "DKG1CVAt",
+    "modid": "minerally",
+    "reason": "止于 1.21（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "mobs-attempt-parkour-0.5.2-1.20.jar",
+    "project": "Lh7ROUhC",
+    "modid": "mobs_attempt_parkour",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "modernfix-fabric-5.25.2+mc1.20.1.jar",
+    "project": "nmDcB62a",
+    "modid": "modernfix",
+    "reason": "26.1.2 只有 forge/neoforge 构建"
+  },
+  {
+    "file": "MoogsSoaringStructures-1.20-2.0.2.jar",
+    "project": "IkGIMS9a",
+    "modid": "mss",
+    "reason": "止于 1.20.4（无 26.1.2 构建，可用加载器：neoforge）"
+  },
+  {
+    "file": "mythic-mounts-1.20.1-7.4.jar",
+    "project": null,
+    "modid": "mythicmounts",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "naturalist-5.0pre5+fabric-1.20.1.jar",
+    "project": "F8BQNPWX",
+    "modid": "naturalist",
+    "reason": "止于 26.3（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "niftycarts-20.1.5.jar",
+    "project": "CXd6g9xp",
+    "modid": "niftycarts",
+    "reason": "止于 1.21.11（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "NonConflictKeys-Fabric-1.18.X-1.20-1.0.0.jar",
+    "project": "XU9gCifV",
+    "modid": "nckey",
+    "reason": "止于 1.19.4（无 26.1.2 构建，可用加载器：fabric/forge）"
+  },
+  {
+    "file": "notenoughanimations-fabric-1.11.3-mc1.20.1.jar",
+    "project": null,
+    "modid": "notenoughanimations",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "Obscure-API-16.jar",
+    "project": "fU7jbFHc",
+    "modid": "obscure_api",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/forge）"
+  },
+  {
+    "file": "Oh-The-Biomes-Weve-Gone-Fabric-1.7.4.jar",
+    "project": "NTi7d3Xc",
+    "modid": "biomeswevegone",
+    "reason": "止于 1.21.11（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "oneitem-1.0.2.jar",
+    "project": null,
+    "modid": "oneitem",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "Paintings-fabric-1.20.1-11.0.0.2.jar",
+    "project": "9wf81Bma",
+    "modid": "paintings",
+    "reason": "止于 1.21.11（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "Paraglider-fabric-20.1.3.jar",
+    "project": "esqWA0aQ",
+    "modid": "paraglider",
+    "reason": "26.1.2 只有 forge/neoforge 构建"
+  },
+  {
+    "file": "pickup-me-1.0.3.1-1.20.jar",
+    "project": null,
+    "modid": "pickupme",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "PineappleDelight-1.1.2-1.20.1-fabric.jar",
+    "project": "8wXnuOvg",
+    "modid": "pineapple_delight",
+    "reason": "止于 1.21.3（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "Platform-fabric-1.20.1-1.2.11.5.jar",
+    "project": "i6fiqm5y",
+    "modid": "platform",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "player-animation-lib-fabric-1.0.2-rc1+1.20.jar",
+    "project": "gedNE4y2",
+    "modid": "player-animator",
+    "reason": "止于 1.21.7（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "plushies-1.4.0-fabric.jar",
+    "project": "hsOK0gUP",
+    "modid": "plushies",
+    "reason": "止于 1.21.4（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "polymorph-fabric-0.49.10+1.20.1.jar",
+    "project": "tagwiZkJ",
+    "modid": "polymorph",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "polymorphic-tom-1.0.4.jar",
+    "project": null,
+    "modid": "polymorphic_tom",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "pyrotechnic-elytra-fabric-1.20.1-1.0.0.jar",
+    "project": "SomUrE3g",
+    "modid": "pyrotechnic_elytra",
+    "reason": "止于 26.1.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "questsadditions-fabric-1.20.1-1.4.6.jar",
+    "project": null,
+    "modid": "questsadditions",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "ranged_weapon_api-1.1.4+1.20.1.jar",
+    "project": null,
+    "modid": "ranged_weapon_api",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "resourcefulconfig-fabric-1.20.1-2.1.3.jar",
+    "project": null,
+    "modid": "resourcefulconfig",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "Ribbits-1.20.1-Fabric-3.0.5.jar",
+    "project": "8YcE8y4T",
+    "modid": "ribbits",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "RidingPartners-fabric-1.20.1.jar",
+    "project": "FwMGjyuI",
+    "modid": "riding_partners",
+    "reason": "止于 1.21（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "rottencreatures-fabric-1.20.1-1.1.0.jar",
+    "project": "5Zusp48B",
+    "modid": "rottencreatures",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "seamless-2.2.2-fabric-1.20.1.jar",
+    "project": "rhyHyQke",
+    "modid": "seamless",
+    "reason": "止于 1.21.5（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "seasonhud-fabric-1.20.1-1.13.17.jar",
+    "project": "VNjUn3NA",
+    "modid": "seasonhud",
+    "reason": "26.1.2 只有 forge/neoforge 构建"
+  },
+  {
+    "file": "seasonsnaturesspiritcompat-1.0.4.jar",
+    "project": "VZCZSOio",
+    "modid": "seasonsnaturesspiritcompat",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/quilt）"
+  },
+  {
+    "file": "SellingBin-mc1.20.1-v1.0.9-fabric.jar",
+    "project": "3uiQSXgt",
+    "modid": "sellingbin",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "simplehats-fabric-1.20.1-0.4.0a.jar",
+    "project": "BzUtMUfo",
+    "modid": "simplehats",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：neoforge）"
+  },
+  {
+    "file": "SimplyHouses-1.1.4-1.20.1-fabric.jar",
+    "project": "cwKtPx6L",
+    "modid": "simply_houses",
+    "reason": "止于 1.21.10（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "SkyVillages-1.0.4-1.19.2-1.20.1-fabric.jar",
+    "project": "mb68eIfx",
+    "modid": "skyvillages",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "smarterfarmers-1.20-2.1.2-fabric.jar",
+    "project": "Bh6ZOMvp",
+    "modid": "smarterfarmers",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "smelting-plus-1.0.5(fabric-forge-quilt).jar",
+    "project": "xDvYGZrH",
+    "modid": "mr_smelting_plus",
+    "reason": "止于 1.21.11（无 26.1.2 构建，可用加载器：datapack/fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "smoothparticles-1.2.0-1.20.1.jar",
+    "project": "xMTLdsFH",
+    "modid": "smoothparticles",
+    "reason": "止于 1.21（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "smsn-fabric-1.3.7-1.20.1.jar",
+    "project": null,
+    "modid": "smsn",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "snowyspirit-1.20-3.0.10-fabric.jar",
+    "project": "UiFDlI7w",
+    "modid": "snowyspirit",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "Soaring-Structures-2-1.20.1-2.5.1-FABRIC.jar",
+    "project": null,
+    "modid": "soaringstructures2",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "species-1.20.1-2.3-fabric.jar",
+    "project": "s5d4P01r",
+    "modid": "species",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "spelunker-1.5.3-mc1.20.jar",
+    "project": "hwl9Rw2v",
+    "modid": "spelunker",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "starlight-1.1.2+fabric.dbc156f.jar",
+    "project": "H8CaAYZC",
+    "modid": "starlight",
+    "reason": "止于 1.20.4（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "structurecredits-1.20.1-4.0-fabric.jar",
+    "project": "9VEHG3zg",
+    "modid": "structurecredits",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "Subtitle-Highlight-11_1.20-1.20.1.jar",
+    "project": "BfdnU8IS",
+    "modid": "subtitle_highlight",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/quilt）"
+  },
+  {
+    "file": "supplementaries-1.20-3.1.42-fabric.jar",
+    "project": "fFEIiSDQ",
+    "modid": "supplementaries",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "swampier_swamps-1.20-4.0.0.jar",
+    "project": "C909jS7n",
+    "modid": "swampier_swamps",
+    "reason": "止于 1.20.4（无 26.1.2 构建，可用加载器：fabric/forge/quilt）"
+  },
+  {
+    "file": "things-0.3.3+1.20.jar",
+    "project": "VzAGdu9D",
+    "modid": "things",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/quilt）"
+  },
+  {
+    "file": "timeoutout-1.0.3+1.19.1.jar",
+    "project": "7cFX55fD",
+    "modid": "timeoutout",
+    "reason": "止于 1.21.10（无 26.1.2 构建，可用加载器：fabric/quilt）"
+  },
+  {
+    "file": "Tips-Fabric-1.20.1-12.1.9.jar",
+    "project": "AMCbgyVw",
+    "modid": "tipsmod",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "totw_modded-fabric-1.20.1-1.0.6.jar",
+    "project": "54eqfZSC",
+    "modid": "totw_modded",
+    "reason": "止于 1.21.11（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "TrampleStopper-Fabric-5.0.0+mc1.20.1.jar",
+    "project": null,
+    "modid": "tramplestopper",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "trenzalore-fabric-3.3.10+mc1.20.1.jar",
+    "project": null,
+    "modid": "trenzalore",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "trinkets-3.7.2.jar",
+    "project": "5aaWibi9",
+    "modid": "trinkets",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/quilt）"
+  },
+  {
+    "file": "Tumbleweed-fabric-1.20.1-0.5.5.jar",
+    "project": "msatPZQ2",
+    "modid": "tumbleweed",
+    "reason": "止于 1.19.3（无 26.1.2 构建，可用加载器：fabric/forge）"
+  },
+  {
+    "file": "vanillabackport-fabric-1.20.1-1.1.4.3.jar",
+    "project": "6xwxDTgf",
+    "modid": "vanillabackport",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "verdantvibes-1.0.1-1.20.1.jar",
+    "project": "NmDRyAF4",
+    "modid": "verdantvibes",
+    "reason": "止于 1.20.2（无 26.1.2 构建，可用加载器：fabric/forge）"
+  },
+  {
+    "file": "villagernames-1.20.1-8.2.jar",
+    "project": "PnxhZXZ2",
+    "modid": "villagernames",
+    "reason": "止于 1.21.4（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "watut-fabric-1.20.1-1.2.3.jar",
+    "project": "AtB5mHky",
+    "modid": "watut",
+    "reason": "止于 1.21.4（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "windchimes-1.2.4+1.20.jar",
+    "project": "iM50gcBD",
+    "modid": "windchimes",
+    "reason": "止于 1.20.1（无 26.1.2 构建，可用加载器：fabric/quilt）"
+  },
+  {
+    "file": "winterly-0.9.3+1.20.jar",
+    "project": "CEvDfomf",
+    "modid": "winterly",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/neoforge/quilt）"
+  },
+  {
+    "file": "wooledboots-1.7-fabric-mc1.20.1.jar",
+    "project": "YJfbVVdW",
+    "modid": "wooledboots",
+    "reason": "止于 1.21.4（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "world_preview-fabric-1.20.1-1.3.1.jar",
+    "project": "WtfpyicL",
+    "modid": "world_preview",
+    "reason": "止于 1.21（无 26.1.2 构建，可用加载器：fabric/forge/quilt）"
+  },
+  {
+    "file": "【FTB背景】ftbanime-1.0.0.jar",
+    "project": null,
+    "modid": "ftbanime",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "【丛林村庄结构】qraftys-jungle-villages-1.jar",
+    "project": "qSvzu3X3",
+    "modid": "mr_qraftys_junglevillages",
+    "reason": "止于 26.3（无 26.1.2 构建，可用加载器：datapack/fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "【互补补丁】EuphoriaPatcher-1.8.1-r5.7.1-fabric.jar",
+    "project": null,
+    "modid": "euphoria_patcher",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "【修复】CME_BlockMixin-1.0-SNAPSHOT.jar",
+    "project": null,
+    "modid": "cme_blockmixin",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "【修复】irisfixes-1.0.0.jar",
+    "project": null,
+    "modid": "irisfixes",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "【修复】ISE_CheckedRandom-1.0.jar",
+    "project": null,
+    "modid": "ise_checkedrandom",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "【修复】popular-biology-fix-1.0.0.jar",
+    "project": null,
+    "modid": "popular-biology-fix",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "【修复】sellingbinfix-1.0.2.jar",
+    "project": null,
+    "modid": "sellingbinfix",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "【偷偷的溜过浆果】sneak_through_berries-fabric-8.0.0+1.20.1.jar",
+    "project": "xq3wqd0E",
+    "modid": "sneak_through_berries",
+    "reason": "止于 1.21.5（无 26.1.2 构建，可用加载器：fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "【兼容修复】KltytonToXhcRepair-2.0.3.jar",
+    "project": null,
+    "modid": "kltytontoxhcrepair",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "【前置】libraryferret-fabric-1.20.1-4.0.0.jar",
+    "project": "DOB2l4oJ",
+    "modid": "libraryferret",
+    "reason": "止于 26.2（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "【原版方块美化+更多小细节】twigsfix-3.1.0.jar",
+    "project": "RG50cUrX",
+    "modid": "twigs",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "【唱片售卖机】recordstore-1.0.1.jar",
+    "project": null,
+    "modid": "a_record_store",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "【基石清理fix】AtomSweep-fabric-1.20.1-1.0.0.jar",
+    "project": "TuSWffJA",
+    "modid": "sweeper",
+    "reason": "26.1.2 只有 forge/neoforge 构建"
+  },
+  {
+    "file": "【小女仆】umu_little_maid-3.11a.jar",
+    "project": "iEwt8nJR",
+    "modid": "umu_little_maid",
+    "reason": "止于 1.20.2（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "【无缝音乐】moremusic-0.1.4+1.20.1.jar",
+    "project": "dGBEUH8l",
+    "modid": "moremusic",
+    "reason": "止于 1.20.2（无 26.1.2 构建，可用加载器：fabric/quilt）"
+  },
+  {
+    "file": "【更多结构飞艇温室花园】imst-2.1.0.jar",
+    "project": "CVBAErky",
+    "modid": "imst",
+    "reason": "止于 1.21.11（无 26.1.2 构建，可用加载器：datapack/fabric/forge/neoforge/quilt）"
+  },
+  {
+    "file": "【更多苹果】diamond_and_netherite_apples-1.0.0.jar",
+    "project": null,
+    "modid": "diamond_and_netherite_apples",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "【更好的梯子】betterladdersmod-1.20.x-No-3D-Model.jar",
+    "project": null,
+    "modid": "betterladdersmod",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "【服务器区块缓存】farsight-fabric-1.20.1-4.5.jar",
+    "project": "eEpWUjwq",
+    "modid": "farsight",
+    "reason": "止于 1.21.4（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "【死亡动画】KltytonDeathScreen-1.0.1.jar",
+    "project": null,
+    "modid": "kltytontoxhcsmod",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "【海洋结构】awesomedungeonocean-fabric-1.20.1-3.3.0.jar",
+    "project": "hn56Bq5n",
+    "modid": "awesomedungeonocean",
+    "reason": "止于 26.2（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "【热门生物】popularbiology-2.3.jar",
+    "project": null,
+    "modid": "popularbiology",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "【熔炉优化】fastfurnace-1.20.1-5.jar",
+    "project": "9X0318ev",
+    "modid": "fastfurnace",
+    "reason": "26.1.2 只有 forge/neoforge 构建"
+  },
+  {
+    "file": "【神秘的橡树】mysticaloaktree-1.20-1.11-fabric.jar",
+    "project": "eUma2vmY",
+    "modid": "mysticaloaktree",
+    "reason": "止于 1.21.1（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "【结构】underground-jungle-fabric-20.1.2.jar",
+    "project": null,
+    "modid": "underground_jungle",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "【结构兼容】Fantastic_Remastered_Structures_1.20+1.20.6-0.5_For+fab.jar",
+    "project": null,
+    "modid": "milesplayz",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "【视觉效果】Perception-FABRIC-0.1.4+1.20.1.jar",
+    "project": "P8STLvzB",
+    "modid": "perception",
+    "reason": "止于 26.3（无 26.1.2 构建，可用加载器：fabric/forge/neoforge）"
+  },
+  {
+    "file": "【跑酷】FastMove-1.20.1-1.0.8.jar",
+    "project": "XmqpPthc",
+    "modid": "fastmove",
+    "reason": "止于 1.21（无 26.1.2 构建，可用加载器：fabric/quilt）"
+  },
+  {
+    "file": "【适配】emotes_replay_compat-0.1.2.jar",
+    "project": "EZojsnZ2",
+    "modid": "emotes-compat-rp",
+    "reason": "止于 1.21.11（无 26.1.2 构建，可用加载器：fabric/neoforge）"
+  },
+  {
+    "file": "【马的骑行体验优化】HorseBuff-1.20.1-2.1.3.jar",
+    "project": "IrrG0G8l",
+    "modid": "horsebuff",
+    "reason": "止于 1.21.4（无 26.1.2 构建，可用加载器：fabric）"
+  },
+  {
+    "file": "【马铠盔甲架】horsearmorstandmod-1.0.2-1.20.1.jar",
+    "project": null,
+    "modid": "horsearmorstandmod",
+    "reason": "Modrinth 上找不到对应项目（多为仅 CurseForge 发布）"
+  },
+  {
+    "file": "tectonic-3.0.28-fabric-26.1.jar",
+    "project": "lWDHr9jE",
+    "modid": "tectonic",
+    "reason": "世界生成模组，服务端从未部署；客户端单端加载会套用未同步的地形 mixin，与服务器区块不符，故移除"
+  },
+  {
+    "file": "a_good_place-26.1.2-1.3.9-fabric.jar",
+    "project": "BwPeriwJ",
+    "modid": "a_good_place",
+    "reason": "结构放置模组，随 tectonic 一并移除，保证与服务端世界生成一致"
+  }
 ]

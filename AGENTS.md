@@ -47,7 +47,7 @@ python3 scripts/update_assets.py --apply        # 落地：替换 + 补 mcmeta +
 python3 scripts/package_assets.py               # 重打材质原件 tar.zst，用于发新 assets-<版本>
 python3 scripts/sync_client.py                  # 客户端改动进仓库：预演差异（mods/config/options）
 python3 scripts/sync_client.py --apply          # 落盘
-python3 scripts/sync_client.py --apply --release 0.2.2   # 落盘 + 改版本 + 提交 + 打 tag 推送（出 Release）
+python3 scripts/sync_client.py --apply --release 0.2.2   # 落盘 + 改版本 + 提交推送（滚动 Release 自动更新）
 ```
 
 ## 客户端开发流程（唯一通道）
@@ -58,8 +58,8 @@ python3 scripts/sync_client.py --apply --release 0.2.2   # 落盘 + 改版本 + 
 1. `python3 scripts/sync_client.py` 看差异，`--apply` 落盘。模组按 sha512 反查 Modrinth 自动补元数据；
    查不到的（付费、自制数据包）先把 jar 放进 `pack/mods-local/` 再跑，脚本会写成 `local` 条目，CI 直接从仓库取。
 2. `python3 scripts/fetch.py && python3 scripts/build.py --fast --target linux` 本地抽检（可选）。
-3. `python3 scripts/sync_client.py --apply --release <新版本>` → 改 `pack.json` version、提交、打 tag 并推送，
-   Actions 构建完自动发 Release，玩家从 Release 页下载即可。
+3. `python3 scripts/sync_client.py --apply --release <新版本>` → 改 `pack.json` version、提交（信息带
+   `release: <新版本>`）、推送 master，Actions 构建完自动更新滚动 Release，玩家从 Release 页下载即可。
 
 ## 发布（滚动更新）
 
