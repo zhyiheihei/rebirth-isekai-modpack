@@ -1,0 +1,10 @@
+{
+ "launcher": "FCL",
+ "format": "modrinth-mrpack",
+ "revision": 3,
+ "exclude_mod_files": ["DistantHorizons-3.3.3-26.1.2-fabric-neoforge.jar"],
+ "include_resourcepacks": true,
+ "include_shaderpacks": false,
+ "experimental": true,
+ "notes": "当前配置沿用客户端模组集；根据 Xiaomi SM8750 / Android 16 的 FCL 日志排除 Distant Horizons（其 zstd JNI 依赖 libpthread.so.0，Android 无此 glibc 库）。其他模组仍需实机验证。首次测试关闭光影；新增排除项必须由设备日志证明，不凭猜测删模组。"
+}

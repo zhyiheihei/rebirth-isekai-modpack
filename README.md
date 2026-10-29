@@ -6,6 +6,8 @@
 
 Minecraft 26.1.2 + **Fabric 0.20.1** 的整合包。客户端版本与服务器保持一致（服务端为 26.1.2 混合端），269 个模组、45 个材质包、9 个光影包，打包成开箱即玩的三平台便携包（自带 Java 25 与全部游戏资源），Windows 另有 PCL2 可导入的 MMC 实例包。三个便携包都是双击启动脚本即进游戏：自带 Java、预置服务器、首次运行随机分配一个离线玩家名；「启动正版」脚本可登录微软账号联机，登录过一次后「启动游戏」会自动识别并用正版启动，删掉账号即回离线模式。
 
+Android 目前提供 **FCL 可导入的 `.mrpack` 实验包**，不是自制 APK；使用 FCL 官方 APK 启动。当前保留完整客户端模组清单，首次测试不带光影；尚未通过 Android 实机验证，不能视为已支持设备。
+
 名字取自「重生」+「异世界冒险」：进服那一刻起，你在一个重开的世界里从头活一遍——不是快节奏的战斗包，而是偏探索与建造的长期生存。地图换了、生物群系重织、村庄与要塞重做，附魔与饰品把成长线拉长；难度靠结构与地牢推进，不靠数值堆砌。适合几个人长期泡在一个存档里，也适合单人慢慢逛。
 
 模组、材质、光影逐条核对到 26.1.2 有可用构建后固定版本，不追最新、只追能跑。加载器是按可移植数量选出来的：Fabric **244** / NeoForge **209**（252 个可移植模组里 Fabric 覆盖 96.8%），且仅 Fabric 可用的 43 个里多为内容模组（BetterEnd、BetterNether、BCLib、The Bumblezone、Brewery、Macaw's Holidays、Sit、Ube's Delight 等）。
@@ -24,12 +26,15 @@ pack/            整合包定义（进 git 的唯一事实来源）
   config/          模组配置（290 个文件）
   options.txt      游戏设置（含已启用材质包顺序）
   mmc-pack.json    MultiMC/Prism 实例组件声明
+  android.json     FCL/Android 实验包策略（单独排除清单，不改桌面配置）
   使用说明.txt     随包分发的说明
 scripts/
   common.py        路径/清单/下载校验（支持 MODPACK_PROXY）
   fetch.py         拉取 mods / 启动器 / Java / 翻译 / 游戏资源 / 材质
   resources.py     按 Mojang+NeoForge 元数据下载客户端 jar、库、素材
   build.py         组装三平台便携包 + PCL2 用的 MMC 实例包
+  build_android.py 生成 FCL 可导入的 Modrinth `.mrpack`（不生成 APK）
+  verify_android.py 自检 Android 包清单、模组哈希与 overrides
   verify_bundle.py 产物自检（确认启动免下载、材质默认启用）
   update.py        检查并升级模组版本
   package_assets.py 打包材质原件用于 release 资产
@@ -56,6 +61,18 @@ python3 scripts/build.py --target mmc --zip     # PCL2 / HMCL 导入用
 
 `build.py` 需要一台已经有 PrismLauncher 数据目录的机器来提供 `assets/ libraries/ meta/`（默认 `~/.local/share/PrismLauncher`，可用 `--prism-data` 指定）。Windows/macOS 专属原生库会在构建时按 Mojang 元数据自动补齐。
 
+### Android / FCL 实验包
+
+```bash
+python3 scripts/fetch.py
+MODPACK_DIST=/var/tmp/rebirth-android-dist python3 scripts/build_android.py
+MODPACK_DIST=/var/tmp/rebirth-android-dist python3 scripts/verify_android.py
+```
+
+将生成的 `Rebirth-Isekai-<版本>-Android-FCL.mrpack` 传到手机，在 FCL 的本地整合包导入页导入。[FCL 官方仓库](https://github.com/FCL-Team/FoldCraftLauncher)列明支持 Fabric 与 Java 25；[Modrinth 导入实现](https://github.com/FCL-Team/FoldCraftLauncher/blob/main/FCL/src/main/java/com/tungsten/fclcore/mod/modrinth/ModrinthInstallTask.java)会读取 Modrinth manifest 和 `overrides/`，本包已按该格式生成。游戏本体与资源不放进包，玩家需在 FCL 中用正版微软账号登录并下载。
+
+本包沿用 `pack/mods.json` 的客户端清单（按设备日志排除了 Distant Horizons），Modrinth 模组由 FCL 下载，4 个本地模组和材质配置放入 overrides；光影包暂不打包，并在 Android overrides 中关闭 Iris 光影。**这只是可导入的测试包，当前没有 Android 实机验收；**遇到启动失败或渲染问题时请保留 FCL 日志，再根据具体日志更新 `pack/android.json`，不要凭猜测删模组。通过实机验收前不并入滚动 Release。要做自有品牌 APK，需要后续单独维护 FCL fork；本项目不复制或修改 FCL 启动器源码。
+
 ## 更新维护
 
 ```bash
@@ -66,7 +83,7 @@ python3 scripts/fetch.py && python3 scripts/build.py --zip
 
 - 升级 Minecraft / Fabric：改 `pack/pack.json` 与 `pack/mmc-pack.json`，再跑一次 `update.py --write` 让所有模组对齐新版本。
 - 换材质/光影：把新压缩包放进 `local-assets/<类别>/`，改对应 JSON 的 `file`/`sha256`/`size`；批量对齐上游用 `python3 scripts/update_assets.py`（见下）。
-  45 个材质包里，能查到上游发布者的最新版本已替换（`options.txt` 的 `resourcePacks` 引用同步更新），每个 `pack.mcmeta` 都写入了 `supported_formats: {min_format, max_format}` 才能在 26.x 里正常启用——26.x 已改用这两个字段名，旧的 `min_inclusive`/`max_inclusive` 会被判为「declares support for version newer than 64, but is missing mandatory fields」而回落；`xali's Enhanced Vanilla` 上游 zip 本身是重叠条目的畸形包（`unzip` 只报 warning，Python zipfile 直接抛错），本地是用 `unzip` 兜底解出后重建的等价副本。
+  45 个材质包里，能查到上游发布者的最新版本已替换（`options.txt` 的 `resourcePacks` 引用同步更新）。Minecraft 26.1 的 resource pack format 65 使用顶层 `min_format` / `max_format`，多版本资源包的最低格式不得小于 15；若兼容范围从旧格式开始，还需保留相匹配的旧版兼容字段，构建时会规范化。`xali's Enhanced Vanilla` 上游 zip 本身是重叠条目的畸形包（`unzip` 只报 warning，Python zipfile 直接抛错），本地是用 `unzip` 兜底解出后重建的等价副本。
 - 禁用某个模组：把 `mods.json` 里的 `enabled` 改成 `false` 并写上 `disabled_reason`。
 
 ## 材质/光影批量对齐上游

@@ -6,6 +6,7 @@ import shutil
 import subprocess
 import sys
 import time
+import zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PACK = os.path.join(ROOT, "pack")
@@ -50,6 +51,68 @@ def sha(algorithm, path, chunk=1 << 20):
         for block in iter(lambda: f.read(chunk), b""):
             h.update(block)
     return h.hexdigest()
+
+
+def normalize_resourcepack(source, destination):
+    """Normalize resource-pack version metadata for the target MC pack-format schema."""
+    with zipfile.ZipFile(source) as src:
+        infos = src.infolist()
+        metadata_info = next((i for i in infos if i.filename == "pack.mcmeta" and not i.is_dir()), None)
+        if metadata_info is None:
+            raise ValueError(f"材质包缺少 pack.mcmeta: {source}")
+        metadata_bytes = src.read(metadata_info)
+        metadata = json.loads(metadata_bytes)
+        pack = metadata.setdefault("pack", {})
+        old_supported = pack.get("supported_formats")
+        old_format = pack.get("pack_format")
+        minimum = pack.get("min_format")
+        maximum = pack.get("max_format")
+
+        if minimum is None:
+            if isinstance(old_supported, dict):
+                minimum = old_supported.get("min_inclusive", old_supported.get("min_format", old_format))
+            elif isinstance(old_supported, list) and old_supported:
+                minimum = old_supported[0]
+            elif isinstance(old_supported, int):
+                minimum = old_supported
+            else:
+                minimum = old_format or 15
+        if maximum is None:
+            if isinstance(old_supported, dict):
+                maximum = old_supported.get("max_inclusive", old_supported.get("max_format", 999))
+            elif isinstance(old_supported, list) and old_supported:
+                maximum = old_supported[-1]
+            else:
+                maximum = 999
+
+        minimum = int(minimum[0] if isinstance(minimum, list) else minimum)
+        maximum = int(maximum[-1] if isinstance(maximum, list) else maximum)
+        minimum = max(15, minimum)
+        if old_format is not None:
+            old_format = max(15, int(old_format))
+            minimum = min(minimum, old_format)
+        maximum = max(minimum, maximum)
+        pack["min_format"] = minimum
+        pack["max_format"] = maximum
+
+        if minimum < 65:
+            pack["pack_format"] = old_format or minimum
+            pack["supported_formats"] = {
+                "min_inclusive": minimum,
+                "max_inclusive": maximum,
+            }
+        else:
+            pack.pop("pack_format", None)
+            pack.pop("supported_formats", None)
+
+        normalized = json.dumps(metadata, ensure_ascii=False, indent=2).encode("utf-8")
+        changed = normalized != metadata_bytes
+        with zipfile.ZipFile(destination, "w") as out:
+            out.comment = src.comment
+            for info in infos:
+                data = normalized if info is metadata_info else src.read(info)
+                out.writestr(info, data)
+    return changed
 
 
 def ensure_dir(path):

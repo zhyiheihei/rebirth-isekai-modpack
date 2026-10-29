@@ -365,7 +365,7 @@ def check_portable_extras(root, problems):
         if "CONTROL_OR_COMMAND" in text or ":\u0000" in text:
             problems.append(f"{os.path.relpath(opts, root)} 残留 Forge 风格键位修饰符")
 
-    # 4) 材质包 mcmeta 必须是 26.x 的 min_format/max_format
+    # 4) 26.1 pack format 65 使用顶层 min/max；仅为旧格式兼容时保留 supported_formats。
     for packzip in glob.glob(os.path.join(root, "**", "resourcepacks", "*.zip"), recursive=True):
         try:
             import zipfile
@@ -375,9 +375,16 @@ def check_portable_extras(root, problems):
         except Exception:
             problems.append(f"材质包 mcmeta 读取失败: {os.path.basename(packzip)}")
             continue
-        sf = meta.get("pack", {}).get("supported_formats")
-        if not isinstance(sf, dict) or "min_format" not in sf or "max_format" not in sf:
-            problems.append(f"材质包 mcmeta 字段不兼容 26.x: {os.path.basename(packzip)}")
+        pack_meta = meta.get("pack", {})
+        low, high = pack_meta.get("min_format"), pack_meta.get("max_format")
+        sf = pack_meta.get("supported_formats")
+        if not isinstance(low, int) or not isinstance(high, int) or low < 15 or high < low:
+            problems.append(f"材质包 mcmeta 的 min_format/max_format 范围无效: {os.path.basename(packzip)}")
+        elif low < 65:
+            if pack_meta.get("pack_format") is None or sf != {"min_inclusive": low, "max_inclusive": high}:
+                problems.append(f"旧格式材质包缺少匹配的 pack_format/supported_formats: {os.path.basename(packzip)}")
+        elif "supported_formats" in pack_meta or "pack_format" in pack_meta:
+            problems.append(f"新格式材质包仍带已移除的旧字段: {os.path.basename(packzip)}")
 
     # 5) iris 默认光影必须真实存在（光影回退版本后容易忘记改这里）
     for props in glob.glob(os.path.join(root, "**", "config", "iris.properties"), recursive=True):

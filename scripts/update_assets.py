@@ -18,6 +18,8 @@ import urllib.parse
 import urllib.request
 import zipfile
 
+import common
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 UA = "rebirth-isekai-modpack (asset realign)"
 API = "https://api.modrinth.com/v2"
@@ -145,31 +147,14 @@ def download(url, dest):
 
 
 def patch_mcmeta(path):
-    """26.x 只认 min_format/max_format；缺就补，保留原描述。"""
-    with zipfile.ZipFile(path) as z:
-        if "pack.mcmeta" not in z.namelist():
-            return False
-        entries = [(i, z.read(i)) for i in z.infolist()]
-        meta = json.loads(z.read("pack.mcmeta"))
-    pack = meta.setdefault("pack", {})
-    fmt = pack.get("pack_format", 15)
-    sf = pack.get("supported_formats")
-    lo = fmt
-    if isinstance(sf, dict):
-        lo = sf.get("min_format") or sf.get("min_inclusive") or fmt
-    elif isinstance(sf, int):
-        lo = min(sf, fmt)
-    want = {"min_format": int(lo), "max_format": 999}
-    if sf == want:
-        return False
-    pack["supported_formats"] = want
-    payload = json.dumps(meta, ensure_ascii=False, indent=2).encode()
+    """按 26.1 pack format 规范转换版本范围，保留旧版兼容字段的正确格式。"""
     tmp = path + ".tmp"
-    with zipfile.ZipFile(tmp, "w", zipfile.ZIP_DEFLATED) as zo:
-        for info, data in entries:
-            zo.writestr(info, payload if info.filename == "pack.mcmeta" and not info.is_dir() else data)
-    os.replace(tmp, path)
-    return True
+    changed = common.normalize_resourcepack(path, tmp)
+    if changed:
+        os.replace(tmp, path)
+    else:
+        os.remove(tmp)
+    return changed
 
 
 def plan():

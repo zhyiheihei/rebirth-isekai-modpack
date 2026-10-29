@@ -154,7 +154,12 @@ def build_gamedir(dest):
     for sub in ("resourcepacks", "shaderpacks"):
         target = common.ensure_dir(os.path.join(dest, sub))
         for e in common.load(sub + ".json"):
-            shutil.copy2(os.path.join(common.LOCAL, sub, e["file"]), os.path.join(target, e["file"]))
+            source = os.path.join(common.LOCAL, sub, e["file"])
+            destination = os.path.join(target, e["file"])
+            if sub == "resourcepacks":
+                common.normalize_resourcepack(source, destination)
+            else:
+                shutil.copy2(source, destination)
     write_servers(dest)
     return dest
 
