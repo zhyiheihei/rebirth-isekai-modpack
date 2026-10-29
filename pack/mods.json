@@ -2123,16 +2123,6 @@
     "enabled": true
   },
   {
-    "file": "sparsestructures-fabric-26.1.2-3.1.3.jar",
-    "project": "qwvI41y9",
-    "version": "3.1.3",
-    "version_id": "nqu4TxJv",
-    "loader": "fabric",
-    "sha512": "7361187361588cb01ad25ff0af098e5b4a566d173b18fad370351be7dcf7ea5ab15ad776f8bb9c57315f78159a1e259da08129bbd4c06df6a3074a2fb334c3b5",
-    "url": "https://cdn.modrinth.com/data/qwvI41y9/versions/nqu4TxJv/sparsestructures-fabric-26.1.2-3.1.3.jar",
-    "enabled": true
-  },
-  {
     "file": "spell_engine-fabric-1.10.9+26.1.2.jar",
     "project": "XvoWJaA2",
     "version": "1.10.9+26.1.2-fabric",
