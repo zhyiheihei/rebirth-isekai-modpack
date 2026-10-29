@@ -100,16 +100,6 @@
     "enabled": true
   },
   {
-    "file": "amendments-26.1.2-3.0.0-fabric.jar",
-    "project": "6iTJugQR",
-    "version": "26.1.2-3.0.0",
-    "version_id": "RKaZBafV",
-    "loader": "fabric",
-    "sha512": "359a3e153ed8ed371cce16c612a95f01682283a7523050f567dd11cd51bdf7eb71ef5123f6a7429f7dd6749fa8670ce67c3404357f62024f03cf7327be68e9bf",
-    "url": "https://cdn.modrinth.com/data/6iTJugQR/versions/RKaZBafV/amendments-26.1.2-3.0.0-fabric.jar",
-    "enabled": true
-  },
-  {
     "file": "anvianslib-fabric-26.1-1.5.0.jar",
     "project": "PuTjrq4T",
     "version": "1.5.0",
@@ -1070,16 +1060,6 @@
     "loader": "fabric",
     "sha512": "c5655807d1c80dd3cdd899435f7938ef9875c5cf5e86bae2313a5e0b2751ed33edeb6b2dce4a8ac4178fda90622008047524b92533466e44920dca4191fe4006",
     "url": "https://cdn.modrinth.com/data/hYykXjDp/versions/Ugxie86a/fzzy_config-0.7.7%2B26.1.jar",
-    "enabled": true
-  },
-  {
-    "file": "gardeners-dream-2.6.jar",
-    "project": "cPfmk5E3",
-    "version": "2.6+mod",
-    "version_id": "jCeXp97b",
-    "loader": "fabric",
-    "sha512": "9fbcd5ce83a57d4aa6eccbf16821db929f6304c180d1cfb9a7a07f1c00bb16329903af332dcf5ad8945a68aa79b8a727256e6561a101b16cdf06e869a82e34cc",
-    "url": "https://cdn.modrinth.com/data/cPfmk5E3/versions/jCeXp97b/gardeners-dream-2.6.jar",
     "enabled": true
   },
   {

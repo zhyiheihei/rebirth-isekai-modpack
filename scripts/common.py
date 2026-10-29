@@ -21,9 +21,11 @@ def load(name):
 
 
 def save(name, data):
+    """写 pack/ 下的清单。缩进固定 2 空格——与仓库现有 JSON 一致，
+    改成别的值会让每次保存都把整份文件重排、淹没真正的改动。"""
     path = os.path.join(PACK, name)
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=1)
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
         f.write("\n")
 
 

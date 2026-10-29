@@ -33,6 +33,11 @@ EXCL_REL = {
     "rpg_series/loot_fallback_report.json",  # 运行时战利品回退报告
 }
 
+# java.util.Properties 保存时自动写入的生成时间注释，如 "#Thu Oct 29 12:44:13 CST 2026"。
+# 模组每次启动都会刷新它，不忽略的话每次同步都会把一堆纯时间戳抖动当改动提交。
+VOLATILE_LINE = re.compile(
+    r"^#[A-Z][a-z]{2} [A-Z][a-z]{2} [ 0-9]{2} [0-9:]{8} [A-Z]{2,5} [0-9]{4}\s*$", re.M)
+
 
 def instance_path(arg):
     for cand in (arg, os.environ.get("MODPACK_INSTANCE")):
@@ -151,13 +156,20 @@ def diff_mods(inst):
 
 # ---------------- config ----------------
 
+def comparable(path):
+    """比对用的归一化文本：换行符统一成 LF，抹掉 Properties 的生成时间戳。"""
+    with open(path, encoding="utf-8", errors="replace") as fh:
+        text = fh.read().replace("\r\n", "\n")
+    return VOLATILE_LINE.sub("#<saved-at>", text)
+
+
 def diff_config(inst):
     src = walk(os.path.join(inst, "config"))
     dst = walk(os.path.join(common.PACK, "config"))
     src = {k: v for k, v in src.items() if not excluded(k)}
     dst = {k: v for k, v in dst.items() if not excluded(k)}
     add = sorted(set(src) - set(dst))
-    upd = sorted(k for k in set(src) & set(dst) if common.sha("sha256", src[k]) != common.sha("sha256", dst[k]))
+    upd = sorted(k for k in set(src) & set(dst) if comparable(src[k]) != comparable(dst[k]))
     return src, add, upd, sorted(set(dst) - set(src))
 
 

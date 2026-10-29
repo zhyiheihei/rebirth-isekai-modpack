@@ -86,8 +86,13 @@ def main():
         dropped = common.load("dropped.json")
     except Exception:
         dropped = []
+    # dropped.json 是累积台账（两百多条历史剔除）。带 since 的按版本过滤，
+    # 只把本次新增的剔除列出来；老条目没有 since，回落到全量，保持旧行为。
+    current = pack["version"]
+    if any(d.get("since") for d in dropped):
+        dropped = [d for d in dropped if d.get("since") == current]
     if dropped:
-        lines += ["## 本版本相对上一版剔除", "| 文件 | 原因 |", "| --- | --- |"]
+        lines += ["## 本版本剔除的模组", "| 文件 | 原因 |", "| --- | --- |"]
         lines += [f"| {d['file']} | {d['reason']} |" for d in dropped]
         lines.append("")
 
