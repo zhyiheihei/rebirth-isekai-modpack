@@ -87,9 +87,11 @@ def main():
     except Exception:
         dropped = []
     # dropped.json 是累积台账（两百多条历史剔除）。带 since 的按版本过滤，
-    # 只把本次新增的剔除列出来；老条目没有 since，回落到全量，保持旧行为。
+    # 只把本次新增的剔除列出来。注意：上一版发版失败时（未出产物），
+    # 其 since 记录会顺延到本版首次成功发布，一并列出，避免静默丢失。
     current = pack["version"]
     if any(d.get("since") for d in dropped):
+        # 只认显式标了本版 since 的条目；没有 since 的都是历史旧账，不该重复出现。
         dropped = [d for d in dropped if d.get("since") == current]
     if dropped:
         lines += ["## 本版本剔除的模组", "| 文件 | 原因 |", "| --- | --- |"]
@@ -99,6 +101,9 @@ def main():
     if disabled:
         lines += ["## 已知不适配、已禁用", "| 模组 | 原因 |", "| --- | --- |"]
         lines += [f"| {m['file']} | {m.get('disabled_reason', '')} |" for m in disabled]
+        lines.append("")
+    if not dropped and not disabled:
+        lines.append("本版本模组集合无增删。")
         lines.append("")
     out = "\n".join(lines)
     if "--github" in sys.argv:
