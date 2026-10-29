@@ -97,4 +97,8 @@ git push origin master
 - `xali's Enhanced Vanilla` 上游 zip 条目重叠（`unzip` 只报 warning，Python `zipfile` 直接抛错），本地是解出后重建的副本，不要用上游原包覆盖。
 - Android 当前只生成 FCL 可导入的 Modrinth `.mrpack`，不生成或分发自制 APK；`pack/android.json` 维护单独的实验配置，基础依赖版本仍来自 `pack/pack.json` / `pack/mods.json`。FCL README 声明支持 Fabric 和 Java 25，导入实现读取 `modrinth.index.json` 与 `overrides/`；这只证明格式兼容，不等同于本整合包已在 Android 实机通过。先关闭光影，模组排除必须由实际设备日志证据驱动；实机验收前不要把 Android 包接入滚动 Release。
 - 账号机制（别拆）：`accounts.json` 里的占位 MSA 账号 + `prismlauncher.cfg` 里的死代理（SOCKS5 127.0.0.1:9）是离线打开即用的前提——Prism 11 的 `ownsMinecraft()` 排除 Offline 类型账号，没有占位 MSA 会弹 Demo 确认框/登录向导；死代理让占位账号的静默刷新以网络错误收场（STATE_OFFLINE），不弹重新认证框。启动脚本检测到 `accounts.json` 出现非占位 `refresh_token`（玩家已登录微软正版）时，会撤掉死代理、不再传 `--offline`，由 Prism 官方逻辑用正版账号启动；「启动正版」脚本则无条件走这条路。`verify_bundle.py` 对这套机制有回归检查。
+- 材质包被就地改过（如剔除包内 JSON 尾部的作者签名行）时，修正版必须放进 `pack/resourcepacks-local/`：
+  `local-assets/` 不进 git，CI 靠 actions/cache 或发布资产恢复，缓存里的旧包会盖掉修正版，
+  `check_local_assets()` 会在校验前把仓库内修正版复制回去。只改 `resourcepacks.json` 的 sha256
+  而不带包，构建会在 fetch 阶段直接报「校验失败」。
 - `AutomaticJavaSwitch=true` 是 Java 自动兜底的开关：实例固定的包内 Java 路径失效时，启动器会从系统检测到的 Java 里挑兼容主版本（MC 26.x = Java 25）；`AutomaticJavaDownload` 必须保持 `false`——自动下载走 meta.prismlauncher.org，失败会直接中止启动。

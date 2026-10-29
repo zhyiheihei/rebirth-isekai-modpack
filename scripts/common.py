@@ -20,12 +20,23 @@ def load(name):
         return json.load(f)
 
 
+def _existing_indent(path):
+    """读文件现有的缩进宽度：仓库里 mods.json 是 2 空格、其余清单多是 1 空格，
+    写死任何一个值都会把整份文件重排，淹没真正的改动。"""
+    try:
+        with open(path, encoding="utf-8") as f:
+            for line in f:
+                if line.startswith(" "):
+                    return len(line) - len(line.lstrip(" "))
+    except OSError:
+        pass
+    return 1
+
+
 def save(name, data):
-    """写 pack/ 下的清单。缩进固定 2 空格——与仓库现有 JSON 一致，
-    改成别的值会让每次保存都把整份文件重排、淹没真正的改动。"""
     path = os.path.join(PACK, name)
     with open(path, "w", encoding="utf-8", newline="\n") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+        json.dump(data, f, ensure_ascii=False, indent=_existing_indent(path))
         f.write("\n")
 
 
@@ -231,7 +242,34 @@ def fetch_runtimes(quiet=False):
     return True
 
 
+# 仓库内直接携带的资产修正版：只有被修过、体积又小的包放这里。
+# local-assets/ 不进 git，靠 actions/cache 或发布资产恢复，缓存里的旧副本会盖掉修正版，
+# 所以每次校验前按清单 sha256 把它们复制回去。
+ASSET_OVERRIDES = os.path.join(PACK, "resourcepacks-local")
+
+
+def apply_asset_overrides():
+    """把仓库自带的修正版资产覆盖到 local-assets/，已一致则跳过。返回被覆盖的相对路径。"""
+    if not os.path.isdir(ASSET_OVERRIDES):
+        return []
+    applied = []
+    for name in ("resourcepacks", "shaderpacks"):
+        for e in load(name + ".json"):
+            src = os.path.join(ASSET_OVERRIDES, e["file"])
+            if not os.path.exists(src):
+                continue
+            dst = os.path.join(LOCAL, name, e["file"])
+            if os.path.exists(dst) and sha("sha256", dst) == e["sha256"]:
+                continue
+            ensure_dir(os.path.dirname(dst))
+            shutil.copy2(src, dst)
+            applied.append(os.path.relpath(dst, ROOT))
+    return applied
+
+
 def check_local_assets():
+    for fixed in apply_asset_overrides():
+        print(f"   用仓库内修正版覆盖: {fixed}")
     missing = []
     for name in ("resourcepacks.json", "shaderpacks.json"):
         for e in load(name):

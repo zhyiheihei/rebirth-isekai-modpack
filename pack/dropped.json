@@ -1283,7 +1283,7 @@
     "modid": "amendments",
     "version_id": "RKaZBafV",
     "reason": "排查客户端加载与渲染问题时清出：该模组改写告示牌/炼药锅/药水等方块外观，日志长期报未解析纹理引用（ecologics、betternether 告示牌），不参与世界生成与联机判定",
-    "since": "0.3.7"
+    "since": "0.3.8"
   },
   {
     "file": "gardeners-dream-2.6.jar",
@@ -1291,6 +1291,6 @@
     "modid": "mr_gardeners_dream",
     "version_id": "jCeXp97b",
     "reason": "排查客户端加载与渲染问题时清出：仅提供园艺花盆的右键收获，服务端从未部署该模组，客户端单端加载不生效；不参与世界生成",
-    "since": "0.3.7"
+    "since": "0.3.8"
   }
 ]

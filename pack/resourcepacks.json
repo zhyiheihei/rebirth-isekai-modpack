@@ -1,9 +1,10 @@
 [
  {
   "file": "3D发光浆果cave-vines-e1610.zip",
-  "sha256": "2fb95c2514edf0c3c6c2cc64e27f507e25549c533bd19da2df8c96601ba638f9",
-  "size": 24288,
-  "source": "local"
+  "sha256": "f932678269757a680f2fd8510bdf8ec60090b014158c24a9a77e916167a802a8",
+  "size": 24307,
+  "source": "local",
+  "note": "包内 JSON 尾部作者签名已剔除，26.x 严格解析可通过（修正版随仓库携带）"
  },
  {
   "file": "3D树苗trees-a-e90.zip",
@@ -525,9 +526,10 @@
  },
  {
   "file": "更好的作物better-crops-3d-16x-with-tall-wheat-e2310.zip",
-  "sha256": "d3a6840a88cb5e99d1ff29c4be04a21070b718a617a98141ebfc72464fdc36c1",
-  "size": 265487,
-  "source": "local"
+  "sha256": "0cab9b6ed6becc868bb25f68d2ec50907b9c093bf99df6a0e874cc299cafc351",
+  "size": 260368,
+  "source": "local",
+  "note": "包内 JSON 尾部作者签名已剔除，26.x 严格解析可通过（修正版随仓库携带）"
  },
  {
   "file": "更好的浆果2better-cberry-2bush.zip",
@@ -555,9 +557,10 @@
  },
  {
   "file": "更好的藤曼better-vines-e2120.zip",
-  "sha256": "460c6d5151f2d68acbeb90274337922c0e404993a3c58b0f6b928e48fc98c77f",
-  "size": 17318,
-  "source": "local"
+  "sha256": "410f49c1eeedb7f968d74f327255199259c1169b2846f3f000b991d0efa89b5c",
+  "size": 17336,
+  "source": "local",
+  "note": "包内 JSON 尾部作者签名已剔除，26.x 严格解析可通过（修正版随仓库携带）"
  },
  {
   "file": "更好的连接透明玻璃Clean_Connected_Glass(1.20fufu修复版).zip",
