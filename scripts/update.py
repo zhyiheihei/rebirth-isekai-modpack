@@ -3,6 +3,7 @@
 
   python3 scripts/update.py          # 只报告可升级项
   python3 scripts/update.py --write  # 写回 mods.json
+  python3 scripts/update.py --only <jar...> --write  # 只更新指定 jar
 """
 import argparse
 import json
@@ -18,13 +19,14 @@ def versions_for(project, mc, loader):
         {"game_versions": json.dumps([mc]), "loaders": json.dumps([loader])}
     )
     url = f"https://api.modrinth.com/v2/project/{project}/version?{query}"
+    error = None
     for _ in range(3):
         try:
             with urllib.request.urlopen(url, timeout=30) as resp:
                 return json.load(resp)
-        except Exception:
-            continue
-    return []
+        except Exception as exc:
+            error = exc
+    raise RuntimeError(f"Modrinth 请求失败（不能当作无兼容版本）: {project}: {error}")
 
 
 def newest(versions):
@@ -36,10 +38,19 @@ def newest(versions):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
+    ap.add_argument("--only", nargs="+", metavar="JAR", help="只检查指定的模组文件名")
     args = ap.parse_args()
 
     pack = common.load("pack.json")
-    mods = common.load("mods.json")
+    all_mods = common.load("mods.json")
+    mods = all_mods
+    if args.only:
+        requested = set(args.only)
+        found = {m["file"] for m in all_mods} & requested
+        if requested - found:
+            raise SystemExit(f"清单中找不到这些模组: {sorted(requested - found)}")
+        mods = [m for m in all_mods if m["file"] in requested]
+    mods = [m for m in mods if not m.get("local") and m.get("project") != "local"]
     updates, incompatible = [], []
 
     for mod in mods:
@@ -82,7 +93,9 @@ def main():
     for name, why in incompatible:
         print(f"  !! {name}: {why}")
     if args.write and updates:
-        common.save("mods.json", mods)
+        with open(f"{common.PACK}/mods.json", "w", encoding="utf-8") as f:
+            json.dump(all_mods, f, ensure_ascii=False, indent=2)
+            f.write("\n")
         print("已写回 pack/mods.json；接着跑 scripts/fetch.py 再 build.py")
     return 0
 

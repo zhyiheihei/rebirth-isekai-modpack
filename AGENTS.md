@@ -14,7 +14,7 @@ java           = Temurin 25
 判定规则，按顺序看：
 
 1. `pack/pack.json` 的 `minecraft` 是唯一事实来源。文档、JSON 里任何其他版本号都不是整合包的目标版本。
-2. `pack/mods.json` 里 259 个模组的 `version_id` 全部在 Modrinth 上声明支持 `26.1.2`（已逐个用 `/v2/version/{id}` 核对）。文件名里出现 `26.2`、`26.3` 只说明那个 jar 同时兼容更高版本，例如 `advancements_reloaded-0.14.0-fabric-26.2.jar`、`bigger_end_cities-26.1-26.3-1.1.3.jar`。
+2. `pack/mods.json` 是模组清单；Modrinth 条目要按 `version_id` 对应的 `game_versions` 判断兼容性，文件名里的 `26.2`、`26.3` 可能只是兼容范围。`local` 条目由仓库提供，不存在可查询的 Modrinth 版本。
 3. `pack/resourcepacks.json` / `shaderpacks.json` 里的 `upstream.game_versions` 是**材质/光影作者发布时声明的版本**，不是本项目的目标。带 `note` 字段的条目是名字或上游版本容易引起误读的，逐条看 note。
 4. `pack/dropped.json` 里的 `reason: "止于 26.3（无 26.1.2 构建…"` 表示那个模组**没有** 26.1.2 构建、因此被排除。看到这类记录不要反推本项目用了 26.3。
 5. 材质包靠 `pack.mcmeta` 的 `supported_formats: {min_format, max_format: 999}` 在 26.1.2 加载；上游停更在 1.20/1.21 的老包也能用，只是新贴图不生效。

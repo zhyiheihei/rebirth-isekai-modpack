@@ -511,13 +511,13 @@
     "enabled": true
   },
   {
-    "file": "collective-26.1.2-8.32.jar",
+    "file": "collective-26.1.2-8.68.jar",
     "project": "e0M1UDsY",
-    "version": "26.1.2-8.32-fabric+forge+neo",
-    "version_id": "iXqgYZEw",
+    "version": "26.1.2-8.68-fabric+forge+neo",
+    "version_id": "J47v377f",
     "loader": "fabric",
-    "sha512": "4eb163cb4c4428a0f74dfe4a6571c831fdcb45a5465e71e7d3ac6d20ba28f72c6a6d7a94a41cd2f9781949655b17513755e2b71aa394c31cfe38e0f9c062d7d1",
-    "url": "https://cdn.modrinth.com/data/e0M1UDsY/versions/iXqgYZEw/collective-26.1.2-8.32.jar",
+    "sha512": "3d32acb27f540a0f5a11c96c6ea26a34d5d41e616d8dada04f55d81f1edbbdba93008e6c9bf369aa714cc9803eca5a70444c8967de7ec56f5ddecc006bd12fe2",
+    "url": "https://cdn.modrinth.com/data/e0M1UDsY/versions/J47v377f/collective-26.1.2-8.68.jar",
     "enabled": true
   },
   {
@@ -721,13 +721,13 @@
     "enabled": true
   },
   {
-    "file": "dragondropselytra-26.1.2-3.6.jar",
+    "file": "dragondropselytra-26.1.2-3.7.jar",
     "project": "DPkbo3dg",
-    "version": "26.1.2-3.6-fabric+forge+neo",
-    "version_id": "QbLd0tvF",
+    "version": "26.1.2-3.7-fabric+forge+neo",
+    "version_id": "Oq82bGLP",
     "loader": "fabric",
-    "sha512": "03912efcb1894318893ed928b49f5f275fa9b917f912642414128205d141714e3c57ca83b90b27371cd23ab22ab94a6a0223abba742a09568b9a61402df474e9",
-    "url": "https://cdn.modrinth.com/data/DPkbo3dg/versions/QbLd0tvF/dragondropselytra-26.1.2-3.6.jar",
+    "sha512": "7c6c7f7c0233226f4feebb1c5d765aefff6ac73069b3a943d57af6f79829113bdb6e828cb24a7e1cc7efbde4b39160da8662522513dd1f1ff43f8c30dff5b05b",
+    "url": "https://cdn.modrinth.com/data/DPkbo3dg/versions/Oq82bGLP/dragondropselytra-26.1.2-3.7.jar",
     "enabled": true
   },
   {
@@ -771,13 +771,13 @@
     "enabled": true
   },
   {
-    "file": "easyelytratakeoff-26.1.2-4.5.jar",
+    "file": "easyelytratakeoff-26.1.2-5.0.jar",
     "project": "3hqwGCUB",
-    "version": "26.1.2-4.5-fabric+forge+neo",
-    "version_id": "nVLVFt6W",
+    "version": "26.1.2-5.0-fabric+forge+neo",
+    "version_id": "qpuFzgoL",
     "loader": "fabric",
-    "sha512": "eb40f2a4a83ee73ac308326faa181448980af014c702aefb9965822ea0dc8ab680b96b91f41b6efd2b433ea79791aa3141ccf2b214e35a9d165e1c1e54c68660",
-    "url": "https://cdn.modrinth.com/data/3hqwGCUB/versions/nVLVFt6W/easyelytratakeoff-26.1.2-4.5.jar",
+    "sha512": "6f58e3c46f33970c2adee47affb4ca3e9cce5bae2303d9bbabf964952557192526f0891cb8da7731fd850468db8e700a6ccaba58a0aeb5e7f14744e133c53674",
+    "url": "https://cdn.modrinth.com/data/3hqwGCUB/versions/qpuFzgoL/easyelytratakeoff-26.1.2-5.0.jar",
     "enabled": true
   },
   {
@@ -1153,13 +1153,13 @@
     "enabled": true
   },
   {
-    "file": "healingcampfire-26.1.2-6.2.jar",
+    "file": "healingcampfire-26.1.2-6.4.jar",
     "project": "kOuPUitF",
-    "version": "26.1.2-6.2-fabric+forge+neo",
-    "version_id": "Gor9X15r",
+    "version": "26.1.2-6.4-fabric+forge+neo",
+    "version_id": "9pXLfjWh",
     "loader": "fabric",
-    "sha512": "ca7d3e31e61b9d64fac882a149c42b6a45c40809a442b10b67ec3d8fd64cc8092e03347248e0363b29ca8f58a884e61ffa0c0217e97f70879b0662afb2b6106e",
-    "url": "https://cdn.modrinth.com/data/kOuPUitF/versions/Gor9X15r/healingcampfire-26.1.2-6.2.jar",
+    "sha512": "966479bb0fca7abcaf305e68376e15322c7801abe10cf4ba11e1e098048d667a28e0b91515eb88c7f6785f1acf7dc60f2f88340321f9eafe4af51d7783352038",
+    "url": "https://cdn.modrinth.com/data/kOuPUitF/versions/9pXLfjWh/healingcampfire-26.1.2-6.4.jar",
     "enabled": true
   },
   {
@@ -1653,13 +1653,13 @@
     "enabled": true
   },
   {
-    "file": "moonlight-26.1.2-4.1.2-fabric.jar",
+    "file": "moonlight-26.1.2-4.2.0-fabric.jar",
     "project": "twkfQtEc",
-    "version": "26.1.2-4.1.2",
-    "version_id": "qUpamPkR",
+    "version": "26.1.2-4.2.0",
+    "version_id": "UR9qn7zW",
     "loader": "fabric",
-    "sha512": "1f1654f50c755d4e6bb66b3a4d4afe6123bdcf448c93ab766e64446f3c8ce18414c1a564bcddf097bd7c995a1f7a16ed1e83c3cf061d742cad753ae61e5a669f",
-    "url": "https://cdn.modrinth.com/data/twkfQtEc/versions/qUpamPkR/moonlight-26.1.2-4.1.2-fabric.jar",
+    "sha512": "6d8fd39c148745bf28025e7f05f4369a4e9b8981920e3fabed39746cc9af8597643363b887924ee1f223be75a1e1aaffd4d279fb91772ccb4a677b2bafb719fe",
+    "url": "https://cdn.modrinth.com/data/twkfQtEc/versions/UR9qn7zW/moonlight-26.1.2-4.2.0-fabric.jar",
     "enabled": true
   },
   {
@@ -2183,13 +2183,13 @@
     "enabled": true
   },
   {
-    "file": "starterkit-26.1.2-8.1.jar",
+    "file": "starterkit-26.1.2-9.0.jar",
     "project": "6L3ydNi8",
-    "version": "26.1.2-8.1-fabric+forge+neo",
-    "version_id": "kMKNPXeX",
+    "version": "26.1.2-9.0-fabric+forge+neo",
+    "version_id": "Ohk1qNLI",
     "loader": "fabric",
-    "sha512": "5e3af7866da28c9aa66c12eb3dd18567b6f02a9b8601c25e11419b7f1956d146b262279e51ca94edb40f515dd4fabdaef3c3a042146e2a9afa3907d599451c33",
-    "url": "https://cdn.modrinth.com/data/6L3ydNi8/versions/kMKNPXeX/starterkit-26.1.2-8.1.jar",
+    "sha512": "1c091babca3c73c90a6a6c08e8c6148cc930da52c84b05677be9703643dfb66d2bde71de8d9583040bb165f7b734a4605008558deafb109bc0b76530f0ec9cf6",
+    "url": "https://cdn.modrinth.com/data/6L3ydNi8/versions/Ohk1qNLI/starterkit-26.1.2-9.0.jar",
     "enabled": true
   },
   {
@@ -2253,13 +2253,13 @@
     "enabled": true
   },
   {
-    "file": "supermartijn642corelib-1.1.25-fabric-mc26.1.jar",
+    "file": "supermartijn642corelib-1.1.26-fabric-mc26.1.jar",
     "project": "rOUBggPv",
-    "version": "1.1.25-fabric-mc26.1",
-    "version_id": "vsFgwnWY",
+    "version": "1.1.26-fabric-mc26.1",
+    "version_id": "R1Kcm9Ay",
     "loader": "fabric",
-    "sha512": "92b0239f8639f2b4243ae05f51d10c8ca3ac688c2b12db1fe2e2f2caae19674bb14251f558b83c7d35d1c5cf298a0ea02ab693ba889e26273d74cb55cfd1b0a5",
-    "url": "https://cdn.modrinth.com/data/rOUBggPv/versions/vsFgwnWY/supermartijn642corelib-1.1.25-fabric-mc26.1.jar",
+    "sha512": "f4e449956bad5489049982e8a2e19e5808bdd51e0a7506ad277f7fb75f1c32512b0d23ee01f13546a08eb8f0de36c34f4a66c151c0cc8732bf375200e877b142",
+    "url": "https://cdn.modrinth.com/data/rOUBggPv/versions/R1Kcm9Ay/supermartijn642corelib-1.1.26-fabric-mc26.1.jar",
     "enabled": true
   },
   {
