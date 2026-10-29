@@ -133,6 +133,18 @@ def ensure_dir(path):
     return path
 
 
+def link_or_copy(src, dst):
+    """优先硬链接，跨盘时回退复制。"""
+    ensure_dir(os.path.dirname(dst))
+    if os.path.exists(dst):
+        return dst
+    try:
+        os.link(src, dst)
+    except OSError:
+        shutil.copy2(src, dst)
+    return dst
+
+
 def proxy_args():
     proxy = os.environ.get("MODPACK_PROXY", "")
     return ["--socks5-hostname", proxy] if proxy else []
