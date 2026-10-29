@@ -71,6 +71,8 @@ jobs:
             cache/resources
             local-assets
           key: deps-${{ hashFiles('pack/mods.json', 'pack/runtimes.json', 'pack/launcher.json', 'pack/local-assets.json') }}
+          restore-keys: |
+            deps-
 
       - name: 拉取依赖（mods / 启动器 / Java / 翻译 / 游戏资源 / 材质）
         run: python3 scripts/fetch.py

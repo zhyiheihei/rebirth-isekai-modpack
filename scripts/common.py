@@ -5,6 +5,7 @@ import os
 import shutil
 import subprocess
 import sys
+import time
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PACK = os.path.join(ROOT, "pack")
@@ -107,16 +108,22 @@ def download(url, dest, expected=None, algorithm="sha256", retries=3, quiet=Fals
     if os.path.exists(dest) and expected and sha(algorithm, dest) == expected:
         return True
     ensure_dir(os.path.dirname(dest))
-    for _ in range(retries):
+    last_error = "未知错误"
+    for attempt in range(retries):
         cmd = ["curl", "-fsSL", "--max-time", "600", *proxy_args(), "-o", dest, url]
-        if subprocess.run(cmd, capture_output=True).returncode == 0:
+        proc = subprocess.run(cmd, capture_output=True)
+        if proc.returncode == 0 and os.path.exists(dest):
             if not expected or sha(algorithm, dest) == expected:
                 return True
+            last_error = f"{algorithm} 校验不符"
+        else:
+            last_error = proc.stderr.decode("utf-8", errors="replace").strip() or f"curl exit {proc.returncode}"
+        if os.path.exists(dest):
             os.remove(dest)
-        elif os.path.exists(dest):
-            os.remove(dest)
+        if attempt + 1 < retries:
+            time.sleep(min(2 ** attempt, 8))
     if not quiet:
-        print(f"  下载失败: {url}", file=sys.stderr)
+        print(f"  下载失败: {url} ({last_error})", file=sys.stderr)
     return False
 
 

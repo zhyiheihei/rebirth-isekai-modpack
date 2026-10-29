@@ -9,6 +9,9 @@ def main():
     print("== mods ==")
     ok, total = common.fetch_mods()
     print(f"   {ok}/{total}")
+    if ok != total:
+        print("   模组未齐，停止构建前置下载", file=sys.stderr)
+        return 1
 
     print("== 启动器 ==")
     print("   ok" if common.fetch_launcher() else "   失败")
