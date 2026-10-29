@@ -385,10 +385,11 @@
     "version": "7",
     "version_id": "local",
     "loader": "fabric",
-    "sha512": "309044144f38c24165aa7ef7d8ca519e205f7c354b3fc2200719236e49d0535b4ae65b53a861550a67f089c34e8812ffa2d61e6526d05804adf46ab7d8e6ce03",
+    "sha512": "669b3881503dce635305e6c7350ca83863a2e2b658092665d849e45c250d58ad070b3826af8404d9eacf4d1d917952d2f03983c6919e778bff879922e968ca6c",
     "url": "",
     "local": "pack/mods-local/BrutalNightmare-v7_MOD.jar",
-    "enabled": true
+    "enabled": true,
+    "size": 912388
   },
   {
     "file": "bundle-api-fabric-3.0.0+26.1.2.jar",
