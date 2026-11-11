@@ -1297,5 +1297,215 @@
     "file": "sparsestructures-fabric-26.1.2-3.1.3.jar",
     "reason": "服务端注册表加载时结构集 TreeSet 被多线程并发写入导致 TreeMap 空指针，任何新区块生成都会中断（上游 issue #69 仍 open，26.1.2 线无修复版；3.1.4/3.1.5 只发 26.2/26.3）",
     "since": "0.3.9"
+  },
+  {
+    "file": "MoogsEndStructures-universal-1.21-2.1.1.jar",
+    "project": "r4PuRGfV",
+    "version": "2.1.1",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "MoogsStructureLib-fabric-26.1.2-3.4.2.jar",
+    "project": "1oUDhxuy",
+    "version": "3.4.2-fabric-26.1.2",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "MoogsVoyagerStructures-universal-1.21-5.1.3.jar",
+    "project": "OQAgZMH1",
+    "version": "5.1.3",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "TerraBlender-fabric-26.1.2-26.1.2.0.3.jar",
+    "project": "kkmrDlKT",
+    "version": "26.1.2.0.3",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "Terralith_26.1_v2.6.2_Fabric.jar",
+    "project": "8oi3bsk5",
+    "version": "2.6.2",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "YungsApi-26.1.2-Fabric-6.1.3.jar",
+    "project": "Ua7DFN59",
+    "version": "26.1.2-Fabric-6.1.3",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "YungsBetterDesertTemples-26.1.2-Fabric-5.1.1.jar",
+    "project": "XNlO7sBv",
+    "version": "26.1.2-Fabric-5.1.1",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "YungsBetterDungeons-26.1.2-Fabric-6.1.1.jar",
+    "project": "o1C1Dkj5",
+    "version": "26.1.2-Fabric-6.1.1",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "YungsBetterEndIsland-26.1.2-Fabric-4.1.0.jar",
+    "project": "2BwBOmBQ",
+    "version": "26.1.2-Fabric-4.1.0",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "YungsBetterJungleTemples-26.1.2-Fabric-4.1.1.jar",
+    "project": "z9Ve58Ih",
+    "version": "26.1.2-Fabric-4.1.1",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "YungsBetterNetherFortresses-26.1.2-Fabric-4.1.1.jar",
+    "project": "Z2mXHnxP",
+    "version": "26.1.2-Fabric-4.1.1",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "YungsBetterOceanMonuments-26.1.2-Fabric-5.1.1.jar",
+    "project": "3dT9sgt4",
+    "version": "26.1.2-Fabric-5.1.1",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "YungsExtras-26.1.2-Fabric-6.1.0.jar",
+    "project": "ZYgyPyfq",
+    "version": "26.1.2-Fabric-6.1.0",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "abridged-2.0.2-fabric-26.1.jar",
+    "project": "tb5O1ssC",
+    "version": "2.0.2-fabric-26.1",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "bclib-26.101.4.jar",
+    "project": "BgNRHReB",
+    "version": "26.101.4",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "beekeeperhut-fabric-3.0.4+mc26.1.2.jar",
+    "project": "Kt4RVKEd",
+    "version": "fabric-3.0.4+mc26.1.2",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "better-nether-26.101.4.jar",
+    "project": "MpzVLzy5",
+    "version": "26.101.4",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "better-end-26.101.4.jar",
+    "project": "gc8OEnCC",
+    "version": "26.101.4",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "deadly-deadly-dungeon-1.0.6.jar",
+    "project": "H1POBnTh",
+    "version": "1.0.6+mod",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "dungeons-and-taverns-5.2.0.jar",
+    "project": "tpehi7ww",
+    "version": "5.2.0+mod",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "lithostitched-1.8.1-fabric-26.1.jar",
+    "project": "XaDC71GB",
+    "version": "1.8.1-fabric-26.1",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "medieval_buildings-fabric-26.1.2-1.2.0.jar",
+    "project": "sc9lpPiU",
+    "version": "1.2.0",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "natures_spirit-fabric-2.3.0+26.1.2.jar",
+    "project": "WBvnqHfV",
+    "version": "2.3.0-26.1.2",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "regions-unexplored-0.7.0+beta4-fabric-26.1.jar",
+    "project": "Tkikq67H",
+    "version": "0.7.0+beta4-fabric-26.1",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "t_and_t-fabric-neoforge-1.13.11.jar",
+    "project": "DjLobEOy",
+    "version": "1.13.11",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "tidal-towns-2.0.jar",
+    "project": "EEIwvQVo",
+    "version": "2.0+mod",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "tlc-fabric-26.1-2.1.1.jar",
+    "project": "FGlHZl7X",
+    "version": "2.1.1",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "trek-B0.6.2.jar",
+    "project": "h2jngREY",
+    "version": "B0.6.2+mod",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "villagesandpillages-fabric-2.0.0+mc26.1.2.jar",
+    "project": "klXONLDA",
+    "version": "fabric-2.0.0+mc26.1.2",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
+  },
+  {
+    "file": "worldweaver-26.101.4.jar",
+    "project": "RiN8rDVs",
+    "version": "26.101.4",
+    "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
+    "since": "0.4.0"
   }
 ]
