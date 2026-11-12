@@ -60,16 +60,6 @@
     "enabled": true
   },
   {
-    "file": "alexsmobs-2.2.4-fabric+26.1.2.jar",
-    "project": "kYIaHHfw",
-    "version": "2.2.4+26.1.2-fabric",
-    "version_id": "GnzVWDzC",
-    "loader": "fabric",
-    "sha512": "53de491b74120bd37087b37134df5f4d9b750e04e634b72920b9f5929185ce203b493af5454069375b2b1637cc26310b3a08373c972db1d6cc40b26c2ae36584",
-    "url": "https://cdn.modrinth.com/data/kYIaHHfw/versions/GnzVWDzC/alexsmobs-2.2.4-fabric%2B26.1.2.jar",
-    "enabled": true
-  },
-  {
     "file": "almanac-fabric-26.1.2-1.26.10.2.jar",
     "project": "Gi02250Z",
     "version": "1.26.10.2",
@@ -439,16 +429,6 @@
     "loader": "fabric",
     "sha512": "56fdaec6b74960f70637ab8e402c9ac8d5c8cbfa5760ac8495cb8d12186fe1dde628639fdebfb67e9745ca7e415c609075c7dd95575b957e314c3cc857b3b388",
     "url": "https://cdn.modrinth.com/data/dQcfqGbl/versions/vv7kxY52/cobweb-fabric-26.1-1.4.0.jar",
-    "enabled": true
-  },
-  {
-    "file": "codxlib-1.6.1-fabric+26.1.2.jar",
-    "project": "6oyMM4yX",
-    "version": "1.6.1+fabric-26.1.2",
-    "version_id": "Lrmefryj",
-    "loader": "fabric",
-    "sha512": "4c1b7643ea6abd062d63b4c9363e798e65f9ed071d337879946ad80d18a79c1d64443e5f1f83cc32890bfa2f3e279f3ee4b4d0002bcda8da9971487bc45fda3d",
-    "url": "https://cdn.modrinth.com/data/6oyMM4yX/versions/Lrmefryj/codxlib-1.6.1-fabric%2B26.1.2.jar",
     "enabled": true
   },
   {

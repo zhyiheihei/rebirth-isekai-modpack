@@ -1507,5 +1507,19 @@
     "version": "26.101.4",
     "reason": "服务端性能方案（2026-11-11）：新区块生成是跑图卡顿的唯一瓶颈，Arclight 上移出这批世界生成 mod 后生成速率 14 → 56 cps；客户端必须与服务端同集，否则注册表对不上直接断连",
     "since": "0.4.0"
+  },
+  {
+    "file": "alexsmobs-2.2.4-fabric+26.1.2.jar",
+    "project": "kYIaHHfw",
+    "modid": "alexsmobs",
+    "reason": "0.4.1 移除：alexsmobs:leafcutter_anthill 在 worldgen 线程丢弃实体，撞 Arclight 的 EntityScheduler.retire 断言崩服（Zccfwq docs/mcsm-test-env.md §9）",
+    "since": "0.4.1"
+  },
+  {
+    "file": "codxlib-1.6.1-fabric+26.1.2.jar",
+    "project": "6oyMM4yX",
+    "modid": "codxlib",
+    "reason": "0.4.1 移除：只被 alexsmobs 依赖，随其一起移出",
+    "since": "0.4.1"
   }
 ]

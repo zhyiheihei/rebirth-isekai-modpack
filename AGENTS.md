@@ -14,7 +14,7 @@ java           = Temurin 25
 判定规则，按顺序看：
 
 1. `pack/pack.json` 的 `minecraft` 是唯一事实来源。文档、JSON 里任何其他版本号都不是整合包的目标版本。
-2. `pack/mods.json` 当前有 267 条：263 条有 Modrinth `version_id`，另有 4 条是仓库内的 `local` 模组。版本目标只看 `pack/pack.json`；文件名里出现 `26.2`、`26.3` 只说明那个 jar 同时兼容更高版本，例如 `advancements_reloaded-0.14.0-fabric-26.2.jar`、`bigger_end_cities-26.1-26.3-1.1.3.jar`。
+2. `pack/mods.json` 当前有 234 条（0.4.1 起）：230 条有 Modrinth `version_id`，另有 4 条是仓库内的 `local` 模组。版本目标只看 `pack/pack.json`；文件名里出现 `26.2`、`26.3` 只说明那个 jar 同时兼容更高版本，例如 `advancements_reloaded-0.14.0-fabric-26.2.jar`、`bigger_end_cities-26.1-26.3-1.1.3.jar`。
 3. `pack/resourcepacks.json` / `shaderpacks.json` 里的 `upstream.game_versions` 是**材质/光影作者发布时声明的版本**，不是本项目的目标。带 `note` 字段的条目是名字或上游版本容易引起误读的，逐条看 note。
 4. `pack/dropped.json` 里的 `reason: "止于 26.3（无 26.1.2 构建…"` 表示那个模组**没有** 26.1.2 构建、因此被排除。看到这类记录不要反推本项目用了 26.3。
 5. 26.1 使用资源包 format 65：`pack.mcmeta` 的 `pack.min_format` / `pack.max_format` 是顶层字段，`min_format` 不得低于 15；兼容范围起点低于 65 的老包还必须保留 `pack_format` 与 `supported_formats: {min_inclusive, max_inclusive}`，两种范围要一致。format 65 及以上的包必须删除这两个旧字段。构建脚本会规范化上游包；不要把 `min_format/max_format` 塞进 `supported_formats`。
@@ -102,3 +102,7 @@ git push origin master
   `check_local_assets()` 会在校验前把仓库内修正版复制回去。只改 `resourcepacks.json` 的 sha256
   而不带包，构建会在 fetch 阶段直接报「校验失败」。
 - `AutomaticJavaSwitch=true` 是 Java 自动兜底的开关：实例固定的包内 Java 路径失效时，启动器会从系统检测到的 Java 里挑兼容主版本（MC 26.x = Java 25）；`AutomaticJavaDownload` 必须保持 `false`——自动下载走 meta.prismlauncher.org，失败会直接中止启动。
+- `alexsmobs` + `codxlib` 自 0.4.1 起两端移除：`alexsmobs:leafcutter_anthill` 这个 worldgen feature 会在区块生成
+  worker 线程上 `ant.remove(DISCARDED)`，撞 Arclight 给 Folia `EntityScheduler.retire` 打的
+  `Bukkit.isPrimaryThread()` 断言，直接崩服（`ReportedException: Feature placement`）。细节见服务端仓库
+  `docs/mcsm-test-env.md` §9。别因为 Modrinth 上有 26.1.2 构建就把它们加回来。
