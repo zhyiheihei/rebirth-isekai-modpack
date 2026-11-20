@@ -17,7 +17,10 @@ def main():
     print("   ok" if common.fetch_launcher() else "   失败")
 
     print("== Java 运行时 ==")
-    print("   ok" if common.fetch_runtimes() else "   失败")
+    if not common.fetch_runtimes():
+        print("   Java 运行时未齐，停止构建前置下载", file=sys.stderr)
+        return 1
+    print("   ok")
 
     print("== 启动器翻译 ==")
     print("   ok" if common.fetch_translations() else "   失败")
