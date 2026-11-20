@@ -1,0 +1,78 @@
+name: update-mods
+
+# 模组版本对齐，只在 Actions 里跑，不在本地跑。
+# 只接受与 pack/pack.json 当前版本同时匹配的构建（minecraft + loader），
+# 写回 pack/mods.json 后用 patch +1 的版本走一次滚动发布。
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "report 只报告差异；release 写回清单并触发新版本构建"
+        type: choice
+        options:
+          - release
+          - report
+        default: release
+      only:
+        description: "只检查这些 jar（空格分隔，留空=全部）"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: update-mods
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 检查并写回模组版本
+        id: upd
+        env:
+          ONLY: ${{ inputs.only }}
+        run: |
+          set -o pipefail
+          if [ -n "$ONLY" ]; then
+            python3 scripts/update.py --only $ONLY --write | tee -a "$GITHUB_STEP_SUMMARY"
+          else
+            python3 scripts/update.py --write | tee -a "$GITHUB_STEP_SUMMARY"
+          fi
+          if git diff --quiet -- pack/mods.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git diff --numstat -- pack/mods.json
+          fi
+
+      - name: 提交并触发构建
+        if: steps.upd.outputs.changed == 'true' && inputs.mode == 'release'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          version=$(python3 - <<'PY'
+          import json, re
+          cur = json.load(open("pack/pack.json", encoding="utf-8"))["version"]
+          parts = [int(p) for p in re.findall(r"\d+", cur)[:3]] + [0, 0, 0]
+          print("{}.{}.{}".format(parts[0], parts[1], parts[2] + 1))
+          PY
+          )
+          python3 scripts/set_version.py "$version"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pack/mods.json pack/pack.json
+          git commit -m "release: $version 模组版本对齐（update-mods 自动）"
+          git push
+          # GITHUB_TOKEN 的 push 不会再触发 push 事件，构建改用 workflow_dispatch 显式触发
+          gh workflow run build.yml --ref master
+          echo "已触发 build.yml，版本 $version" >> "$GITHUB_STEP_SUMMARY"

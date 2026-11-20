@@ -1,38 +1,79 @@
 #!/usr/bin/env python3
 """检查/升级 mods.json 里的模组版本。
 
-  python3 scripts/update.py          # 只报告可升级项
-  python3 scripts/update.py --write  # 写回 mods.json
-  python3 scripts/update.py --only <jar...> --write  # 只更新指定 jar
+只接受与 pack.json 当前版本同时匹配的构建：game_versions 必须包含 pack.minecraft，
+loaders 必须包含 pack.loader.type。不匹配的版本直接跳过，不会把整合包拽到别的 MC 版本上。
+
+  python3 scripts/update.py                  # 只报告可升级项
+  python3 scripts/update.py --write          # 写回 mods.json
+  python3 scripts/update.py --only <jar...> --write   # 只更新指定 jar
+
+日常不手跑：.github/workflows/update.yml 在 Actions 里跑 --write 并触发新版本构建。
 """
 import argparse
 import json
 import sys
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 
 import common
+
+UA = {"User-Agent": "rebirth-isekai-modpack/update (+https://github.com/__SECRET_NEXTTODO_ADMIN_PASSWORD__heihei/rebirth-isekai-modpack)"}
+RETRY_STATUS = {408, 425, 429, 500, 502, 503, 504}
+
+
+def get_json(url):
+    req = urllib.request.Request(url, headers=UA)
+    delay = 3
+    last = None
+    for _ in range(6):
+        try:
+            with urllib.request.urlopen(req, timeout=45) as resp:
+                return json.load(resp)
+        except urllib.error.HTTPError as exc:
+            last = f"HTTP {exc.code}"
+            if exc.code not in RETRY_STATUS:
+                raise RuntimeError(f"Modrinth 请求失败: {url}: {last}") from exc
+            wait = int(exc.headers.get("Retry-After") or delay)
+            time.sleep(min(wait, 60))
+        except Exception as exc:  # 网络抖动
+            last = repr(exc)
+            time.sleep(delay)
+        delay = min(delay * 2, 30)
+    raise RuntimeError(f"Modrinth 请求失败（重试已尽）: {url}: {last}")
 
 
 def versions_for(project, mc, loader):
     query = urllib.parse.urlencode(
         {"game_versions": json.dumps([mc]), "loaders": json.dumps([loader])}
     )
-    url = f"https://api.modrinth.com/v2/project/{project}/version?{query}"
-    error = None
-    for _ in range(3):
-        try:
-            with urllib.request.urlopen(url, timeout=30) as resp:
-                return json.load(resp)
-        except Exception as exc:
-            error = exc
-    raise RuntimeError(f"Modrinth 请求失败（不能当作无兼容版本）: {project}: {error}")
+    return get_json(f"https://api.modrinth.com/v2/project/{project}/version?{query}")
 
 
-def newest(versions):
-    releases = [v for v in versions if v["version_type"] == "release"]
-    pool = releases or versions
-    return max(pool, key=lambda v: v["date_published"]) if pool else None
+def matches(version, mc, loader):
+    return mc in version.get("game_versions", []) and loader in version.get("loaders", [])
+
+
+def pick_file(version):
+    files = [
+        f
+        for f in version.get("files", [])
+        if not any(x in f["filename"] for x in ("-sources", "-dev", "-javadoc"))
+    ]
+    if not files:
+        return None
+    return next((f for f in files if f.get("primary")), files[0])
+
+
+def newest(versions, mc, loader):
+    pool = [v for v in versions if matches(v, mc, loader)]
+    if not pool:
+        return None
+    releases = [v for v in pool if v.get("version_type") == "release"]
+    pool = releases or pool
+    return max(pool, key=lambda v: v.get("date_published") or "")
 
 
 def main():
@@ -42,61 +83,67 @@ def main():
     args = ap.parse_args()
 
     pack = common.load("pack.json")
+    mc, loader = pack["minecraft"], pack["loader"]["type"]
     all_mods = common.load("mods.json")
-    mods = all_mods
+    mods = [
+        m
+        for m in all_mods
+        if not m.get("local") and m.get("project") not in (None, "", "local")
+    ]
     if args.only:
         requested = set(args.only)
-        found = {m["file"] for m in all_mods} & requested
-        if requested - found:
-            raise SystemExit(f"清单中找不到这些模组: {sorted(requested - found)}")
-        mods = [m for m in all_mods if m["file"] in requested]
-    mods = [m for m in mods if not m.get("local") and m.get("project") != "local"]
+        known = {m["file"] for m in all_mods}
+        unknown = requested - known
+        if unknown:
+            raise SystemExit(f"清单中找不到这些模组: {sorted(unknown)}")
+        mods = [m for m in mods if m["file"] in requested]
+
+    print(f"目标版本：minecraft={mc} loader={loader}，待检查 {len(mods)} 个模组")
     updates, incompatible = [], []
 
     for mod in mods:
-        versions = versions_for(mod["project"], pack["minecraft"], pack["loader"]["type"])
-        if not versions:
-            incompatible.append((mod["file"], "该版本无可用构建"))
-            continue
-        best = newest(versions)
+        versions = versions_for(mod["project"], mc, loader)
+        best = newest(versions, mc, loader)
         if not best:
+            incompatible.append((mod["file"], f"无匹配 {mc}/{loader} 的构建"))
             continue
-        if best["id"] == mod["version_id"]:
+        if best["id"] == mod.get("version_id"):
             continue
-        primary = [f for f in best["files"] if f["primary"]] or best["files"]
-        file = primary[0]
+        file = pick_file(best)
+        if not file:
+            incompatible.append((mod["file"], "版本下没有可用 jar"))
+            continue
         updates.append(
             {
                 "file": mod["file"],
                 "new_file": file["filename"],
-                "old": mod["version"],
-                "new": best["version_number"],
+                "old": mod.get("version", "?"),
+                "new": best.get("version_number", best["id"]),
                 "version_id": best["id"],
                 "url": file["url"],
-                "sha512": file["hashes"]["sha512"],
+                "sha512": file.get("hashes", {}).get("sha512", ""),
             }
         )
         if args.write:
             mod.update(
                 {
                     "file": file["filename"],
-                    "version": best["version_number"],
+                    "version": best.get("version_number", best["id"]),
                     "version_id": best["id"],
                     "url": file["url"],
-                    "sha512": file["hashes"]["sha512"],
+                    "sha512": file.get("hashes", {}).get("sha512", ""),
                 }
             )
 
-    print(f"可升级 {len(updates)} 个，无可用构建 {len(incompatible)} 个")
+    print(f"可升级 {len(updates)} 个，无匹配构建 {len(incompatible)} 个")
     for u in updates:
         print(f"  {u['old']:>16} → {u['new']:<16} {u['new_file']}")
     for name, why in incompatible:
         print(f"  !! {name}: {why}")
+
     if args.write and updates:
-        with open(f"{common.PACK}/mods.json", "w", encoding="utf-8") as f:
-            json.dump(all_mods, f, ensure_ascii=False, indent=2)
-            f.write("\n")
-        print("已写回 pack/mods.json；接着跑 scripts/fetch.py 再 build.py")
+        common.save("mods.json", all_mods)
+        print("已写回 pack/mods.json")
     return 0
 
 
