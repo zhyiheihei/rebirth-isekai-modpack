@@ -77,6 +77,10 @@ jobs:
       - name: 拉取依赖（mods / 启动器 / Java / 翻译 / 游戏资源 / 材质）
         run: python3 scripts/fetch.py
 
+      - name: 依赖检查（fabric.mod.json 依赖是否齐全）
+        # 阻断式：缺依赖的包客户端一启动就崩，这类问题不发版。
+        run: python3 scripts/audit_deps.py
+
       - name: 组装三平台便携包 + PCL2 实例包
         run: python3 scripts/build.py --zip
 

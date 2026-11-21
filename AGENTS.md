@@ -101,6 +101,7 @@ git push origin master
   `local-assets/` 不进 git，CI 靠 actions/cache 或发布资产恢复，缓存里的旧包会盖掉修正版，
   `check_local_assets()` 会在校验前把仓库内修正版复制回去。只改 `resourcepacks.json` 的 sha256
   而不带包，构建会在 fetch 阶段直接报「校验失败」。
+- 移出「库」类模组前先查还有谁依赖它：0.4.0 按服务端性能方案移出 YUNG 系列时把 `YungsApi` 一起删了，但 `TravelersTitles` 硬依赖 `yungsapi >= 26.1.2-Fabric-6.1.0`，服务端没有 TravelersTitles 所以一直正常，客户端直到 0.4.3 启动才 `Incompatible mods found`。现在清单保留 `YungsApi-26.1.2-Fabric-6.1.3.jar`（纯库，不生成世界）。`scripts/audit_deps.py` 会扫 `cache/mods` 的 fabric.mod.json（含内嵌 jar 与 provides）并把缺依赖当构建失败。
 - `pack/runtimes.json` 的 Java 运行时 URL 必须钉到具体 release（形如 `https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5.1%2B2/...`），不能用 `api.adoptium.net/v3/binary/latest/...`：上游一发新构建，同一个 URL 的内容就变，而清单里的 sha256 没变，`fetch.py` 会下载失败，旧流程要等到 `build.py` 的 `extract_runtime` 才崩（0.4.2 构建就是这样挂的）。升级运行时＝URL、sha256、`release` 字段一起换。
 - `AutomaticJavaSwitch=true` 是 Java 自动兜底的开关：实例固定的包内 Java 路径失效时，启动器会从系统检测到的 Java 里挑兼容主版本（MC 26.x = Java 25）；`AutomaticJavaDownload` 必须保持 `false`——自动下载走 meta.prismlauncher.org，失败会直接中止启动。
 - `alexsmobs` + `codxlib` 自 0.4.1 起两端移除：`alexsmobs:leafcutter_anthill` 这个 worldgen feature 会在区块生成

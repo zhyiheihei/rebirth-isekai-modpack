@@ -2325,6 +2325,16 @@
   "enabled": true
  },
  {
+  "file": "YungsApi-26.1.2-Fabric-6.1.3.jar",
+  "project": "Ua7DFN59",
+  "version": "26.1.2-Fabric-6.1.3",
+  "version_id": "lmLenYfY",
+  "loader": "fabric",
+  "sha512": "a7fde2de897a17a3cdb0a84bc5b993de5ce01577e894360af9aac4b67d38b9101ae9ffc6eba5b69c1bd669316985a9394b2848bf73c1614fc9ce096cb9da937b",
+  "url": "https://cdn.modrinth.com/data/Ua7DFN59/versions/lmLenYfY/YungsApi-26.1.2-Fabric-6.1.3.jar",
+  "enabled": true
+ },
+ {
   "file": "zoomify-2.17.0+mc26.1.2-universal.jar",
   "project": "w7ThoJFB",
   "version": "2.17.0+mc26.1.2",
