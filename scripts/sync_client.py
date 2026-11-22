@@ -317,7 +317,7 @@ def release(version):
     else:
         git("commit", "-m", f"release: {version} 同步客户端模组与配置")
     git("push", "origin", "HEAD")
-    print(f"已推送 master（提交信息含 release: {version}），Actions 构建完成后更新滚动 Release")
+    print(f"已推送 main（提交信息含 release: {version}），Actions 构建完成后更新滚动 Release")
     return 0
 
 

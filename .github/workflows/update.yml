@@ -74,5 +74,5 @@ jobs:
           git commit -m "release: $version 模组版本对齐（update-mods 自动）"
           git push
           # GITHUB_TOKEN 的 push 不会再触发 push 事件，构建改用 workflow_dispatch 显式触发
-          gh workflow run build.yml --ref master
+          gh workflow run build.yml --ref main
           echo "已触发 build.yml，版本 $version" >> "$GITHUB_STEP_SUMMARY"

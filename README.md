@@ -106,7 +106,7 @@ python3 scripts/update_assets.py --apply    # 落地：替换文件、补 mcmeta
 
 ```bash
 git commit -m "release: 0.2.4 简述改动"
-git push origin master
+git push origin main
 ```
 
 滚动更新，不打 tag：提交信息里带 `release: <版本>` 就自动构建并发到同一个滚动 Release（tag 固定 `rolling`，每次先清旧资产再传新包），下载入口不变。工作流完全自包含，不依赖本地任何文件。

@@ -1,18 +1,18 @@
 name: build
 
-# 滚动更新：只有一个分支 master，不打 tag。
+# 滚动更新：只有一个分支 main，不打 tag。
 # 版本写在提交信息里，形如 `release: 0.2.4`（或 `[release 0.2.4]`），这一句决定是否构建。
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: build-master
+  group: build-main
   cancel-in-progress: false
 
 env:

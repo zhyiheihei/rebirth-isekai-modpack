@@ -11,7 +11,7 @@
 1. **版本只有一处权威**：`pack/pack.json`。`minecraft = 26.1.2`、`loader = fabric 0.20.1`、`java major = 25`。文档、上游元数据、jar 文件名里的 `26.2` / `26.3` / `1.21.x` 都不是本项目的目标，不要据此改版本。
 2. **客户端改动必须回灌仓库**：在本机实例里试出来的任何改动，都要经 `scripts/sync_client.py` 落进 `pack/`，由 CI 出 Release。**不允许只留在本机实例**，也不允许手工拼一个包发给玩家。
 3. **版本号只能由发布产生**：写进 `pack.json` 的唯一合法途径是 `scripts/set_version.py`，且版本来自提交信息里的 `release: x.y.z`。不要为了"顺手对齐"去改版本号；不发布就不碰。
-4. **`master` 上不打 tag**（`rolling` 由工作流创建，永远不要手工建/删/移动）。回退旧版本是禁止动作 —— 出问题就把版本加一位重发。
+4. **`main` 上不打 tag**（`rolling` 由工作流创建，永远不要手工建/删/移动）。回退旧版本是禁止动作 —— 出问题就把版本加一位重发。
 5. **清单里的哈希不许手改**：`mods.json` 的 `sha512`、`resourcepacks.json` 的 `sha256`、`local-assets.json` 的 `sha256` 都由下载/校验脚本写。手改等于让 `fetch.py` 在 CI 上直接失败。
 
 ## 1. 需要明确授权才能做的动作
@@ -107,7 +107,7 @@ python3 scripts/set_version.py 0.2.4            # 只改 pack.json 版本（CI �
 | Loader | `pack.json` `loader.version` | `fabric/gradle.properties` `loader_version` | 必须都是 **0.20.1** |
 | Java | `pack.json` `java.major` | 镜像基座 JDK | 必须都是 **25** |
 | 版本号 | `pack.json` `version`（滚动 Release） | `server/VERSION`（镜像 tag） | **各自独立**，不要求相等 |
-| 发布 | `master` + 提交信息 `release: x.y.z` + Release `rolling` | `main` + `server/VERSION` + GHCR tag | 互不触发 |
+| 发布 | `main` + 提交信息 `release: x.y.z` + Release `rolling` | `main` + `server/VERSION` + GHCR tag | 互不触发 |
 
 模组集合的对齐规则：
 
@@ -137,13 +137,13 @@ PY
 
 1. `python3 scripts/sync_client.py` 看差异，`--apply` 落盘。模组按 sha512 反查 Modrinth 自动补元数据；查不到的（付费、自制数据包）先把 jar 放进 `pack/mods-local/` 再跑，脚本会写成 `project: local`，CI 直接从仓库取。
 2. `python3 scripts/fetch.py && python3 scripts/build.py --fast --target linux` 本地抽检（可选，CI 会做全量）。
-3. `python3 scripts/sync_client.py --apply --release <新版本>` → 改 `pack.json` version、提交（信息带 `release: <新版本>`）、推送 `master`，Actions 构建完自动更新滚动 Release。
+3. `python3 scripts/sync_client.py --apply --release <新版本>` → 改 `pack.json` version、提交（信息带 `release: <新版本>`）、推送 `main`，Actions 构建完自动更新滚动 Release。
 
 实机验收：用本机 NixOS 上的 PrismLauncher 实例，**用户明确授权后**才由 agent 启动 Prism 并看该实例的 `latest.log`。默认服务器两个：`server`（正式服 `mc.zhyi.xin`，`auto_join` 自动连接）+ `extra_servers`（测试服 `mc.zhyi.xin:25566`），都预置进 `servers.dat`（`build.py` 的 `write_servers`）；临时连接的地址不要写进 `pack.json`。
 
 ## 6. 发布（滚动更新）
 
-只有一个分支 `master`，**不打 tag**，版本不进 git 历史文件：
+只有一个分支 `main`，**不打 tag**，版本不进 git 历史文件：
 
 - 版本号写在**提交信息**里，形如 `release: 0.2.4`（`[release 0.2.4]` 也认）。工作流看到这一句才构建，普通提交直接跳过；手动 `Run workflow` 无条件构建。
 - CI 用 `scripts/set_version.py <版本>` 把它写进 `pack/pack.json` 再打包。
@@ -154,7 +154,7 @@ PY
 ```bash
 python3 scripts/set_version.py 0.2.4      # 本地同步版本号（CI 会自动做）
 git commit -m "release: 0.2.4 简述改动"    # 提交信息带版本即触发工作流
-git push origin master
+git push origin main
 ```
 
 ## 7. 已知坑（都已处理，改包时别退化）
