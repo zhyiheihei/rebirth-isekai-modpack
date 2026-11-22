@@ -95,6 +95,13 @@
   }
  },
  {
+  "file": "Axiom-简中汉化-6.1.5.zip",
+  "sha256": "ae7fbca5f9fa71e1b0d87acc13e79d027053b05987044adde19387e9659b9071",
+  "size": 18392,
+  "source": "local",
+  "note": "自制：Axiom 6.1.5 界面汉化，1234 键全覆盖（原文 en_us 同键数，占位符一致）"
+ },
+ {
   "file": "A提示.zip",
   "sha256": "dfcaba9db21a0de9846cce9c1798ab63161237705ba63f50be47824e04c43f0b",
   "size": 252591,
@@ -489,21 +496,15 @@
   "source": "local"
  },
  {
-  "file": "三叉戟模型drowned-trident.zip",
-  "sha256": "d35ca7765ae914d3c1fe7f3fe22dd989c8458895c8e98cab47127a6d0efd7961",
-  "size": 61204,
-  "source": "local"
- },
- {
   "file": "七彩花透明GUI.zip",
   "sha256": "88d703f6cad7fd9e5160cd29f33df6a602d7c70303f36fda45fd29c4f04dcb35",
   "size": 13400,
   "source": "local"
  },
  {
-  "file": "自定义音乐版本3.5.zip",
-  "sha256": "8e18e4b4248569ac1dfdc03bbe47416544642df62933ea43846ee791bb36bc47",
-  "size": 218258913,
+  "file": "三叉戟模型drowned-trident.zip",
+  "sha256": "d35ca7765ae914d3c1fe7f3fe22dd989c8458895c8e98cab47127a6d0efd7961",
+  "size": 61204,
   "source": "local"
  },
  {
@@ -584,6 +585,12 @@
   "file": "绿色行星.zip",
   "sha256": "dd77ae55c3810c48406b28e04fe7da26d23cb8a3f297ceb501a568da75f4e461",
   "size": 9476801,
+  "source": "local"
+ },
+ {
+  "file": "自定义音乐版本3.5.zip",
+  "sha256": "8e18e4b4248569ac1dfdc03bbe47416544642df62933ea43846ee791bb36bc47",
+  "size": 218258913,
   "source": "local"
  },
  {
