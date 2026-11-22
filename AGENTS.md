@@ -2,7 +2,7 @@
 
 给接手这个仓库的 agent。动手前读 §0–§2，事实在 §3，踩过的坑在 §7；§8 是收尾清单。
 
-服务端在同级目录 `../Zccfwq`（私有仓库），两端的关系与对齐规则见 §4。
+服务端 GitHub 是 [`zhyiheihei/Zccfwq`](https://github.com/zhyiheihei/Zccfwq)（私有仓库），两端的关系与对齐规则见 §4。本仓库在开发机上 clone 成同级目录（NixOS 机叫 `../Zccfwq`，Windows 机叫 `../MC`），逻辑互认一律以 GitHub 全名为准，目录名随机器不同。
 
 ---
 
@@ -99,9 +99,9 @@ python3 scripts/set_version.py 0.2.4            # 只改 pack.json 版本（CI �
 
 ## 4. 与服务端仓库的关系
 
-服务端 `../Zccfwq` 是另一个 git 仓库（私有），客户端是公开的（玩家从 Release 下载）。
+服务端 `zhyiheihei/Zccfwq` 是另一个 git 仓库（私有），客户端是公开的（玩家从 Release 下载）。本仓库的 agent 可以直接调服务端的 `tools/check_alignment.py`（本机有同级 clone 时自动用本地目录，否则匿名拉本仓库 raw 清单）；服务端侧对应规则见其 AGENTS.md §4。
 
-| 项 | 客户端（本仓库） | 服务端（`../Zccfwq`） | 规则 |
+| 项 | 客户端（本仓库） | 服务端（`zhyiheihei/Zccfwq`） | 规则 |
 |---|---|---|---|
 | MC | `pack/pack.json` `minecraft` | `server/mods` 里的 jar 目标版本 | 必须都是 **26.1.2** |
 | Loader | `pack.json` `loader.version` | `fabric/gradle.properties` `loader_version` | 必须都是 **0.20.1** |
@@ -121,7 +121,9 @@ python3 scripts/set_version.py 0.2.4            # 只改 pack.json 版本（CI �
 ```bash
 python3 - <<'PY'
 import json, os
-srv = {f for f in os.listdir('../Zccfwq/server/mods') if f.endswith('.jar')}
+# 探测同级的服务端 clone（目录名随机器：NixOS 机叫 Zccfwq，Windows 机叫 MC）
+srv_repo = next(p for p in ('../Zccfwq', '../MC') if os.path.isdir(p + '/server/mods'))
+srv = {f for f in os.listdir(srv_repo + '/server/mods') if f.endswith('.jar')}
 cli = {x['file'] for x in json.load(open('pack/mods.json', encoding='utf-8'))}
 print('服务端有、客户端没有:', sorted(srv - cli))   # 预期只剩 c2me / darkmobs / ResourcefulLib 旧版
 PY
@@ -172,7 +174,7 @@ git push origin master
 - **移出「库」类模组前先查依赖**：0.4.0 按服务端性能方案移出 YUNG 系列时把 `YungsApi` 一起删了，但 `TravelersTitles` 硬依赖 `yungsapi >= 26.1.2-Fabric-6.1.0`；服务端没有 TravelersTitles 所以一直正常，客户端直到 0.4.3 启动才 `Incompatible mods found`。现在清单保留 `YungsApi-26.1.2-Fabric-6.1.3.jar`（纯库，不生成世界）。`scripts/audit_deps.py` 会扫 `cache/mods` 的 `fabric.mod.json`（含内嵌 jar 与 provides）并把缺依赖当构建失败。
 - **`pack/runtimes.json` 的 Java URL 必须钉到具体 release**（形如 `.../releases/download/jdk-25.0.5.1%2B2/...`），不能用 `api.adoptium.net/v3/binary/latest/...`：上游一发新构建，同一个 URL 的内容就变，而清单里的 sha256 没变，`fetch.py` 会下载失败，旧流程要等到 `build.py` 的 `extract_runtime` 才崩（0.4.2 就是这样挂的）。升级运行时＝URL、sha256、`release` 字段一起换。
 - **`AutomaticJavaSwitch=true`** 是 Java 自动兜底；`AutomaticJavaDownload` 必须保持 `false`（自动下载走 meta.prismlauncher.org，失败会直接中止启动）。
-- **`alexsmobs` + `codxlib` 自 0.4.1 起两端移除**：`alexsmobs:leafcutter_anthill` 这个 worldgen feature 会在区块生成 worker 线程上 `ant.remove(DISCARDED)`，撞 Arclight 给 Folia `EntityScheduler.retire` 打的 `Bukkit.isPrimaryThread()` 断言，直接崩服（`ReportedException: Feature placement`）。细节见服务端 `docs/mcsm-test-env.md` §9。别因为 Modrinth 上有 26.1.2 构建就加回来。
+- **`alexsmobs` + `codxlib` 自 0.4.1 起两端移除**：`alexsmobs:leafcutter_anthill` 这个 worldgen feature 会在区块生成 worker 线程上 `ant.remove(DISCARDED)`，撞 Arclight 给 Folia `EntityScheduler.retire` 打的 `Bukkit.isPrimaryThread()` 断言，直接崩服（`ReportedException: Feature placement`）。经过与原因见服务端仓库的 `CHANGELOG.md` 0.5.x「迁移」条目与其 AGENTS.md §7。别因为 Modrinth 上有 26.1.2 构建就加回来。
 
 ## 8. 收尾清单（每个任务结束前过一遍）
 
