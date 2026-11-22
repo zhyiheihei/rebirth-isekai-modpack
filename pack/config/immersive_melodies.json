@@ -26,6 +26,7 @@
   "loadInbuiltMidis": true,
   "stopGameMusicForPlayers": true,
   "stopGameMusicForMobs": false,
+  "requireSneakToOpenMenu": false,
   "uploadPermissionLevel": 0,
   "rightClickToDropEntityInstrumentPermissionLevel": 0,
   "keycodeToMidi": {

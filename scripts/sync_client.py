@@ -32,6 +32,10 @@ EXCL_REL = {
     "rpg_series/tag_cache.json",    # 运行时标签缓存（每次启动重建，进版本库只会一直是旧快照）
     "rpg_series/loot_fallback_report.json",  # 运行时战利品回退报告
 }
+# 整目录排除：模组已移除后残留在实例里的孤儿配置，进仓库只会误导维护。
+EXCL_DIR = (
+    "alexsmobs/",  # 模组已随 0.4.1 两端移除（worldgen feature 崩服，见 AGENTS.md §7）
+)
 
 # java.util.Properties 保存时自动写入的生成时间注释，如 "#Thu Oct 29 12:44:13 CST 2026"。
 # 模组每次启动都会刷新它，不忽略的话每次同步都会把一堆纯时间戳抖动当改动提交。
@@ -52,6 +56,8 @@ def instance_path(arg):
 
 def excluded(rel):
     if rel in EXCL_REL:
+        return True
+    if any(rel.startswith(d) for d in EXCL_DIR):
         return True
     if any(part.endswith("_备份") or "备份_" in part for part in rel.split("/")):
         return True
