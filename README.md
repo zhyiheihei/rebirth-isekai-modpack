@@ -37,6 +37,7 @@ scripts/
   verify_android.py 自检 Android 包清单、模组哈希与 overrides
   verify_bundle.py 产物自检（确认启动免下载、材质默认启用）
   update.py        检查并升级模组版本
+  axiom_zh.py      Axiom 简中资源包维护：对照最新版语言键、重打包并同步清单
   package_assets.py 打包材质原件用于 release 资产
   release_notes.py 生成 release 说明
 local-assets/    不进 git：材质与光影原始压缩包（约 266MB）
