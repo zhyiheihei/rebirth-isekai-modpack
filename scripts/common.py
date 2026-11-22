@@ -221,7 +221,6 @@ def fetch_mods(quiet=False):
     for m in mods:
         dest = os.path.join(CACHE, "mods", m["file"])
         if m.get("local"):
-            # 仓库自带 jar（Modrinth 上没有的付费/自制数据包模组），按 sha512 校验后直接摆进缓存
             src = os.path.join(ROOT, m["local"])
             if not os.path.exists(src) or (m.get("sha512") and sha("sha512", src) != m["sha512"]):
                 print(f"  仓库内 mod 缺失或校验失败: {m['local']}", file=sys.stderr)
@@ -254,9 +253,6 @@ def fetch_runtimes(quiet=False):
     return True
 
 
-# 仓库内直接携带的资产修正版：只有被修过、体积又小的包放这里。
-# local-assets/ 不进 git，靠 actions/cache 或发布资产恢复，缓存里的旧副本会盖掉修正版，
-# 所以每次校验前按清单 sha256 把它们复制回去。
 ASSET_OVERRIDES = os.path.join(PACK, "resourcepacks-local")
 
 
@@ -364,7 +360,7 @@ def extract_tar(archive, dest):
         with tarfile.open(fileobj=reader, mode="r|") as tar:
             try:
                 tar.extractall(dest, filter="data")
-            except TypeError:  # Python < 3.12 没有 filter 参数
+            except TypeError:
                 tar.extractall(dest)
     return True
 

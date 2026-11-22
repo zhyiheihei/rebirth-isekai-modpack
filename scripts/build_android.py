@@ -103,7 +103,6 @@ def main():
         options = PACK / "options.txt"
         shutil.copy2(options, overrides / "options.txt")
 
-        # FCL 的 Android 渲染器由设备/驱动决定；先禁用未经实机验证的桌面光影，避免启动即黑屏。
         iris = overrides / "config" / "iris.properties"
         if iris.exists():
             lines = iris.read_text(encoding="utf-8").splitlines()

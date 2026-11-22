@@ -215,7 +215,6 @@ def check_runnable(root, problems):
     name = pack["name"]
     jre = "jre" + str(pack["java"]["major"])
 
-    # 平台按产物自身的标志文件判断，不看宿主机
     is_windows = os.path.exists(os.path.join(root, "prismlauncher.exe"))
     apps = glob.glob(os.path.join(root, "*.app"))
     is_macos = bool(apps)
@@ -304,7 +303,6 @@ def check_runnable(root, problems):
     else:
         problems.append("无法判断平台（没有 prismlauncher.exe / *.app / PrismLauncher）")
 
-    # 启动脚本里引用的实例 id 必须与实际目录一致
     for script in ("启动游戏.sh", "启动正版.sh", "启动游戏.command", "启动正版.command", "launch.ps1"):
         path = os.path.join(root, script)
         if os.path.exists(path):
@@ -328,7 +326,6 @@ def check_runnable(root, problems):
         if line:
 
             def gson_unescape(s):
-                # options.txt 里 resourcePacks 的值是 Gson 序列化的 JSON，会把 & ' " 等写成 \uXXXX
                 return re.sub(r"\\u([0-9a-fA-F]{4})", lambda m: chr(int(m.group(1), 16)), s)
 
             refs = [gson_unescape(r) for r in re.findall(r'file/([^"]+)"', line[0])]
@@ -343,13 +340,11 @@ def check_portable_extras(root, problems):
     import glob
     import hashlib
 
-    # 1) 启动器配置：必须关闭「使用系统 GLFW」（MC 26.x 要 GLFW 3.5）
     for cfg in glob.glob(os.path.join(root, "**", "prismlauncher.cfg"), recursive=True):
         text = open(cfg, encoding="utf-8").read()
         if "UseNativeGLFW=false" not in text:
             problems.append(f"{os.path.relpath(cfg, root)} 未关闭系统 GLFW（MC 26.x 需 GLFW 3.5）")
 
-    # 2) 组件 meta 的 cachedSha256 必须与随包 meta 文件一致，否则启动要联网取元数据
     for manifest in glob.glob(os.path.join(root, "**", "mmc-pack.json"), recursive=True):
         data = json.load(open(manifest, encoding="utf-8"))
         meta_root = os.path.join(os.path.dirname(manifest), "meta")
@@ -364,13 +359,11 @@ def check_portable_extras(root, problems):
             if comp.get("cachedSha256") != sha:
                 problems.append(f"{comp['uid']} 的 cachedSha256 与包内 meta 不一致（会触发联网更新）")
 
-    # 3) options.txt 不能残留 Forge 修饰符键位（会让整个 options 加载失败）
     for opts in glob.glob(os.path.join(root, "**", "options.txt"), recursive=True):
         text = open(opts, encoding="utf-8").read()
         if "CONTROL_OR_COMMAND" in text or ":\u0000" in text:
             problems.append(f"{os.path.relpath(opts, root)} 残留 Forge 风格键位修饰符")
 
-    # 4) 26.1 pack format 65 使用顶层 min/max；仅为旧格式兼容时保留 supported_formats。
     for packzip in glob.glob(os.path.join(root, "**", "resourcepacks", "*.zip"), recursive=True):
         try:
             import zipfile
@@ -391,7 +384,6 @@ def check_portable_extras(root, problems):
         elif "supported_formats" in pack_meta or "pack_format" in pack_meta:
             problems.append(f"新格式材质包仍带已移除的旧字段: {os.path.basename(packzip)}")
 
-    # 5) iris 默认光影必须真实存在（光影回退版本后容易忘记改这里）
     for props in glob.glob(os.path.join(root, "**", "config", "iris.properties"), recursive=True):
         text = open(props, encoding="utf-8").read()
         want = None

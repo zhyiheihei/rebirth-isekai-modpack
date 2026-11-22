@@ -1,8 +1,5 @@
 name: update-mods
 
-# 模组版本对齐，只在 Actions 里跑，不在本地跑。
-# 只接受与 pack/pack.json 当前版本同时匹配的构建（minecraft + loader），
-# 写回 pack/mods.json 后用 patch +1 的版本走一次滚动发布。
 on:
   workflow_dispatch:
     inputs:
@@ -73,6 +70,5 @@ jobs:
           git add pack/mods.json pack/pack.json
           git commit -m "release: $version 模组版本对齐（update-mods 自动）"
           git push
-          # GITHUB_TOKEN 的 push 不会再触发 push 事件，构建改用 workflow_dispatch 显式触发
           gh workflow run build.yml --ref main
           echo "已触发 build.yml，版本 $version" >> "$GITHUB_STEP_SUMMARY"

@@ -38,7 +38,7 @@ def get_json(url):
                 raise RuntimeError(f"Modrinth 请求失败: {url}: {last}") from exc
             wait = int(exc.headers.get("Retry-After") or delay)
             time.sleep(min(wait, 60))
-        except Exception as exc:  # 网络抖动
+        except Exception as exc:
             last = repr(exc)
             time.sleep(delay)
         delay = min(delay * 2, 30)

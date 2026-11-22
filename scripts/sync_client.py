@@ -20,25 +20,21 @@ import subprocess
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import common  # noqa: E402
+import common
 
 DEFAULT_INSTANCE = r"D:/我的世界/重生之异世界生存/.minecraft/versions/重生之异世界生成1.0v"
 
-# 备份、日志、运行时缓存的排除规则（与历史同步口径保持一致）
 EXCL_NAME = re.compile(r"(\.bak|\.log$|\.tmp$|\.db$)", re.I)
 EXCL_REL = {
-    "resourceful-config-web.json",  # 含 web 配置口令
-    "wover/cached.json",            # 运行时缓存
-    "rpg_series/tag_cache.json",    # 运行时标签缓存（每次启动重建，进版本库只会一直是旧快照）
-    "rpg_series/loot_fallback_report.json",  # 运行时战利品回退报告
+    "resourceful-config-web.json",
+    "wover/cached.json",
+    "rpg_series/tag_cache.json",
+    "rpg_series/loot_fallback_report.json",
 }
-# 整目录排除：模组已移除后残留在实例里的孤儿配置，进仓库只会误导维护。
 EXCL_DIR = (
-    "alexsmobs/",  # 模组已随 0.4.1 两端移除（worldgen feature 崩服，见 AGENTS.md §7）
+    "alexsmobs/",
 )
 
-# java.util.Properties 保存时自动写入的生成时间注释，如 "#Thu Oct 29 12:44:13 CST 2026"。
-# 模组每次启动都会刷新它，不忽略的话每次同步都会把一堆纯时间戳抖动当改动提交。
 VOLATILE_LINE = re.compile(
     r"^#[A-Z][a-z]{2} [A-Z][a-z]{2} [ 0-9]{2} [0-9:]{8} [A-Z]{2,5} [0-9]{4}\s*$", re.M)
 
@@ -73,7 +69,6 @@ def walk(base):
     return out
 
 
-# ---------------- mods ----------------
 
 def local_entry(path):
     """pack/mods-local/ 里的自制 / 付费数据包模组：直接内嵌进仓库。"""
@@ -160,7 +155,6 @@ def diff_mods(inst):
     return entries, local, added, gone
 
 
-# ---------------- config ----------------
 
 def comparable(path):
     """比对用的归一化文本：换行符统一成 LF，抹掉 Properties 的生成时间戳。"""
@@ -214,7 +208,7 @@ def sanitize_options(raw, manifest):
             else:
                 kept.append(item)
         if len(kept) == len(arr):
-            out.append(line)          # 没剔除任何东西就保留原文，避免格式漂移
+            out.append(line)
             continue
         out.append(key + ":" + gson_dumps(kept))
     return "\n".join(out) + ("\n" if raw.endswith("\n") else ""), dropped
@@ -232,7 +226,6 @@ def main():
     if not os.path.isdir(os.path.join(inst, "config")):
         raise SystemExit(f"实例目录无效: {inst}")
 
-    # ---- mods ----
     entries, local, added, gone = diff_mods(inst)
     print(f"[mods.json] 仓库 {len(entries)} | 本机 {len(local)}")
     print(f"   + 本机新增 {len(added)}: {added or '无'}")
@@ -247,11 +240,9 @@ def main():
     if unresolved:
         print(f"   ⚠ 以下 jar Modrinth 查不到、pack/mods-local/ 里也没有，需先手工放进 mods-local: {unresolved}")
 
-    # ---- config ----
     src, cfg_add, cfg_upd, cfg_only = diff_config(inst)
     print(f"\n[config] 新增 {len(cfg_add)} | 更新 {len(cfg_upd)} | 仓库独有（保留不删）{len(cfg_only)}")
 
-    # ---- options.txt ----
     src_opt = os.path.join(inst, "options.txt")
     dst_opt = os.path.join(common.PACK, "options.txt")
     opt_text, opt_dropped = "", []
@@ -270,7 +261,6 @@ def main():
     if unresolved:
         raise SystemExit("\n有新模组缺少元数据，先补齐再落盘（见上方 ⚠）")
 
-    # ---- 写盘 ----
     if new_entries or (args.prune_mods and gone):
         keep = [e for e in entries if e["file"] not in (set(gone) if args.prune_mods else set())]
         keep += new_entries

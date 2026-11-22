@@ -1521,5 +1521,26 @@
     "modid": "codxlib",
     "reason": "0.4.1 移除：只被 alexsmobs 依赖，随其一起移出",
     "since": "0.4.1"
+  },
+  {
+    "file": "exordium-fabric-2.1.1-mc26.1.jar",
+    "project": "DynYZEae",
+    "modid": "exordium",
+    "reason": "0.4.9 移出：模组页自述不再积极维护（will have visual issues/compatibility issues with other mods or even vanilla），26.1.2 仅 2026-04 一个构建；与本包 ModernUI/FancyMenu 及大量 HUD 模组抢 GUI 渲染",
+    "since": "0.4.9"
+  },
+  {
+    "file": "AsyncParticles-26.1.2.9+26.1.2.jar",
+    "project": "c3onkd5k",
+    "modid": "asyncparticles",
+    "reason": "0.4.9 移出：options.txt 中 particles=0，粒子优化无收益；模组自述仍为 beta，运行日志里 6 条自身 mixin 被取消，另有 C2ME / ClassInstanceMultiMap / getBlockEntity 类已知崩溃",
+    "since": "0.4.9"
+  },
+  {
+    "file": "sodium-shadowy-path-blocks-fabric-7.0.0.jar",
+    "project": "EIa1eiMm",
+    "modid": "sspb",
+    "reason": "0.4.9 移出：纯视觉（土径阴影），26.1.2 仅 2026-04 构建；日志报 sspb.mixins.json:sodium.SmoothLightPipelineMixin Shift.BY=1 超过 maxShiftBy，Sodium 平滑光照注入已失效",
+    "since": "0.4.9"
   }
 ]

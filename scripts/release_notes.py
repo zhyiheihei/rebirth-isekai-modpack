@@ -26,7 +26,6 @@ def enabled_resourcepack_count():
                     arr = json.loads(line.split(":", 1)[1])
                 except ValueError:
                     return None
-                # 只数随包分发的 file/ 条目，vanilla、moonlight:merged_pack 这类是模组虚拟包
                 return sum(1 for x in arr if x.startswith("file/"))
     return None
 
@@ -86,12 +85,8 @@ def main():
         dropped = common.load("dropped.json")
     except Exception:
         dropped = []
-    # dropped.json 是累积台账（两百多条历史剔除）。带 since 的按版本过滤，
-    # 只把本次新增的剔除列出来。注意：上一版发版失败时（未出产物），
-    # 其 since 记录会顺延到本版首次成功发布，一并列出，避免静默丢失。
     current = pack["version"]
     if any(d.get("since") for d in dropped):
-        # 只认显式标了本版 since 的条目；没有 since 的都是历史旧账，不该重复出现。
         dropped = [d for d in dropped if d.get("since") == current]
     if dropped:
         lines += ["## 本版本剔除的模组", "| 文件 | 原因 |", "| --- | --- |"]

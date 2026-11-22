@@ -1,7 +1,5 @@
 name: build
 
-# 滚动更新：只有一个分支 main，不打 tag。
-# 版本写在提交信息里，形如 `release: 0.2.4`（或 `[release 0.2.4]`），这一句决定是否构建。
 on:
   push:
     branches:
@@ -22,7 +20,6 @@ jobs:
   package:
     runs-on: ubuntu-24.04
     timeout-minutes: 240
-    # 普通提交不构建；提交信息里出现 release 才构建。手动触发无条件构建。
     if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, 'release')
     steps:
       - uses: actions/checkout@v4
@@ -78,7 +75,6 @@ jobs:
         run: python3 scripts/fetch.py
 
       - name: 依赖检查（fabric.mod.json 依赖是否齐全）
-        # 阻断式：缺依赖的包客户端一启动就崩，这类问题不发版。
         run: python3 scripts/audit_deps.py
 
       - name: 组装三平台便携包 + PCL2 实例包
@@ -89,7 +85,6 @@ jobs:
         run: python3 scripts/release_notes.py --github
 
       - name: 产物自检（启动免下载，不阻断发布）
-        # 测试版策略：自检只报告，不阻断。发现问题就把版本加一位发新版，不回退旧版本。
         continue-on-error: true
         run: python3 scripts/verify_bundle.py
 

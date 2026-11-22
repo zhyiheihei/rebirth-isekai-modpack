@@ -52,7 +52,6 @@ def _download_lib(lib, libdir):
     url = artifact.get("url")
     sha1 = artifact.get("sha1")
     if not url and lib.get("url"):
-        # Prism 的 meta 里 Fabric 相关库只给 maven 根地址，没有直链与校验和
         return common.download(lib["url"].rstrip("/") + "/" + rel, dest, None, "sha1", retries=2, quiet=True), rel
     if not url:
         url = LIBRARY_HOSTS[0] + rel
@@ -91,8 +90,6 @@ def fetch(pack=None):
         path = os.path.join(meta_dir, uid, f"{version}.json")
         with open(path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=1)
-        # Prism 的 meta 结构：uid/index.json 是版本列表（列表项 sha256 指向版本 json），
-        # index.json 里 packages[].sha256 指向各版本列表文件
         vlist = {
             "formatVersion": 1,
             "uid": uid,

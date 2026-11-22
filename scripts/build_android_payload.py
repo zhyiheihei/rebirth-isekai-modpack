@@ -28,7 +28,6 @@ VERSION_ID = "RebirthIsekai"
 VANILLA_MANIFEST = "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json"
 FABRIC_PROFILE = "https://meta.fabricmc.net/v2/versions/loader/{mc}/{loader}/profile/json"
 
-# 已压缩过的格式不再 deflate，省时间也几乎不损失体积
 STORE_EXT = (".jar", ".zip", ".ogg", ".png", ".jpg", ".jpeg", ".webp", ".nbt", ".dat", ".ttf", ".otf")
 
 
@@ -129,7 +128,6 @@ def stage_tree(root, pack, android, version_json):
     """把 assets / libraries / versions/<id> 铺进 root。"""
     resources = os.path.join(common.CACHE, "resources")
 
-    # 1) 素材：只带当前 assetIndex 的索引与对象
     index_id = version_json["assetIndex"]["id"]
     assets_src = os.path.join(resources, "assets")
     assets_dst = common.ensure_dir(os.path.join(root, "assets"))
@@ -151,7 +149,6 @@ def stage_tree(root, pack, android, version_json):
             count += 1
     print(f"  assets: {count} 个对象（index {index_id}）", flush=True)
 
-    # 2) 运行库：只带版本 json 真正引用的 jar
     libs_src = os.path.join(resources, "libraries")
     libs_dst = common.ensure_dir(os.path.join(root, "libraries"))
     missing = []
@@ -181,7 +178,6 @@ def stage_tree(root, pack, android, version_json):
     if missing:
         raise SystemExit(f"缺少运行库: {missing[:5]}")
 
-    # 3) 实例目录
     version_dir = common.ensure_dir(os.path.join(root, "versions", VERSION_ID))
     with open(os.path.join(version_dir, f"{VERSION_ID}.json"), "w", encoding="utf-8") as f:
         json.dump(version_json, f, ensure_ascii=False, indent=2)
@@ -213,7 +209,6 @@ def stage_tree(root, pack, android, version_json):
                 os.path.join(rp_dir, e["file"]),
             )
 
-    # 光影默认关闭：Android 上首次启动不加载光影
     iris = os.path.join(version_dir, "config", "iris.properties")
     if os.path.isfile(iris):
         lines = []

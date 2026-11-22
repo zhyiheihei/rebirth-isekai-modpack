@@ -204,7 +204,7 @@ _version = 5
 			#
 			# If enabled, a chat message will be displayed if vanilla MC's 
 			# render distance is higher than the recommended amount.
-			showHighVanillaRenderDistanceWarning = true
+			showHighVanillaRenderDistanceWarning = false
 			#
 			# If enabled, a chat message will be displayed if DH detects 
 			# that any pooled objects have been garbage collected.

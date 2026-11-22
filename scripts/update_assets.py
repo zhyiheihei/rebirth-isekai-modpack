@@ -28,23 +28,19 @@ BACKUP = os.path.join(ROOT, "cache", "asset-old")
 KINDS = {"resourcepacks": "resourcepack", "shaderpacks": "shader"}
 MIN_OVERLAP = 0.55
 TARGET_MC = json.load(open(os.path.join(ROOT, "pack", "pack.json"), encoding="utf-8"))["minecraft"]
-TARGET_LINE = ".".join(TARGET_MC.split(".")[:2])          # 26.1.2 -> "26.1"
+TARGET_LINE = ".".join(TARGET_MC.split(".")[:2])
 
-# 结构重排导致路径重合度偏低、但作者与 pack.mcmeta 能证明是同一上游的
 FORCE = {
     "FreshAnimations_v1.9.2.zip": "fresh-animations",
     "Os' Colorful Grasses (Mix).zip": "os-colorful-grasses",
 }
-# 上游已不再分发合并 zip（改用 EuphoriaPatcher 模组运行期打补丁），这两个合并包没有可更新对象
 SKIP = {
     "ComplementaryUnbound_r5.7.1 + EuphoriaPatches_1.8.1.zip": "Euphoria 合并包，上游已改为模组形式",
     "ComplementaryReimagined_r5.7.1 + EuphoriaPatches_1.8.1.zip": "Euphoria 合并包，上游已改为模组形式",
 }
-# 内容已按 26.x 的要求重建过，不能拿上游原始 zip 覆盖（上游那个是条目重叠的畸形包）
 PINNED = {
     "xali's Enhanced Vanilla -1.11.2b-rev.54d51d4.zip": "上游原始 zip 条目重叠，本地是 26.x 可用的重建副本",
 }
-# 同一项目有多个变体时，只换同名变体
 VARIANT = {"Os' Colorful Grasses (Mix).zip": "Mix-26.3"}
 
 

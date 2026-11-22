@@ -20,8 +20,6 @@ import common
 
 PACK = common.load("pack.json")
 NAME = PACK["name"]
-# 实例目录名用 ASCII：Windows 上 cmd/PowerShell 传递中文路径会因代码页出错，
-# 显示名（instance.cfg 的 name=）仍然是中文。
 INSTANCE_ID = "RebirthIsekai"
 VERSION = PACK["version"]
 JRE_DIRNAME = "jre" + str(PACK["java"]["major"])
@@ -58,8 +56,6 @@ JavaPath=__BUNDLED_JAVA__
 AutoUpdateCheckEnabled=false
 """
 
-# 占位账户的静默刷新必须以「网络错误」收场（STATE_OFFLINE），启动器才不会弹
-# 重新认证框。死代理让 OAuth 请求连接被拒 = NetworkError；游戏联机不走这个代理。
 DEAD_PROXY_CFG = """[General]
 ProxyType=SOCKS5
 ProxyAddr=127.0.0.1
@@ -79,14 +75,14 @@ name={name}
 OverrideMemory=true
 MinMemAlloc={min_mem}
 MaxMemAlloc={max_mem}
-OverrideJavaArgs=false
+OverrideJavaArgs=true
+JvmArgs=-XX:+UseZGC
 OverrideJavaLocation=true
 JavaPath=__BUNDLED_JAVA__
 JoinServerOnLaunch=false
 LowMemWarning=false
 """
 
-# mmc-pack 组件声明本地 sha256，Prism 校验通过后不再远程拉 meta
 
 
 
@@ -331,7 +327,6 @@ def write_servers(gamedir):
     entries = []
     if srv:
         entries.append({"name": srv["name"], "ip": srv["ip"]})
-    # 额外预置服务器（如测试服），主服务器不重复出现
     for s in PACK.get("extra_servers", []):
         if s.get("ip") and (not srv or s["ip"] != srv.get("ip")):
             entries.append({"name": s["name"], "ip": s["ip"]})
@@ -371,7 +366,7 @@ def extract_runtime(archive, kind, dest):
             tar.extractall(tmp)
     inner = os.path.join(tmp, os.listdir(tmp)[0])
     if os.path.isdir(dest):
-        shutil.rmtree(dest)          # 幂等：重复解到同一目录时别和旧树合并（macOS .app 会嵌套出 Contents/Contents）
+        shutil.rmtree(dest)
     common.ensure_dir(dest)
     for item in os.listdir(inner):
         shutil.move(os.path.join(inner, item), os.path.join(dest, item))
@@ -464,12 +459,8 @@ def assemble(platform, source, fill_natives=True, fast=False):
 
     server_arg = f' -s {PACK["server"]["ip"]}' if PACK.get("server", {}).get("auto_join") else ""
 
-    # 账号策略：占位 MSA 账号（Prism 11 要求必须有「拥有 MC 的账号」才不弹 Demo/登录向导）
-    # + 死代理让它的静默刷新以网络错误收场（STATE_OFFLINE），实现离线打开即用。
-    # accounts.json 里出现非占位的 refresh_token = 玩家已登录微软正版，此时撤掉死代理、
-    # 不再传 --offline，由 Prism 官方逻辑决定启动方式（默认账号是正版就直接正版进服）。
-    SH_PROXY_STRIP = "sed -i '/^ProxyType=/d;/^ProxyAddr=/d;/^ProxyPort=/d'"  # GNU sed（Linux）
-    SH_PROXY_STRIP_MAC = 'sed -i "" \'/^ProxyType=/d;/^ProxyAddr=/d;/^ProxyPort=/d\''  # BSD sed（macOS 的 -i 后必须紧跟后缀参数）
+    SH_PROXY_STRIP = "sed -i '/^ProxyType=/d;/^ProxyAddr=/d;/^ProxyPort=/d'"
+    SH_PROXY_STRIP_MAC = 'sed -i "" \'/^ProxyType=/d;/^ProxyAddr=/d;/^ProxyPort=/d\''
 
     if platform == "linux":
         sh_prologue = (
@@ -505,8 +496,6 @@ def assemble(platform, source, fill_natives=True, fast=False):
         open(path, "w", encoding="utf-8").write(msa_script)
         os.chmod(path, 0o755)
     elif platform == "windows":
-        # 全部逻辑放进 UTF-8 BOM 的 .ps1，.bat 只负责调用：
-        # cmd 用命令行传中文参数会因代码页丢字符，之前 JavaPath 没被替换就是这里出的问题。
         java_rel = runtime["java_path"].replace("/", "\\")
         join_arg = f", '-s', '{PACK['server']['ip']}'" if PACK.get("server", {}).get("auto_join") else ""
         ps1 = f'''param([string]$Mode = 'offline')
@@ -589,7 +578,6 @@ $launchArgs = @('-l', '{INSTANCE_ID}'{join_arg})
 if (-not $realMsa) {{ $launchArgs += @('--offline', $player) }}
 Start-Process -FilePath $exe -ArgumentList $launchArgs -WorkingDirectory $d
 '''
-        # Windows PowerShell 5.1 靠 BOM 才认 UTF-8；没有 BOM 时中文提示会乱码。
         with open(os.path.join(root, "launch.ps1"), "w", encoding="utf-8-sig", newline="\r\n") as f:
             f.write(ps1)
 
