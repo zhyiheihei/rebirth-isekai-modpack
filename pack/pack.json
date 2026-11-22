@@ -1,6 +1,6 @@
 {
  "name": "重生：异世界冒险",
- "version": "0.4.4",
+ "version": "0.4.5",
  "minecraft": "26.1.2",
  "minecraft_line": "26.1",
  "loader": {
@@ -21,8 +21,14 @@
   "max_mb": 5120
  },
  "server": {
-  "name": "Minecraft服务器",
-  "ip": "122.51.242.40:25565",
+  "name": "正式服",
+  "ip": "mc.zhyi.xin",
   "auto_join": true
- }
+ },
+ "extra_servers": [
+  {
+   "name": "测试服",
+   "ip": "mc.zhyi.xin:25566"
+  }
+ ]
 }

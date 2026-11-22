@@ -139,7 +139,7 @@ PY
 2. `python3 scripts/fetch.py && python3 scripts/build.py --fast --target linux` 本地抽检（可选，CI 会做全量）。
 3. `python3 scripts/sync_client.py --apply --release <新版本>` → 改 `pack.json` version、提交（信息带 `release: <新版本>`）、推送 `master`，Actions 构建完自动更新滚动 Release。
 
-实机验收：用本机 NixOS 上的 PrismLauncher 实例，**用户明确授权后**才由 agent 启动 Prism 并看该实例的 `latest.log`；MCSM 测试服地址只作为临时连接参数或单独的服务器列表项添加，**不能覆盖** `pack/pack.json` 里原有的服务器地址。
+实机验收：用本机 NixOS 上的 PrismLauncher 实例，**用户明确授权后**才由 agent 启动 Prism 并看该实例的 `latest.log`。默认服务器两个：`server`（正式服 `mc.zhyi.xin`，`auto_join` 自动连接）+ `extra_servers`（测试服 `mc.zhyi.xin:25566`），都预置进 `servers.dat`（`build.py` 的 `write_servers`）；临时连接的地址不要写进 `pack.json`。
 
 ## 6. 发布（滚动更新）
 

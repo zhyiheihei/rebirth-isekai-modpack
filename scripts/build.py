@@ -328,9 +328,15 @@ def write_servers(gamedir):
     import servers
 
     srv = PACK.get("server")
-    if not srv:
-        return
-    servers.write(os.path.join(gamedir, "servers.dat"), [{"name": srv["name"], "ip": srv["ip"]}])
+    entries = []
+    if srv:
+        entries.append({"name": srv["name"], "ip": srv["ip"]})
+    # 额外预置服务器（如测试服），主服务器不重复出现
+    for s in PACK.get("extra_servers", []):
+        if s.get("ip") and (not srv or s["ip"] != srv.get("ip")):
+            entries.append({"name": s["name"], "ip": s["ip"]})
+    if entries:
+        servers.write(os.path.join(gamedir, "servers.dat"), entries)
 
 
 def extract_launcher(archive, kind, root):

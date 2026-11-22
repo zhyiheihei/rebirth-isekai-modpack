@@ -152,8 +152,13 @@ def check_bundle(root):
         dat = os.path.join(gamedir, "servers.dat")
         if not os.path.exists(dat):
             problems.append("缺少 servers.dat")
-        elif server["ip"].encode() not in open(dat, "rb").read():
-            problems.append(f"servers.dat 里没有 {server['ip']}")
+        else:
+            dat_bytes = open(dat, "rb").read()
+            if server["ip"].encode() not in dat_bytes:
+                problems.append(f"servers.dat 里没有 {server['ip']}")
+            for extra in common.load("pack.json").get("extra_servers", []):
+                if extra.get("ip", "").encode() not in dat_bytes:
+                    problems.append(f"servers.dat 里没有预置的 {extra.get('name', '?')}（{extra['ip']}）")
 
     for base in (".", "PrismLauncher-data"):
         cfg_path = os.path.join(root, base, "prismlauncher.cfg")
