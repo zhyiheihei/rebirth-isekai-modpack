@@ -1,16 +1,14 @@
-# 重生：异世界冒险 —— Minecraft 26.1.2 整合包
+# 重生：异世界冒险 —— Minecraft 26.3 整合包
 
-> **版本：Minecraft 26.1.2 / Fabric 0.20.1。** 唯一事实来源是 `pack/pack.json` 的 `minecraft` 字段。
-> 模组文件名里出现 `26.2`/`26.3`、材质包里出现 `EnderEyes_26.3`、`dropped.json` 里写「止于 26.3」，
-> 都是上游的版本命名或排除原因，不代表本项目目标版本。详见 `AGENTS.md` 的「版本」一节。
+> **版本：Minecraft 26.3 / Fabric 0.20.1。** 唯一事实来源是 `pack/pack.json` 的 `minecraft` 字段。
 
-Minecraft 26.1.2 + **Fabric 0.20.1** 的整合包。客户端版本与服务器保持一致（服务端为 26.1.2 混合端），267 个模组、45 个材质包、9 个光影包，打包成开箱即玩的三平台便携包（自带 Java 25 与全部游戏资源），Windows 另有 PCL2 可导入的 MMC 实例包。三个便携包都是双击启动脚本即进游戏：自带 Java、预置服务器、首次运行随机分配一个离线玩家名；「启动正版」脚本可登录微软账号联机，登录过一次后「启动游戏」会自动识别并用正版启动，删掉账号即回离线模式。
+Minecraft 26.3 + **Fabric 0.20.1** 的整合包。客户端版本与服务器保持一致（服务端同为 26.3 纯 Fabric），204 个模组、46 个材质包、9 个光影包，打包成开箱即玩的三平台便携包（自带 Java 25 与全部游戏资源），Windows 另有 PCL2 可导入的 MMC 实例包。三个便携包都是双击启动脚本即进游戏：自带 Java、预置服务器、首次运行随机分配一个离线玩家名；「启动正版」脚本可登录微软账号联机，登录过一次后「启动游戏」会自动识别并用正版启动，删掉账号即回离线模式。
 
 Android 目前提供 **FCL 可导入的 `.mrpack` 实验包**，不是自制 APK；使用 FCL 官方 APK 启动。当前保留完整客户端模组清单，首次测试不带光影；尚未通过 Android 实机验证，不能视为已支持设备。
 
 名字取自「重生」+「异世界冒险」：进服那一刻起，你在一个重开的世界里从头活一遍——不是快节奏的战斗包，而是偏探索与建造的长期生存。地图换了、生物群系重织、村庄与要塞重做，附魔与饰品把成长线拉长；难度靠结构与地牢推进，不靠数值堆砌。适合几个人长期泡在一个存档里，也适合单人慢慢逛。
 
-模组、材质、光影逐条核对到 26.1.2 有可用构建后固定版本，不追最新、只追能跑。加载器是按可移植数量选出来的：Fabric **244** / NeoForge **209**（252 个可移植模组里 Fabric 覆盖 96.8%），且仅 Fabric 可用的 43 个里多为内容模组（BetterEnd、BetterNether、BCLib、The Bumblezone、Brewery、Macaw's Holidays、Sit、Ube's Delight 等）。
+模组、材质、光影逐条核对到 26.3 有可用构建后固定版本，不追最新、只追能跑。加载器是按可移植数量选出来的：Fabric **244** / NeoForge **209**（252 个可移植模组里 Fabric 覆盖 96.8%），且仅 Fabric 可用的 43 个里多为内容模组（BetterEnd、BetterNether、BCLib、The Bumblezone、Brewery、Macaw's Holidays、Sit、Ube's Delight 等）。
 
 
 ## 目录结构
@@ -19,7 +17,7 @@ Android 目前提供 **FCL 可导入的 `.mrpack` 实验包**，不是自制 APK
 pack/            整合包定义（进 git 的唯一事实来源）
   pack.json        整合包元数据：MC / 加载器 / Java / 内存
   mods.json        模组清单：Modrinth 项目 + 固定版本 + sha512（含源整合包的 modid 便于对齐）
-  dropped.json     未纳入的 213 个源模组及原因（无 26.1.2 Fabric 构建 / 仅 CurseForge）
+  dropped.json     未纳入的 279 个源模组及原因（无目标版本 Fabric 构建 / 仅 CurseForge）
   resourcepacks.json / shaderpacks.json   材质与光影清单（本地文件，记录 sha256）
   launcher.json    启动器版本与校验和
   runtimes.json    Temurin JRE 25 各平台下载地址与校验和
@@ -84,7 +82,7 @@ python3 scripts/fetch.py && python3 scripts/build.py --zip
 
 - 升级 Minecraft / Fabric：改 `pack/pack.json` 与 `pack/mmc-pack.json`，再跑一次 `update.py --write` 让所有模组对齐新版本。
 - 换材质/光影：把新压缩包放进 `local-assets/<类别>/`，改对应 JSON 的 `file`/`sha256`/`size`；批量对齐上游用 `python3 scripts/update_assets.py`（见下）。
-  45 个材质包里，能查到上游发布者的最新版本已替换（`options.txt` 的 `resourcePacks` 引用同步更新）。Minecraft 26.1 的 resource pack format 65 使用顶层 `min_format` / `max_format`，多版本资源包的最低格式不得小于 15；若兼容范围从旧格式开始，还需保留相匹配的旧版兼容字段，构建时会规范化。`xali's Enhanced Vanilla` 上游 zip 本身是重叠条目的畸形包（`unzip` 只报 warning，Python zipfile 直接抛错），本地是用 `unzip` 兜底解出后重建的等价副本。
+  46 个材质包里，能查到上游发布者的最新版本已替换（`options.txt` 的 `resourcePacks` 引用同步更新）。Minecraft 26.3 的 resource pack format 97（26.1 时为 65）使用顶层 `min_format` / `max_format`，多版本资源包的最低格式不得小于 15；若兼容范围从旧格式开始，还需保留相匹配的旧版兼容字段，构建时会规范化。`xali's Enhanced Vanilla` 上游 zip 本身是重叠条目的畸形包（`unzip` 只报 warning，Python zipfile 直接抛错），本地是用 `unzip` 兜底解出后重建的等价副本。
 - 禁用某个模组：把 `mods.json` 里的 `enabled` 改成 `false` 并写上 `disabled_reason`。
 
 ## 材质/光影批量对齐上游
@@ -141,13 +139,14 @@ sha256 eea00b797562eec6a0c12bcab0ce2c5428f30045513b316367e253219200ceca
 
 ## 未纳入的模组
 
-评估过的 459 个模组中，211 个在 26.1.2 上没有 Fabric 构建，连同 4 个主动移除的（tectonic、a_good_place、amendments、gardeners-dream）一并记在 `pack/dropped.json`，共 215 条：
+评估过的源模组中，没有可用 Fabric 构建的、只有 Forge/NeoForge 的、Modrinth 找不到的，连同本服主动移除的，一并记在 `pack/dropped.json`，共 282 条：
 
 | 分类 | 数量 | 说明 |
 | --- | --- | --- |
-| 止步旧版本 | 148 | 最后一次更新停在 1.20.1～1.21.11，如 Farmer's Delight、Create、BiomesOPlenty、FTB 全家桶 |
+| 止步旧版本 | 179 | 最后一次更新停在 1.20.1～26.1.2；其中 32 个是 0.5.0 升 26.3 时出库的（止于 26.2 / 26.1.2），如沉浸载具/装甲/机械、墓园、法杖、神器、ModernUI、YungsApi |
 | 只有 Forge/NeoForge 构建 | 8 | paragliders、kubejs、modernfix、seasonhud、inventoryhud、fastfurnace、ultimine-rewind、lavasweeper |
 | CurseForge 独占 | 55 | Modrinth 上没有对应项目（MrCrayfish's Framework、FTB Quests/Chunks/Teams、Botany Pots 等） |
+| 本服主动移除 | 40 | 服务端性能方案 29（Arclight 时代的区块生成卡顿）、世界生成一致性、启动排障等 |
 
 补齐依赖（19 个）不来自源整合包，是按所选模组的 `depends` 自动解析后加的。
 

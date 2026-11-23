@@ -2,7 +2,9 @@
  "launcher": "FCL",
  "format": "modrinth-mrpack",
  "revision": 3,
- "exclude_mod_files": ["DistantHorizons-3.3.3-26.1.2-fabric-neoforge.jar"],
+ "exclude_mod_files": [
+  "DistantHorizons-3.3.4-26.3-fabric-neoforge.jar"
+ ],
  "include_resourcepacks": true,
  "include_shaderpacks": false,
  "experimental": true,

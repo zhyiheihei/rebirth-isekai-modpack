@@ -9,9 +9,9 @@
         },
         {
             "uid": "net.minecraft",
-            "version": "26.1.2",
+            "version": "26.3",
             "cachedName": "Minecraft",
-            "cachedVersion": "26.1.2",
+            "cachedVersion": "26.3",
             "cachedRequires": [
                 {
                     "suggests": "3.4.1",
@@ -22,12 +22,12 @@
         },
         {
             "uid": "net.fabricmc.intermediary",
-            "version": "26.1.2",
+            "version": "26.3",
             "cachedName": "Intermediary Mappings",
-            "cachedVersion": "26.1.2",
+            "cachedVersion": "26.3",
             "cachedRequires": [
                 {
-                    "equals": "26.1.2",
+                    "equals": "26.3",
                     "uid": "net.minecraft"
                 }
             ],

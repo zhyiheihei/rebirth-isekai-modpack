@@ -8,7 +8,7 @@
 
 ## 0. 红线
 
-1. **版本只有一处权威**：`pack/pack.json`。`minecraft = 26.1.2`、`loader = fabric 0.20.1`、`java major = 25`。文档、上游元数据、jar 文件名里的 `26.2` / `26.3` / `1.21.x` 都不是本项目的目标，不要据此改版本。
+1. **版本只有一处权威**：`pack/pack.json`。`minecraft = 26.3`、`loader = fabric 0.20.1`、`java major = 25`。文档、上游元数据、jar 文件名里的 `26.1.2` / `26.2` / `26.4` / `1.21.x` 都不是本项目的目标，不要据此改版本。
 2. **客户端改动必须回灌仓库**：在本机实例里试出来的任何改动，都要经 `scripts/sync_client.py` 落进 `pack/`，由 CI 出 Release。**不允许只留在本机实例**，也不允许手工拼一个包发给玩家。
 3. **版本号只能由发布产生**：写进 `pack.json` 的唯一合法途径是 `scripts/set_version.py`，且版本来自提交信息里的 `release: x.y.z`。不要为了"顺手对齐"去改版本号；不发布就不碰。
 4. **`main` 上不打 tag**（`rolling` 由工作流创建，永远不要手工建/删/移动）。回退旧版本是禁止动作 —— 出问题就把版本加一位重发。
@@ -35,12 +35,12 @@
 ### 版本判定，按顺序
 
 1. `pack/pack.json` 的 `minecraft` 是唯一事实来源。
-2. `pack/mods.json` 里每条的目标版本也只看 `pack.json`；文件名带 `26.2`、`26.3` 只说明那个 jar 同时兼容更高版本，例如 `advancements_reloaded-0.14.0-fabric-26.2.jar`、`bigger_end_cities-26.1-26.3-1.1.3.jar`。
+2. `pack/mods.json` 里每条的目标版本也只看 `pack.json`；文件名带 `26.2`、`26.1` 只说明那个 jar 同时兼容更多版本，例如 `bigger_end_cities-26.1-26.3-1.1.3.jar` 是 26.3 唯一可用构建。
 3. `pack/resourcepacks.json` / `shaderpacks.json` 的 `upstream.game_versions` 是**材质/光影作者发布时声明的版本**，不是本项目目标。带 `note` 的条目是容易误读的，逐条看。
-4. `pack/dropped.json` 里 `reason` 写着「止于 26.3（无 26.1.2 构建…」表示那个模组**没有** 26.1.2 构建才被排除。看到这类记录不要反推本项目用了 26.3。
-5. 26.1 用资源包 format 65：`pack.mcmeta` 的 `min_format` / `max_format` 是顶层字段，`min_format` 不得低于 15；兼容范围起点低于 65 的老包还必须保留 `pack_format` 与 `supported_formats: {min_inclusive, max_inclusive}`，两种范围要一致。format 65 及以上的包**必须删掉**这两个旧字段。构建脚本会规范化上游包，别把 `min_format/max_format` 塞进 `supported_formats`。
+4. `pack/dropped.json` 的 `reason` 写的是排除当时的目标版本：老条目可能写「无 26.1.2 构建」，0.5.0 那批写「止于 26.2 / 26.1.2（无 26.3 构建，2026-11-22 复核）」。别拿这些文字反推现在跑的是哪个版本。
+5. 26.3 用资源包 format **97.1**（26.1 是 65；数据包 121）：`pack.mcmeta` 的 `min_format` / `max_format` 是顶层字段，`min_format` 不得低于 15；兼容范围起点低于 65 的老包还必须保留 `pack_format` 与 `supported_formats: {min_inclusive, max_inclusive}`，两种范围要一致。format 65 及以上的包**必须删掉**这两个旧字段。构建脚本会规范化上游包，别把 `min_format/max_format` 塞进 `supported_formats`。
 
-结论：**这个仓库是 26.1，不是 26.2，也不是 26.3。**
+结论：**这个仓库是 26.3。** 目标版本只认 `pack.json`，别拿 jar 文件名或上游 `game_versions` 反推。
 
 ### 目录
 
@@ -103,7 +103,7 @@ python3 scripts/set_version.py 0.2.4            # 只改 pack.json 版本（CI �
 
 | 项 | 客户端（本仓库） | 服务端（`zhyiheihei/Zccfwq`） | 规则 |
 |---|---|---|---|
-| MC | `pack/pack.json` `minecraft` | `server/mods` 里的 jar 目标版本 | 必须都是 **26.1.2** |
+| MC | `pack/pack.json` `minecraft` | `server/mods` 里的 jar 目标版本 | 必须都是 **26.3** |
 | Loader | `pack.json` `loader.version` | `fabric/gradle.properties` `loader_version` | 必须都是 **0.20.1** |
 | Java | `pack.json` `java.major` | 镜像基座 JDK | 必须都是 **25** |
 | 版本号 | `pack.json` `version`（滚动 Release） | `server/VERSION`（镜像 tag） | **各自独立**，不要求相等 |
@@ -161,7 +161,7 @@ git push origin main
 
 - **MC 26.x 要 GLFW 3.5 的 `glfwSetPreeditCallback`**。NixOS 系统 GLFW 3.4 没这个符号，`UseNativeGLFW=true` 会在 `InputConstants` 初始化时 NPE 崩掉；便携包的 `prismlauncher.cfg` 必须 `UseNativeGLFW=false`。
 - **`options.txt` 的 `key_*` 不能带 `o:CONTROL_OR_COMMAND`** 这类 Forge 修饰符后缀，否则 `InputConstants.getKey` 抛 `NumberFormatException`，**整个 options.txt 加载失败**（材质包启用顺序全丢）。
-- **资源包 format 65**：新包必须删除 `supported_formats`；旧包若仍支持 format <65，`pack_format` 与 `supported_formats: {min_inclusive, max_inclusive}` 必须与顶层 `min_format/max_format` 一致。只用 `supported_formats: {min_format, max_format}` 会让资源包被标为不兼容。
+- **资源包 format 97.1**（26.1 时是 65）：`max_format` 覆盖不到 97 的包会被判不兼容；新包必须删除 `supported_formats`；旧包若仍支持 format <65，`pack_format` 与 `supported_formats: {min_inclusive, max_inclusive}` 必须与顶层 `min_format/max_format` 一致。只用 `supported_formats: {min_format, max_format}` 会让资源包被标为不兼容。
 - **`mmc-pack.json` 带 `cachedSha256`** 且与随包 meta 文件一致时，启动器才不去远程拉组件元数据（假 IP/断网环境会直接拦住启动）。MMC 导入包不含 meta，故不写。
 - **不要把 MC 直接从仓库目录跑起来**：实例目录与运行日志读写频繁，会把仓库搞脏、也会让 `git status` 一片红。先复制到 `/var/tmp` 之类路径再跑。（这仓库早先位于 bindfs 挂载上，有约 50 个并发文件上限；2026-11-21 在 NixOS 主机上核查已是 btrfs 普通目录 —— 换机器时用 `stat -f -c %T ~/Documents` 确认后再决定要不要多绕这一层。）
 - **实例目录名固定 ASCII `RebirthIsekai`**（显示名 `name=` 才是中文）：Windows 上 cmd/PowerShell 传中文参数会因代码页丢字符，`JavaPath` 替换曾经就是这样失效的。
@@ -174,7 +174,7 @@ git push origin main
 - **移出「库」类模组前先查依赖**：0.4.0 按服务端性能方案移出 YUNG 系列时把 `YungsApi` 一起删了，但 `TravelersTitles` 硬依赖 `yungsapi >= 26.1.2-Fabric-6.1.0`；服务端没有 TravelersTitles 所以一直正常，客户端直到 0.4.3 启动才 `Incompatible mods found`。现在清单保留 `YungsApi-26.1.2-Fabric-6.1.3.jar`（纯库，不生成世界）。`scripts/audit_deps.py` 会扫 `cache/mods` 的 `fabric.mod.json`（含内嵌 jar 与 provides）并把缺依赖当构建失败。
 - **`pack/runtimes.json` 的 Java URL 必须钉到具体 release**（形如 `.../releases/download/jdk-25.0.5.1%2B2/...`），不能用 `api.adoptium.net/v3/binary/latest/...`：上游一发新构建，同一个 URL 的内容就变，而清单里的 sha256 没变，`fetch.py` 会下载失败，旧流程要等到 `build.py` 的 `extract_runtime` 才崩（0.4.2 就是这样挂的）。升级运行时＝URL、sha256、`release` 字段一起换。
 - **`AutomaticJavaSwitch=true`** 是 Java 自动兜底；`AutomaticJavaDownload` 必须保持 `false`（自动下载走 meta.prismlauncher.org，失败会直接中止启动）。
-- **`instance.cfg` 的 `OverrideJavaArgs=true` + `JvmArgs=-XX:+UseZGC`**：Prism 默认给的是 G1，原版 26.1.2 的 `default-user-jvm` 早就换成 ZGC；5G 堆上的 G1 停顿是掉帧尖峰来源（Distant Horizons 会在聊天栏点名）。删掉这行或退回 G1 等于退化。
+- **`instance.cfg` 的 `OverrideJavaArgs=true` + `JvmArgs=-XX:+UseZGC`**：Prism 默认给的是 G1，原版 26.3 的 `default-user-jvm` 早就换成 ZGC；5G 堆上的 G1 停顿是掉帧尖峰来源（Distant Horizons 会在聊天栏点名）。删掉这行或退回 G1 等于退化。
 - **`alexsmobs` + `codxlib` 自 0.4.1 起两端移除**：`alexsmobs:leafcutter_anthill` 这个 worldgen feature 会在区块生成 worker 线程上 `ant.remove(DISCARDED)`，撞 Arclight 给 Folia `EntityScheduler.retire` 打的 `Bukkit.isPrimaryThread()` 断言，直接崩服（`ReportedException: Feature placement`）。经过与原因见服务端仓库的 `CHANGELOG.md` 0.5.x「迁移」条目与其 AGENTS.md §7。别因为 Modrinth 上有 26.1.2 构建就加回来。
 
 ## 8. 收尾清单（每个任务结束前过一遍）

@@ -667,9 +667,30 @@ def build_mmc(root_dir):
     return root
 
 
+def seven_zip():
+    """找一个能建 .7z 的可执行文件：PATH 里的 7z/7za、MODPACK_7Z 环境变量、
+    或仓库内 .local/bin/7zr.exe（官方独立版，Windows 上没装 7-Zip 时用）。
+    都找不到时返回空串，由调用方退回 zip。"""
+    for name in ("7z", "7za", "7zr"):
+        found = shutil.which(name)
+        if found:
+            return found
+    env = os.environ.get("MODPACK_7Z", "")
+    if env and os.path.isfile(env):
+        return env
+    bundled = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir, ".local", "bin", "7zr.exe")
+    if os.path.isfile(bundled):
+        return os.path.abspath(bundled)
+    return ""
+
+
 def zip_dir(path, archive):
-    cmd = ["7z", "a", "-bd", "-mx=5", archive, "."]
-    if shutil.which("7z") is None:
+    seven = seven_zip()
+    if seven:
+        cmd = [seven, "a", "-bd", "-mx=5", archive, "."]
+    else:
+        print("未找到 7z，退回 zip 打包（产物后缀改为 .zip）", flush=True)
+        archive = os.path.splitext(archive)[0] + ".zip"
         cmd = ["zip", "-r", "-q", archive, "."]
     subprocess.run(cmd, cwd=path, check=True)
     return archive
@@ -711,7 +732,7 @@ def main():
             suffix = os.path.basename(root).replace(f"{NAME}-", ARCHIVE_PREFIX + "-")
             archive = os.path.join(common.DIST, suffix + ".7z")
             print("打包：", archive, flush=True)
-            zip_dir(root, archive)
+            archive = zip_dir(root, archive)
             built.append(archive)
     for path in built:
         print(path)

@@ -2,6 +2,8 @@
 cache/
 dist*/
 local-assets/
+# 本机工具（含 Windows 用的 7zr.exe，构建时按需重新下载）
+.local/
 
 # python
 __pycache__/
