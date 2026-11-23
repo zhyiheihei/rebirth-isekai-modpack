@@ -23,7 +23,6 @@ pack/            整合包定义（进 git 的唯一事实来源）
   runtimes.json    Temurin JRE 25 各平台下载地址与校验和
   config/          模组配置（290 个文件）
   options.txt      游戏设置（含已启用材质包顺序）
-  mmc-pack.json    MultiMC/Prism 实例组件声明
   android.json     FCL/Android 实验包策略（单独排除清单，不改桌面配置）
   使用说明.txt     随包分发的说明
 scripts/
@@ -80,7 +79,7 @@ python3 scripts/update.py --write    # 写回 pack/mods.json
 python3 scripts/fetch.py && python3 scripts/build.py --zip
 ```
 
-- 升级 Minecraft / Fabric：改 `pack/pack.json` 与 `pack/mmc-pack.json`，再跑一次 `update.py --write` 让所有模组对齐新版本。
+- 升级 Minecraft / Fabric：改 `pack/pack.json`，再跑一次 `update.py --write` 让所有模组对齐新版本；`mmc-pack.json` 由 `build.py` 按元数据生成，不用手改。
 - 换材质/光影：把新压缩包放进 `local-assets/<类别>/`，改对应 JSON 的 `file`/`sha256`/`size`；批量对齐上游用 `python3 scripts/update_assets.py`（见下）。
   46 个材质包里，能查到上游发布者的最新版本已替换（`options.txt` 的 `resourcePacks` 引用同步更新）。Minecraft 26.3 的 resource pack format 97（26.1 时为 65）使用顶层 `min_format` / `max_format`，多版本资源包的最低格式不得小于 15；若兼容范围从旧格式开始，还需保留相匹配的旧版兼容字段，构建时会规范化。`xali's Enhanced Vanilla` 上游 zip 本身是重叠条目的畸形包（`unzip` 只报 warning，Python zipfile 直接抛错），本地是用 `unzip` 兜底解出后重建的等价副本。
 - 禁用某个模组：把 `mods.json` 里的 `enabled` 改成 `false` 并写上 `disabled_reason`。
@@ -99,7 +98,7 @@ python3 scripts/update_assets.py --apply    # 落地：替换文件、补 mcmeta
 1. **MC 26.x 需要 GLFW 3.5。** 客户端要调 `glfwSetPreeditCallback`，官方 `lwjgl-glfw-natives-linux-3.4.1.jar` 里编的其实是 GLFW 3.5.0（有 preedit 符号）。NixOS 的 prismlauncher 包装器把 `glfw-minecraft-3.4` 塞进 `LD_LIBRARY_PATH` 并默认 `UseNativeGLFW=true`，于是 `dlopen` 拿到没有该符号的 3.4 → `InputConstants.setupKeyboardCallbacks` NPE、启动即崩。本包的 `PRISM_CFG` 因此设 `UseNativeGLFW=false`；如果目标机器仍崩，用 `-Dorg.lwjgl.glfw.libname=/path/to/libglfw.so` 显式钉住正确的库。
 2. **`options.txt` 里的键位不能带 Forge 修饰符。** 原 1.20.1 包留下的 `key_xxx:key.keyboard.o:CONTROL_OR_COMMAND` 会让 26.x 的 `InputConstants.getKey` 抛 `NumberFormatException`，整个 options 加载失败（连带材质包启用顺序丢失）。写回前必须剥掉 `:MODIFIER` 后缀。
 3. **`config/iris.properties` 的 `shaderPack` 必须与实际光影文件名一致。** 光影回退版本后忘了改这里，Iris 会报 `Pack ... is not valid!` 并静默关闭光影。
-4. **`mmc-pack.json` 要带与本地 meta 文件匹配的 `cachedSha256`。** 否则 Prism 每次启动都去远程拉组件元数据，断网/代理 fake-ip 环境下直接报「组件元数据更新失败」。
+4. **`mmc-pack.json` 由 `build.py` 生成，LWJGL 版本跟 `net.minecraft` 元数据的 `requires` 走**（26.3 是 3.4.3；钉错了 Sodium 会以「Installed version: 3.4.1-snapshot / Required version: 3.4.3」直接拒绝启动），并带与 meta 匹配的 `cachedSha256`。仓库里不放静态副本。
 
 ## 发布
 

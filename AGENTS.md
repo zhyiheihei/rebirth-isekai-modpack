@@ -46,7 +46,7 @@ pack/                 清单与配置（唯一事实来源）
   resourcepacks.json    材质清单   shaderpacks.json  光影清单
   local-assets.json     材质/光影原始压缩包的分发信息（release 资产 assets-<版本>）
   runtimes.json         Java 运行时（URL 必须钉到具体 release）
-  launcher.json / mmc-pack.json / options.txt / config/ / android.json
+  launcher.json / options.txt / config/ / android.json
   mods-local/           Modrinth 上没有的自制/付费模组（清单里写 project: local）
   resourcepacks-local/  就地改过的材质包修正版（本地包优先于 local-assets 里的原包）
 scripts/              fetch.py build.py verify_bundle.py update.py audit_deps.py
@@ -114,7 +114,7 @@ python3 scripts/update_assets.py                # 材质/光影上游版本报�
 - **MC 26.x 要 GLFW 3.5 的 `glfwSetPreeditCallback`**。NixOS 系统 GLFW 3.4 没这个符号，`UseNativeGLFW=true` 会在 `InputConstants` 初始化时 NPE 崩掉；便携包的 `prismlauncher.cfg` 必须 `UseNativeGLFW=false`。
 - **`options.txt` 的 `key_*` 不能带 `o:CONTROL_OR_COMMAND`** 这类 Forge 修饰符后缀，否则 `InputConstants.getKey` 抛 `NumberFormatException`，**整个 options.txt 加载失败**（材质包启用顺序全丢）。
 - **资源包 format 97.1**（26.1 时是 65）：`max_format` 覆盖不到 97 的包会被判不兼容；新包必须删除 `supported_formats`；旧包若仍支持 format <65，`pack_format` 与 `supported_formats: {min_inclusive, max_inclusive}` 必须与顶层 `min_format/max_format` 一致。只用 `supported_formats: {min_format, max_format}` 会让资源包被标为不兼容。
-- **`mmc-pack.json` 带 `cachedSha256`** 且与随包 meta 文件一致时，启动器才不去远程拉组件元数据（假 IP/断网环境会直接拦住启动）。MMC 导入包不含 meta，故不写。
+- **`mmc-pack.json` 只由 `build.py` 的 `write_mmc_pack()` 生成**（LWJGL 版本从 `net.minecraft` 元数据的 `requires` 取，26.3 是 3.4.3）；仓库里不再放静态副本。带 `cachedSha256` 且与随包 meta 一致时启动器才不去远程拉元数据（假 IP/断网会拦住启动），MMC 导入包不含 meta 故不写。
 - **不要把 MC 直接从仓库目录跑起来**：实例目录与运行日志读写频繁，会把仓库搞脏、也会让 `git status` 一片红。先复制到 `/var/tmp` 之类路径再跑。
 - **实例目录名固定 ASCII `RebirthIsekai`**（显示名 `name=` 才是中文）：Windows 上 cmd/PowerShell 传中文参数会因代码页丢字符，`JavaPath` 替换曾经就是这样失效的。
 - **Windows 启动逻辑全在 `launch.ps1`**（UTF-8 **带 BOM**，否则 PowerShell 5.1 读中文乱码），`启动游戏.bat` 只用 `-File` 调用；`.bat` 必须 CRLF，写成 CRCRLF 会解析异常。
