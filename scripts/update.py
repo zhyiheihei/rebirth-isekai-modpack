@@ -90,6 +90,10 @@ def main():
         for m in all_mods
         if not m.get("local") and m.get("project") not in (None, "", "local")
     ]
+    # hold=True 的条目钉死在当前版本：上游有新构建也不动。用于上游走太快、
+    # 新版本与包里其它模组互相 breaks 的情况（见 AGENTS.md「Sodium 0.9.3 事件」）。
+    held = [m for m in mods if m.get("hold")]
+    mods = [m for m in mods if not m.get("hold")]
     if args.only:
         requested = set(args.only)
         known = {m["file"] for m in all_mods}
@@ -99,6 +103,10 @@ def main():
         mods = [m for m in mods if m["file"] in requested]
 
     print(f"目标版本：minecraft={mc} loader={loader}，待检查 {len(mods)} 个模组")
+    if held:
+        print(f"已锁定 {len(held)} 个（hold=true，不参与自动更新）：" + "、".join(
+            f"{m['file']}({m.get('version')})" for m in held
+        ))
     updates, incompatible = [], []
 
     for mod in mods:

@@ -33,8 +33,74 @@ def ver(s):
     return tuple(int(x) for x in m.groups(default="0")) if m else (0,)
 
 
+def _kv(s):
+    """版本 → (数字段, 预发布串)。构建元数据（+mc26.3）不参与比较，与 Fabric 一致。"""
+    s = str(s).strip().split("+")[0].rstrip("-")
+    m = re.match(r"^(\d+(?:\.\d+)*)(?:-(.*))?$", s)
+    if not m:
+        return (0,), ""
+    return tuple(int(x) for x in m.group(1).split(".")), m.group(2) or ""
+
+
+def _cmp(a, b):
+    (na, pa), (nb, pb) = _kv(a), _kv(b)
+    n = max(len(na), len(nb))
+    na, nb = na + (0,) * (n - len(na)), nb + (0,) * (n - len(nb))
+    if na != nb:
+        return -1 if na < nb else 1
+    if pa == pb:
+        return 0
+    if not pa:  # 正式版 > 预发布
+        return 1
+    if not pb:
+        return -1
+    for x, y in zip(re.split(r"[.\-]", pa), re.split(r"[.\-]", pb)):
+        if x == y:
+            continue
+        if x.isdigit() and y.isdigit():
+            return -1 if int(x) < int(y) else 1
+        if x.isdigit():
+            return -1
+        if y.isdigit():
+            return 1
+        return -1 if x < y else 1
+    return 0
+
+
+def _one(version, tok):
+    if tok == "*":
+        return True
+    for op in (">=", "<=", ">", "<", "="):
+        if tok.startswith(op):
+            c = _cmp(version, tok[len(op):].strip().rstrip("-"))
+            return {"<": c < 0, "<=": c <= 0, ">": c > 0, ">=": c >= 0, "=": c == 0}[op]
+    if "x" in tok.lower() or "*" in tok:
+        parts = re.split(r"[.\-]", tok)
+        nums = _kv(version)[0]
+        for i, part in enumerate(parts[:3]):
+            if part.lower() in ("x", "*"):
+                return True
+            if part.isdigit() and (i >= len(nums) or nums[i] != int(part)):
+                return False
+        return True
+    return _cmp(version, tok) == 0
+
+
+def satisfies(version, pred):
+    """按 Fabric 的版本谓词判断 version 是否落在 pred 内。
+
+    只覆盖 breaks 里实际出现的写法（>、>=、<、<=、=、x 通配、空格并集）；
+    ~ 与 ^ 记为不匹配，宁可漏报也不误报。
+    """
+    if pred is None or str(pred).strip() in ("", "*"):
+        return True
+    if isinstance(pred, list):
+        return any(satisfies(version, p) for p in pred)
+    return all(_one(version, tok) for tok in str(pred).split())
+
+
 def audit(mods_dir):
-    provided, deps = {}, []
+    provided, deps, brks = {}, [], []
 
     def add(mid, v):
         if mid and (mid not in provided or ver(v) > ver(provided[mid])):
@@ -56,6 +122,8 @@ def audit(mods_dir):
                     add(p, meta.get("version"))
                 for dep, rng in (meta.get("depends") or {}).items():
                     deps.append((f, dep, rng))
+                for dep, rng in (meta.get("breaks") or {}).items():
+                    brks.append((f, dep, rng))
             for name in zf.namelist():
                 if not (name.startswith("META-INF/jars/") and name.endswith(".jar")):
                     continue
@@ -84,7 +152,16 @@ def audit(mods_dir):
             if m and ver(provided[dep]) < ver(m.group(1)):
                 problems.append((dep, r, f, f"版本过低({provided[dep]})"))
 
-    print(f"   {len(provided)} 个 mod id，{len(deps)} 条依赖声明")
+    # breaks 是硬冲突：命中即 Fabric 解析阶段直接拒绝启动，比缺依赖更致命。
+    conflicts = []
+    for f, dep, rng in brks:
+        have = provided.get(dep)
+        if have is None or dep in SKIP:
+            continue
+        if satisfies(have, rng):
+            conflicts.append((dep, rng, have, f))
+
+    print(f"   {len(provided)} 个 mod id，{len(deps)} 条依赖声明，{len(brks)} 条 breaks 声明")
     seen = set()
     for dep, rng, f, why in problems:
         key = (dep, str(rng), why)
@@ -92,7 +169,14 @@ def audit(mods_dir):
             continue
         seen.add(key)
         print(f"   {dep}: 需要 {rng} — {why}  ← {f}")
-    return problems
+    seen = set()
+    for dep, rng, have, f in conflicts:
+        key = (dep, str(rng), have)
+        if key in seen:
+            continue
+        seen.add(key)
+        print(f"   !! {f} 声明与 {dep} {rng} 不兼容，实际装了 {have}")
+    return problems, conflicts
 
 
 def main():
@@ -101,11 +185,14 @@ def main():
         print(f"目录不存在: {target}", file=sys.stderr)
         return 1
     print(f"== 依赖检查 {target} ==")
-    problems = audit(target)
-    if problems:
-        print(f"   {len(problems)} 条依赖不满足", file=sys.stderr)
+    problems, conflicts = audit(target)
+    if problems or conflicts:
+        print(
+            f"   {len(problems)} 条依赖不满足，{len(conflicts)} 条 breaks 冲突",
+            file=sys.stderr,
+        )
         return 1
-    print("   依赖全部满足")
+    print("   依赖全部满足，无 breaks 冲突")
     return 0
 
 
