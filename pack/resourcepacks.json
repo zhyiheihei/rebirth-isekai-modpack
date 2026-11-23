@@ -293,9 +293,10 @@
  },
  {
   "file": "Minecraft-Mod-Language-Modpack-Converted-1.20.1.zip",
-  "sha256": "7b837a4dca89ed43f6d4c0d693711d3b5d5e958d7fa9f1ef1acf3ef5a6ceb5f0",
-  "size": 1719133,
-  "source": "local"
+  "sha256": "9360b6380266b5f8e9085f513661b1e4e3a8c81ee0bffaf40ea5bca74f3f76e4",
+  "size": 1698515,
+  "source": "local",
+  "note": "已删除 isometric-renders / minecells / mythicmetals 的 lang 文件：它们用数组形式的旧版组件值，26.3 的 Jade 语言加载器会抛 JsonSyntaxException，使整次语言重载失败（UI 退回英文）"
  },
  {
   "file": "Os' Colorful Grasses (Mix).zip",
