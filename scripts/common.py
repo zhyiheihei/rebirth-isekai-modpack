@@ -234,6 +234,11 @@ def fetch_mods(quiet=False):
             ok += 1
         else:
             print(f"  缺失 mod: {m['file']}", file=sys.stderr)
+    mods_dir = os.path.join(CACHE, "mods")
+    wanted = {m["file"] for m in mods}
+    for name in os.listdir(mods_dir) if os.path.isdir(mods_dir) else []:
+        if name.endswith(".jar") and name not in wanted:
+            os.remove(os.path.join(mods_dir, name))
     return ok, len(mods)
 
 
