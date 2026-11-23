@@ -76,7 +76,7 @@ OverrideMemory=true
 MinMemAlloc={min_mem}
 MaxMemAlloc={max_mem}
 OverrideJavaArgs=true
-JvmArgs=-XX:+UseZGC
+JvmArgs=-XX:+UseZGC -Dorg.lwjgl.opengl.contextAPI=native
 OverrideJavaLocation=true
 JavaPath=__BUNDLED_JAVA__
 JoinServerOnLaunch=false
@@ -466,7 +466,6 @@ def assemble(platform, source, fill_natives=True, fast=False):
         sh_prologue = (
             "#!/bin/sh\n"
             'cd "$(dirname "$0")" || exit 1\n'
-            '[ -n "$WAYLAND_DISPLAY" ] && export SDL_VIDEO_DRIVER=wayland\n'
             f'JAVA="$(pwd)/java/{JRE_DIRNAME}/{runtime["java_path"]}"\n'
             f'sed -i "s|^JavaPath=.*|JavaPath=$JAVA|" "prismlauncher.cfg" "instances/{INSTANCE_ID}/instance.cfg"\n'
             'if [ -f player.txt ]; then\n'
