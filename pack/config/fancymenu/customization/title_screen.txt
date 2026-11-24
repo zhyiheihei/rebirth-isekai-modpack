@@ -3,7 +3,7 @@ type = fancymenu_layout
 layout-meta {
 identifier = net.minecraft.client.gui.screens.TitleScreen
 render_custom_elements_behind_vanilla = false
-last_edited_time = 1793123115745
+last_edited_time = 1795509062596
 is_enabled = true
 randommode = false
 randomgroup = 1
@@ -12,21 +12,122 @@ layout_index = 0
 }
 
 menu_background {
-instance_identifier = c3c7f2c1-a24a-420a-8fa6-2f14358239dd
-background_type = glsl
-inline_shader_source = float hash21(vec2 p) {%%!serialized_property_newline!%%    p = fract(p * vec2(127.31, 311.7));%%!serialized_property_newline!%%    p += dot(p, p + 34.23);%%!serialized_property_newline!%%    return fract(p.x * p.y);%%!serialized_property_newline!%%}%%!serialized_property_newline!%%%%!serialized_property_newline!%%float snowLayer(vec2 uv, float t, float density, float speed, float size, float seed) {%%!serialized_property_newline!%%    vec2 p = uv * density;%%!serialized_property_newline!%%    p.y -= t * speed;%%!serialized_property_newline!%%    p.x += sin(t * 0.22 + seed) * 0.35;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    vec2 id = floor(p);%%!serialized_property_newline!%%    vec2 f = fract(p) - 0.5;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    float h1 = hash21(id + seed);%%!serialized_property_newline!%%    float h2 = hash21(id + seed + 7.77);%%!serialized_property_newline!%%    float h3 = hash21(id + seed + 13.13);%%!serialized_property_newline!%%%%!serialized_property_newline!%%    vec2 pos = vec2((h1 - 0.5) * 0.82, (h2 - 0.5) * 0.82);%%!serialized_property_newline!%%    pos.x += sin(t * (0.6 + h3 * 0.9) + h1 * 6.2831) * 0.13;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    float d = length(f - pos);%%!serialized_property_newline!%%    float r = size * (0.55 + 0.8 * h3);%%!serialized_property_newline!%%    float flake = 1.0 - smoothstep(r * 0.25, r, d);%%!serialized_property_newline!%%    flake *= step(0.45, h1);%%!serialized_property_newline!%%%%!serialized_property_newline!%%    return flake * (0.35 + 0.65 * h2);%%!serialized_property_newline!%%}%%!serialized_property_newline!%%%%!serialized_property_newline!%%void mainImage(out vec4 fragColor, in vec2 fragCoord) {%%!serialized_property_newline!%%    vec2 res = iResolution.xy;%%!serialized_property_newline!%%    float asp = res.x / max(res.y, 1.0);%%!serialized_property_newline!%%    vec2 uv = fragCoord / max(res.y, 1.0);%%!serialized_property_newline!%%    float t = iTime;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    vec3 col = mix(vec3(0.014, 0.021, 0.038), vec3(0.052, 0.074, 0.108), uv.y);%%!serialized_property_newline!%%%%!serialized_property_newline!%%    vec2 c = fragCoord / res - vec2(0.5, 0.4);%%!serialized_property_newline!%%    c.x *= asp;%%!serialized_property_newline!%%    col += vec3(0.018, 0.030, 0.050) * exp(-length(c) * 2.8);%%!serialized_property_newline!%%%%!serialized_property_newline!%%    float star = pow(hash21(floor(fragCoord / 2.0)), 42.0) * 0.5;%%!serialized_property_newline!%%    col += vec3(0.55, 0.72, 0.95) * star;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    float s = 0.0;%%!serialized_property_newline!%%    s += snowLayer(uv, t, 9.0, 0.20, 0.048, 1.0) * 0.45;%%!serialized_property_newline!%%    s += snowLayer(uv, t, 6.0, 0.34, 0.065, 5.0) * 0.70;%%!serialized_property_newline!%%    s += snowLayer(uv, t, 4.2, 0.56, 0.088, 9.0) * 0.95;%%!serialized_property_newline!%%    s += snowLayer(uv * 1.35, t, 2.6, 0.86, 0.115, 21.0) * 0.75;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    col += vec3(0.82, 0.91, 1.0) * s;%%!serialized_property_newline!%%%%!serialized_property_newline!%%    vec2 vuv = (fragCoord / res - 0.5) * vec2(asp, 1.0);%%!serialized_property_newline!%%    col *= 1.0 - 0.5 * pow(length(vuv) * 1.05, 1.7);%%!serialized_property_newline!%%%%!serialized_property_newline!%%    fragColor = vec4(clamp(col, 0.0, 1.0), 1.0);%%!serialized_property_newline!%%}
+instance_identifier = dba6a1ee-797b-44fc-83c2-e28647bf0312
+background_type = image
+image_path = [source:local]config/fancymenu/assets/menu_bg_pink.jpg
+}
+
+# 自定义标题图：左侧垂直居中
+element {
+element_type = image
+instance_identifier = 5292e1bf-f4c2-4484-a690-6f142f5be364
+source = [source:local]config/fancymenu/assets/rebirth_title.png
+anchor_point = mid-left
+sticky_anchor = true
+x = 16
+y = 0
+width = 420
+height = 89
+auto_sizing = false
+base_opacity = 1.0
+}
+
+# 隐藏原版标题 logo / splash / 版本信息 / 版权 / Realms 通知
+element {
+element_type = vanilla_button
+instance_identifier = minecraft_logo_widget
+is_hidden = true
 }
 
 element {
-element_type = image
-instance_identifier = 611feeb5-7ab1-4e5f-b347-44efd6af61a9
-source = [source:local]config/fancymenu/assets/rebirth_title.png
-anchor_point = top-centered
+element_type = vanilla_button
+instance_identifier = minecraft_splash_widget
+is_hidden = true
+}
+
+element {
+element_type = vanilla_button
+instance_identifier = minecraft_branding_widget
+is_hidden = true
+}
+
+element {
+element_type = vanilla_button
+instance_identifier = title_screen_copyright_button
+is_hidden = true
+}
+
+element {
+element_type = vanilla_button
+instance_identifier = minecraft_realms_notification_icons_widget
+is_hidden = true
+}
+
+# 隐藏不需要的原版按钮：单人游戏 / Realms / 语言 / 无障碍 / 模组
+element {
+element_type = vanilla_button
+instance_identifier = mc_titlescreen_singleplayer_button
+is_hidden = true
+}
+
+element {
+element_type = vanilla_button
+instance_identifier = mc_titlescreen_realms_button
+is_hidden = true
+}
+
+element {
+element_type = vanilla_button
+instance_identifier = mc_titlescreen_language_button
+is_hidden = true
+}
+
+element {
+element_type = vanilla_button
+instance_identifier = mc_titlescreen_accessibility_button
+is_hidden = true
+}
+
+element {
+element_type = vanilla_button
+instance_identifier = titlescreen_mods_button
+is_hidden = true
+}
+
+# 三大按钮：右侧垂直居中放大（多人游戏 / 选项 / 退出游戏）
+# 按钮粉色外观来自 options.txt 的 global_button_background_*（全游戏统一）
+element {
+element_type = vanilla_button
+instance_identifier = mc_titlescreen_multiplayer_button
+anchor_point = mid-right
 sticky_anchor = true
-x = 0
-y = 16
-width = 360
-height = 76
+x = -24
+y = -60
+width = 280
+height = 48
 auto_sizing = false
-base_opacity = 1.0
+}
+
+element {
+element_type = vanilla_button
+instance_identifier = mc_titlescreen_options_button
+anchor_point = mid-right
+sticky_anchor = true
+x = -24
+y = 0
+width = 280
+height = 48
+auto_sizing = false
+}
+
+element {
+element_type = vanilla_button
+instance_identifier = mc_titlescreen_quit_button
+anchor_point = mid-right
+sticky_anchor = true
+x = -24
+y = 60
+width = 280
+height = 48
+auto_sizing = false
 }
