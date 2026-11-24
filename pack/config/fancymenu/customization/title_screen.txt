@@ -1,7 +1,7 @@
 type = fancymenu_layout
 
 layout-meta {
-identifier = net.minecraft.client.gui.screens.TitleScreen
+identifier = title_screen
 render_custom_elements_behind_vanilla = false
 last_edited_time = 1795512000000
 is_enabled = true
@@ -9,6 +9,12 @@ randommode = false
 randomgroup = 1
 randomonlyfirsttime = false
 layout_index = 0
+}
+
+customization {
+action = autoscale
+basewidth = 1920
+baseheight = 1080
 }
 
 menu_background {
@@ -127,8 +133,3 @@ height = 48
 auto_sizing = false
 }
 
-customization {
-action = autoscale
-basewidth = 1920
-baseheight = 1080
-}
