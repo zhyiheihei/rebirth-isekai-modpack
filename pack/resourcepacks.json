@@ -55,12 +55,6 @@
   "note": "上游停更在 1.20.x，靠 supported_formats.max_format=999 在 26.1.2 加载"
  },
  {
-  "file": "A Good Place Sample Pack.zip",
-  "sha256": "84ed61e510f104010fe5c5c1198de0204a1cb205eb2ef76c7afc19d12ecf0ada",
-  "size": 15055,
-  "source": "local"
- },
- {
   "file": "Assorted Allays x FA - V.12.0.zip",
   "sha256": "0b7b1b3bd9ac10925cb02506cdc69500b02fb85b160f09777370992a9d09b304",
   "size": 974952,
@@ -100,12 +94,6 @@
   "size": 18320,
   "source": "local",
   "note": "自制：Axiom 界面汉化，1234 键 · 目标 6.1.5 (26.1/26.1.1/26.1.2)（中文缺键时自动回退英文）"
- },
- {
-  "file": "A提示.zip",
-  "sha256": "dfcaba9db21a0de9846cce9c1798ab63161237705ba63f50be47824e04c43f0b",
-  "size": 252591,
-  "source": "local"
  },
  {
   "file": "Better-Leaves-9.4.zip",
@@ -202,31 +190,6 @@
   "note": "文件名里的 26.3 是上游的版本命名，该版本声明支持 26.1.2/26.2/26.3"
  },
  {
-  "file": "FarnersDelightExcaliburSupport_1.21.1.zip",
-  "sha256": "e133a320904d7cc296a2e473f791270a5f0dd505deb158baba27c84709ebeda3",
-  "size": 1149194,
-  "source": "local",
-  "upstream": {
-   "project": "excalibur-farmers-delight-support",
-   "version": "1.1.1",
-   "game_versions": [
-    "1.21",
-    "1.21.1",
-    "1.21.2",
-    "1.21.3",
-    "1.21.4",
-    "1.21.5",
-    "1.21.6",
-    "1.21.7",
-    "1.21.8",
-    "1.21.9",
-    "1.21.10",
-    "1.21.11"
-   ]
-  },
-  "note": "上游只发到 1.21.x，靠 supported_formats.max_format=999 在 26.1.2 加载"
- },
- {
   "file": "FreshAnimations_v1.11.1_26.1+.zip",
   "sha256": "ace5850e6f45e194aee47d84557634e3a79613230cf466550700b7e0318946f4",
   "size": 773652,
@@ -242,12 +205,6 @@
     "26.3"
    ]
   }
- },
- {
-  "file": "Furnish Door Knock Silencer.zip",
-  "sha256": "c7b48aa60e0c71dd0856ccc1c892a1ab65a46bc1fd9c7849a9b52e1e405ba24e",
-  "size": 14000,
-  "source": "local"
  },
  {
   "file": "JustExpressions_v1.2.1.zip",
@@ -290,13 +247,6 @@
   "sha256": "bbec7b6533371b14b746c2f03e2b14cb1e1d62e030ded6547650c2dac755bd51",
   "size": 68076,
   "source": "local"
- },
- {
-  "file": "Minecraft-Mod-Language-Modpack-Converted-1.20.1.zip",
-  "sha256": "9360b6380266b5f8e9085f513661b1e4e3a8c81ee0bffaf40ea5bca74f3f76e4",
-  "size": 1698515,
-  "source": "local",
-  "note": "已删除 isometric-renders / minecells / mythicmetals 的 lang 文件：它们用数组形式的旧版组件值，26.3 的 Jade 语言加载器会抛 JsonSyntaxException，使整次语言重载失败（UI 退回英文）"
  },
  {
   "file": "Os' Colorful Grasses (Mix).zip",
@@ -497,12 +447,6 @@
   "source": "local"
  },
  {
-  "file": "七彩花透明GUI.zip",
-  "sha256": "88d703f6cad7fd9e5160cd29f33df6a602d7c70303f36fda45fd29c4f04dcb35",
-  "size": 13400,
-  "source": "local"
- },
- {
   "file": "三叉戟模型drowned-trident.zip",
   "sha256": "d35ca7765ae914d3c1fe7f3fe22dd989c8458895c8e98cab47127a6d0efd7961",
   "size": 61204,
@@ -568,24 +512,6 @@
   "file": "更好的连接透明玻璃Clean_Connected_Glass(1.20fufu修复版).zip",
   "sha256": "b842f5ad5a9693139c6b1422faff0c73b3210f376462bfb1efb97d92511c05d8",
   "size": 687122,
-  "source": "local"
- },
- {
-  "file": "杂七杂八的东西重置材质Things_Retextured.zip",
-  "sha256": "fbed09b21636ef532eaa4e7fd916c2a58fa67aec9a0356835f1d838e667bba66",
-  "size": 31320,
-  "source": "local"
- },
- {
-  "file": "汉化资源包.zip",
-  "sha256": "d9ce2c5e557240c0418e48c765cecbfc6f5e1a3221201c77faee811f2a78701e",
-  "size": 1081456,
-  "source": "local"
- },
- {
-  "file": "绿色行星.zip",
-  "sha256": "dd77ae55c3810c48406b28e04fe7da26d23cb8a3f297ceb501a568da75f4e461",
-  "size": 9476801,
   "source": "local"
  },
  {
