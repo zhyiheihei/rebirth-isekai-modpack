@@ -3,7 +3,7 @@ type = fancymenu_layout
 layout-meta {
 identifier = net.minecraft.client.gui.screens.TitleScreen
 render_custom_elements_behind_vanilla = false
-last_edited_time = 1795509062596
+last_edited_time = 1795512000000
 is_enabled = true
 randommode = false
 randomgroup = 1
@@ -17,98 +17,93 @@ background_type = image
 image_path = [source:local]config/fancymenu/assets/menu_bg_pink.jpg
 }
 
-# 自定义标题图：左侧垂直居中
 element {
 element_type = image
 instance_identifier = 5292e1bf-f4c2-4484-a690-6f142f5be364
-source = [source:local]config/fancymenu/assets/rebirth_title.png
+source = [source:local]config/fancymenu/assets/title_frosted.png
 anchor_point = mid-left
 sticky_anchor = true
 x = 16
 y = 0
-width = 420
-height = 89
+width = 468
+height = 126
 auto_sizing = false
 base_opacity = 1.0
 }
 
-# 隐藏原版标题 logo / splash / 版本信息 / 版权 / Realms 通知
-element {
+vanilla_button {
 element_type = vanilla_button
 instance_identifier = minecraft_logo_widget
 is_hidden = true
 }
 
-element {
+vanilla_button {
 element_type = vanilla_button
 instance_identifier = minecraft_splash_widget
 is_hidden = true
 }
 
-element {
+vanilla_button {
 element_type = vanilla_button
 instance_identifier = minecraft_branding_widget
 is_hidden = true
 }
 
-element {
+vanilla_button {
 element_type = vanilla_button
 instance_identifier = title_screen_copyright_button
 is_hidden = true
 }
 
-element {
+vanilla_button {
 element_type = vanilla_button
 instance_identifier = minecraft_realms_notification_icons_widget
 is_hidden = true
 }
 
-# 隐藏不需要的原版按钮：单人游戏 / Realms / 语言 / 无障碍 / 模组
-element {
+vanilla_button {
 element_type = vanilla_button
 instance_identifier = mc_titlescreen_singleplayer_button
 is_hidden = true
 }
 
-element {
+vanilla_button {
 element_type = vanilla_button
 instance_identifier = mc_titlescreen_realms_button
 is_hidden = true
 }
 
-element {
+vanilla_button {
 element_type = vanilla_button
 instance_identifier = mc_titlescreen_language_button
 is_hidden = true
 }
 
-element {
+vanilla_button {
 element_type = vanilla_button
 instance_identifier = mc_titlescreen_accessibility_button
 is_hidden = true
 }
 
-element {
+vanilla_button {
 element_type = vanilla_button
 instance_identifier = titlescreen_mods_button
 is_hidden = true
 }
 
-# 三大按钮：右侧垂直居中放大（多人游戏 / 选项 / 退出游戏）
-# 按钮粉色外观来自 options.txt 的 global_button_background_*（全游戏统一）
-element {
+vanilla_button {
 element_type = vanilla_button
 instance_identifier = mc_titlescreen_multiplayer_button
 anchor_point = mid-right
 sticky_anchor = true
 x = -24
-y = -60
+y = -62
 width = 280
 height = 48
 auto_sizing = false
 }
 
-element {
+vanilla_button {
 element_type = vanilla_button
 instance_identifier = mc_titlescreen_options_button
 anchor_point = mid-right
@@ -120,13 +115,13 @@ height = 48
 auto_sizing = false
 }
 
-element {
+vanilla_button {
 element_type = vanilla_button
 instance_identifier = mc_titlescreen_quit_button
 anchor_point = mid-right
 sticky_anchor = true
 x = -24
-y = 60
+y = 62
 width = 280
 height = 48
 auto_sizing = false
