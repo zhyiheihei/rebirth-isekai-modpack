@@ -60,6 +60,16 @@
   "enabled": true
  },
  {
+  "file": "Axiom-6.1.5-for-MC26.3.jar",
+  "project": "N6n5dqoA",
+  "version": "6.1.5",
+  "version_id": "Gm9DhTF6",
+  "loader": "fabric",
+  "sha512": "b37108eaf452b1426786a2bb2f97ca948d76083c733823f2271d1a8fcde83d728ed00ac18b706bce48a755b504d0523b67fea3a458f7e89fb547ca382960ffbd",
+  "url": "https://cdn.modrinth.com/data/N6n5dqoA/versions/Gm9DhTF6/Axiom-6.1.5-for-MC26.3.jar",
+  "enabled": true
+ },
+ {
   "file": "BadOptimizations-2.4.1-26.3-fabric.jar",
   "project": "g96Z4WVZ",
   "version": "2.4.1",
