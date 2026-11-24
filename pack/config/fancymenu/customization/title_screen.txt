@@ -126,3 +126,9 @@ width = 280
 height = 48
 auto_sizing = false
 }
+
+customization {
+action = autoscale
+basewidth = 1920
+baseheight = 1080
+}
