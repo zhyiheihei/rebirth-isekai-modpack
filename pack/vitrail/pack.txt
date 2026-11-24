@@ -1,0 +1,5 @@
+pack=Solas_Shader_V3.9.zip
+enabled=true
+shadowdistance=32
+renderscale=100
+shadowmapscale=100

@@ -47,6 +47,7 @@ pack/                 清单与配置（唯一事实来源）
   local-assets.json     材质/光影原始压缩包的分发信息（release 资产 assets-<版本>）
   runtimes.json         Java 运行时（URL 必须钉到具体 release）
   launcher.json / options.txt / config/ / android.json
+  vitrail/pack.txt      Vitrail（Vulkan 光影加载器）的选包文件，build.py 原样写进实例
   mods-local/           Modrinth 上没有的自制/付费模组（清单里写 project: local）
   resourcepacks-local/  就地改过的材质包修正版（本地包优先于 local-assets 里的原包）
 scripts/              fetch.py build.py verify_bundle.py update.py audit_deps.py
@@ -129,4 +130,7 @@ python3 scripts/update_assets.py                # 材质/光影上游版本报�
 - **`instance.cfg` 的 `OverrideJavaArgs=true` + `JvmArgs=-XX:+UseZGC`**：Prism 默认给的是 G1，原版 26.3 的 `default-user-jvm` 早就换成 ZGC；5G 堆上的 G1 停顿是掉帧尖峰来源（Distant Horizons 会在聊天栏点名）。删掉这行或退回 G1 等于退化。
 - **26.3 在 Wayland 下走 XWayland 时 OpenGL 后端会加载失败**：`renderpearl` 的 `GlBackend.loadLibrary` 报 `OpenGL is not supported: Could not retrieve OpenGL functions`——LWJGL 因 `WAYLAND_DISPLAY` 选了 `libEGL.so.1`，而 SDL 用的 x11 驱动走 GLX。JVM 加 `-Dorg.lwjgl.opengl.contextAPI=native` 即可（MC-312230 的官方 workaround），`build.py` 的 `JvmArgs` 里已带。**不要**为了绕这个去强制 `SDL_VIDEO_DRIVER=wayland`：那样 SDL 不再经 XWayland 承接合成器缩放，整机 HiDPI（umbriel `output.eDP-1.scale`）对 MC 失效，窗口和 UI 都按 1:1 物理像素画，在这块 2880x1800 面板上明显偏小。
 - **`config/sodium-options.json` 的 `use_no_error_g_l_context` 必须 `false`**：Sodium 默认开无错误 GL 上下文，Iris 在首次渲染世界（translucents 合成阶段）会绑一个不存在的纹理名，Mesa 的 `bind_texture_object` 跳过空指针检查直接 SIGSEGV（只留 `hs_err_pid*.log`，没有 crash-report，堆栈是 `SamplerBinding.updateSampler`）。上游记录在 Iris issue #3367，关掉后退化成无害的 `GL_INVALID_OPERATION`。
+- **26.3 有原生 Vulkan 后端，光影要换加载器**：`options.txt` 的 `preferredGraphicsBackend:"vulkan"`（游戏内「优先 Vulkan（实验性）」）生效后由 **Vitrail** 画光影，OpenGL 时由 **Iris** 画；两个 jar 可以同时躺在 `mods/` 里，切后端 + 重启即切换，互不冲突。Vitrail 的选包文件是 `vitrail/pack.txt`，键名 **`pack=` / `enabled=`**（写成 `shaders=true` 不报错但光影是关的），另有 `shadowdistance` / `renderscale` / `shadowmapscale`。首次加载要一次性把 GLSL 翻成 SPIR-V（日志 `N of M leftover pipelines compiled ahead of their first draw`，实测约 6 秒），之后走缓存。
+- **Distant Horizons 在 Vulkan 下必崩**：DH 3.3.4 往 `Lightmap.render` 注入并解引用 `AbstractDhRenderApiDefinition.getRenderApi()`，Vulkan 后端下 `renderDef` 为 null，进世界首帧 `ReportedException: Render Frame`。26.3 的四个 DH 版本（3.3.0~3.3.4）changelog 全是 Iris/OpenGL 修复，没有 Vulkan 路线；`pack/mods.json` 里因此 `enabled: false`。**远景的替代品现在都不通**：Voxy 强推 OpenGL（MCRcortex/voxy #754/#607），Voxyrium 只有源码、无发行版，Voxy 官方 Vulkan RFC（#758）与 Vitrail 的 render pass 互斥，VIRIS 用 GL/Vulkan interop 绕开但只支持 Windows。
+- **Arc 核显上 Vulkan 比 OpenGL 快一倍**（本机实测，Linux + XWayland，同场景 CR r5.10、视距 24）：OpenGL+Iris 是 34–41 fps，且 CPU 单核 100%、GPU 只有 76% busy、频率腰斩到 0.87 GHz；Vulkan+Vitrail 是 71 fps，GPU 98% 满载 @2.1 GHz。上游已知问题：MC-307319（Arc + Linux 下 Vulkan 偏慢）、MC-307376（CPU/GPU 都没吃满、卡 25–35 fps）。
 - **`alexsmobs` + `codxlib` 自 0.4.1 起两端移除**：`alexsmobs:leafcutter_anthill` 这个 worldgen feature 会在区块生成 worker 线程上 `ant.remove(DISCARDED)`，撞 Arclight 给 Folia `EntityScheduler.retire` 打的 `Bukkit.isPrimaryThread()` 断言，直接崩服（`ReportedException: Feature placement`）。经过与原因见服务端仓库的 `CHANGELOG.md` 0.5.x「迁移」条目与其 AGENTS.md §7。别因为 Modrinth 上有 26.1.2 构建就加回来。

@@ -14,6 +14,7 @@ fovEffectScale:1.0
 darknessEffectScale:1.0
 glintSpeed:0.5
 glintStrength:0.75
+preferredGraphicsBackend:"vulkan"
 graphicsPreset:"custom"
 prioritizeChunkUpdates:0
 fullscreen:false

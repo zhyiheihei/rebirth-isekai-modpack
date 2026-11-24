@@ -156,6 +156,20 @@ def build_gamedir(dest):
                 common.normalize_resourcepack(source, destination)
             else:
                 shutil.copy2(source, destination)
+    shaderpacks_manifest = common.load("shaderpacks.json")
+    shader_dir = os.path.join(dest, "shaderpacks")
+    pack_txt = os.path.join(common.PACK, "vitrail", "pack.txt")
+    if os.path.exists(pack_txt) and os.path.exists(shader_dir):
+        chosen = ""
+        for line in open(pack_txt, encoding="utf-8"):
+            if line.startswith("pack="):
+                chosen = line.split("=", 1)[1].strip()
+        shipped = {e["file"] for e in shaderpacks_manifest}
+        if chosen and chosen not in shipped:
+            print(f"  ! vitrail/pack.txt 指向的 {chosen} 不在 shaderpacks.json 里，跳过写入")
+        else:
+            os.makedirs(os.path.join(dest, "vitrail"), exist_ok=True)
+            shutil.copy2(pack_txt, os.path.join(dest, "vitrail", "pack.txt"))
     write_servers(dest)
     return dest
 
