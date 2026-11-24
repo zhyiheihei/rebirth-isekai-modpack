@@ -38,6 +38,10 @@ def main():
         if common.fetch_local_assets():
             missing = common.check_local_assets()
     if missing:
+        print("   尝试按 sha256 从 Modrinth 补拉…")
+        if common.repair_local_assets(missing):
+            missing = common.check_local_assets()
+    if missing:
         print("   缺少以下文件（既不随包也不在发布资产里），请补齐 local-assets/：")
         for m in missing:
             print("    -", m)

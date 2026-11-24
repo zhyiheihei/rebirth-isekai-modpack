@@ -3,7 +3,12 @@
   "file": "BSL_v10.1.8.zip",
   "sha256": "36b0a50ff7918bf10e9422c401d93779f9d0088a26acea975b435243f96930b5",
   "size": 1134153,
-  "source": "local"
+  "source": "local",
+  "upstream": {
+   "project": "bsl-shaders",
+   "version": "10.1.8",
+   "url": "https://cdn.modrinth.com/data/Q1vvjJYV/versions/Y68yiql9/BSL_v10.1.8.zip"
+  }
  },
  {
   "file": "Bliss_v2.1.2_(Chocapic13_Shaders_edit).zip",
@@ -55,7 +60,12 @@
   "file": "ComplementaryReimagined_r5.10.zip",
   "sha256": "4a61c33c87a7febe7ce898c51ca233683cd1d9854dd8fb7b0d039c88dec2fca2",
   "size": 567387,
-  "source": "local"
+  "source": "local",
+  "upstream": {
+   "project": "complementary-reimagined",
+   "version": "r5.10",
+   "url": "https://cdn.modrinth.com/data/HVnmMxH1/versions/RKfUB9VC/ComplementaryReimagined_r5.10.zip"
+  }
  },
  {
   "file": "ComplementaryReimagined_r5.7.1 + EuphoriaPatches_1.8.1.zip",
@@ -67,7 +77,12 @@
   "file": "ComplementaryUnbound_r5.10.zip",
   "sha256": "f19bf3268669576485124b7a717980f46b6200cde146fa181e794a2df0f9c2da",
   "size": 567391,
-  "source": "local"
+  "source": "local",
+  "upstream": {
+   "project": "complementary-unbound",
+   "version": "r5.10",
+   "url": "https://cdn.modrinth.com/data/R6NEzAwj/versions/QJiYQisE/ComplementaryUnbound_r5.10.zip"
+  }
  },
  {
   "file": "ComplementaryUnbound_r5.7.1 + EuphoriaPatches_1.8.1.zip",
@@ -79,31 +94,56 @@
   "file": "Derivative 26.3.zip",
   "sha256": "035365ca116abe4706bec3b281d79e53db2c0917cb13b68403419e1bdf386af4",
   "size": 17885403,
-  "source": "local"
+  "source": "local",
+  "upstream": {
+   "project": "derivative-shaders",
+   "version": "26.3",
+   "url": "https://cdn.modrinth.com/data/UL7IRfHl/versions/8cC6CLtR/Derivative%2026.3.zip"
+  }
  },
  {
   "file": "Helian-MMCO v1.3.14 (Sundial Lite edit).zip",
   "sha256": "8edae5e885fd4319809714a75e310e20c0f9ef4bd734316202b053e1a1c593ee",
   "size": 1405386,
-  "source": "local"
+  "source": "local",
+  "upstream": {
+   "project": "helian-mmco-sundial-lite-edit",
+   "version": "1.3.14",
+   "url": "https://cdn.modrinth.com/data/oUtFVqSY/versions/D6kC0DH2/Helian-MMCO%20v1.3.14%20%28Sundial%20Lite%20edit%29.zip"
+  }
  },
  {
   "file": "RedHat_v34.3.1.zip",
   "sha256": "8185bc8ecbba05f0f12c70bbe45531b3de3afb4491fc79e651006df2d45c2611",
   "size": 194767,
-  "source": "local"
+  "source": "local",
+  "upstream": {
+   "project": "redhat-shaders",
+   "version": "34.3.1",
+   "url": "https://cdn.modrinth.com/data/ZvitaqQh/versions/Ca8OxUZj/RedHat_v34.3.1.zip"
+  }
  },
  {
   "file": "Sildur's Vibrant Shaders v2.02 Extreme.zip",
   "sha256": "824504bc937f9570277c0a809f5059ae4a5fe70c413cf4459b6ccff4dfed7ebe",
   "size": 251371,
-  "source": "local"
+  "source": "local",
+  "upstream": {
+   "project": "sildurs-vibrant-shaders",
+   "version": "2.02",
+   "url": "https://cdn.modrinth.com/data/z8EjLYqN/versions/J4RlzpKF/Sildur%27s%20Vibrant%20Shaders%20v2.02%20Extreme.zip"
+  }
  },
  {
   "file": "Solas_Shader_V3.9.zip",
   "sha256": "e207c3c7e2ca572457e03b998dbfa383fb1251324ad78ea7b7faee90b533d748",
   "size": 1243081,
-  "source": "local"
+  "source": "local",
+  "upstream": {
+   "project": "solas-shader",
+   "version": "3.9",
+   "url": "https://cdn.modrinth.com/data/EpQFjzrQ/versions/IsqhVpb8/Solas%20Shader%20V3.9.zip"
+  }
  },
  {
   "file": "photon_v1.4.zip",

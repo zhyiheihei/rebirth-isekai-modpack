@@ -294,6 +294,41 @@ def check_local_assets():
     return missing
 
 
+MODRINTH = "https://api.modrinth.com/v2"
+
+
+def repair_local_assets(missing):
+    """按清单里的 sha256 反查 Modrinth，把缺失的材质/光影直接补下来。
+
+    发布资产的匿名下载并不可靠（历史构建实际上一直靠 actions/cache 里的 local-assets），
+    所以缺件时改走清单里记的 upstream.url（Modrinth 版本文件直链）下载并校验 sha256；
+    没有 upstream 的（Euphoria 合并包、无 26.3 构建的包）留给调用方报错。
+    Modrinth 的 version_file 接口只认 sha1/sha512，清单里只有 sha256，故不能按哈希反查。
+    """
+    fixed, failed = [], []
+    for rel in missing:
+        name = os.path.basename(rel.replace(" (校验失败)", ""))
+        kind = os.path.basename(os.path.dirname(rel.replace(" (校验失败)", "")))
+        entry = next((e for e in load(kind + ".json") if e["file"] == name), None)
+        if not entry:
+            failed.append(name)
+            continue
+        dest = os.path.join(LOCAL, kind, name)
+        url = (entry.get("upstream") or {}).get("url")
+        if not url:
+            failed.append(name)
+            continue
+        if download(url, dest, entry["sha256"]):
+            fixed.append(name)
+        else:
+            failed.append(name)
+    for name in fixed:
+        print(f"   已按 sha256 从上游补拉: {name}")
+    if failed:
+        print(f"   上游也找不到: {failed}")
+    return bool(fixed)
+
+
 I18N = "https://i18n.prismlauncher.org"
 
 
