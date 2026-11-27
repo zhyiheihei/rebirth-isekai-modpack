@@ -1,6 +1,6 @@
 {
   "core": {
-    "notifications": true
+    "notifications": false
   },
   "advanced": {
     "recordingPath": "./replay_recordings/",
@@ -17,12 +17,12 @@
     ]
   },
   "recording": {
-    "recordSingleplayer": true,
+    "recordSingleplayer": false,
     "recordServer": false,
-    "indicator": true,
-    "autoStartRecording": true,
+    "indicator": false,
+    "autoStartRecording": false,
     "autoPostProcess": true,
-    "renameDialog": true
+    "renameDialog": false
   },
   "replay": {
     "showChat": true,
@@ -53,7 +53,7 @@
     "frameTimeFromWorldTime": false
   },
   "simplepathing": {
-    "pathpreview": true,
+    "pathpreview": false,
     "autosync": true,
     "timelineLength": 1800,
     "interpolator": "replaymod.gui.editkeyframe.interpolator.catmullrom.name",

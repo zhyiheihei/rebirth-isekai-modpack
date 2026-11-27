@@ -1,0 +1,8 @@
+type = slideshow
+
+slideshow-meta {
+name = pasture_bg
+duration = 5.0
+fadespeed = 2.0
+randomize = false
+}

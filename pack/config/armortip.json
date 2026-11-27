@@ -1,0 +1,13 @@
+{
+  "enable": true,
+  "tool": true,
+  "armor": true,
+  "trim": true,
+  "mob": true,
+  "effect": true,
+  "pottery": true,
+  "painting": true,
+  "disc": true,
+  "banner": true,
+  "durability": true
+}

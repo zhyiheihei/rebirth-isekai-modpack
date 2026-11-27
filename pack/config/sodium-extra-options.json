@@ -30,7 +30,7 @@
       "multi_dimension_fog_control": false,
       "atmospheric": {
         "distance_chunks": 0,
-        "start_percent": 100,
+        "start_percent": 1,
         "shape_mode": "VANILLA",
         "cloud_fog_percent": 100
       },
@@ -62,8 +62,6 @@
     "show_f_p_s_extended": true,
     "show_coords": false,
     "reduce_resolution_on_mac": false,
-    "wayland_fullscreen_resolution": false,
-    "wayland_fullscreen_resolution_recovery_pending": false,
     "use_adaptive_sync": false,
     "cloud_height_override": false,
     "cloud_height": 192,

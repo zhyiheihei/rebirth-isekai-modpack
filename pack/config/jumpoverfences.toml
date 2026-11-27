@@ -1,2 +1,11 @@
+#Client settings
 [client]
-jumpTheseToo = ["cfm:oak_upgraded_fence"]
+	#modid:thingid list of stuff to jump, used for implicit jumping, for example the default list item 'cfm:oak_upgraded_fence
+	jumpTheseToo = ["cfm:oak_upgraded_fence"]
+	#How high, in blocks, you jump when the boost applies (next to a fence, wall, fence gate or a block from jumpTheseToo).
+	#The default 1.5376 is the original boost and just clears a 1.5 block tall fence; a vanilla jump is about 1.2522.
+	#Raise it for taller modded fences or walls (for example 2.5 clears a 2 block tall wall).
+	#Values at or below the vanilla jump height give no boost. Heights assume no Jump Boost effect; potions still add on top.
+	# Default: 1.5376
+	# Range: 1.25 ~ 5.0
+	jumpHeight = 1.5376

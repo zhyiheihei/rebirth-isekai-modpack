@@ -593,6 +593,18 @@
   "enabled": true
  },
  {
+  "file": "NoFriendsButton-1.0.0.jar",
+  "project": "local",
+  "version": "1.0.0",
+  "version_id": "local",
+  "loader": "fabric",
+  "sha512": "7ba51c4c4598f20f0408b6006f7421e2585c4c27792ee5f34fcb699ee6e4d5ba7060d712274934395bee60034b9fd6ffac2f198ef05c341f4a157b6d5a5976de",
+  "url": "",
+  "local": "pack/mods-local/NoFriendsButton-1.0.0.jar",
+  "enabled": true,
+  "source_mod": "no-friends-button"
+ },
+ {
   "file": "pickupnotifier-v26.3.0-mc26.3.x+fabric.jar",
   "project": "ZX66K16c",
   "version": "26.3.0",

@@ -1,7 +1,7 @@
 type = fancymenu_layout
 
 layout-meta {
-identifier = title_screen
+identifier = net.minecraft.client.gui.screens.TitleScreen
 render_custom_elements_behind_vanilla = false
 last_edited_time = 1795512000000
 is_enabled = true
@@ -11,30 +11,12 @@ randomonlyfirsttime = false
 layout_index = 0
 }
 
-customization {
-action = autoscale
-basewidth = 1920
-baseheight = 1080
-}
-
 menu_background {
 instance_identifier = dba6a1ee-797b-44fc-83c2-e28647bf0312
-background_type = image
-image_path = [source:local]config/fancymenu/assets/menu_bg_pink.jpg
-}
-
-element {
-element_type = image
-instance_identifier = 5292e1bf-f4c2-4484-a690-6f142f5be364
-source = [source:local]config/fancymenu/assets/title_frosted.png
-anchor_point = mid-left
-sticky_anchor = true
-x = 16
-y = 0
-width = 468
-height = 126
-auto_sizing = false
-base_opacity = 1.0
+background_type = slideshow
+slideshow_name = pasture_bg
+slideshow = pasture_bg
+keepaspectratio = true
 }
 
 vanilla_button {
@@ -69,12 +51,6 @@ is_hidden = true
 
 vanilla_button {
 element_type = vanilla_button
-instance_identifier = mc_titlescreen_singleplayer_button
-is_hidden = true
-}
-
-vanilla_button {
-element_type = vanilla_button
 instance_identifier = mc_titlescreen_realms_button
 is_hidden = true
 }
@@ -99,14 +75,38 @@ is_hidden = true
 
 vanilla_button {
 element_type = vanilla_button
+instance_identifier = vanillabtn:gui.friends.open
+is_hidden = true
+}
+
+vanilla_button {
+element_type = vanilla_button
 instance_identifier = mc_titlescreen_multiplayer_button
 anchor_point = mid-right
 sticky_anchor = true
-x = -24
-y = -62
-width = 280
-height = 48
+x = -20
+y = -98
+width = 143
+height = 32
 auto_sizing = false
+backgroundnormal = [source:local]config/fancymenu/assets/pkm/ks_n.png
+backgroundhovered = [source:local]config/fancymenu/assets/pkm/ks_h.png
+label =  
+}
+
+vanilla_button {
+element_type = vanilla_button
+instance_identifier = mc_titlescreen_singleplayer_button
+anchor_point = mid-right
+sticky_anchor = true
+x = -20
+y = -43
+width = 143
+height = 32
+auto_sizing = false
+backgroundnormal = [source:local]config/fancymenu/assets/pkm/dr_n.png
+backgroundhovered = [source:local]config/fancymenu/assets/pkm/dr_h.png
+label =  
 }
 
 vanilla_button {
@@ -114,11 +114,14 @@ element_type = vanilla_button
 instance_identifier = mc_titlescreen_options_button
 anchor_point = mid-right
 sticky_anchor = true
-x = -24
-y = 0
-width = 280
-height = 48
+x = -20
+y = 12
+width = 143
+height = 32
 auto_sizing = false
+backgroundnormal = [source:local]config/fancymenu/assets/pkm/sz_n.png
+backgroundhovered = [source:local]config/fancymenu/assets/pkm/sz_h.png
+label =  
 }
 
 vanilla_button {
@@ -126,10 +129,12 @@ element_type = vanilla_button
 instance_identifier = mc_titlescreen_quit_button
 anchor_point = mid-right
 sticky_anchor = true
-x = -24
-y = 62
-width = 280
-height = 48
+x = -20
+y = 67
+width = 143
+height = 32
 auto_sizing = false
+backgroundnormal = [source:local]config/fancymenu/assets/pkm/tc_n.png
+backgroundhovered = [source:local]config/fancymenu/assets/pkm/tc_h.png
+label =  
 }
-

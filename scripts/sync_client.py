@@ -30,9 +30,15 @@ EXCL_REL = {
     "wover/cached.json",
     "rpg_series/tag_cache.json",
     "rpg_series/loot_fallback_report.json",
+    # Axiom 蓝图库之外的一处独立大素材：当前主题没引用，13MB 不入包
+    "fancymenu/assets/pasture_anim.gif",
 }
 EXCL_DIR = (
     "alexsmobs/",
+    # Axiom 蓝图库（导入的建筑 + 社区包，50MB 级）：玩家本地数据，不是整合包内容
+    "axiom/",
+    # 按存档 / 服务器记的村民交易配置，含别的服务器名字，属本机数据
+    "inventoryprofilesnext/",
 )
 
 VOLATILE_LINE = re.compile(

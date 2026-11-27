@@ -1,0 +1,8 @@
+type = slideshow
+
+slideshow-meta {
+name = pokemon_bg
+duration = 3.0
+fadespeed = 3.0
+randomize = false
+}
